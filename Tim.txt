@@ -1,8 +1,0 @@
-Hi Tim,
-
-I made the following updates:
-- cable.html
-- ti73..86: fformat.html
-- ti83+: flash support
-
-To do: TI73

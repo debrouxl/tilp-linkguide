@@ -1,0 +1,79 @@
+			+------------------------+
+			| TI89 Titanium USB port |
+			|		Informations	 			 |
+			+------------------------+
+
+
+
+USB port characteristics:
+-------------------------
+
+- Name: 'TI-89 Titanium'
+- Manufacturer: 'Texas Instruments Corporated'
+- VID/PID: 0x0451/0xe004
+- Firmware revision: 3.00 (AMS or HW version ??)
+- bus or self powered (unused) with remote wake-up
+
+
+USB related things:
+-------------------
+
+The cable is a full-speed (FS, 12Mbit/s) device, USB2.0 compliant, under a 
+proprietary class. It does not fit into any existing class (HID, printer, ...)
+then it requires a specific device driver.
+
+The device uses 'Bulk' mode for data transfers. There are two bulk endpoints 
+(IN & OUT) and one control endpoint (mandatory). Transfers are achieved by 
+packets. The endpoints advertise a maximum packet size of 64 bytes.
+
+Unlike SilverLink, it seems to have a sub-class.
+
+
+Identity card (Linux log):
+--------------------------
+
+T:  Bus=02 Lev=02 Prnt=02 Port=00 Cnt=01 Dev#= 12 Spd=12  MxCh= 0
+D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
+P:  Vendor=0451 ProdID=e004 Rev= 3.00
+S:  Manufacturer=Texas Instruments Incorporated
+S:  Product=TI-89 Titanium
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:  If#= 0 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=01 Prot=00 Driver=(none)
+E:  Ad=81(I) Atr=02(Bulk) MxPS=  64 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS=  64 Ivl=0ms
+
+bus/device  idVendor/idProduct
+002/012     0451/E004
+- Manufacturer : Texas Instruments Incorporated
+- Product      : TI-89 Titanium
+  wTotalLength:         35
+  bNumInterfaces:       1
+  bConfigurationValue:  1
+  iConfiguration:       0
+  bmAttributes:         e0h
+  MaxPower:             0
+    bInterfaceNumber:   0
+    bAlternateSetting:  0
+    bNumEndpoints:      2
+    bInterfaceClass:    255
+    bInterfaceSubClass: 1
+    bInterfaceProtocol: 0
+    iInterface:         0
+      bEndpointAddress: 81h
+      bmAttributes:     02h
+      wMaxPacketSize:   64
+      bInterval:        0
+      bRefresh:         0
+      bSynchAddress:    0
+      bEndpointAddress: 02h
+      bmAttributes:     02h
+      wMaxPacketSize:   64
+      bInterval:        0
+      bRefresh:         0
+      bSynchAddress:    0
+      
+Author:
+-------
+
+(c) 2004, Romain Liévin
+Developer of TiLP & TiEmu.

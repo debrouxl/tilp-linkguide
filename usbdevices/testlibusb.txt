@@ -1,0 +1,152 @@
+bus/device  idVendor/idProduct
+002/012     0451/E004
+- Manufacturer : Texas Instruments Incorporated
+- Product      : TI-89 Titanium
+  wTotalLength:         35
+  bNumInterfaces:       1
+  bConfigurationValue:  1
+  iConfiguration:       0
+  bmAttributes:         e0h
+  MaxPower:             0
+    bInterfaceNumber:   0
+    bAlternateSetting:  0
+    bNumEndpoints:      2
+    bInterfaceClass:    255
+    bInterfaceSubClass: 1
+    bInterfaceProtocol: 0
+    iInterface:         0
+      bEndpointAddress: 81h
+      bmAttributes:     02h
+      wMaxPacketSize:   64
+      bInterval:        0
+      bRefresh:         0
+      bSynchAddress:    0
+      bEndpointAddress: 02h
+      bmAttributes:     02h
+      wMaxPacketSize:   64
+      bInterval:        0
+      bRefresh:         0
+      bSynchAddress:    0
+002/011     0451/E008
+- Unable to fetch manufacturer string
+- Unable to fetch product string
+  wTotalLength:         35
+  bNumInterfaces:       1
+  bConfigurationValue:  1
+  iConfiguration:       0
+  bmAttributes:         e0h
+  MaxPower:             0
+    bInterfaceNumber:   0
+    bAlternateSetting:  0
+    bNumEndpoints:      2
+    bInterfaceClass:    255
+    bInterfaceSubClass: 1
+    bInterfaceProtocol: 0
+    iInterface:         0
+      bEndpointAddress: 81h
+      bmAttributes:     02h
+      wMaxPacketSize:   64
+      bInterval:        0
+      bRefresh:         0
+      bSynchAddress:    0
+      bEndpointAddress: 02h
+      bmAttributes:     02h
+      wMaxPacketSize:   64
+      bInterval:        0
+      bRefresh:         0
+      bSynchAddress:    0
+002/009     0451/E001
+- Unable to fetch manufacturer string
+- Unable to fetch product string
+  wTotalLength:         32
+  bNumInterfaces:       1
+  bConfigurationValue:  1
+  iConfiguration:       0
+  bmAttributes:         a0h
+  MaxPower:             50
+    bInterfaceNumber:   0
+    bAlternateSetting:  0
+    bNumEndpoints:      2
+    bInterfaceClass:    255
+    bInterfaceSubClass: 0
+    bInterfaceProtocol: 0
+    iInterface:         0
+      bEndpointAddress: 81h
+      bmAttributes:     02h
+      wMaxPacketSize:   32
+      bInterval:        0
+      bRefresh:         0
+      bSynchAddress:    0
+      bEndpointAddress: 02h
+      bmAttributes:     02h
+      wMaxPacketSize:   32
+      bInterval:        0
+      bRefresh:         0
+      bSynchAddress:    0
+002/002     05E3/0660
+- Product      : USB2.0 Hub
+  wTotalLength:         25
+  bNumInterfaces:       1
+  bConfigurationValue:  1
+  iConfiguration:       0
+  bmAttributes:         e0h
+  MaxPower:             50
+    bInterfaceNumber:   0
+    bAlternateSetting:  0
+    bNumEndpoints:      1
+    bInterfaceClass:    9
+    bInterfaceSubClass: 0
+    bInterfaceProtocol: 0
+    iInterface:         0
+      bEndpointAddress: 81h
+      bmAttributes:     03h
+      wMaxPacketSize:   1
+      bInterval:        255
+      bRefresh:         0
+      bSynchAddress:    0
+002/001     0000/0000
+- Manufacturer : Linux 2.6.7 ohci_hcd
+- Product      : Silicon Integrated Systems [SiS] USB 1.0 Controller (#2)
+- Serial Number: 0000:00:02.3
+  wTotalLength:         25
+  bNumInterfaces:       1
+  bConfigurationValue:  1
+  iConfiguration:       0
+  bmAttributes:         e0h
+  MaxPower:             0
+    bInterfaceNumber:   0
+    bAlternateSetting:  0
+    bNumEndpoints:      1
+    bInterfaceClass:    9
+    bInterfaceSubClass: 0
+    bInterfaceProtocol: 0
+    iInterface:         0
+      bEndpointAddress: 81h
+      bmAttributes:     03h
+      wMaxPacketSize:   2
+      bInterval:        255
+      bRefresh:         0
+      bSynchAddress:    0
+001/001     0000/0000
+- Manufacturer : Linux 2.6.7 ohci_hcd
+- Product      : Silicon Integrated Systems [SiS] USB 1.0 Controller
+- Serial Number: 0000:00:02.2
+  wTotalLength:         25
+  bNumInterfaces:       1
+  bConfigurationValue:  1
+  iConfiguration:       0
+  bmAttributes:         e0h
+  MaxPower:             0
+    bInterfaceNumber:   0
+    bAlternateSetting:  0
+    bNumEndpoints:      1
+    bInterfaceClass:    9
+    bInterfaceSubClass: 0
+    bInterfaceProtocol: 0
+    iInterface:         0
+      bEndpointAddress: 81h
+      bmAttributes:     03h
+      wMaxPacketSize:   2
+      bInterval:        255
+      bRefresh:         0
+      bSynchAddress:    0
