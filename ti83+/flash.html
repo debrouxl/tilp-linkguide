@@ -363,7 +363,7 @@ In the case of a FLASH OS (AMS), the name is 'basecode'.
       <center> <img src="graphics/calc.gif" alt="Calculator"
  align="bottom" border="0" height="35" width="60"> </center>
       </td>
-      <td bgcolor="#ffffff" width="80%">RTS with expected header
+      <td bgcolor="#ffffff" width="80%">VAR with expected header
 including
 the FLASH application name and size.&nbsp;</td>
     </tr>
@@ -453,59 +453,6 @@ the file)</td>
 the
 one currently installed.<br>
 </p>
-<p>The sending of an application requires a specific block to be sent
-before
-any others. It follows the same format as above. Example:<br>
-Note: this block is the same as 'Getting OS &amp; BIOS version'. I'm
-not sure it is needed for sending FLASH.<br>
-</p>
-<table nosave="" border="0" cellspacing="0" width="100%">
-  <tbody>
-    <tr bgcolor="#ffcccc">
-      <td bgcolor="#ccffcc" width="2%">PC:</td>
-      <td bgcolor="#ccffcc" width="49%"><tt><b>23 2D 00 00</b></tt></td>
-      <td bgcolor="#ccffcc" width="49%"><i>Send an application in FLASH</i></td>
-    </tr>
-    <tr bgcolor="#ffcccc">
-      <td bgcolor="#ffcccc" width="2%">TI:</td>
-      <td bgcolor="#ffcccc" width="49%"><b><tt>73 56 00 00</tt></b></td>
-      <td bgcolor="#ffcccc" width="49%"><i>Acknowledgement of request</i></td>
-    </tr>
-    <tr bgcolor="#ffcccc">
-      <td bgcolor="#ffcccc" width="2%">PC:</td>
-      <td bgcolor="#ffcccc" width="49%"><b><tt>23 09 00 00&nbsp;</tt></b></td>
-      <td bgcolor="#ffcccc" width="49%"><i>Clear to send variable</i></td>
-    </tr>
-    <tr bgcolor="#ffcccc">
-      <td bgcolor="#ccffcc" width="2%">PC:</td>
-      <td bgcolor="#ccffcc" width="49%"><b><tt>73 56 00 00</tt></b></td>
-      <td bgcolor="#ccffcc" width="49%"><i>Acknowledgement of variable
-header</i></td>
-    </tr>
-    <tr bgcolor="#ffcccc">
-      <td bgcolor="#ccffcc" width="2%">&nbsp;</td>
-      <td bgcolor="#ccffcc" width="49%"><tt><b>73 15 0B 00 </b>01 0E
-01 00
-00 00 09 01 00 00 00 <b> CHK</b></tt></td>
-      <td bgcolor="#ccffcc" width="49%"><i>Data block: ????</i></td>
-    </tr>
-    <tr bgcolor="#ffcccc">
-      <td bgcolor="#ffcccc" width="2%">TI:</td>
-      <td bgcolor="#ffcccc" width="49%"><b><tt>23 56 00 00</tt></b></td>
-      <td bgcolor="#ffcccc" width="49%"><i>Acknowledgement of CTS</i></td>
-    </tr>
-    <tr bgcolor="#ffcccc">
-      <td bgcolor="#ccffcc" width="2%">PC:</td>
-      <td bgcolor="#ccffcc" width="49%"><b><tt>00 68 00 00</tt></b></td>
-      <td bgcolor="#ccffcc" width="49%"><i>Is ready ?</i></td>
-    </tr>
-    <tr bgcolor="#ffcccc">
-      <td bgcolor="#ccffcc" width="2%">TI:</td>
-      <td bgcolor="#ccffcc" width="49%"><b><tt>73 56 00 00</tt></b></td>
-      <td bgcolor="#ccffcc" width="49%">Yes !</td>
-    </tr>
-  </tbody>
-</table>
 <p>Given that the TI83+ is a paged memory calculator, the protocol
 follows
 this scheme (see the TI83+ SDK guide for hardware informations). You
@@ -619,12 +566,17 @@ header</i></td>
   </tbody>
 </table>
 </p>
-<p><i>Important remark:</i> for FLASH OS, a pause must be inserted just
+<p><i>Important remark:</i> for FLASH OS and TI73/83+, a pause must be
+inserted:<br>
+- just after the first page (1 second),<br>
+- and just
 before sending the last page (which is the 'digital signature') else
 the entire
 operation will not be validated. TI's soft seems to use a very long
 pause
-(2..3s). Practically, a pause of 1 second seems to be enough.</p>
+(2..3s). Practically, a pause of 1 second seems to be enough.<br>
+This pause is not needed for TI84+ (it will make transfer fail in fact).<br>
+</p>
 <p><br>
 &nbsp; <a name="rts"></a><b>Receiving FLASH</b></p>
 The protocol for silently receiving a FLASH file is shown below:
