@@ -1,0 +1,247 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.7 [en] (X11; I; Linux 2.4.0-test6 i586) [Netscape]">
+  <title>TI-89 Link Protocol Guide - Backup Transfers</title>
+</head>
+<body bgcolor="#ffffe8">
+<b>TI-83+ Link Protocol Guide</b> - Getting OS &amp; BIOS version
+<center>
+<h2>
+<hr align="center">OS &amp; BIOS version</h2>
+</center>
+<p><br>
+With the introduction of the Ti-Connect software, Texas Instruments
+have incorporated a new command which returns some version
+informations. </p>
+<p> </p>
+<h4> </h4>
+<p> </p>
+<h4> <a name="rts"></a>Getting OS &amp; BIOS version</h4>
+Indeed, the request is like sending a TI84+ FLASH.
+<p>The protocol for silently receiving the clock is shown below:
+<table nosave="" bgcolor="#ffffff" border="1" cellspacing="0"
+ width="92%">
+  <tbody>
+    <tr>
+      <th bgcolor="#008800" width="7%"><font color="#ffffff">Step</font></th>
+      <th colspan="3" bgcolor="#008800"><font color="#ffffff">Direction</font></th>
+      <th bgcolor="#008800" width="80%"><font color="#ffffff">Packet</font></th>
+    </tr>
+    <tr nosave="">
+      <td bgcolor="#ffffff" width="7%">
+      <center>1&nbsp;</center>
+      </td>
+      <td rowspan="6" nosave="">
+      <center><img src="graphics/comp.gif" alt="Computer" align="bottom"
+ border="0" height="33" width="30"> </center>
+      </td>
+      <td bgcolor="#ffffff">
+      <center><img src="graphics/right.gif" alt="===&gt;" align="bottom"
+ border="0" height="13" width="22"> </center>
+      </td>
+      <td rowspan="6" nosave="">
+      <center><img src="graphics/calc.gif" alt="Calculator"
+ align="bottom" border="0" height="35" width="60"> </center>
+      </td>
+      <td bgcolor="#ffffff" width="80%">REQ special ?<br>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">
+      <center>2&nbsp;</center>
+      </td>
+      <td bgcolor="#ffffff">
+      <center><img src="graphics/left.gif" alt="&lt;===" align="bottom"
+ border="0" height="13" width="22"> </center>
+      </td>
+      <td bgcolor="#ffffff" width="80%">ACK</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">
+      <center>3&nbsp;</center>
+      </td>
+      <td bgcolor="#ffffff">
+      <center>
+      <center><img src="graphics/right.gif" alt="===&gt;" align="bottom"
+ border="0" height="13" width="22"> </center>
+      </center>
+      </td>
+      <td bgcolor="#ffffff" width="80%">CTS</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">
+      <center>4&nbsp;</center>
+      </td>
+      <td bgcolor="#ffffff">
+      <center>
+      <center><img src="graphics/left.gif" alt="&lt;===" align="bottom"
+ border="0" height="13" width="22"> </center>
+      </center>
+      </td>
+      <td bgcolor="#ffffff" width="80%">ACK</td>
+    </tr>
+    <tr>
+      <td width="7%">
+      <center>5&nbsp;</center>
+      </td>
+      <td>
+      <center>
+      <center>
+      <center><img src="graphics/left.gif" alt="&lt;===" align="bottom"
+ border="0" height="13" width="22"> </center>
+      </center>
+      </center>
+      </td>
+      <td width="80%">DATA<br>
+      </td>
+    </tr>
+    <tr>
+      <td width="7%">
+      <center>6&nbsp;</center>
+      </td>
+      <td>
+      <center>
+      <center>
+      <center><img src="graphics/right.gif" alt="===&gt;" align="bottom"
+ border="0" height="13" width="22"> </center>
+      </center>
+      </center>
+      </td>
+      <td width="80%">ACK</td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p></p>
+<p><u>Example (PC requesting version):</u>
+<table nosave="" border="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc">PC:</td>
+      <td bgcolor="#ccffcc" width="50%"><tt><b>23 2D 00 00</b></tt></td>
+      <td bgcolor="#ccffcc" width="50%"><i>Request informations</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc">TI:</td>
+      <td bgcolor="#ffcccc" width="50%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="50%"><i>Acknowledgement of REQ</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc">PC:</td>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>23 09 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="50%"><i>Clear to send variable</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc">TI:</td>
+      <td bgcolor="#ffcccc" width="50%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="50%"><i>Acknowledgement of CTS</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc" height="44">&nbsp;</td>
+      <td bgcolor="#ffcccc" height="44" width="50%"><tt><b>73 15 0B 00 </b>02
+15 01 00 00 03 09 01 4d 50 00 <b>c2 00</b></tt></td>
+      <td bgcolor="#ffcccc" height="44" width="50%"><i>Variable data:
+12 bytes
+(OS: 2.21, BIOS: 1.00)</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc">PC:</td>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>23 56 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="50%"><i>Acknowledgement of variable
+data</i></td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p></p>
+<h4> </h4>
+<p>The variable data has the following format (pure binary and/or BCD):
+<table border="1" cellspacing="0" width="92%">
+  <tbody>
+    <tr>
+      <th bgcolor="#dddddd" width="7%">Offset</th>
+      <th bgcolor="#dddddd" width="8%">Length</th>
+      <th bgcolor="#dddddd" width="85%">Description</th>
+    </tr>
+    <tr>
+      <td width="7%">0</td>
+      <td width="8%">2 bytes</td>
+      <td width="85%">OS version like 02 15 for 2.21</td>
+    </tr>
+    <tr>
+      <td width="7%">4</td>
+      <td width="8%">2&nbsp;bytes</td>
+      <td width="85%">BIOS version like 01 00 for 1.00</td>
+    </tr>
+    <tr>
+      <td width="7%">6<br>
+      </td>
+      <td width="8%">2 bytes</td>
+      <td width="85%">Battery good ?<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">8<br>
+      </td>
+      <td valign="top">2 bytes<br>
+      </td>
+      <td valign="top">?<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">10<br>
+      </td>
+      <td valign="top">2 bytes<br>
+      </td>
+      <td valign="top">?<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">12<br>
+      </td>
+      <td valign="top">2 bytes<br>
+      </td>
+      <td valign="top">?<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p></p>
+<p></p>
+<h4>&nbsp; </h4>
+<table border="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="32%">
+      <center><a href="silent.html"><img src="graphics/prevpage.gif"
+ alt="[previous page]" align="bottom" border="2" height="32" width="32">
+      </a> <br>
+      <a href="silent.html">Silent transfers</a></center>
+      </td>
+      <td width="34%">
+      <center><a href="index.html"><img src="graphics/home.gif"
+ alt="[home]" align="bottom" border="2" height="32" width="32"> </a> <br>
+      <a href="index.html">Table of Contents</a></center>
+      </td>
+      <td width="34%">
+      <center><a href="vars.html"><img src="graphics/nextpage.gif"
+ alt="[next page]" align="bottom" border="2" height="32" width="32"> </a>
+      <br>
+      <a href="vars.html">Variable Formats</a></center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p></p>
+<hr align="center"><i>Site maintained by Romain Li&eacute;vin (<a
+ href="mailto:roms@lpg.ticalc.org">roms@lpg.ticalc.org</a>) and Tim
+Singer
+(<a href="mailto:tsinger@gladstone.uoregon.edu">tsinger@gladstone.uoregon.edu</a>)</i>
+<br>
+</body>
+</html>
