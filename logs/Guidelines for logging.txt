@@ -1,12 +1,9 @@
 Reverse-engineering  of the TI calculators protocol
 Guidelines
 
-
-
 Tools used :
-- DSP Starter Kit,
-- AVRanalyzer.
-
+- DSP Starter Kit (DSK),
+- or AVRanalyzer.
 
 Analysis:
 - fastAVRlink on COM2 (TiLP)
@@ -20,4 +17,5 @@ Some offsets used by my DSK tools for storing data:
 - ChemBio: 23000
 - TI83PlusOS114.8XU: 260000
 
-
+A more recent method, usable only with SilverLink cable:
+Use SnoopyPro (UsbSnoopy) to sniff USB packet and process XML logs.
