@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META NAME="GENERATOR" Content="Visual Page 1.0 for Windows">
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>TI-73...92+/V200 TI Link Guide</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFE8">
+
+<P><B>TI Link Protocol Guide </B>- Hardware Link Protocol 
+<CENTER>
+<H2>
+<HR ALIGN="CENTER">
+Hardware Link Protocol</H2>
+</CENTER>
+<P>The TI transfer bus is a two-wire half-duplex serial interface consisting of a 'red' line (wrapped in red insulation)
+and a 'white' line (wrapped in white insulation) with a common ground.<BR>
+Both lines are bi-directional, so outputs must be of an open-drain or an open-collector type (such as i&sup2;C
+bus for instance). <BR>
+Each line is connected to the supply voltage via a pull-up resistor. A line is then logic high when both of the
+calculators hold the line high, and logic low if one or more of the devices drives the line low.</P>
+<P><IMG SRC="graphics/hard_layer.gif" WIDTH="311" HEIGHT="288" ALIGN="BOTTOM" ALT="[Electrical Schematic of TI-92 Link Circuitry]"
+BORDER="0"> <BR>
+In this way the calculator or any external device can put the line to logical high and monitor the corresponding
+input to see whether the line actually becomes high. This open-collector structure allows the calculator to drive
+an I&sup2;C device directly.&nbsp;
+<H4>The Texas Instruments Hardware Byte-Transfer Protocol</H4>
+<P>Each bit is made of two voltage changes on each two different wires. The order of the first two voltage impulses
+determines whether the bit is high (1) or low (0). A logical '0' is represented by changing the red wire first,
+wheras a logical '1' is represented by changing the white wire first. A sequence of eight bit transfers constitutes
+one byte, least significant bit sent first. The protocol does not allow for a distinction of byte boundaries.</P>
+<P>The graphing calculator models up to the TI-92 (those with a 6MHz Z80 processor) can transfer data at roughly
+16 to 18 kilobits per second, whereas the TI-89, TI-92 and TI-92+ (those with the 10-MHz processor) can transfer
+data at roughly 45 to 50 kilobits per second.</P>
+<P><U>An example of a byte transfer:</U> The byte represented in the figure is 0xC9 (11001001 in binary).<BR>
+The first bit transmitted is the least significant bit (LSb) and the last one is&nbsp; the most significant bit
+(MSb) as a serial stream.<BR>
+Remember that a high status represents a closed circuit and that either one of the calculators can pull it low.
+On the other hand, a low status represents a break in the circuit, and both calculators must close the circuit
+in order to bring the line high again.<BR>
+This figure shows the electrical status of the data lines during a byte transfer:</P>
+<P><IMG SRC="graphics/protocol.gif" WIDTH="450" HEIGHT="74" ALIGN="BOTTOM" ALT="[protocol diagram]" BORDER="0"></P>
+<P><U>Flow charts of 'put' and 'get' routines:</U> <BR>
+&nbsp; 
+<TABLE BORDER="1" WIDTH="75%">
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/put_chart.gif" WIDTH="315" HEIGHT="526" ALIGN="BOTTOM" ALT="[PUT routine flowchart]"
+			BORDER="0">
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/get_chart.gif" WIDTH="315" HEIGHT="575" ALIGN="BOTTOM" ALT="[GET routine flowchart]"
+			BORDER="0">
+		</TD>
+	</TR>
+</TABLE>
+
+<H4>&nbsp;Example C Routines for the Parallel Link</H4>
+<P>You will find below 2 examples of routines: one for sending, the other for receiving a byte with a parallel
+link cable. Link cables are described in the next section.</P>
+<P><FONT face="Courier New, Courier, mono">/*</FONT> <BR>
+<FONT face="Courier New, Courier, mono">Send a byte to the calculator</FONT> <BR>
+<FONT face="Courier New, Courier, mono">*/</FONT> <BR>
+<FONT face="Courier New, Courier, mono">int put92(char data)</FONT> <BR>
+<FONT face="Courier New, Courier, mono">{</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; int bit;</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; for(bit=0; bit&lt;8; bit++)</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; {</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(data &amp; 1)</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outportb(lpt_out,
+2);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((inportb(lpt_in)
+&amp; 0x10) == 1);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outportb(lpt_out,
+3);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((inportb(lpt_in)
+&amp; 0x10) == 0);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outportb(lpt_out,
+1);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((inportb(lpt_in)
+&amp; 0x20) == 1);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outportb(lpt_out,
+3);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((inportb(lpt_in)
+&amp; 0x20) == 0);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data &gt;&gt;= 1;</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; }</FONT> <BR>
+<FONT face="Courier New, Courier, mono">}</FONT></P>
+<P><FONT face="Courier New, Courier, mono">/*</FONT> <BR>
+<FONT face="Courier New, Courier, mono">Reads a byte from the calculator</FONT> <BR>
+<FONT face="Courier New, Courier, mono">*/</FONT> <BR>
+<FONT face="Courier New, Courier, mono">unsigned char get92(void)</FONT> <BR>
+<FONT face="Courier New, Courier, mono">{</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; int bit;</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; unsigned char v, data=0;</FONT></P>
+<P><FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; for(bit=0; bit&lt;8; bit++)</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; {</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((v = inportb(lpt_in) &amp;
+0x30) == 0x30);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(v &amp; 1)</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data
+= (data &gt;&gt; 1) | 0x80;</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outportb(lpt_out,
+1);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((inportb(lpt_in)
+&amp; 0x20) == 0x00);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outportb(lpt_out,
+3);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data
+= data &gt;&gt; 1;</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outportb(lpt_out,
+2);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((inportb(lpt_in)
+&amp; 0x10) == 0x00);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outportb(lpt_out,
+3);</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</FONT> <BR>
+<FONT face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp; }<BR>
+}</FONT></P>
+<P>If you want use a link cable for your own project, you should know that a complete 
+  and multi-platform library exists for handling the different link cables (hardware 
+  &amp; virtual) thru a common API. The libticables library (source and .dll/.so) 
+  can be found either on <A HREF="http://www.ticalc.org">ticalc.org</A> (unix 
+  directory of the ticalc's archives) or on the <A HREF="http://lpg.ticalc.org/prj_tilp/">TiLP 
+  (formermy GtkTiLink) homepage</A>. 
+<H4>More Information</H4>
+<P>You will find here, as a separate documentation, various documents on the parallel and serial port structure:
+
+<UL>
+	<LI><A HREF="http://gladstone.uoregon.edu/~tsinger/TI-86/misc/RS232.html">RS232</A> information
+	<LI><A HREF="http://gladstone.uoregon.edu/~tsinger/TI-86/misc/LPTx.htm">parallel</A> port registers on the PC
+	<LI><A HREF="http://gladstone.uoregon.edu/~tsinger/TI-86/misc/COMx.htm">serial</A> port registers on the PC
+</UL>
+
+<P>
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%">
+	<TR>
+		<TD WIDTH="32%">
+			<P ALIGN="CENTER"><A HREF="intro.html"><IMG SRC="graphics/prevpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[previous page]"
+			BORDER="2"><BR>
+			Introduction</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="index.html"><IMG SRC="graphics/home.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[home]"
+			BORDER="2"><BR>
+			Table of Contents</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="cable.html"><IMG SRC="graphics/nextpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[next page]"
+			BORDER="2"><BR>
+			Link Cables</A>
+		</TD>
+	</TR>
+</TABLE>
+
+<HR ALIGN="CENTER">
+<I>Site maintained by Romain Li&eacute;vin (</I><A HREF="mailto:roms@tilp.info"><I>roms@tilp.info</I></A><I>)
+and Tim Singer (</I><A HREF="mailto:tsinger@gladstone.uoregon.edu"><I>tsinger@gladstone.uoregon.edu</I></A><I>)</I>
+
+
+</BODY>
+
+</HTML>

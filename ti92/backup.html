@@ -1,0 +1,516 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META NAME="GENERATOR" Content="Visual Page 1.0 for Windows">
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>TI-92 Link Protocol Guide - Backup Transfers</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFE8">
+
+<P><B>TI-92 Link Protocol Guide</B> - System Backup Transfers 
+<CENTER>
+<H2>
+<HR ALIGN="CENTER">
+System Backup Transfers</H2>
+</CENTER>
+<P>A System Backup is one large transmission containing all user-modifiable data in the calculator. The file format
+that the TI-92 Graph Link software uses can be found in the <A HREF="fformat.html#backup">file formats</A> section
+of this documentation.</P>
+
+<P>System backups must be transferred silently. Silent transfers can only be done between a computer and a calculator,
+and require that the computer make the <A HREF="#request">request</A> or <A HREF="#rts">request-to-send</A>.</P>
+<H4><A NAME="request"></A>Requesting a Backup</H4>
+<P>The protocol for silently requesting and receiving a backup is described below. For information on packet formats,
+<A HREF="packet.html">click here</A>.</P>
+<P>
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%" BGCOLOR="#FFFFFF" NOSAVE>
+	<TR>
+		<TH WIDTH="7%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Step</FONT></TH>
+		<TH COLSPAN="3" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Direction</FONT></TH>
+		<TH WIDTH="80%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Packet</FONT></TH>
+	</TR>
+	<TR NOSAVE>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">1
+		</TD>
+		<TD ROWSPAN="11" NOSAVE>
+			<P ALIGN="CENTER"><IMG SRC="graphics/comp.gif" WIDTH="30" HEIGHT="33" ALIGN="BOTTOM" ALT="Computer" BORDER="0">
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD ROWSPAN="11" NOSAVE>
+			<P ALIGN="CENTER"><IMG SRC="graphics/calc.gif" WIDTH="60" HEIGHT="35" ALIGN="BOTTOM" ALT="Calculator" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">REQ with <A HREF="packet.html#reqbackup">request-style backup header</A>.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">2
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">ACK</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">3
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">VAR with <A HREF="packet.html#backup">data-style backup header</A>.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">4
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">ACK</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">5
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">CTS</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">6
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">ACK</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">7
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">DATA (a 1-kilobyte backup block, with four extra bytes at the beginning)</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">8
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">ACK</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">&nbsp;
+		</TD>
+		<TD>&nbsp;</TD>
+		<TD WIDTH="80%"><I>(Repeat steps 3-8 for as many kilobytes as there are in the backup)</I></TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">9
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">EOT</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">10
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">ACK</TD>
+	</TR>
+</TABLE>
+The actual backup data is broken into 1-kilobyte blocks which are transferred individually.<p></P>
+<P><U>Example:</U>
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%" NOSAVE>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;A2&nbsp;11&nbsp;00&nbsp;</TT></B><TT>00&nbsp;00&nbsp;00&nbsp;00&nbsp;1D&nbsp;0B&nbsp;6D&nbsp;61&nbsp;69&nbsp;6E&nbsp;5C&nbsp;62&nbsp;61&nbsp;63&nbsp;6B&nbsp;75&nbsp;70&nbsp;<B>9F&nbsp;04</B></TT></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Request: Backup &quot;main\backup&quot;</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of request</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;06&nbsp;0A&nbsp;00&nbsp;</TT></B><TT>00&nbsp;04&nbsp;00&nbsp;00&nbsp;1D&nbsp;04&nbsp;31&nbsp;2E&nbsp;31&nbsp;31&nbsp;<B>E6&nbsp;00</B></TT></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Variable header: Backup block (rom version &quot;1.11&quot;)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of header</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;09&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Clear to Send</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of CTS</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;15&nbsp;04&nbsp;04&nbsp;</TT></B>&lt;404h (1028) bytes of data plus checksum&gt;</TD>
+		
+    <TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>First 1-kilobyte block of data (plus 
+      four bytes at the beginning)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09 56 00 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of data</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;06&nbsp;0A&nbsp;00&nbsp;</TT></B><TT>00&nbsp;04&nbsp;00&nbsp;00&nbsp;1D&nbsp;04&nbsp;31&nbsp;2E&nbsp;31&nbsp;31&nbsp;<B>E6&nbsp;00</B></TT></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Variable header: Backup block (rom version &quot;1.11&quot;)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of header</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;09&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Clear to Send</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of CTS</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;15&nbsp;04&nbsp;04&nbsp;</TT></B>&lt;404h (1028) bytes of data plus checksum&gt;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Second 1-kilobyte block of data (plus four bytes at the beginning)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09 56 00 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of data</I></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><B>. . .</B>
+		</TD>
+		<TD WIDTH="50%">
+			<P ALIGN="CENTER"><B>. . .</B>
+		</TD>
+		<TD WIDTH="50%">
+			<P ALIGN="CENTER"><B>. . .</B>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;06&nbsp;0A&nbsp;00&nbsp;</TT></B><TT>08&nbsp;02&nbsp;00&nbsp;00&nbsp;1D&nbsp;04&nbsp;31&nbsp;2E&nbsp;31&nbsp;31&nbsp;<B>EC&nbsp;00</B></TT></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Variable header: Backup block (rom version &quot;1.11&quot;)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of header</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;09&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Clear to Send</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of CTS</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;15&nbsp;0C&nbsp;02&nbsp;</TT></B>&lt;20Ch (524) bytes of data plus checksum&gt;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Final block of data (plus four bytes at the beginning)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09 56 00 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of data</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;92&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>End of transmission - no more blocks</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of EOT</I></TD>
+	</TR>
+</TABLE>
+<p></P>
+<H4><A NAME="rts"></A>Sending a Backup</H4>
+<P>The protocol for silently sending a backup is shown below:
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%" BGCOLOR="#FFFFFF" NOSAVE>
+	<TR>
+		<TH WIDTH="7%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Step</FONT></TH>
+		<TH COLSPAN="3" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Direction</FONT></TH>
+		<TH WIDTH="80%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Packet</FONT></TH>
+	</TR>
+	<TR NOSAVE>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">1
+		</TD>
+		<TD ROWSPAN="10" NOSAVE>
+			<P ALIGN="CENTER"><IMG SRC="graphics/comp.gif" WIDTH="30" HEIGHT="33" ALIGN="BOTTOM" ALT="Computer" BORDER="0">
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD ROWSPAN="10" NOSAVE>
+			<P ALIGN="CENTER"><IMG SRC="graphics/calc.gif" WIDTH="60" HEIGHT="35" ALIGN="BOTTOM" ALT="Calculator" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">VAR with <A HREF="packet.html#backup">send-style backup header</A>.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">2
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">ACK</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">3
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">VAR with <A HREF="packet.html#backup">data-style backup header</A>.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">4
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">ACK</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">5
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">CTS</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">6
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">ACK</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">7
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">DATA (a 1-kilobyte backup block, <B>without</B> the extra four bytes at the beginning)</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">8
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">ACK</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">&nbsp;</TD>
+		<TD>&nbsp;</TD>
+		<TD WIDTH="80%"><I>(Repeat steps 3-8 for as many kilobytes as there are in the backup)</I></TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%">
+			<P ALIGN="CENTER">9
+		</TD>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD WIDTH="80%">EOT</TD>
+	</TR>
+</TABLE>
+<p></P>
+
+<P><U>Example (PC sending backup to TI):</U>
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%" NOSAVE>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;06&nbsp;0A&nbsp;00</TT></B><TT>&nbsp;08&nbsp;9A&nbsp;00&nbsp;00&nbsp;1D&nbsp;04&nbsp;31&nbsp;2E&nbsp;31&nbsp;31&nbsp;<B>84&nbsp;01</B></TT></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Variable header: Backup (rom version &quot;1.11&quot;)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of header</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;06&nbsp;0A&nbsp;00</TT></B><TT>&nbsp;04&nbsp;00&nbsp;00&nbsp;00&nbsp;1D&nbsp;04&nbsp;31&nbsp;2E&nbsp;31&nbsp;31&nbsp;<B>E6&nbsp;00</B></TT></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Variable header: Backup block (rom version &quot;1.11&quot;)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of header</I></TD>
+	</TR>
+	<TR BGCOLOR="#FFCCCC" NOSAVE>
+		<TD NOSAVE>&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC" NOSAVE><B><TT>89&nbsp;09&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%"><I>Clear To Send</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of CTS</I></TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#CCFFCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC" NOSAVE><B><TT>09 15 00 04 </TT></B>&lt;400h (1024) bytes of data plus checksum&gt;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>First 1-kilobyte block of data</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89 56 00 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of data</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;06&nbsp;0A&nbsp;00</TT></B><TT>&nbsp;04&nbsp;00&nbsp;00&nbsp;00&nbsp;1D&nbsp;04&nbsp;31&nbsp;2E&nbsp;31&nbsp;31&nbsp;<B>E6&nbsp;00</B></TT></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Variable header: Backup block (rom version &quot;1.11&quot;)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of header</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;09&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Clear To Send</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of CTS</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09 15 00 04 </TT></B>&lt;400h (1024) bytes of data plus checksum&gt;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Second 1-kilobyte block of data</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89 56 00 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of data</I></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><B>. . .</B>
+		</TD>
+		<TD WIDTH="50%">
+			<P ALIGN="CENTER"><B>. . .</B>
+		</TD>
+		<TD WIDTH="50%">
+			<P ALIGN="CENTER"><B>. . .</B>
+		</TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#CCFFCC" NOSAVE>PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09&nbsp;06&nbsp;0A&nbsp;00</TT></B><TT>&nbsp;08&nbsp;02&nbsp;00&nbsp;00&nbsp;1D&nbsp;04&nbsp;31&nbsp;2E&nbsp;31&nbsp;31&nbsp;<B>EC&nbsp;00</B></TT></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Variable header: Backup block (rom version &quot;1.11&quot;)</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of header</I></TD>
+	</TR>
+	<TR BGCOLOR="#FFCCCC" NOSAVE>
+		<TD BGCOLOR="#FFCCCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC" NOSAVE><B><TT>89&nbsp;09&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Clear To Send</I></TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC" NOSAVE><B><TT>09&nbsp;56&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Acknowledgement of CTS</I></TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#CCFFCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC" NOSAVE><B><TT>09 15 08 02 </TT></B>&lt;208h (520) bytes of data plus checksum&gt;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Final block of data</I></TD>
+	</TR>
+	<TR BGCOLOR="#FFCCCC" NOSAVE>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC" NOSAVE><B><TT>89 56 00 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of data</I></TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC" NOSAVE><B><TT>09&nbsp;92&nbsp;00&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>End of transmission</I></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%">
+	<TR>
+		<TD WIDTH="32%">
+			<P ALIGN="CENTER"><A HREF="silent.html"><IMG SRC="graphics/prevpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM"
+			ALT="[previous page]" BORDER="2"></A> <BR>
+			<A HREF="silent.html">Silent transfers</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="index.html"><IMG SRC="graphics/home.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[home]"
+			BORDER="2"></A> <BR>
+			<A HREF="index.html">Table of Contents</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="vars.html"><IMG SRC="graphics/nextpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[next page]"
+			BORDER="2"></A> <BR>
+			<A HREF="vars.html">Variable Formats</A>
+		</TD>
+	</TR>
+</TABLE>
+
+<HR ALIGN="CENTER">
+<I>Site maintained by Romain Li&eacute;vin (</I><A HREF="mailto:roms@lpg.ticalc.org"><I>roms@lpg.ticalc.org</I></A><I>)
+and Tim Singer (</I><A HREF="mailto:tsinger@gladstone.uoregon.edu"><I>tsinger@gladstone.uoregon.edu</I></A><I>)</I>
+
+</BODY>
+
+</HTML>

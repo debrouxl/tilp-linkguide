@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META NAME="GENERATOR" Content="Visual Page 1.0 for Windows">
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>TI-92 Link Protocol Guide - Remote Control</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFE8">
+
+<P><B>TI-92 Link Protocol Guide</B> - Remote control/command 
+<CENTER>
+<H2>
+<HR ALIGN="CENTER">
+Remote control/command</H2>
+</CENTER>
+<P>The TI-92's remote control ability is &quot;silent,&quot; which means that the calculator does not need to be
+put in a special mode. The remote control ability can be utilized any time the calculator is ready to accept a
+keypress.</P>
+
+<P><B><U>Remote command:</U></B></P>
+
+<P>The protocol used for sending a remote command is shown below. 
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%" BGCOLOR="#FFFFFF">
+	<TR>
+		<TH WIDTH="7%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Step</FONT></TH>
+		<TH COLSPAN="3" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Direction</FONT></TH>
+		<TH WIDTH="80%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Packet</FONT></TH>
+	</TR>
+	<TR>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">1&nbsp;
+		</TD>
+		<TD ROWSPAN="2">
+			<P ALIGN="CENTER"><IMG SRC="graphics/comp.gif" WIDTH="30" HEIGHT="33" ALIGN="BOTTOM" ALT="Computer" BORDER="0">
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/right.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="===>" BORDER="0">
+		</TD>
+		<TD ROWSPAN="2" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/calc.gif" WIDTH="60" HEIGHT="35" ALIGN="BOTTOM" ALT="Calculator" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">CMD</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="7%" BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER">2&nbsp;
+		</TD>
+		<TD BGCOLOR="#FFFFFF">
+			<P ALIGN="CENTER"><IMG SRC="graphics/left.gif" WIDTH="22" HEIGHT="13" ALIGN="BOTTOM" ALT="<===" BORDER="0">
+		</TD>
+		<TD WIDTH="80%" BGCOLOR="#FFFFFF">ACK</TD>
+	</TR>
+</TABLE>
+<p></P>
+
+<P>The scancode of the key is sent in the last two bytes of the command. Scancodes are defined in the section B8
+to B12 of the French TI-92 guidebook or p. 384 of the US&nbsp;TI-92 guidebook.<BR>
+<U></U></P>
+
+<P><U>Example:</U> 
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%">
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09 87 31&nbsp;00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Command:  Key &lt;1&gt;</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>89 56 00 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of command</I></TD>
+	</TR>
+</TABLE>
+<BR>
+If the calculator is put into the self test menu (&lt;F5&gt; + &lt;diamond&gt; + &lt;(&gt; + &lt;s&gt; from the
+home screen) then sent back to the home screen, then whenever a command result becomes available the calculator
+will send it through the link port as expression data.  Each transmission from the calculator does not include
+a packet header or checksum but is terminated with 0xFF (see below).<BR>
+<BR>
+<B><U>Remote Control Mode:<BR>
+<BR>
+</U></B>The remote control mode can be activated either by pressing &lt;F5&gt; + &lt;DIAMOND&gt; + &lt;(&gt;+&lt;R&gt;
+or by sending this key sequence directly to the calculator via remote commands. In this mode, the calculator can
+receive key codes as if they have been typed on the keyboard and send the result via the link port.<BR>
+<BR>
+To control the calculator, a scancode must be sent trough the link port in a command packet. After each scancode
+is received, the calculator replies with an FFh byte.  Whenever a command result becomes available, the calculator
+will send it through the link port as expression data, followed by an FFh byte.<BR>
+<BR>
+<U>Example:</U> 
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%" BGCOLOR="#FFFFFF" NOSAVE>
+	<TR>
+		<TD BGCOLOR="#CCFFCC">PC:</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><B><TT>09 87 31 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Command: &lt;1&gt;</I></TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><B><TT>FF</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of command</I></TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#CCFFCC">PC:&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC" NOSAVE><B><TT>09 87 2B 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Command: &lt;+&gt;</I></TD>
+	</TR>
+	<TR BGCOLOR="#FFCCCC" NOSAVE>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC" NOSAVE><B><TT>FF</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of command</I></TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#CCFFCC">PC:&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC" NOSAVE><B><TT>09 87 41 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Command: &lt;a&gt;</I></TD>
+	</TR>
+	<TR BGCOLOR="#FFCCCC" NOSAVE>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC" NOSAVE><B><TT>FF</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of command</I></TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#CCFFCC">PC:&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC" NOSAVE><B><TT>09 87 0D 00</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#CCFFCC"><I>Command: &lt;ENTER&gt;</I></TD>
+	</TR>
+	<TR BGCOLOR="#FFCCCC" NOSAVE>
+		<TD BGCOLOR="#FFCCCC">TI:</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC" NOSAVE><B><TT>FF</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Acknowledgement of command</I></TD>
+	</TR>
+	<TR BGCOLOR="#99FFCC" NOSAVE>
+		<TD BGCOLOR="#FFCCCC">&nbsp;</TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC" NOSAVE><B><TT>41 2B 31 FF</TT></B></TD>
+		<TD WIDTH="50%" BGCOLOR="#FFCCCC"><I>Reply with result &quot;a+1&quot;</I></TD>
+	</TR>
+</TABLE>
+<BR>
+&nbsp; 
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%">
+	<TR>
+		<TD WIDTH="32%">
+			<P ALIGN="CENTER"><A HREF="packet.html"><IMG SRC="graphics/prevpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM"
+			ALT="[previous page]" BORDER="2"></A> <BR>
+			<A HREF="packet.html">Packet Formats</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="index.html"><IMG SRC="graphics/home.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[home]"
+			BORDER="2"></A> <BR>
+			<A HREF="index.html">Table of Contents</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="screenshot.html"><IMG SRC="graphics/nextpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM"
+			ALT="[next page]" BORDER="2"></A> <BR>
+			<A HREF="screenshot.html">Screenshots</A>
+		</TD>
+	</TR>
+</TABLE>
+
+<HR ALIGN="CENTER">
+<I>Site maintained by Romain Li&eacute;vin (</I><A HREF="mailto:roms@lpg.ticalc.org"><I>roms@lpg.ticalc.org</I></A><I>)
+and Tim Singer (</I><A HREF="mailto:tsinger@gladstone.uoregon.edu"><I>tsinger@gladstone.uoregon.edu</I></A><I>)</I>
+
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META NAME="GENERATOR" Content="Visual Page 1.0 for Windows">
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>TI-73...92+/V200 TI Link Guide</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFE8">
+
+<P><B>TI Link Protocol Guide </B>- Link cables 
+<CENTER>
+<H2>
+<HR ALIGN="CENTER">
+Link Cables</H2>
+</CENTER>
+<P>There are many types of link cables:
+
+<UL>
+  <LI>The <A HREF="#greytigl">Grey TI Graph Link</A> (the first cable designed 
+    by Texas Instruments) 
+  <LI>The <A HREF="#blacktigl">Black TI Graph Link</A> (the second cable designed 
+    by Texas Instruments) 
+  <LI>The <A HREF="#par">&quot;$5 home-made&quot; parallel link cable</A> 
+  <LI>The <A HREF="#ser">&quot;$4 home-made&quot;' serial link cable</A> 
+  <LI>The <A HREF="#c85">&quot;Connect-85&quot; link cable</A> 
+  <LI>The <A HREF="#bcc">BCC Serial link cable</A> 
+  <LI>The <A HREF="#pic">PIClink</A> 
+  <LI>The <A HREF="#avr">fastAVRlink</A> 
+  <LI>The <A HREF="#bluetigl"> TIGraphLink USB (aka SilverLink) cable</A> (the 
+    third cable designed by Texas Instruments) 
+</UL>
+
+<P>Additional information, schematics, pictures and building instructions for these link cables can be found at
+<A HREF="http://www.ticalc.org">http://www.ticalc.org/</A>.
+<H4><A NAME="greytigl"></A>The Grey TI Graph Link cable</H4>
+<P>This was the first link cable designed for connecting a TI calculator to a computer (PC or Macintosh). It connects
+to a serial port on the computer, either 25-pin or 9-pin (with an adapter). This is one of three cables (the others
+are the PIClink and the fastAVRlink) that work on Macintosh computers.</P>
+
+<UL>
+	<LI>The PC uses a RS-232 compliant interface for the serial ports. Most older PC's provide two serial ports: a
+	9-pin port and a 25-pin port. Newer PC's use only the 9-pin ports, but are still compatible with 25-pin cables
+	through the use of an adapter. For the pin-out of a RS232 connector, see <A HREF="http://gladstone.uoregon.edu/~tsinger/TI-86/misc/COMx.htm">COMx.htm</A>.
+	<LI>The Macintosh uses a RS-422 compliant interface for the serial ports. Macintosh serial ports are either the
+	mini-DIN type (the small round port) or 9-pin D-SUB ports. The main differences between RS-422 and RS-232 are that
+	(1) the RS-422 does not have DTR/DSR lines, and (2) the CTS line is replaced by the HSK (handshake) line in an
+	RS-422 cable.
+</UL>
+
+<P>The Grey TIGraphLink cable does not use the hardware flow control to communicate, but the DTR and RTS pins are
+used to provide the power supply. These lines change from -9V to +9V (values measured on my PC) when the TIGraphLink
+software starts. At the same time, the CTS line jumps from 0 to -4V and the DSR line changes from -9V to +9V. The
+grey cable can therefore be detected by toggling the DTR and RTS lines, then checking the state of the CTS and
+DSR lines.</P>
+<P><B>Characteristics:</B> 9600 baud, no hardware flow control, 1 start bit, 8 data bits, 1 stop bit and no parity.
+<H4><A NAME="blacktigl"></A>The Black TI Graph Link Cable (&quot;Windows-Only&quot; or &quot;Black link&quot;)</H4>
+<P>This is the second link cable designed by Texas Instruments. The most recent version of TI's Graph Link Software
+includes support for this cable, which is compatible with the '$4 Serial Link'. It does not work on a Macintosh
+computer.
+<H4><A NAME="par"></A>The Home-Made Parallel Link Cable</H4>
+<P>In our day and age, this was the first alternative to the expensive Grey TI Graph Link. This cable has three
+drawbacks: it works only on PC computers, it requires some CPU computation since the hardware protocol is directly
+managed by the processor, and TI's software does not support it.<BR>
+Nevertheless, it is cheap and easy to build, and more and more linking programs are supporting it.</P>
+<P><IMG SRC="graphics/parallel_link.gif" WIDTH="341" HEIGHT="511" ALIGN="BOTTOM" ALT="[Parallel Cable Schematic]"
+BORDER="0"></P>
+<H4><A NAME="ser"></A>The Home-Made Serial Link Cable</H4>
+<P>This was the second alternative to the expensive Grey TI Graph Link. This cable also had the same drawbacks
+as the Parallel Link, but TI recently added support for it in the TI Graph Link software (since it is compatible
+with the Black TI Graph Link). Again, it is cheap and easy to build and supported by more programs.</P>
+<P><BR>
+
+<TABLE BORDER="1" WIDTH="75%">
+	<TR>
+		<TD WIDTH="62%"><IMG SRC="graphics/serial_link.gif" WIDTH="449" HEIGHT="350" ALIGN="BOTTOM" ALT="[Electrical schematic of $4 Serial Cable]"
+			BORDER="0"></TD>
+		<TD WIDTH="38%"><IMG SRC="graphics/serial_link_pic.gif" WIDTH="500" HEIGHT="470" ALIGN="BOTTOM" ALT="[Soldering Diagram of $4 Serial Cable]"
+			BORDER="0"></TD>
+	</TR>
+</TABLE>
+<p></P>
+<P>
+<H4><A NAME="c85"></A>The 'Connect85' link cable</H4>
+<P>I have no detailed information about this link cable. It was designed by Magnus Hagander for the TI85 only.
+Information on this cable can be found at <A HREF="http://www.ticalc.org">http://www.ticalc.org/</A>. <BR>
+&nbsp;</P>
+<P><IMG SRC="graphics/c85sch.gif" WIDTH="519" HEIGHT="274" ALIGN="BOTTOM" ALT="[Electrical Schematic of Connect85 Cable]"
+BORDER="0">
+<H4><A NAME="bcc"></A>The 'BCC' Serial Link cable</H4>
+<P>The BCC Serial Link is a homemade version of TI's black graphlink cable. The BCC Serial Link is compatible with
+TI's graphlink software using the &quot;black cable&quot; setting. Like the Black TI Graph Link, it cannot be used
+on a Macintosh computer.</P>
+<P><IMG SRC="graphics/bccsl_link.gif" WIDTH="640" HEIGHT="480" ALIGN="BOTTOM" ALT="[Electrical Schematic of BCC Serial Cable]"
+BORDER="0">
+<H4><A NAME="pic"></A>The PIClink</H4>
+<P>This cable, designed by <A HREF="http://skhawam.ticalc.org">Sami Khawam</A>, is the first home-made link cable
+that is fully compatible with the Grey TIGraphLink. It should work on the Macintosh, but it was never officially
+tested.<BR>
+This link cable is a bit more complex than other home-made link cable because it converts data between the protocol
+used by the calc and the asynchronous RS232 protocol used by the computer. Nevertheless, it is cheaper than the
+Grey TIGraphLink. <BR>
+&nbsp;</P>
+<P><IMG SRC="graphics/piclink_link.gif" WIDTH="560" HEIGHT="430" ALIGN="BOTTOM" ALT="[Electrical Schematic of PIClink Cable]"
+BORDER="0"><BR>
+&nbsp;
+<H4><A NAME="avr"></A>The fastAVRlink</H4>
+<P>This cable, designed by <A HREF="http://lpg.ticalc.org/prj_gtktilink">Romain Li&eacute;vin</A>, is the second
+home-made link cable fully compatible with the Grey TIGraphLink. It should work on Macintosh but it has never officially
+been tested.<BR>
+This link cable is also a bit more complex than other home-made link cable because, like the PIClink, it converts
+data between the protocol used by the calc and the asynchronous RS232 protocol used by the computer. Nevertheless,
+it is cheaper than the Grey TIGraphLink. <BR>
+This cable has some features that the PIClink does not have:
+
+<UL>
+	<LI>It allows transmission of data up to 57600 baud (5 times as fast) if the calculator can handle it.
+	<LI>It is FLASH upgradeable (no specific programmer required).
+	<LI>It is jumperless.
+</UL>
+
+<P><BR>
+<IMG SRC="graphics/fastAVRlink_link.gif" WIDTH="1165" HEIGHT="770" ALIGN="BOTTOM" ALT="[Electrical Schematic of fastAVRlink Cable]"
+BORDER="0">
+<H4>&nbsp;</H4>
+<H4><A NAME="bluetigl"></A>The TI Graph Link USB (also known as SilverLink)</H4>
+<P>This is the third link cable designed by Texas Instruments. The TI's Graph 
+  Link Software does not support this link cable. In the meanwhile, TI released 
+  a new software called 'TI-Connect' which supports it. The TI GraphLink USB is 
+  primarily sold for use with Macintosh, but it can be used on any architecture 
+  that supports USB. This cable is faster than any other currently available, 
+  including the FastAVRLink. It can reach a maximum rate of 5.6 KBytes/s.</P>
+<P>This link cable is based on a CY7C64013 microcontroller (&micro;C) from Cypress 
+  Semiconductors. Cypress is well known for its USB devices (mouse, hubs, ...).</P>
+<P>The cable is a Full-Speed (FS, 12Mbit/s) device, USB1.1 compliant, under a 
+  proprietary class. It does not fit into any existing class (HID, printer, ...) 
+  and so it requires a specific device driver (you can find a such driver for 
+  Windows/Linux/Mac OS-X on the <a href="http://lpg.ticalc.org">LPG</a> web site).</P>
+<P>The device uses 'Bulk' mode for data transfers. There are two bulk endpoints 
+  (IN & OUT) and one control endpoint (mandatory). Transfers are achieved by packets. 
+  The endpoints advertise a maximum packet size of 32 bytes. </P>
+<P>
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%">
+	<TR>
+		<TD WIDTH="32%">
+			<P ALIGN="CENTER"><A HREF="hardware.html"><IMG SRC="graphics/prevpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM"
+			ALT="[previous page]" BORDER="2"><BR>
+			Hardware Link Protocol</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="index.html"><IMG SRC="graphics/home.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[home]"
+			BORDER="2"><BR>
+			Table of Contents</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="packet.html"><IMG SRC="graphics/nextpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM"
+			ALT="[next page]" BORDER="2"><BR>
+			Packet Formats</A>
+		</TD>
+	</TR>
+</TABLE>
+
+<HR ALIGN="CENTER">
+<I>Site maintained by Romain Li&eacute;vin (</I><A HREF="mailto:roms@tilp.info"><I>roms@tilp.info</I></A><I>)
+and Tim Singer (</I><A HREF="mailto:tsinger@gladstone.uoregon.edu"><I>tsinger@gladstone.uoregon.edu</I></A><I>)</I>
+
+
+</BODY>
+
+</HTML>

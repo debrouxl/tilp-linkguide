@@ -1,0 +1,574 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META NAME="GENERATOR" Content="Visual Page 1.0 for Windows">
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>TI-92 Link Protocol Guide - File formats</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFE8">
+
+<P><B>TI-92 Link Protocol Guide</B> - File formats 
+<CENTER>
+<H2>
+<HR ALIGN="CENTER">
+File Formats</H2>
+</CENTER>
+<P>The TI-92 Graph Link software stores variables in several types of files. Single variables are stored in files
+that have an extension that corresponds with their type. Groups of variables are stored in files with the extension
+&quot;.92g&quot; and backups with the extension &quot;.92b&quot;. However, all of these file types have a common
+format.</P>
+<P>The different file types and contents that the TI-92 Graph Link software can read and write are shown below.
+
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="66%">
+	<TR>
+		<TH WIDTH="13%" BGCOLOR="#DDDDDD">Extension</TH>
+		<TH BGCOLOR="#DDDDDD">Description</TH>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92a
+		</TD>
+		<TD>TI-92 figure</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92b
+		</TD>
+		<TD>TI-92 system backup</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92c
+		</TD>
+		<TD>TI-92 data</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92d
+		</TD>
+		<TD>TI-92 GDB (Graphic Data Base)</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92e
+		</TD>
+		<TD>TI-92 expression</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92f
+		</TD>
+		<TD>TI-92 function</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92g
+		</TD>
+		<TD>Multiple TI-92 variables of varying types (group)</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92i
+		</TD>
+		<TD>TI-92 picture (image)</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92l
+		</TD>
+		<TD>TI-92 list</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92m
+		</TD>
+		<TD>TI-92 matrix</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92p
+		</TD>
+		<TD>TI-92 program</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92s
+		</TD>
+		<TD>TI-92 string</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92t
+		</TD>
+		<TD>TI-92 text</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="13%">
+			<P ALIGN="CENTER">.92x
+		</TD>
+		<TD>TI-92 macro</TD>
+	</TR>
+</TABLE>
+<p></P>
+<P>Early link programs for the TI-92 used an additional file type &quot;.92@&quot; because the TI-Graph Link 92
+software had not been released for the PC. That format is described in this section as well.</P>
+<H3>
+<HR ALIGN="CENTER">
+The TI-92 variable file format</H3>
+<P>The TI-92 variable file format has three parts: a header, a variable table and a data section.</P>
+<P>The header appears at the beginning of the file and takes the following format: <BR>
+<I>Note - All 2-byte and 4-byte integers are stored little-endian Intel-style (least significant byte first).</I>
+
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+	<TR>
+		<TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+		<TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+		<TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">8-character signature. The signature is always &quot;<TT>**TI92**</TT>&quot;.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">8</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">2-byte further signature. These two bytes always contain {01h, 00h} = {1, 0}.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">10 (Ah)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Default folder name (zero terminated unless 8 characters long).</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">18 (12h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">40&nbsp;(28h)&nbsp;bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Comment. The comment is either zero-terminated or padded on the right with space characters.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">58 (3Ah)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Number of variable and folder entries in the variable table.</TD>
+	</TR>
+</TABLE>
+<I>Note: If the first byte of the default folder name is 0, then the default folder is the current folder on the
+receiving unit.</I><p></P>
+<P>The variable table comes immediately after the header and consists of a number 
+  of 16-byte entries, each taking the format described below. Folder entries share 
+  the same table. The variables described before the first folder entry are assumed 
+  to be in the default folder. Variables described after any given folder entry 
+  are placed in that folder. <br>
+  If no folder entries are included, then variables are considered to be part 
+  of the folder named at file offset 0x0A. If this is null, then it is considered 
+  to be in the current directory when a link program sends it.</P>
+<P>Each variable entry follows this format: 
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+  <TR> 
+    <TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+    <TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+    <TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">4 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">Offset to the data for this variable from 
+      the beginning of the file.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">4</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">Name of variable (zero terminated if not 
+      8 characters long).</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">12 (Ch)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">Type ID of the variable.</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">13 (Dh)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">Attribute (0: none, 1: locked)</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">14 (Eh)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">Unused - each byte has a value of 0.</TD>
+  </TR>
+</TABLE>
+<br>
+Folder entries follow this format: 
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+	<TR>
+		<TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+		<TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+		<TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">4 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Offset to the data for the next variable from the beginning of the file.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">4</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Name of variable (zero terminated if not 8 characters long).</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">12 (Ch)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Type ID of the variable. For folders, this value is always 1Fh.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">13 (Dh)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Unused - this byte has a value of 0.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">14 (Eh)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The number of variables in this folder.</TD>
+	</TR>
+</TABLE>
+<BR>
+Finally, the data section, which follows the variable table, has this format:<BR>
+
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+	<TR>
+		<TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+		<TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+		<TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">4 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The file size, in bytes.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">4</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">A 2-byte signature. These two bytes always contain {A5h, 5Ah}.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">6</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF"><I>n</I> bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Data section.</TD>
+	</TR>
+</TABLE>
+<p></P>
+<P>The data section consists of several variable data parts back-to-back, in order of their listing in the variable
+table. Each variable part has this format: 
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+	<TR>
+		<TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+		<TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+		<TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF"><I>m</I> bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The variable data. This field includes all bytes transferred in data packets. The first five bytes usually all
+			have a value of 0.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF"><I>m</I></TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Checksum. This is the lower 16 bits of the sum of all bytes in the first four bytes and the variable data.</TD>
+	</TR>
+</TABLE>
+<p></P>
+<H3>
+<HR ALIGN="CENTER">
+A simplification of the TI-92 file format for a single variable</H3>
+<P>Files containing single variables are a simple yet common example of the TI-92 file format. In this special
+case, the file format can be simplified as follows: 
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+	<TR>
+		<TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+		<TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+		<TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">8-character signature. The signature is always &quot;<TT>**TI92**</TT>&quot;.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">8</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">2-byte further signature. These two bytes always contain {01h, 00h} = {1, 0}.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">10 (Ah)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The parent folder of the variable (zero terminated if not 8 characters long) - <I>See note below</I>.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">18 (12h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">40 (28h) bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Comment. The comment is either zero-terminated or padded on the right with space characters.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">58 (3Ah)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">6 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">These 6 bytes always contain {01h, 00h, 52h, 00h, 00h, 00h} = {1, 0, 82, 0, 0, 0}.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">64 (40h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The name of the variable (zero terminated if not 8 characters long).</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">72 (48h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The type ID for this variable.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">73 (49h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">3 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">These three bytes always have a value of 0.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">76 (4Ch)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">4 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The file size, in bytes.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">80 (50h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">A 2-byte signature. These two bytes always contain {A5h, 5Ah}.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">82 (52h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF"><I>n</I> bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The variable data. This field includes all bytes transferred in data packets. The first five bytes usually all
+			have a value of 0.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">82 (52h)+<I>n</I></TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Checksum. This is the lower 16 bits of the sum of all bytes in the variable data.</TD>
+	</TR>
+</TABLE>
+<I>Note: If the first byte of the name of the parent folder is 0, then the variable is put into the current folder
+on the receiving unit.</I>
+<H3>
+<HR ALIGN="CENTER">
+The TI-92 backup file format</H3>
+<P>The TI-92 backup file format is similar to the group file format, but there are some functional differences.
+Backup data cannot be stored in the same file as variable data, and some of the bytes in a backup file have special
+meanings. While the backup is sent in several sections, there is only one variable entry for the backup.</P>
+<P>TI-92 backup files follow this format: 
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+  <TR> 
+    <TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+    <TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+    <TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">8-character signature. The signature is 
+      always &quot;<TT>**TI92**</TT>&quot;.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">8</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">2-byte further signature. These two bytes 
+      always contain {01h, 00h} = {1, 0}.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">10 (Ah)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">The first byte always has a value of 0; 
+      the other seven can have any value.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">18 (12h)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">40 (28h) bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">Comment. The comment is either zero-terminated 
+      or padded on the right with space characters.</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">58 (3Ah)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">These 2 bytes always contain {01h, 00h}.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">60 (3Ch)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">4 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">These 4bytes always contain {52h, 00h, 00h, 
+      00h} = {82, 0, 0, 0}.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">64 (40h)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">A string which contains the ROM version 
+      of the calculator (zero-terminated). Examples: &quot;1.11&quot;, &quot;2.1&quot;</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">72 (48h)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">This byte always contains 1Dh.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">73 (49h)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">3 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">These three bytes always have a value of 
+      0.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">76 (4Ch)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">4 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">The file size, in bytes.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">80 (50h)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">A 2-byte further signature. These two bytes 
+      always contain {A5h, 5Ah}.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">82 (52h)</TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF"><I>n</I> bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">Raw data, made up of the 1-kilobyte blocks 
+      stored back-to-back in order of transmission. These blocks do <B>not</B> 
+      include the first four bytes of each of the data packets.</TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="8%" BGCOLOR="#FFFFFF">82 (52h)+<I>n</I></TD>
+    <TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+    <TD WIDTH="81%" BGCOLOR="#FFFFFF">File checksum. This is the lower 16 bits 
+      of the sum of all bytes in the raw data.</TD>
+  </TR>
+</TABLE>
+<p></P>
+<H3>
+<HR ALIGN="CENTER">
+The early 92@ file format</H3>
+<P>Linking programs were available for the TI-92 before TI released the TI-92 Graph Link for the PC. The creators
+of Link92xp, one of these early TI-92 linking programs, designed this file format to store the information. While
+this format was never supported by TI and is now obsolete, there are still some 92@ files floating about the internet.</P>
+<P>92@ files start with a header with this format:<BR>
+
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+	<TR>
+		<TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+		<TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+		<TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">8 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">8-character signature. The signature is always &quot;<TT>**TI92**</TT>&quot;.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">8</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">3 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">3-byte further signature. These two bytes always contain {1Ah, 0Ch, 00h} = {26, 12, 0}.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">11 (Bh)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">42 (2Ah) bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Comment. The comment is either zero-terminated or padded on the right with space characters.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">53 (35h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Length, in bytes, of the data section and the checksum (<I>n</I>+2). This value should be 37h less than the file
+			length.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">55 (37h)</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF"><I>n</I> bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Data section - made up of a number of entries, described below.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">54 (36h)+<I>n</I></TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">File checksum. This is the lower 16 bits of the sum of all bytes in the data section.</TD>
+	</TR>
+</TABLE>
+<p></P>
+<P>Each variable entry in the data section has this format:<BR>
+
+<TABLE BORDER="1" CELLSPACING="0" WIDTH="92%">
+	<TR>
+		<TH WIDTH="8%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Offset</FONT></TH>
+		<TH WIDTH="11%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Length</FONT></TH>
+		<TH WIDTH="81%" BGCOLOR="#008800"><FONT COLOR="#FFFFFF">Description</FONT></TH>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">0</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Offset from the next byte to the data length field. This number should be 4+<I>m</I>, where <I>m</I> is defined
+			below.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">1</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Offset from the beginning of the entry to the raw data. This number should be 3 more than the value at offset 0.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">3</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Variable type ID.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">4</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">1 byte</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Length, in characters, of the variable directory/name field.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">5</TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF"><I>m</I> bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Variable directory/name. If a directory is specified, its name comes first, followed by a backslash (\) character,
+			then the variable name. If no directory is specified, there is no backslash and the variable is put in the current
+			directory of the calculator.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">5+<I>m</I></TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF">2 bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">Length, in bytes, of the variable data.</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="8%" BGCOLOR="#FFFFFF">7+<I>m</I></TD>
+		<TD WIDTH="11%" BGCOLOR="#FFFFFF"><I>n</I> bytes</TD>
+		<TD WIDTH="81%" BGCOLOR="#FFFFFF">The variable data, not including the first five bytes sent with the data packet.  The first four bytes of the packet
+			are unimportant, and the fifth byte of the packet can be calculated by subtracting 2 from the value at offset <I>5+m</I>
+			and taking the upper 8 bits.</TD>
+	</TR>
+</TABLE>
+<p></P>
+
+<P>
+<TABLE BORDER="0" CELLSPACING="0" WIDTH="100%">
+	<TR>
+		<TD WIDTH="32%">
+			<P ALIGN="CENTER"><A HREF="vars.html"><IMG SRC="graphics/prevpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[previous page]"
+			BORDER="2"></A> <BR>
+			<A HREF="vars.html">Variable Formats</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="index.html"><IMG SRC="graphics/home.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM" ALT="[home]"
+			BORDER="2"></A> <BR>
+			<A HREF="index.html">Table of Contents</A>
+		</TD>
+		<TD WIDTH="34%">
+			<P ALIGN="CENTER"><A HREF="tokens.html"><IMG SRC="graphics/nextpage.gif" WIDTH="32" HEIGHT="32" ALIGN="BOTTOM"
+			ALT="[next page]" BORDER="2"></A> <BR>
+			<A HREF="tokens.html">Tokens and Characters</A>
+		</TD>
+	</TR>
+</TABLE>
+
+<HR ALIGN="CENTER">
+<I>Site maintained by Romain Li&eacute;vin (</I><A HREF="mailto:roms@lpg.ticalc.org"><I>roms@lpg.ticalc.org</I></A><I>)
+and Tim Singer (</I><A HREF="mailto:tsinger@gladstone.uoregon.edu"><I>tsinger@gladstone.uoregon.edu</I></A><I>)</I>
+
+
+</BODY>
+
+</HTML>

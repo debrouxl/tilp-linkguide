@@ -1,0 +1,23 @@
+Reverse-engineering  of the TI calculators protocol
+Guidelines
+
+
+
+Tools used :
+- DSP Starter Kit,
+- AVRanalyzer.
+
+
+Analysis:
+- fastAVRlink on COM2 (TiLP)
+- DSK on the 'T'
+- GreyLink on COM1 (TI's SDK)
+
+Some offsets used by my DSK tools for storing data:
+- CblExpmt: 31000
+- Conics (acf2b3e.8xk): 22000
+- ProbSi83: 36000 ?
+- ChemBio: 23000
+- TI83PlusOS114.8XU: 260000
+
+
