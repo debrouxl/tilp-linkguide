@@ -30,415 +30,415 @@ $7A01 : CID = Command ID
 1°) AI4 handler
 	
 @IA4_handler
-222180:	MOVEM.L    	D0-D2/A0-A2,-(A7)	; save context
-222184:	ST.B       	$5D69      				; $ff when entering ISR
-222188:	MOVEA.L    	#$60000C,A1      	;	ctrl reg -> A1
-22218e:	MOVEA.L    	#$60000F,A2      	; rx/tx reg -> A2
+222180:	; save context
+222184:		; $ff when entering ISR
+222188:	;	ctrl reg -> A1
+22218e:	; rx/tx reg -> A2
 
-222194:	MOVEA.L    	#$5CE0,A0        	; a0 = &rx buf
-22219a:	MOVE.W     	($6,A0),D1       	; if(#bytes < buffer size)
-22219e:	CMP.W      	($4,A0),D1       	; 
-2221a2:	BLT.S      	*+$C [lbl001]    	; then process
-2221a4:	MOVE.B     	#$1,$5D6A        	; else, 1 -> $5d6a
-2221aa:	BRA        	*+$88 [lbl007]   	; goto ISR end
+222194:	; a0 = &rx buf
+22219a:	; if(#bytes < buffer size)
+22219e:	; 
+2221a2:	; then process
+2221a4:	; else, 1 -> $5d6a
+2221aa:	; goto ISR end
 
-@lbl001															; check for irq cause
-2221ae:	MOVE.W     	(A1),D2          	; read ctrl reg
-2221b0:	BTST       	#$3,D2           	; if SA=1 (autostart)
-2221b4:	BNE        	*+$7E [lbl007]   	; then goto end
-2221b8:	BTST       	#$7,D2           	; if SLE=1 (error)
-2221bc:	BNE        	*+$80 [lbl008]   	; then reset linkport
-2221c0:	BTST       	#$5,D2           	;	if SRX=0 (rx reg full)
-2221c4:	BEQ.S      	*+$1E [lbl003]   	; then goto tx routine
+@lbl001							; check for irq cause
+2221ae:	; read ctrl reg
+2221b0:	; if SA=1 (autostart)
+2221b4:	; then goto end
+2221b8:	; if SLE=1 (error)
+2221bc:	; then reset linkport
+2221c0:	;	if SRX=0 (rx reg full)
+2221c4:	; then goto tx routine
 
-																		; RX routine
-2221c6:	MOVE.B     	(A2),D0          	; else get char from rx reg
-2221c8:	ADDQ.W     	#1,($6,A0)       	; #bytes++
-2221cc:	MOVE.W     	(A0),D1          	; rxbuf[tail] = char
-2221ce:	MOVE.B     	D0,($8,A0,D1.W)  	; 
-2221d2:	ADDQ.W     	#1,D1            	; tail++
-2221d4:	CMP.W      	($4,A0),D1       	; if(tail < bufsize)
-2221d8:	BLT.S      	*+$4 [lbl002]    	; then jump
-2221da:	CLR.W      	D1               	; else, roll-up tail to 0
+										; RX routine
+2221c6:	; else get char from rx reg
+2221c8:	; #bytes++
+2221cc:	; rxbuf[tail] = char
+2221ce:	; 
+2221d2:	; tail++
+2221d4:	; if(tail < bufsize)
+2221d8:	; then jump
+2221da:	; else, roll-up tail to 0
 
 @lbl002
-2221dc:	MOVE.W     	D1,(A0)          	; and store it
-2221de:	BRA        	*+$54 [lbl007]   	; goto end
+2221dc:	; and store it
+2221de:	; goto end
 
-@lbl003															;TX routine
-2221e2:	BTST       	#$9,D2           	; if TXIE=0
-2221e6:	BEQ        	*+$4C [lbl007]   	; then goto end (no char to transmit)
-2221ea:	MOVEA.L    	#$5C58,A0        	; else a0 = &tx_buf
+@lbl003							;TX routine
+2221e2:	; if TXIE=0
+2221e6:	; then goto end (no char to transmit)
+2221ea:	; else a0 = &tx_buf
 
 @lbl004
-2221f0:	TST.W      	($6,A0)          	; if no (more) char in tx_buf ?
-2221f4:	BEQ.S      	*+$36 [lbl006]   	; then exit
-2221f6:	MOVE.W     	(A1),D2          	; else, read ctrl reg
-2221f8:	BTST       	#$6,D2           	; if STX=0
-2221fc:	BEQ.S      	*+$36 [lbl007]   	; then exit (last char)
-2221fe:	MOVE.W     	($2,A0),D1       	; else char = txbuf[head]
-222202:	MOVE.B     	($8,A0,D1.W),D0  	;
+2221f0:	; if no (more) char in tx_buf ?
+2221f4:	; then exit
+2221f6:	; else, read ctrl reg
+2221f8:	; if STX=0
+2221fc:	; then exit (last char)
+2221fe:	; else char = txbuf[head]
+222202:	;
 
-@lbl005															; wait for char transmission
-222206:	MOVE.W     	(A1),D2          	; read ctrl reg
-222208:	BTST       	#$7,D2           	; if SLE=1 (link error)
-22220c:	BNE.S      	*+$30 [lbl008]   	; then reset link
-22220e:	BTST       	#$6,D2           	; if STX=0 (tx empty)
-222212:	BEQ.S      	*-$C [lbl005]    	; then loop (wait for char to be transmitted)
+@lbl005							; wait for char transmission
+222206:	; read ctrl reg
+222208:	; if SLE=1 (link error)
+22220c:	; then reset link
+22220e:	; if STX=0 (tx empty)
+222212:	; then loop (wait for char to be transmitted)
 
-222214:	MOVE.B     	D0,(A2)          	; write char into tx reg
-222216:	SUBQ.W     	#1,($6,A0)       	; #bytes--
-22221a:	ADDQ.W     	#1,D1            	; head++
-22221c:	CMP.W      	($4,A0),D1       	; if head >= buf size
-222220:	BLT.S      	*+$4 [222224]    	; 
-222222:	CLR.W      	D1               	; then roll-up head to 0
-222224:	MOVE.W     	D1,($2,A0)       	; and store
-222228:	BRA.S      	*-$38 [lbl004]   	; re-loop for next byte
-222228:	BRA.S      	*-$38 [lbl004]   	; ????
+222214:	; write char into tx reg
+222216:	; #bytes--
+22221a:	; head++
+22221c:	; if head >= buf size
+222220:	; 
+222222:	; then roll-up head to 0
+222224:	; and store
+222228:	; re-loop for next byte
+222228:	; ????
 
 @lbl006
-22222a:	BCLR       	#$1,$60000C      	; disable TX interrupt (no more bytes to send)
+22222a:	; disable TX interrupt (no more bytes to send)
 
-@lbl007															; end of ISR
-222232:	CLR.B      	$5D69            	; $00 when exiting ISR
-222236:	MOVEM.L    	(A7)+,D0-D2/A0-A2	; restore context
-22223a:	RTE        	                 	; exit ISR
+@lbl007							; end of ISR
+222232:	; $00 when exiting ISR
+222236:	; restore context
+22223a:	; exit ISR
 
-@lbl008															; reset link port
-22223c:	MOVE.B     	#$E0,$60000C     	;	reset link port (AE,LD,LTO=1)
-222244:	MOVE.B     	#$8D,$60000C     	; AE,CLE,CAIE,CRW=1
-22224c:	ST         	.B    $5D68      	; $ff
-222250:	BRA.S      	*-$1E [lbl007]   	; exit
+@lbl008							; reset link port
+22223c:	;	reset link port (AE,LD,LTO=1)
+222244:	; AE,CLE,CAIE,CRW=1
+22224c:	; $ff
+222250:	; exit
 
 2°) void OSLinkReset(void)
 
 @OSLinkReset:
-222252:	MOVE.W     	#$4E20,D0        	; wait for 20 ms
-222256:	DBF        	D0,*-$0 [itself] 	; 
-22225a:	BSR        	*+$200 [22245A]  	; disable ints
-22225e:	MOVE.W     	$60000C,D0       	; read ctrl reg
-222264:	MOVE.B     	#$E0,$60000C     	; disable ints and link
-22226c:	BSET       	#$0,$60000E      	; red/white wire = 0
-222274:	BSET       	#$1,$60000E      	;
-22227c:	MOVE.W     	#$100,D0         	; wait for 100 us
-222280:	DBF        	D0,*-$0 [itself] 	;
-222284:	BCLR       	#$0,$60000E      	; D1/tip/red = 1
-22228c:	BCLR       	#$1,$60000E      	; D1/ring/white = 1
-222294:	MOVE.W     	#$100,D0         	; wait for 100 us
-222298:	DBF        	D0,*-$0 [itself] 	;
-22229c:	CLR.L      	$7A00            	; clear MID
-2222a0:	BRA.S      	*+$1A [2222BA]   	; ??
+222252:	; wait for 20 ms
+222256:	; 
+22225a:	; disable ints
+22225e:	; read ctrl reg
+222264:	; disable ints and link
+22226c:	; red/white wire = 0
+222274:	;
+22227c:	; wait for 100 us
+222280:	;
+222284:	; D1/tip/red = 1
+22228c:	; D1/ring/white = 1
+222294:	; wait for 100 us
+222298:	;
+22229c:	; clear MID
+2222a0:	; ??
 
 3°) void OSLinkOpen(void);
 
 @OSLinkOpen
-2c1360:	BRA.S      	*+$24 [lbl012]   	; jump to ??
+2c1360:	; jump to ??
 
-@lbl013 (APD)
-2c1362:	MOVE.W     	#$2,-(A7)        	; if OsTimer #2 not expired
-2c1366:	JSR        	tios::OSTimerExpired	;
-2c136c:	ADDQ.L     	#2,A7            	;
-2c136e:	TST.W      	D0               	; 
-2c1370:	BEQ.S      	*+$14 [2C1384]   	; then skip
-2c1372:	JSR        	tios::off        	; else calc off
-2c1378:	MOVE.W     	#$2,-(A7)        	;
-2c137c:	JSR        	tios::OSTimerRestart	;and restart timer
-2c1382:	ADDQ.L     	#2,A7            	;
+@lbl013 
+2c1362:	; if OsTimer #2 not expired
+2c1366:		;
+2c136c:	;
+2c136e:	; 
+2c1370:	; then skip
+2c1372:	; else calc off
+2c1378:	;
+2c137c:		;and restart timer
+2c1382:	;
 
 @lbl012
-2c1384:	JSR        	OSLinkTxQueueInq2	; get bytes in tx buf
-2c138a:	TST.W      	D0               	; if #bytes=0
-2c138c:	BEQ.S      	*+$E [lbl013]    	; then
-2c138e:	TST.B      	$5D68            	; else if link flushed ??
-2c1392:	BNE.S      	*+$8 [lbl013]    	; then ??
-2c1394:	TST.B      	$5B92            	; else ig ??
-2c1398:	BEQ.S      	*-$36 [lbl013]   	; then ??
+2c1384:	; get bytes in tx buf
+2c138a:	; if #bytes=0
+2c138c:	; then
+2c138e:	; else if link flushed ??
+2c1392:	; then ??
+2c1394:	; else ig ??
+2c1398:	; then ??
 
 @lbl013
-2c139a:	MOVE.W     	#$3,-(A7)        	;
-2c139e:	JSR        	tios::OSFreeTimer	; release timer for what ?
-2c13a4:	ADDQ.L     	#2,A7            	;
-2c13a4:	ADDQ.L     	#2,A7            	;
-2c13a6:	JSR        	$2222C4          	; clear buffers
-2c13ac:	RTS        	                 	; end
+2c139a:	;
+2c139e:	; release timer for what ?
+2c13a4:	;
+2c13a4:	;
+2c13a6:	; clear buffers
+2c13ac:	; end
 
 4°) void OSLinkClose (void);
 
 @OSLinkClose
-2222a2:	MOVEA.L    	#$5C58,A0        	; a0 = &tx_buf
-2222a8:	TST.W      	($6,A0)          	; if nbytes=0
-2222ac:	BEQ.S      	*+$E [labe9]    	; then ??
-2222ae:	TST.B      	$5D68            	; if =1 (link port reset'ed due to error)
-2222b2:	BNE.S      	*+$8 [labe9]    	; then ??
-2222b4:	TST.B      	$5B92            	; if =0
-2222b8:	BEQ.S      	*-$10 [2222A8]   	; then loop
+2222a2:	; a0 = &tx_buf
+2222a8:	; if nbytes=0
+2222ac:	; then ??
+2222ae:	; if =1 (link port reset'ed due to error)
+2222b2:	; then ??
+2222b4:	; if =0
+2222b8:	; then loop
 
 @lbl009
-2222ba:	CLR.B      	$5D6C            	; ?
-2222be:	CLR.B      	$5D6D            	; ?
-2222c2:	BRA.S      	*+$A [lbl010]    	;
-2222c4:	BSR        	*+$196 [22245A]  	; disable ints
-2222c8:	ST         	.B    $5D6C      	; $ff
+2222ba:	; ?
+2222be:	; ?
+2222c2:	;
+2222c4:	; disable ints
+2222c8:	; $ff
 
 @lbl010
-2222cc:	CLR.L      	D0               	;
-2222ce:	MOVE.B     	D0,$5D68         	; clear some vars
-2222d2:	MOVE.B     	D0,$5D69         	;
-2222d2:	MOVE.B     	D0,$5D69         	;
-2222d6:	MOVE.B     	D0,$5D6B         	;
-2222da:	MOVE.B     	D0,$5D6A         	;
-2222de:	MOVEA.L    	#$5C58,A0        	; a0 = &tx_buf
-2222e4:	BSR        	*+$20 [lbl011]   	; clear tx_buf
-2222e8:	MOVEA.L    	#$5CE0,A0        	; a0 = &rx_buf
-2222ee:	BSR        	*+$16 [lbl011]   	; clear rx_buf
-2222f2:	MOVE.B     	#$8D,$60000C     	; init ctrl reg
-2222fa:	BSR        	*+$16C [222466]  	; restore ints
-2222fe:	CLR.W      	D0               	;
-2222f2:	MOVE.B     	#$8D,$60000C     	; init ctrl reg
-2222fa:	BSR        	*+$16C [222466]  	; restore ints
-2222fe:	CLR.W      	D0               	;
-222300:	ST         	.B    D0         	;
-222302:	RTS        	                 	; end
+2222cc:	;
+2222ce:	; clear some vars
+2222d2:	;
+2222d2:	;
+2222d6:	;
+2222da:	;
+2222de:	; a0 = &tx_buf
+2222e4:	; clear tx_buf
+2222e8:	; a0 = &rx_buf
+2222ee:	; clear rx_buf
+2222f2:	; init ctrl reg
+2222fa:	; restore ints
+2222fe:	;
+2222f2:	; init ctrl reg
+2222fa:	; restore ints
+2222fe:	;
+222300:	;
+222302:	; end
 
-@lbl0011														;clear buffer
-222304:	MOVE.W     	D0,(A0)+         	; tail = 0
-222306:	MOVE.W     	D0,(A0)+         	; head = 0
-222308:	MOVE.W     	#$80,(A0)+       	; buf size = 128
-22230c:	MOVE.W     	D0,(A0)+         	; nbytes = 0
-22230e:	RTS        	                 	;
+@lbl0011						;clear buffer
+222304:	; tail = 0
+222306:	; head = 0
+222308:	; buf size = 128
+22230c:	; nbytes = 0
+22230e:	;
 
 5°) unsigned short OSLinkTxQueueInquire (void);
 
 @OSLinkTxQueueInquire
-222310:	BSR        	*+$14A [22245A]  	; disable ints
-222314:	MOVEA.L    	#$5C58,A0        	; a0 = @tx_buf
-22231a:	MOVE.W     	($4,A0),D0       	; get # of free bytes in buffer
-22231e:	SUB.W      	($6,A0),D0       	;
-222322:	MOVE.W     	D0,-(A7)         	; return it on stack frame
-222324:	BSR        	*+$142 [222466]  	; restore ints
-222328:	MOVE.W     	(A7)+,D0         	;
-22232a:	RTS        	                 	; end
+222310:	; disable ints
+222314:	; a0 = @tx_buf
+22231a:	; get # of free bytes in buffer
+22231e:	;
+222322:	; return it on stack frame
+222324:	; restore ints
+222328:	;
+22232a:	; end
 
 @OSLinkTxQueueInq2
-22232c:	BSR        	*+$12E [22245A]  	; disable ints
-22232c:	BSR        	*+$12E [22245A]  	; disable ints
-222330:	MOVEA.L    	#$5C58,A0        	; a0 = @tx_buf
-222336:	MOVE.W     	($6,A0),-(A7)    	; return #bytes in buffer
-22233a:	BSR        	*+$12C [222466]  	; restore ints
-22233e:	MOVE.W     	(A7)+,D0         	; d0 = #bytes
-222340:	RTS        	                 	;
+22232c:	; disable ints
+22232c:	; disable ints
+222330:	; a0 = @tx_buf
+222336:	; return #bytes in buffer
+22233a:	; restore ints
+22233e:	; d0 = #bytes
+222340:	;
 
 
 6°) short OSLinkTxQueueActive (void); 
 
 @OSLinkTxQueueActive
-222342:	BSR        	*+$118 [22245A]  	; disable ints
-222346:	CLR.W      	D0               	; return 0
-222348:	BTST       	#$1,$60000C      	; if CTX=0 (no transmission is in progress)
-222350:	BEQ        	*+$6 [222356]    	; then return FALSE
-222350:	BEQ        	*+$6 [222356]    	;
-222354:	ADDQ.L     	#1,D0            	; else return TRUE
-222356:	MOVE.W     	D0,-(A7)         	;
-222358:	BSR        	*+$10E [222466]  	; restore ints
-22235c:	MOVE.W     	(A7)+,D0         	;
-22235e:	RTS        	                 	; end
+222342:	; disable ints
+222346:	; return 0
+222348:	; if CTX=0 (no transmission is in progress)
+222350:	; then return FALSE
+222350:	;
+222354:	; else return TRUE
+222356:	;
+222358:	; restore ints
+22235c:	;
+22235e:	; end
 
 9°) short OSWriteLinkBlock (const char *buffer, unsigned short num); 
 
 @OSWriteLinkBlock
-222360:	BSR        	*+$FA [22245A]   	; disable ints
-222364:	MOVEA.L    	($4,A7),A0       	; get vars from stack frame (a0 = buffer, d0 = num)
-222368:	MOVE.W     	($8,A7),D0       	;
-22236c:	MOVEM.L    	D1-D3/A1,-(A7)   	;
-222370:	MOVE.W     	D0,D3            	;
-222372:	SUBQ.W     	#1,D0            	;
-222374:	BMI.S      	*+$5C [2223D0]   	; return -1
-222376:	CMPI.W     	#$80,D3          	; check there are no more than 128 bytes
-22237a:	BHI.S      	*+$54 [2223CE]   	; return -1
-22237c:	MOVEA.L    	#$5C58,A1        	; a1 = #bytes in tx buf
-22237c:	MOVEA.L    	#$5C58,A1        	;
-222382:	MOVE.W     	($6,A1),D1       	;
-222386:	ADD.W      	D3,D1            	; #bytes += num
-222388:	CMP.W      	($4,A1),D1       	;
-22238c:	BHI.S      	*+$40 [2223CC]   	; return -1
-22238e:	BTST       	#$1,$60000C      	; if CTX=1 (TX IE)
-222396:	BNE.S      	*+$A [2223A0]    	; then do nothing
-222398:	BSET       	#$1,$60000C      	; else enable TX interrupt (is this raises interrupt ?)
-2223a0:	MOVE.W     	(A1),D2          	; copy bytes into tx buffer
-2223a2:	MOVE.B     	(A0)+,D1         	;
-2223a4:	ADDQ.W     	#1,($6,A1)       	;
-2223a8:	MOVE.B     	D1,($8,A1,D2.W)  	;
-2223ac:	ADDQ.W     	#1,D2            	;
-2223ae:	CMP.W      	($4,A1),D2       	;
-2223b2:	BLT.S      	*+$4 [2223B6]    	;
-2223b4:	CLR.W      	D2               	;
-2223b6:	DBF        	D0,*-$14 [2223A2]	; loop to copy num bytes
-2223ba:	MOVE.W     	D2,(A1)          	;
-2223bc:	BSR        	*+$AA [222466]   	; restore ints
-2223bc:	BSR        	*+$AA [222466]   	;
-2223c0:	CLR.L      	D0               	; return 0
-2223c2:	MOVEM.L    	(A7)+,D1-D3/A1   	;
-2223c6:	RTS        	                 	; end
-2223c8:	NOP        	                 	;
-2223ca:	NOP        	                 	;
-2223cc:	NOP        	                 	;
-2223ce:	NOP        	                 	;
-2223d0:	NOP        	                 	;
-2223d2:	BSR        	*+$94 [222466]   	;
-2223d6:	ST         	.B    D0         	; return -1
-2223d8:	BRA.S      	*-$16 [2223C2]   	;
-2223d8:	BRA.S      	*-$16 [2223C2]   	;
+222360:	; disable ints
+222364:	; get vars from stack frame (a0 = buffer, d0 = num)
+222368:	;
+22236c:	;
+222370:	;
+222372:	;
+222374:	; return -1
+222376:	; check there are no more than 128 bytes
+22237a:	; return -1
+22237c:	; a1 = #bytes in tx buf
+22237c:	;
+222382:	;
+222386:	; #bytes += num
+222388:	;
+22238c:	; return -1
+22238e:	; if CTX=1 (TX IE)
+222396:	; then do nothing
+222398:	; else enable TX interrupt (is this raises interrupt ?)
+2223a0:	; copy bytes into tx buffer
+2223a2:	;
+2223a4:	;
+2223a8:	;
+2223ac:	;
+2223ae:	;
+2223b2:	;
+2223b4:	;
+2223b6:	; loop to copy num bytes
+2223ba:	;
+2223bc:	; restore ints
+2223bc:	;
+2223c0:	; return 0
+2223c2:	;
+2223c6:	; end
+2223c8:	;
+2223ca:	;
+2223cc:	;
+2223ce:	;
+2223d0:	;
+2223d2:	;
+2223d6:	; return -1
+2223d8:	;
+2223d8:	;
 
 @OSReadLinkBlock
-2223da:	BSR        	*+$80 [22245A]   	;
-2223de:	MOVEA.L    	($4,A7),A0       	;
-2223e2:	MOVE.W     	($8,A7),D0       	;
-2223e6:	MOVEM.L    	D3-D4,-(A7)      	;
-2223ea:	MOVEQ      	#$0,D3           	;
-2223ec:	MOVEA.L    	#$5CE0,A1        	;
-2223f2:	MOVE.W     	($6,A1),D1       	;
-2223f6:	BEQ.S      	*+$58 [22244E]   	;
-2223f8:	MOVE.W     	($2,A1),D2       	;
-2223fc:	MOVE.B     	($8,A1,D2.W),(A0)+	;
-222400:	ADDQ.W     	#1,D3            	;
-222402:	ADDQ.W     	#1,D2            	;
-222404:	CMP.W      	($4,A1),D2       	;
-222408:	BLT.S      	*+$4 [22240C]    	;
-22240a:	MOVEQ      	#$0,D2           	;
-22240c:	SUBQ.W     	#1,($6,A1)       	;
-222410:	BEQ.S      	*+$3A [22244A]   	;
-222412:	TST.B      	$5D6A            	;
-222412:	TST.B      	$5D6A            	;
-222416:	BEQ.S      	*+$30 [222446]   	;
-222418:	CLR.B      	$5D6A            	;
-22241c:	MOVE.W     	$60000C,D4       	;
-222422:	BTST       	#$3,D4           	; if SA=1 (autostart)
-222426:	BNE.S      	*+$1C [222442]   	; then ...
-222428:	BTST       	#$7,D4           	; if SLE=0 (error)
-22242c:	BEQ.S      	*+$1A [222446]   	; then
-22242e:	MOVE.B     	#$E0,$60000C     	; else reset linkport
-222436:	MOVE.B     	#$8D,$60000C     	;
-222436:	MOVE.B     	#$8D,$60000C     	;
-22243e:	ST         	.B    $5D68      	;
-222442:	CLR.B      	$5D69            	;
-222446:	SUBQ.W     	#1,D0            	;
-222448:	BNE.S      	*-$4C [2223FC]   	;
-22244a:	MOVE.W     	D2,($2,A1)       	;
-22244e:	BSR        	*+$18 [222466]   	;
-222452:	MOVE.W     	D3,D0            	;
-222454:	MOVEM.L    	(A7)+,D3-D4      	;
-222458:	RTS        	                 	;
+2223da:	;
+2223de:	;
+2223e2:	;
+2223e6:	;
+2223ea:	;
+2223ec:	;
+2223f2:	;
+2223f6:	;
+2223f8:	;
+2223fc:	;
+222400:	;
+222402:	;
+222404:	;
+222408:	;
+22240a:	;
+22240c:	;
+222410:	;
+222412:	;
+222412:	;
+222416:	;
+222418:	;
+22241c:	;
+222422:	; if SA=1 (autostart)
+222426:	; then ...
+222428:	; if SLE=0 (error)
+22242c:	; then
+22242e:	; else reset linkport
+222436:	;
+222436:	;
+22243e:	;
+222442:	;
+222446:	;
+222448:	;
+22244a:	;
+22244e:	;
+222452:	;
+222454:	;
+222458:	;
 
 7°) short OSCheckSilentLink (void);
 
 @OSCheckSilentLink
-2bf314:	MOVE.L     	D3,-(A7)         	;
-2bf316:	SUBQ.L     	#8,A7            	;
-2bf318:	TST.B      	$5D6B            	; check var
-2bf31c:	BNE        	*+$F2 [2BF40E]   	; return ?
-2bf320:	TST.B      	$5D6C            	; check var
-2bf324:	BEQ.S      	*+$6 [2BF32A]    	; 
-2bf326:	BRA        	*+$E8 [2BF40E]   	; return ?
+2bf314:	;
+2bf316:	;
+2bf318:	; check var
+2bf31c:	; return ?
+2bf320:	; check var
+2bf324:	; 
+2bf326:	; return ?
 
 @
-2bf32a:	TST.B      	$5D68            	; check var ?
-2bf32e:	BEQ.S      	*+$E [2BF33C]    	;
-2bf330:	JSR        	tios::OSLinkClose	; close link
-2bf330:	JSR        	tios::OSLinkClose	; ??
-2bf336:	MOVEQ      	#$0,D0           	;
-2bf338:	MOVE.L     	D0,$7A00         	; clear MID
+2bf32a:	; check var ?
+2bf32e:	;
+2bf330:	; close link
+2bf330:	; ??
+2bf336:	;
+2bf338:	; clear MID
 
 @
-2bf33c:	CLR.W      	D3               	;
-2bf33e:	MOVE.B     	$7A01,D3         	; D3 contains the Command ID
-2bf342:	TST.W      	D3               	;
-2bf344:	BEQ        	*+$A2 [2BF3E6]   	;
-2bf348:	CMPI.B     	#$89,$7A00       	; TI92_PC
-2bf34e:	BEQ.S      	*+$2E [2BF37C]   	;
-2bf350:	CMPI.B     	#$88,$7A00       	; TI92p_PC
-2bf350:	CMPI.B     	#$88,$7A00       	; V200_PC
-2bf356:	BEQ.S      	*+$26 [2BF37C]   	;
-2bf358:	CMPI.B     	#$98,$7A00       	; TI89_PC, TI89t_PC
-2bf35e:	BEQ.S      	*+$1E [2BF37C]   	;
-2bf360:	CMPI.B     	#$8,$7A00        	; PC_TI89, PC_TI89t, PC_TI92p, PC_V200
-2bf366:	BEQ.S      	*+$16 [2BF37C]   	;
-2bf368:	CMPI.B     	#$9,$7A00        	; PC_TI92
-2bf36e:	BEQ.S      	*+$E [2BF37C]    	;
-2bf370:	CMPI.W     	#$2D,D3          	; CMD_FLSH (flash os/app)
-2bf374:	BEQ.S      	*+$8 [2BF37C]    	;
-2bf374:	BEQ.S      	*+$8 [2BF37C]    	;
-2bf376:	CMPI.W     	#$68,D3          	; CMD_RDY (ready)
-2bf37a:	BNE.S      	*+$62 [2BF3DC]   	;
-2bf37c:	MOVEQ      	#$0,D0           	;
-2bf37e:	MOVE.W     	D3,D0            	;
-2bf380:	CMPI.L     	#$7FFF,D0        	; ??
-2bf386:	BGT.S      	*+$56 [2BF3DC]   	;
-2bf388:	CMPI.L     	#$FFFF8000,D0    	; ??
-2bf38e:	BLT.S      	*+$4E [2BF3DC]   	;
-2bf390:	CMPI.W     	#$6D,D0          	; CMD_SCR (screenshot)
-2bf390:	CMPI.W     	#$6D,D0          	;
-2bf394:	BGT.S      	*+$1C [2BF3B0]   	;
-2bf396:	BEQ.S      	*+$3E [2BF3D4]   	;
-2bf398:	CMPI.W     	#$2D,D0          	; CMD_FLSH
-2bf39c:	BGT.S      	*+$C [2BF3A8]    	;
-2bf39e:	BEQ.S      	*+$3A [2BF3D8]   	;
-2bf3a0:	CMPI.W     	#$6,D0           	; CMD_VAR (variable header)
-2bf3a4:	BNE.S      	*+$38 [2BF3DC]   	;
-2bf3a6:	BRA.S      	*+$2A [2BF3D0]   	;
-2bf3a8:	CMPI.W     	#$68,D0          	; CMD_RDY
-2bf3a8:	CMPI.W     	#$68,D0          	; CMD_RDY
-2bf3ac:	BNE.S      	*+$30 [2BF3DC]   	;
-2bf3ae:	BRA.S      	*+$2A [2BF3D8]   	;
-2bf3b0:	CMPI.W     	#$A2,D0          	; CMD_REQ (requets variable)
-2bf3b4:	BGT.S      	*+$C [2BF3C0]    	;
-2bf3b6:	BEQ.S      	*+$1E [2BF3D4]   	;
-2bf3b8:	CMPI.W     	#$87,D0          	; CMD_KEY (remote control)
-2bf3bc:	BNE.S      	*+$20 [2BF3DC]   	;
-2bf3be:	BRA.S      	*+$16 [2BF3D4]   	;
-2bf3c0:	CMPI.W     	#$B7,D0          	; CMD_IND (var index)
-2bf3c0:	CMPI.W     	#$B7,D0          	;
-2bf3c4:	BEQ.S      	*+$10 [2BF3D4]   	;
-2bf3c6:	BLE.S      	*+$16 [2BF3DC]   	;
-2bf3c8:	CMPI.W     	#$C9,D0          	; CMD_RTS (requets to send)
-2bf3cc:	BEQ.S      	*+$4 [2BF3D0]    	;
-2bf3ce:	BRA.S      	*+$E [2BF3DC]    	;
-2bf3d0:	MOVEQ      	#$1,D0           	;
-2bf3d2:	BRA.S      	*+$3E [2BF410]   	;
-2bf3d4:	MOVEQ      	#$2,D0           	;
-2bf3d6:	BRA.S      	*+$3A [2BF410]   	;
-2bf3d6:	BRA.S      	*+$3A [2BF410]   	;
-2bf3d8:	MOVEQ      	#$3,D0           	;
-2bf3da:	BRA.S      	*+$36 [2BF410]   	;
-2bf3dc:	JSR        	tios::OSLinkReset	;
-2bf3e2:	MOVEQ      	#$0,D0           	;
-2bf3e4:	BRA.S      	*+$2C [2BF410]   	;
-2bf3e6:	TST.W      	$5CE6            	;
-2bf3ea:	BEQ.S      	*+$24 [2BF40E]   	; return ?
-2bf3ec:	MOVEQ      	#$28,D0          	;
-2bf3ee:	MOVE.L     	D0,(A7)          	;
-2bf3ee:	MOVE.L     	D0,(A7)          	;
-2bf3f0:	MOVEQ      	#$4,D0           	;
-2bf3f2:	MOVE.L     	D0,-(A7)         	;
-2bf3f4:	PEA        	$7A00            	;
-2bf3f8:	JSR        	tios::LIO_RecvData	;
-2bf3fc:	ADDQ.L     	#8,A7            	;
-2bf3fe:	TST.W      	D0               	;
-2bf400:	BEQ        	*-$D6 [2BF32A]   	;
-2bf404:	JSR        	tios::OSLinkReset	;
-2bf40a:	MOVEQ      	#$0,D0           	;
-2bf40a:	MOVEQ      	#$0,D0           	;
-2bf40c:	BRA.S      	*+$4 [2BF410]    	;
+2bf33c:	;
+2bf33e:	; D3 contains the Command ID
+2bf342:	;
+2bf344:	;
+2bf348:	; TI92_PC
+2bf34e:	;
+2bf350:	; TI92p_PC
+2bf350:	; V200_PC
+2bf356:	;
+2bf358:	; TI89_PC, TI89t_PC
+2bf35e:	;
+2bf360:	; PC_TI89, PC_TI89t, PC_TI92p, PC_V200
+2bf366:	;
+2bf368:	; PC_TI92
+2bf36e:	;
+2bf370:	; CMD_FLSH (flash os/app)
+2bf374:	;
+2bf374:	;
+2bf376:	; CMD_RDY (ready)
+2bf37a:	;
+2bf37c:	;
+2bf37e:	;
+2bf380:	; ??
+2bf386:	;
+2bf388:	; ??
+2bf38e:	;
+2bf390:	; CMD_SCR (screenshot)
+2bf390:	;
+2bf394:	;
+2bf396:	;
+2bf398:	; CMD_FLSH
+2bf39c:	;
+2bf39e:	;
+2bf3a0:	; CMD_VAR (variable header)
+2bf3a4:	;
+2bf3a6:	;
+2bf3a8:	; CMD_RDY
+2bf3a8:	; CMD_RDY
+2bf3ac:	;
+2bf3ae:	;
+2bf3b0:	; CMD_REQ (requets variable)
+2bf3b4:	;
+2bf3b6:	;
+2bf3b8:	; CMD_KEY (remote control)
+2bf3bc:	;
+2bf3be:	;
+2bf3c0:	; CMD_IND (var index)
+2bf3c0:	;
+2bf3c4:	;
+2bf3c6:	;
+2bf3c8:	; CMD_RTS (requets to send)
+2bf3cc:	;
+2bf3ce:	;
+2bf3d0:	;
+2bf3d2:	;
+2bf3d4:	;
+2bf3d6:	;
+2bf3d6:	;
+2bf3d8:	;
+2bf3da:	;
+2bf3dc:	;
+2bf3e2:	;
+2bf3e4:	;
+2bf3e6:	;
+2bf3ea:	; return ?
+2bf3ec:	;
+2bf3ee:	;
+2bf3ee:	;
+2bf3f0:	;
+2bf3f2:	;
+2bf3f4:	;
+2bf3f8:	;
+2bf3fc:	;
+2bf3fe:	;
+2bf400:	;
+2bf404:	;
+2bf40a:	;
+2bf40a:	;
+2bf40c:	;
 
 @
-2bf40e:	MOVEQ      	#$0,D0           	; return 0
-2bf410:	ADDQ.L     	#8,A7            	;
-2bf412:	MOVE.L     	(A7)+,D3         	;
-2bf414:	RTS        	                 	; end
+2bf40e:	; return 0
+2bf410:	;
+2bf412:	;
+2bf414:	; end
 
 8°) void OSLinkCmd (short NormalState);
 
 @OSLinkCmd
-2bf416:	LINK       	A6,#$FF44        	;
-2bf41a:	MOVEM.L    	D3-D4/A2-A3,(-$10,A6)	;
-2bf420:	MOVE.W     	($8,A6),D3       	;
-2bf424:	MOVE.W     	#$0,(-$68,A6)    	;
+2bf416:	;
+2bf41a:	;
+2bf420:	;
+2bf424:	;
