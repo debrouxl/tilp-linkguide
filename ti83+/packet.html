@@ -1,9 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <html>
 <head>
-	
   <meta name="GENERATOR" content="Visual Page 1.0 for Windows">
-	
   <meta http-equiv="Content-Type" content="text/html;CHARSET=iso-8859-1">
   <title>TI-83+ Link Protocol Guide - Packet formats</title>
 </head>
@@ -20,76 +18,77 @@ Packets have the following format:<br>
 (least significant byte first).</i></p>
 <p>
 <table border="1" cellspacing="0" width="92%">
-	<tbody>
+  <tbody>
     <tr>
-		<th width="7%" bgcolor="#008800"><font color="#ffffff">Offset</font></th>
-		<th width="8%" bgcolor="#008800"><font color="#ffffff">Length</font></th>
-		<th width="85%" bgcolor="#008800"><font color="#ffffff">Description</font></th>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">0</td>
-		<td width="8%" bgcolor="#ffffff">1 byte</td>
-		<td width="85%" bgcolor="#ffffff">Machine ID byte</td>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">1</td>
-		<td width="8%" bgcolor="#ffffff">1 byte</td>
-		<td width="85%" bgcolor="#ffffff">Command ID byte</td>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">2</td>
-		<td width="8%" bgcolor="#ffffff">2 bytes</td>
-		<td width="85%" bgcolor="#ffffff">Length of data (see note below)</td>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">4</td>
-		<td width="8%" bgcolor="#ffffff"><i>n</i> bytes</td>
-		<td width="85%" bgcolor="#ffffff">Data (if attached)</td>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">4+<i>n</i></td>
-		<td width="8%" bgcolor="#ffffff">2 bytes</td>
-		<td width="85%" bgcolor="#ffffff">Checksum (if data is attached)</td>
-	</tr>
+      <th bgcolor="#008800" width="7%"><font color="#ffffff">Offset</font></th>
+      <th bgcolor="#008800" width="8%"><font color="#ffffff">Length</font></th>
+      <th bgcolor="#008800" width="85%"><font color="#ffffff">Description</font></th>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">0</td>
+      <td bgcolor="#ffffff" width="8%">1 byte</td>
+      <td bgcolor="#ffffff" width="85%">Machine ID byte</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">1</td>
+      <td bgcolor="#ffffff" width="8%">1 byte</td>
+      <td bgcolor="#ffffff" width="85%">Command ID byte</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">2</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Length of data (see note below)</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">4</td>
+      <td bgcolor="#ffffff" width="8%"><i>n</i> bytes</td>
+      <td bgcolor="#ffffff" width="85%">Data (if attached)</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">4+<i>n</i></td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Checksum (if data is attached)</td>
+    </tr>
   </tbody>
 </table>
 <i>Note - The "Length of data" element may not be equal to zero if the
-packet contains no data. In this case, the Command ID byte will indicate
+packet contains no data. In this case, the Command ID byte will
+indicate
 that the packet contains no data.</i></p>
 <p></p>
 <h4>The Machine ID Byte</h4>
 <p>The Machine ID byte identifies the machine that is sending the
 packet. It can have one of the following values:
 <table border="1" cellspacing="0" width="66%">
-	<tbody>
+  <tbody>
     <tr>
-		<th width="13%" bgcolor="#dddddd">Value</th>
-		<th bgcolor="#dddddd">Description</th>
-	</tr>
-	<tr>
-		<td width="13%">02h</td>
-		<td>Computer sending TI-82 data</td>
-	</tr>
-	<tr>
-		<td width="13%">03h</td>
-		<td>Computer sending TI-83 data</td>
-	</tr>
+      <th bgcolor="#dddddd" width="13%">Value</th>
+      <th bgcolor="#dddddd">Description</th>
+    </tr>
+    <tr>
+      <td width="13%">02h</td>
+      <td>Computer sending TI-82 data</td>
+    </tr>
+    <tr>
+      <td width="13%">03h</td>
+      <td>Computer sending TI-83 data</td>
+    </tr>
     <tr>
       <td width="13%">23h</td>
       <td>Computer sending TI-83+ data</td>
     </tr>
-	<tr>
-		<td width="13%">73h</td>
-		<td>TI-83+</td>
-	</tr>
-	<tr>
-		<td width="13%">82h</td>
-		<td>TI-82</td>
-	</tr>
-	<tr>
-		<td width="13%">83h</td>
-		<td>TI-83</td>
-	</tr>
+    <tr>
+      <td width="13%">73h</td>
+      <td>TI-83+</td>
+    </tr>
+    <tr>
+      <td width="13%">82h</td>
+      <td>TI-82</td>
+    </tr>
+    <tr>
+      <td width="13%">83h</td>
+      <td>TI-83</td>
+    </tr>
   </tbody>
 </table>
 <i>Note: The TI-83 accepts TI-82 and TI-83 Machine ID bytes in order to
@@ -100,68 +99,71 @@ transfer data between a TI-82/83 and a TI-83+.</i></p>
 machine is sending. It can have one of the following values:</p>
 <p>
 <table border="1" cellspacing="0" width="66%">
-	<tbody>
+  <tbody>
     <tr>
-		<th width="22%" bgcolor="#dddddd">Value</th>
-		<th width="259" bgcolor="#dddddd">Description</th>
-		<th bgcolor="#dddddd">Data Included</th>
-	</tr>
-	<tr>
-		<td width="22%">06h</td>
-		<td width="259">Variable Header (VAR)</td>
-		 <td>A fixed-length, NUL padded <a href="#varheader">variable header</a></td>
-	</tr>
-	<tr>
-		<td width="22%">09h</td>
-		<td width="259">Clear to send (CTS)</td>
-		<td><i>None</i></td>
-	</tr>
-	<tr>
-		<td width="22%">15h</td>
-		<td width="259">Data packet (DATA)</td>
-		<td>Screenshot/variable/backup data</td>
-	</tr>
-	<tr>
-		<td width="22%">36h</td>
-		<td width="259">Skip/Exit (SKIP/EXIT)</td>
-		<td>A five-byte rejection code (see codes below)</td>
-	</tr>
-	<tr>
-		<td width="22%">56h</td>
-		<td width="259">Acknowledge (ACK)</td>
-		<td><i>None</i></td>
-	</tr>
-	<tr>
-		<td width="22%">5Ah</td>
-		<td width="259">Checksum Error (ERR)<br>
-			The previous packet must be sent again.</td>
-		<td><i>None</i></td>
-	</tr>
-	<tr>
-		<td width="22%">68h</td>
-		<td width="259">Check ready (RDY)</td>
-		<td><i>None</i></td>
-	</tr>
-	<tr>
-		<td width="22%">6Dh</td>
-		<td width="259"><i>Silent</i> - Request Screenshot (SCR)</td>
-		<td><i>None</i></td>
-	</tr>
-	<tr>
-		<td width="22%">92h</td>
-		<td width="259">End of Transmission (EOT)</td>
-		<td><i>None</i></td>
-	</tr>
-	<tr>
-		<td width="22%">A2h</td>
-		<td width="259"><i>Silent</i> - Request Variable (REQ)</td>
-		 <td>A fixed-length, NUL padded <a href="#varheader">variable header</a></td>
-	</tr>
-	<tr>
-		<td width="22%">C9h</td>
-		<td width="259"><i>Silent</i> - Request to Send Variable (RTS)</td>
-		 <td>A fixed-length, NUL padded <a href="#varheader">variable header</a></td>
-	</tr>
+      <th bgcolor="#dddddd" width="22%">Value</th>
+      <th bgcolor="#dddddd" width="259">Description</th>
+      <th bgcolor="#dddddd">Data Included</th>
+    </tr>
+    <tr>
+      <td width="22%">06h</td>
+      <td width="259">Variable Header (VAR)</td>
+      <td>A fixed-length, NUL padded <a href="#varheader">variable
+header</a></td>
+    </tr>
+    <tr>
+      <td width="22%">09h</td>
+      <td width="259">Clear to send (CTS)</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td width="22%">15h</td>
+      <td width="259">Data packet (DATA)</td>
+      <td>Screenshot/variable/backup data</td>
+    </tr>
+    <tr>
+      <td width="22%">36h</td>
+      <td width="259">Skip/Exit (SKIP/EXIT)</td>
+      <td>A five-byte rejection code (see codes below)</td>
+    </tr>
+    <tr>
+      <td width="22%">56h</td>
+      <td width="259">Acknowledge (ACK)</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td width="22%">5Ah</td>
+      <td width="259">Checksum Error (ERR)<br>
+The previous packet must be sent again.</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td width="22%">68h</td>
+      <td width="259">Check ready (RDY)</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td width="22%">6Dh</td>
+      <td width="259"><i>Silent</i> - Request Screenshot (SCR)</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td width="22%">92h</td>
+      <td width="259">End of Transmission (EOT)</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td width="22%">A2h</td>
+      <td width="259"><i>Silent</i> - Request Variable (REQ)</td>
+      <td>A fixed-length, NUL padded <a href="#varheader">variable
+header</a></td>
+    </tr>
+    <tr>
+      <td width="22%">C9h</td>
+      <td width="259"><i>Silent</i> - Request to Send Variable (RTS)</td>
+      <td>A fixed-length, NUL padded <a href="#varheader">variable
+header</a></td>
+    </tr>
   </tbody>
 </table>
 </p>
@@ -170,24 +172,24 @@ machine is sending. It can have one of the following values:</p>
 following values:</p>
 <p>
 <table border="1" cellspacing="0" width="66%">
-	<tbody>
+  <tbody>
     <tr>
-		<th width="13%" bgcolor="#dddddd">Value</th>
-		<th bgcolor="#dddddd">Description</th>
-	</tr>
-	<tr>
-		<td width="13%">01h</td>
-		<td>EXIT - The entire transmission has been cancelled.</td>
-	</tr>
-	<tr>
-		<td width="13%">02h</td>
-		<td>SKIP - The current variable has been skipped.</td>
-	</tr>
-	<tr>
-		<td width="13%">03h</td>
-		<td>OUT OF MEMORY (silent transmissions only) - The receiving
+      <th bgcolor="#dddddd" width="13%">Value</th>
+      <th bgcolor="#dddddd">Description</th>
+    </tr>
+    <tr>
+      <td width="13%">01h</td>
+      <td>EXIT - The entire transmission has been cancelled.</td>
+    </tr>
+    <tr>
+      <td width="13%">02h</td>
+      <td>SKIP - The current variable has been skipped.</td>
+    </tr>
+    <tr>
+      <td width="13%">03h</td>
+      <td>OUT OF MEMORY (silent transmissions only) - The receiving
 calculator is out of memory.</td>
-	</tr>
+    </tr>
   </tbody>
 </table>
 </p>
@@ -207,47 +209,47 @@ about one variable in the calculator.<br>
 <table border="1" cellspacing="0" width="92%">
   <tbody>
     <tr>
-      <th width="7%" bgcolor="#008800"><font color="#ffffff">Offset</font></th>
-      <th width="8%" bgcolor="#008800"><font color="#ffffff">Length</font></th>
-      <th width="85%" bgcolor="#008800"><font color="#ffffff">Description</font></th>
+      <th bgcolor="#008800" width="7%"><font color="#ffffff">Offset</font></th>
+      <th bgcolor="#008800" width="8%"><font color="#ffffff">Length</font></th>
+      <th bgcolor="#008800" width="85%"><font color="#ffffff">Description</font></th>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">0</td>
-      <td width="8%" bgcolor="#ffffff">2 bytes</td>
-      <td width="85%" bgcolor="#ffffff">Size of actual variable data,
+      <td bgcolor="#ffffff" width="7%">0</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Size of actual variable data,
 in bytes</td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">2</td>
-      <td width="8%" bgcolor="#ffffff">1 byte</td>
-      <td width="85%" bgcolor="#ffffff">Type ID Byte (see type ID's
+      <td bgcolor="#ffffff" width="7%">2</td>
+      <td bgcolor="#ffffff" width="8%">1 byte</td>
+      <td bgcolor="#ffffff" width="85%">Type ID Byte (see type ID's
 below)</td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">3</td>
-      <td width="8%" bgcolor="#ffffff">8 bytes</td>
-      <td width="85%" bgcolor="#ffffff">Variable name, padded on the
-right with        NULL characters (0h). This field is always tokenized.
+      <td bgcolor="#ffffff" width="7%">3</td>
+      <td bgcolor="#ffffff" width="8%">8 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Variable name, padded on the
+right with NULL characters (0h). This field is always tokenized.
 Not used for ID list.<i></i></td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">11</td>
-      <td width="8%" bgcolor="#ffffff">1 byte</td>
-      <td width="85%" bgcolor="#ffffff">Version - Always has a value of
+      <td bgcolor="#ffffff" width="7%">11</td>
+      <td bgcolor="#ffffff" width="8%">1 byte</td>
+      <td bgcolor="#ffffff" width="85%">Version - Always has a value of
 0h.</td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">12</td>
-      <td width="8%" bgcolor="#ffffff">1 byte</td>
-      <td width="85%" bgcolor="#ffffff">Type ID Byte 2 - Always has a
-value of 0h.        Note: bit 7 is set if archived.</td>
+      <td bgcolor="#ffffff" width="7%">12</td>
+      <td bgcolor="#ffffff" width="8%">1 byte</td>
+      <td bgcolor="#ffffff" width="85%">Type ID Byte 2 - Always has a
+value of 0h. Note: bit 7 is set if archived.</td>
     </tr>
   </tbody>
 </table>
 <i>Note: These bytes only make up the "data" section of the packet.<br>
 </i><i>Note2:<br>
 </i><i> - for lists (L1..L6), the first token is a 5D byte followed by
-another byte:   00 for L1 to 05 for L6.</i><br>
+another byte: 00 for L1 to 05 for L6.</i><br>
 - for equations: there are 31 equations (Y1..Y0 in func mode, X1t..X6t
 and Y1t..Y6t in param mode, r1..r6 in polar mode and FnOn/FnOff in
 On/Off mode). The varname is 5E10 for Y1 to 5E19 for Y0. The varname is
@@ -267,7 +269,7 @@ transmitted. It can have one of the following values:</p>
 <table border="1" cellspacing="0" width="66%">
   <tbody>
     <tr>
-      <th width="13%" bgcolor="#dddddd">Value</th>
+      <th bgcolor="#dddddd" width="13%">Value</th>
       <th bgcolor="#dddddd">Description (click for variable format)</th>
     </tr>
     <tr>
@@ -374,90 +376,91 @@ contents of the name field of the header do not matter.</i></p>
 <p></p>
 <h4><a name="backup"></a>Backup Header Format</h4>
 <p>If the type ID byte specifies a backup, the variable header takes
-the following    9-byte format :</p>
+the following 9-byte format :</p>
 <p>
 <table border="1" cellspacing="0" width="92%">
-	<tbody>
+  <tbody>
     <tr>
-		<th width="7%" bgcolor="#008800"><font color="#ffffff">Offset</font></th>
-		<th width="8%" bgcolor="#008800"><font color="#ffffff">Length</font></th>
-		<th width="85%" bgcolor="#008800"><font color="#ffffff">Description</font></th>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">0</td>
-		<td width="8%" bgcolor="#ffffff">2 bytes</td>
-		 <td width="85%" bgcolor="#ffffff">Size of first backup section
-(flags area),        in bytes</td>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">2</td>
-		<td width="8%" bgcolor="#ffffff">1 byte</td>
-		 <td width="85%" bgcolor="#ffffff">Type ID Byte (13h in this case)</td>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">3</td>
-		<td width="8%" bgcolor="#ffffff">2 bytes</td>
-		 <td width="85%" bgcolor="#ffffff">Size of second backup section
-(data area),        in bytes</td>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">5</td>
-		<td width="8%" bgcolor="#ffffff">2 bytes</td>
-		 <td width="85%" bgcolor="#ffffff">Size of third backup section
-(symbol area),        in bytes</td>
-	</tr>
-	<tr>
-		<td width="7%" bgcolor="#ffffff">7</td>
-		<td width="8%" bgcolor="#ffffff">2 bytes</td>
-		 <td width="85%" bgcolor="#ffffff">Start User Area Address</td>
-	</tr>
+      <th bgcolor="#008800" width="7%"><font color="#ffffff">Offset</font></th>
+      <th bgcolor="#008800" width="8%"><font color="#ffffff">Length</font></th>
+      <th bgcolor="#008800" width="85%"><font color="#ffffff">Description</font></th>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">0</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Size of first backup section
+(flags area), in bytes</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">2</td>
+      <td bgcolor="#ffffff" width="8%">1 byte</td>
+      <td bgcolor="#ffffff" width="85%">Type ID Byte (13h in this case)</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">3</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Size of second backup section
+(data area), in bytes</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">5</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Size of third backup section
+(symbol area), in bytes</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">7</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Start User Area Address</td>
+    </tr>
   </tbody>
 </table>
 </p>
 <h4><a name="FLASH"></a>FLASH Header Format<br>
 </h4>
 <p>If the type ID byte is in the range 22...28h, the variable header
-takes the    following 10-byte format : </p>
+takes the following 10-byte format : </p>
 <table border="1" cellspacing="0" width="92%">
   <tbody>
     <tr>
-      <th width="7%" bgcolor="#008800"><font color="#ffffff">Offset</font></th>
-      <th width="8%" bgcolor="#008800"><font color="#ffffff">Length</font></th>
-      <th width="85%" bgcolor="#008800"><font color="#ffffff">Description</font></th>
+      <th bgcolor="#008800" width="7%"><font color="#ffffff">Offset</font></th>
+      <th bgcolor="#008800" width="8%"><font color="#ffffff">Length</font></th>
+      <th bgcolor="#008800" width="85%"><font color="#ffffff">Description</font></th>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">0</td>
-      <td width="8%" bgcolor="#ffffff">2 bytes</td>
-      <td width="85%" bgcolor="#ffffff">Size of actual data, in bytes
+      <td bgcolor="#ffffff" width="7%">0</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Size of actual data, in bytes
 (LSB).</td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">2</td>
-      <td width="8%" bgcolor="#ffffff">1 byte</td>
-      <td width="85%" bgcolor="#ffffff">Type ID Byte (see type ID's
+      <td bgcolor="#ffffff" width="7%">2</td>
+      <td bgcolor="#ffffff" width="8%">1 byte</td>
+      <td bgcolor="#ffffff" width="85%">Type ID Byte (see type ID's
 below)</td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">3</td>
-      <td width="8%" bgcolor="#ffffff">2 bytes</td>
-      <td width="85%" bgcolor="#ffffff">Size of actual data, in bytes
-(MSB).</td>
+      <td bgcolor="#ffffff" width="7%">3</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">Size of actual data, in bytes
+(MSB). Usually 128/256 bytes.<br>
+      </td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">5</td>
-      <td width="8%" bgcolor="#ffffff">1 byte</td>
-      <td width="85%" bgcolor="#ffffff">Flag - Always has a value of 0h
-but bit        7 is set if archived.</td>
+      <td bgcolor="#ffffff" width="7%">5</td>
+      <td bgcolor="#ffffff" width="8%">1 byte</td>
+      <td bgcolor="#ffffff" width="85%">Flag - Always has a value of 0h
+but bit 7 is set if archived.</td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">6</td>
-      <td width="8%" bgcolor="#ffffff">2 bytes</td>
-      <td width="85%" bgcolor="#ffffff">FLASH offset</td>
+      <td bgcolor="#ffffff" width="7%">6</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">FLASH offset</td>
     </tr>
     <tr>
-      <td width="7%" bgcolor="#ffffff">8</td>
-      <td width="8%" bgcolor="#ffffff">2 bytes</td>
-      <td width="85%" bgcolor="#ffffff">FLASH page</td>
+      <td bgcolor="#ffffff" width="7%">8</td>
+      <td bgcolor="#ffffff" width="8%">2 bytes</td>
+      <td bgcolor="#ffffff" width="85%">FLASH page</td>
     </tr>
   </tbody>
 </table>
@@ -465,32 +468,33 @@ but bit        7 is set if archived.</td>
 <p></p>
 <p>
 <table border="0" cellspacing="0" width="100%">
-	<tbody>
+  <tbody>
     <tr>
-		<td width="32%"> 			
+      <td width="32%">
       <p align="center"><a href="cable.html"><img
- src="graphics/prevpage.gif" width="32" height="32" align="bottom"
- alt="[previous page]" border="2"> <br>
-			Link Cables</a> 		</p>
+ src="graphics/prevpage.gif" alt="[previous page]" align="bottom"
+ border="2" height="32" width="32"> <br>
+Link Cables</a> </p>
       </td>
-		<td width="34%"> 			
+      <td width="34%">
       <p align="center"><a href="index.html"><img
- src="graphics/home.gif" width="32" height="32" align="bottom"
- alt="[home]" border="2"> <br>
-			Table of Contents</a> 		</p>
+ src="graphics/home.gif" alt="[home]" align="bottom" border="2"
+ height="32" width="32"> <br>
+Table of Contents</a> </p>
       </td>
-		<td width="34%"> 			
+      <td width="34%">
       <p align="center"><a href="screenshot.html"><img
- src="graphics/nextpage.gif" width="32" height="32" align="bottom"
- alt="[next page]" border="2"> <br>
-			Screenshots</a> 		</p>
+ src="graphics/nextpage.gif" alt="[next page]" align="bottom" border="2"
+ height="32" width="32"> <br>
+Screenshots</a> </p>
       </td>
-	</tr>
+    </tr>
   </tbody>
 </table>
 </p>
 <hr align="center"> <i>Site maintained by Romain Li&eacute;vin (</i><a
  href="mailto:roms@lpg.ticalc.org"><i>roms@lpg.ticalc.org</i></a><i>)
-and Tim Singer (</i><a href="mailto:tsinger@gladstone.uoregon.edu"><i>tsinger@gladstone.uoregon.edu</i></a><i>)</i> <br>
+and Tim Singer (</i><a href="mailto:tsinger@gladstone.uoregon.edu"><i>tsinger@gladstone.uoregon.edu</i></a><i>)</i>
+<br>
 </body>
 </html>
