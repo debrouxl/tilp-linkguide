@@ -169,7 +169,7 @@ int pkdecomp(const char *filename)
 
 		for(l = 4; l <= WIDTH; l++)
 			fprintf(fo, "   ");
-		fprintf(fo, "  | ");
+		fprintf(fo, " | ");
 		fprintf(fo, "%s", string_id[is_a_command_id(cid)]);
 
         if(cmd_with_data[index])

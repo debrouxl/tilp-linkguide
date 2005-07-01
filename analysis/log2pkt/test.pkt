@@ -1,4 +1,4 @@
-Packet decompiler, version 1.1
+TI packet decompiler, version 1.1
 
 00 68 00 00                              | RDY
 98 56 04 10                              | ACK
