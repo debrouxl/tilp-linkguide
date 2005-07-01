@@ -1,0 +1,4 @@
+4 components can be directly mounted because the elektor_avr_PCB has been 
+customized with IC1A, T1, R1, R14, R16 (avr_prommer & fastAVRlink).
+
+K3, T2 doesn't exist.
