@@ -110,6 +110,7 @@ int main(int argc, char **argv)
 	fclose(fi);
 	fclose(fo);
 
+#if 0
 	{
 		char *args[4] = { 0 };
 		
@@ -121,6 +122,7 @@ int main(int argc, char **argv)
 
 		execv("LOG2PKT.EXE", args);
 	}
+#endif
 
 	return 0;
 }
