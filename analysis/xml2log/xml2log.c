@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define TOKEN1	"<payloadbytes>"
 #define TOKEN2	"</payloadbytes>"
@@ -9,6 +10,9 @@
 
 int main(int argc, char **argv)
 {
+	char *filename = arg[1];
+	char src_name[1024];
+    char dst_name[1024];
 	FILE *fi;
 	FILE *fo;
 	
@@ -16,7 +20,14 @@ int main(int argc, char **argv)
 	if(argc < 2)
 		return -1;
 
-	printf("argv = %s %s\n", argv[1], argv[2]);
+	printf("argv = %s\n", argv[1]);
+
+	strcpy(src_name, filename);
+    strcat(src_name, ".xml");
+    
+    strcpy(dst_name, filename);
+    strcat(dst_name, ".log");
+
 	fi = fopen(argv[1], "rt");
 	fo = fopen(argv[2], "wt");
 	if(fi == NULL || fo == NULL)
@@ -26,7 +37,7 @@ int main(int argc, char **argv)
 	  {
 	    char line[4096];
 		char *p, *q;
-		int i;
+		unsigned int i;
 		char data[3];
 		char ascii[4096];
 		char value;
