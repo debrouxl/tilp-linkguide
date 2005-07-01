@@ -169,7 +169,7 @@ int pkdecomp(const char *filename)
 
 		for(l = 4; l <= WIDTH; l++)
 			fprintf(fo, "   ");
-		fprintf(fo, " | ");
+		fprintf(fo, "  | ");
 		fprintf(fo, "%s", string_id[is_a_command_id(cid)]);
 
         if(cmd_with_data[index])
@@ -210,7 +210,7 @@ int main(int argc, char **argv)
 {
 	if(argc < 2)
     {
-		fprintf(stderr, "Usage: pkdecomp [file]\n");
+		fprintf(stderr, "Usage: log2pkt [file]\n");
 		exit(0);
     }
   
