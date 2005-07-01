@@ -1,0 +1,19 @@
+This directory is the root directory of the archive. It contains serveral files and
+directories.
+
+List of files:
+
+- asu: Linux version, the Avrlink Setup Utility used for customizing some internal parameters of the fastAVRlink cable.
+- asu.exe: Win32 version, idem.
+- at90s2313: source code of the firmware
+- avr_prommer: Linux version, the AVRprommer used for programming the micro-controller.
+- avr_prommer.exe: Win32 version, idem.
+- docs: some documentations to read first
+- gpl.txt: the GNU Public License, read it also...
+- protel: schematic & PCB files of the project
+- rom.rom: the firmware code to use with the 'avr_prommer(.exe)'
+- eep.epp: the firmware data to use with the 'avr_prommer(.exe)'
+- schematic: some screen-captures
+- source: source code of the ASU
+- terminal.exe: a RS232 terminal used for the test program in the test directory
+- test: some programs for testing the RS232 communication (the same as thode provided with the fastAVRlink package which is always the latest)

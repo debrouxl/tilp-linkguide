@@ -1,0 +1,6 @@
+This directory contains licences.
+
+List of files:
+
+- gpl.txt: GPL in english text.
+- ...

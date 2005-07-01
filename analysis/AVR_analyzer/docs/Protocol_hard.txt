@@ -1,0 +1,144 @@
+*****************************************************************
+* Hardware protocol of the TIxx calculators			*
+* Documentation by Romain Lievin <roms@gtktilink.ticalc.org>    *
+* programmer of the GtkTiLink: http://gtktilink.ticalc.org      *
+* Begin: 28/03/2000						*
+* Last update: 28/03/2000					*
+* Latest version of this doc can be found at                    *
+* http://gtktilink.ticalc.org/download/docs
+*****************************************************************
+
+
+0) Remark
+---------
+
+If you need this doc in order to write some code to handle link cables, you should know that I have already developped a complete and well-documented library for Linux/Windows9x/WindowsNT4. This lib can handle any link cable (parallel, serial, Black and Grey TIGraphLink cable).
+The source code is available on the web site or also on <www.freshmeat.org>.
+
+
+I) The hardware
+---------------
+
+The TI bus is a two-wire serial interface consisting of a 'red' line and a 
+'white' line.
+Both lines are bi-directionnal therefore outputs must be of an open-drain or an
+open-collector type.
+Each line is connected to the supply voltage via a pull-up resistor. A line is
+then logic high when none of the connected devices drives the line, and logic
+low if one or more is drives the line low.
+
+							Vdd
+							---
+							 |
+							 < 10 Kohms
+							 >
+							 |
+							 V Diode
+							 |
+						    out--O---------- input
+                                                         |
+                                                         < 470 ohms
+                                                         >
+                                                         |
+                                                    NPN  \__/\/\____ output
+                                                         /  33 Kohms
+                                                         |
+                                                       __|___
+                                                        Gnd
+
+
+II) The protocol
+----------------
+
+An example of sample: the byte represented is 0x09 (00001001 in binary); the 
+first bit transmitted is the least significant bit (LSb) and the last one is 
+the most significant bit (MSb) as a RS232 serial stream.
+
+
+                    1                 0                      0
+R = XF0|1: ______        ______|______    __________|________    __________
+R = XF0|0:       ________      |      ____          |        ____
+W = XF1|1:         ____________|________      ______|__________       _____
+W = XF1|0: ________            |        ______      |          _______
+
+                      1                        0                     0 
+
+R = XF0|1: ___|__________       ______|________     _________|_________
+R = XF0|0:    |          _______      |        _____         |         ____
+W = XF1|1: ___|_____       ___________|___________      _____|___________
+W = XF1|0:    |     _______           |           ______     |           __
+
+
+                                 0                      0
+R = XF0|1: ____________|______    ___________|________    __________|______
+R = XF0|0:             |      ____           |        ____          | 
+W = XF1|1:      _______|________       ______|__________      ______|______
+W = XF1|0: _____       |        _______      |          ______      |
+
+
+Legend: R is the red wire and W is the white wire.
+
+Each bit is made of two impulsions on two differents wires.
+This is the order of these two impulsions that determine the state of the bit.
+See the example below.
+
+At last, the transfer rate is of 45 to 50 Kbits/seconds. 
+
+For a program example, see in the lib_ticable archive of the GtkTiLink code 
+source and more particularly 'parlink.c' and 'serlink.c' which provide a
+complete library of functions to drive a parallel/serial homemade cable. 
+A preview is given below:
+
+int par_put(byte data)
+{
+  int bit;
+  int i;
+  clock_t clk;
+  int b;
+
+  for(bit=0; bit<8; bit++)
+    {
+      if(data & 1)
+        {
+          outb(2, lpt_out);
+          clk=clock();
+          do
+            {
+              b=(clock()-clk) < time_out/10.0*CLOCKS_PER_SEC;
+              if(!b) return 2;
+            }
+          while((inb(lpt_in) & 0x10));
+          outb(3, lpt_out);
+          clk=clock();
+          do
+            {
+              b=(clock()-clk) < time_out/10.0*CLOCKS_PER_SEC;
+              if(!b) return 2;
+            }
+          while((inb(lpt_in) & 0x10)==0x00);
+        }
+      else
+        {
+          outb(1, lpt_out);
+          clk=clock();
+          do
+            {
+              b=(clock()-clk) < time_out/10.0*CLOCKS_PER_SEC;
+              if(!b) return 2;
+            }
+          while(inb(lpt_in) & 0x20);
+          outb(3, lpt_out);
+          clk=clock();
+          do
+            {
+              b=(clock()-clk) < time_out/10.0*CLOCKS_PER_SEC;
+              if(!b) return 2;
+            }
+          while((inb(lpt_in) & 0x20)==0x00);
+        }
+      data>>=1;
+      for(i=0; i<delay; i++) inb(lpt_in);
+    }
+  return 0;
+}
+

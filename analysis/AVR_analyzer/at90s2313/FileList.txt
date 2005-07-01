@@ -1,0 +1,7 @@
+List of files:
+
+- rs232buf.asm: unit for managing a full duplex serial communication with buffers
+- d-bus.asm: unit which contains TI routines: put, get and spy
+- ana_100.asm: the AVRanalyzer
+- test_232.asm: a simple program for testing the ti_prot.asm unit
+- test_ti.asm: a simple program for testing the rs232buf.asm unit
