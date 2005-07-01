@@ -1,0 +1,1 @@
+rs232_log com2 test
