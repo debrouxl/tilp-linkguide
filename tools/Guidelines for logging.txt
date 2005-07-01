@@ -1,0 +1,29 @@
+This folder contains tools and guide-lines used for doing the
+various logs.
+
+1°) My first method (with TI-GraphLink software):
+
+Tools used :
+- DSP Starter Kit (DSK),
+- or AVRanalyzer + RS232 sampler.
+
+Some offsets used by my DSK tools for storing data:
+- CblExpmt: 31000
+- Conics (acf2b3e.8xk): 22000
+- ProbSi83: 36000 ?
+- ChemBio: 23000
+- TI83PlusOS114.8XU: 260000
+
+RS232 sampler provides an hexdump log which can be processed with log2pkt.exe.
+
+2°) My second method (with Ti-Connect software)
+
+Use SnoopyPro (UsbSnoopy) to sniff USB packet and get an XML log.
+The XML log can be processed with xml2log and next with log2pkt.
+
+
+3°) When the hand-held is not available but the TI emulator is:
+
+- fastAVRlink/GrayLink on COM2 (TiLP)
+- DSK on the 'T'
+- GreyLink on COM1 (TI's SDK)

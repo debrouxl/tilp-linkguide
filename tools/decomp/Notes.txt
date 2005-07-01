@@ -1,6 +1,6 @@
 About the 'Packet Decompiler':
 
-the packet decompiler is a very simple program used to insulate packets from the flow of data containes in the log files.
+the packet decompiler is a very simple program used to insulate packets from the flow of data contained in the log files.
 
 The program can be used after a preliminary analysis (that is to say analyze log by hand,
 extract the format, writing the doc, ...) to automatize further analysis...

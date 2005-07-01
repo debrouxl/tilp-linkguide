@@ -526,7 +526,11 @@ of the sum of all bytes in the variable data.</td>
 </table>
 </p>
 <p><i>By roms: the part below is preliminary, I will have to finish
-it...</i> </p>
+it...<br>
+You are strongly encouraged to take a look at the TI's "TI83+ SDK
+guide" (sdk83pguide.pdf) and more particularly the "Hardware Layer"
+section.<br>
+</i> </p>
 <p>1) Data encoding: </p>
 <p>Data are formatted in a particular way. TI used the 'INTEL Intellec
 8/MDS' format, a very popular format used for transferring data to
@@ -540,7 +544,9 @@ Format: </p>
 <p>- data block (page address = 4000h): :20 4000 00 80 0F 00 00 6C 24
 80
 12 01 04 80 21 01 80 31 01 80 48 43 42 4C 45 78 70 6D 74 80 81 02 80 90
-03 D9 - end block: :00 0000 01 FF </p>
+03 D9 <br>
+</p>
+<p>- end block: :00 0000 01 FF </p>
 <p>Each block has an address field. Depending on the operation (App or
 Os)
 and the part, the address of the data block can be used as is (absolute
@@ -568,7 +574,10 @@ third
 block have Fl=80 (FLASH), the second one has always Fl=00 (RAM). </p>
 <p>Data are sent to calcs block per block. A incomplete block may need
 to
-be filled. It will be filled with: - 0x00 for App, - 0xff for OS.<br>
+be filled. <br>
+It will be filled with: <br>
+- 0x00 for App, <br>
+- 0xff for OS.<br>
 </p>
 <p>&nbsp; <br>
 <table border="0" cellspacing="0" width="100%">
