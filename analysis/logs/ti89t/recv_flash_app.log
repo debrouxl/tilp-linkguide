@@ -1,0 +1,517 @@
+AVR decoder, version 1.1, \2000
+Copyright (c) 1999-2001, Romain Lievin
+
+08 68 00 00 98 56 0C 10 08 2D 00 00 98 56 00 00 |  h   V   -   V  
+08 09 00 00 98 56 00 00 98 15 0E 00 03 00 02 01 |      V          
+00 02 09 01 00 00 00 00 00 09 1B 00 08 56 00 00 |              V  
+08 A2 06 00 00 00 00 1B 1A 00 35 00 98 56 00 00 |           5  V  
+98 06 0B 00 54 00 00 0E 1A 04 6D 61 69 6E 03 28 |     T     main (
+02 08 56 00 00 08 09 00 00 98 56 00 00 98 15 58 |   V       V    X
+00 00 00 00 00 6D 61 69 6E 00 00 00 00 1F 00 00 |      main       
+00 00 03 78 00 00 00 00 00 00 00 00 00 05 00 00 |    x            
+00 79 00 00 00 00 00 00 00 00 01 05 00 00 00 7A |  y             z
+00 00 00 00 00 00 00 00 03 05 00 00 00 54 49 46 |              TIF
+4E 41 4E 43 45 24 00 85 A8 00 00 55 53 50 52 45 | NANCE$     USPRE
+53 00 00 24 00 19 82 00 00 7F 09 08 56 00 00 98 | S  $       V   
+92 00 00 08 56 00 00 08 68 00 00 98 56 0C 10 08 |     V   h   V   
+A2 0D 00 00 00 00 00 24 06 55 53 50 52 45 53 01 |        $ USPRES 
+0D 02 98 56 00 00 98 06 0D 00 19 82 00 00 24 06 |    V          $ 
+55 53 50 52 45 53 04 AB 02 08 56 00 00 08 09 00 | USPRES    V     
+00 98 56 00 00 98 15 60 02 81 0F 00 00 81 D0 81 |   V    `        
+12 01 03 81 21 00 81 31 00 81 46 55 53 50 52 45 |     !  1  FUSPRE
+53 03 26 09 04 07 B0 00 4D 02 0D 40 12 1F ED 81 | S &     M  @    
+7A 46 B4 03 B0 D7 28 1F D9 0C FA 1A 90 7D B4 E5 | zF    (      }  
+64 21 E1 A1 A0 5F 1A 43 33 75 A0 12 76 42 6F 6D | d!   _ C3u  vBom
+70 7A 3B FE 6A 43 EE CF C9 DE 33 50 76 21 94 08 | pz; jC    3Pv!  
+19 FB B2 EF 69 F2 1C 09 9E 76 20 71 00 01 FF 81 |     i    v q    
+7F 00 00 81 6A 16 7B 53 3D 55 53 50 52 45 53 00 |    j {S=USPRES 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 08 00 |                 
+00 01 BA 00 00 81 62 00 00 00 08 00 00 00 00 00 |       b         
+00 1E 00 00 3A 00 00 26 00 00 48 00 00 2E 00 7A |     :  &  H  . z
+E8 00 00 36 00 7E 4C 00 77 30 80 00 04 00 77 6A |    6 ~L w0    wj
+80 00 04 00 78 60 00 78 36 00 7A F4 80 00 06 00 |     x` x6 z     
+7B 1A 80 00 00 00 7B 30 80 00 06 00 7B 50 80 00 | {     {0    {P  
+04 00 7B 64 00 78 D8 00 7B 6E 00 00 4F 00 7B 7C |   {d x  {n  O {|
+00 02 5C 00 7B 8A 00 04 69 00 7B 98 00 06 76 00 |   \ {   i {   v 
+7B A6 00 08 CD 00 7B B4 00 0B 6E 00 7B C2 00 0D | {     {   n {   
+C5 00 7B D0 00 10 66 00 7B DE 00 12 81 00 7B EC |   {   f {     { 
+00 14 D8 00 7B FA 00 17 2F 00 7C 08 00 19 86 00 |     {   / |     
+7C 16 00 1B DD 00 7C 24 00 1D EA 00 7C 32 00 20 | |     |$    |2  
+41 00 7C 40 00 22 98 00 7C 4E 00 24 EF 00 7C 5C | A |@ "  |N $  |\
+00 27 46 00 7C 6A 00 29 53 00 7C 78 00 2B 60 00 |  'F |j )S |x +` 
+7C 86 00 2D B7 00 7C 94 00 30 0E 00 7C A2 00 32 | |  -  |  0  |  2
+65 00 7C B0 00 34 72 00 7C BE 00 36 7F 00 7C CC | e |  4r |  6 | 
+00 38 8C 00 7C DA 00 3A 99 00 7C E8 00 3C F0 00 |  8  |  :  |  <  
+7C F6 00 3F 47 00 7D 04 00 41 9E 00 7D 12 00 48 | |  ?G }  A  }  H
+E4 00 7D 20 00 56 67 00 7D 2E 00 59 29 00 7D 3C |   }  Vg }. Y) }<
+00 5B 80 00 7D 4A 00 5D 8D 00 7D 58 00 5F E4 00 |  [  }J ]  }X _  
+7D 66 00 62 3B 00 7D 74 00 64 92 00 7D 82 00 66 | }f b; }t d  }  f
+9F 00 7D 90 00 68 F6 00 7D 9E 00 6B 03 00 7D AC |   }  h  }  k  } 
+00 6D 5A 00 7D BA 00 6F B1 00 7D C8 00 72 08 00 |  mZ }  o  }  r  
+7D D6 00 74 5F 00 7D E8 00 7A D0 00 7D F2 00 7A | }  t_ }  z  }  z
+DC 00 7D FC 00 7A E2 00 7E C2 00 7E 54 00 7E E4 |   }  z  ~  ~T ~ 
+00 7F 36 00 7E F0 00 7F 68 00 7F A8 00 00 00 FF |  6 ~  h      
+00 00 00 00 00 00 00 00 03 00 00 00 01 00 00 00 |                 
+05 00 00 00 01 00 00 00 01 00 00 00 02 FF FF FF |                 
+FF 00 00 00 03 FF FF FF FF 00 00 00 04 FF FF FF |                 
+FF 00 00 00 12 FF FF FF FF 1C AB 08 56 00 00 98 |             V   
+78 00 00 08 56 00 00 08 09 00 00 98 56 00 00 98 | x   V       V   
+15 F6 76 55 53 20 50 72 65 73 69 64 65 6E 74 73 |   vUS Presidents
+00 55 53 50 52 45 53 00 02 0B 00 4A 00 38 FF FF |  USPRES    J 8  
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 8F |                 
+FF FF FF FF FF E3 00 FF FF FF FF FF 81 00 0F FF |                 
+FF FF FF 81 80 01 FF FF FF EF CD 00 00 1F FF FF |                 
+FF DF 00 00 0F FF FF FF F6 00 00 07 FF FF 7F E2 |                
+30 30 03 FF FF FF E1 00 00 01 FF FF FF F3 20 06 | 00              
+00 FF FF FF F3 A0 3F 98 FF FF FF FC 00 3F E0 7F |       ?      ? 
+FF FC 78 00 0F E0 7F FF B8 3F F0 0F F0 7F FF 70 |   x     ?    p
+00 30 07 E0 7F FE 70 00 00 07 E0 7F FF 30 00 00 |  0   p     0  
+07 30 3F FE 68 00 00 07 10 3F FC 60 00 00 1F 00 |  0? h    ? `    
+1F FD E0 00 00 1E 00 00 FF E0 00 00 3E 00 02 FE |             >   
+E0 10 00 07 00 01 FF E0 00 00 13 00 01 FF 84 00 |                 
+00 11 00 07 FF FD F0 00 01 80 07 FF FD 7F 00 80 |                
+80 0F FF FC FF C0 C0 C0 07 FF FE 7F C0 00 C0 03 |                
+FF FE 3E C0 00 44 07 FF FE 1F 20 00 63 0F FF 9E |   >  D      c   
+1F B0 00 09 8F FF 84 0D 00 00 04 3F FF 0C 04 80 |            ?    
+00 06 3F FF 08 00 00 00 64 3F FF 18 00 00 00 60 |   ?     d?     `
+3F FF 00 00 00 10 65 3F FF 80 00 00 00 E3 7F FF | ?     e?       
+80 18 00 04 E5 FF FF C0 0C 00 07 05 FF FF F0 0C |                 
+00 03 05 FF FF FE CE 00 0C 11 FF FF F3 87 00 0C |                 
+33 FF FF F1 81 00 00 3F FF FF E1 C8 80 00 1F FF | 3      ?        
+FF CF FC 80 00 1F FF FF C8 0C 00 00 1F FF FF C0 |                 
+06 00 00 1F FF FF E7 03 00 00 7F FF FE C3 80 00 |                
+00 FF FF FF A0 00 00 03 FF FF FF 20 02 00 07 FF |                 
+FF FF 10 02 00 3F FF FF FE 18 06 00 7F FF FF FE |      ?         
+F7 86 C1 FF FF FF FF 77 C7 C3 FF FF FF FF 9F FF |        w        
+CF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF 8F FF FF FF FF FF FF 00 7F |                
+FF FF FF FF FF 00 1F FF FF FF FF FF 80 07 FF FF |                 
+FF FF FF C0 07 FF FF FF FF FF C0 07 FF FF FF FF |                 
+FF C0 07 FF FF FF FF FF C0 03 FF FF FF FF FF F8 |                 
+07 FF FF FF FF FF F8 0F FF FF FF FF FF FC 1F FF |                 
+FF FF FF FF DF 02 0B 00 4A 00 37 00 00 00 00 00 |         J 7     
+00 00 00 00 00 1C 00 00 00 00 00 03 FF FC 00 00 |                 
+00 00 1F FB FE 00 00 00 00 38 FF FF C0 00 00 00 |          8      
+10 A6 BF C0 00 00 06 F4 01 B3 F0 00 00 07 F0 03 |                 
+B7 F0 00 00 0B 80 03 BC F8 00 00 05 80 00 2F BC |               / 
+00 00 44 00 00 03 BC 00 00 84 00 00 00 1E 00 00 |   D             
+86 00 00 00 0E 00 01 BF 80 00 00 07 00 01 3F 00 |               ? 
+00 00 03 80 01 7C 00 00 00 03 80 03 5D 00 00 00 |      |      ]   
+03 00 03 F9 80 00 00 03 00 03 FB 80 00 00 01 00 |                 
+07 FF 80 00 06 03 00 07 FF 80 00 00 01 00 07 FB |                 
+A0 80 00 01 00 07 38 78 00 00 01 00 07 66 7A 00 |       8x     fz 
+00 00 00 06 EE F8 07 80 03 20 00 D8 E0 1F FC 5F |                _
+00 03 CC E0 7E FD FF C0 07 FF A1 FF F9 F9 A0 0F |     ~           
+FF 91 FF F8 FF E0 08 FF C1 F3 DC FF E0 0E FF E0 |                 
+00 00 14 C0 1E FF F0 00 02 05 80 1F FF F8 00 00 |                 
+01 80 1F FF FC 00 00 00 00 1F FF FF 00 00 01 00 |                 
+1F FF FF C0 60 03 00 1F FF FF C0 70 13 00 0F DF |     `      p    
+FD F0 BF B2 00 0F C3 FC F1 9F F2 00 07 FF FF F9 |                 
+03 CA 00 07 FF FF B8 03 CA 00 07 FF FF BA 00 2E |                .
+00 03 FF FF B2 00 06 00 03 FF FF 00 FF F6 00 0D |                 
+FF FF 61 80 36 00 01 FF FE 60 02 04 00 01 FF FF |   a 6    `      
+E0 0F CC 00 00 FF FF FC 7F F8 00 00 10 FF 7E F0 |              ~ 
+38 00 00 18 0F FA 00 10 00 00 38 03 FC 00 30 00 | 8         8   0 
+00 3C 00 7E 00 00 00 00 7F 00 3F 8E 40 00 00 7F |  < ~     ? @  
+C0 1F FF C0 00 00 FF F0 1F FF 80 00 00 FF FC 1F |                 
+FF 80 00 00 FF FF 1F FF 80 00 03 FF FF FF FF C0 |                 
+00 07 FF FF FF FF C0 00 0F FF FF FF FF E0 00 1F |                 
+FF FF FF FF F0 00 FF FF FF EF FF F8 00 FF FF FF |                 
+EF FF BE 00 FF FF FF DF FF DF C0 FF FF FF FF FF |                 
+C7 F0 FF FF FF FF FE 0F FE FF FF FF BF FC 3F FE |               ? 
+FF FF FE 9F FF FF FE FF FF FF 1F 80 FF FE FF FF |                 
+FF 86 00 7F FE FF FF FF 80 00 7F FE FF FF FF C8 |               
+00 3F FE FF FF FF EC 00 3F FE FF FF FF F6 00 1F |  ?      ?       
+FE DF 02 0B 00 4A 00 32 00 00 00 00 00 00 00 00 |      J 2        
+00 00 00 00 00 00 00 00 1E 00 00 00 00 00 01 FF |                 
+FF 00 00 00 00 03 FD FF 80 00 00 00 07 FF FF E0 |                 
+00 00 00 0F FF FF F0 00 00 00 0F FF FF F8 00 00 |                 
+00 1F FF FF F8 00 00 00 1F FF FF FC 00 00 00 3F |                ?
+FF FF FC 00 00 00 7F FF FF FE 00 00 00 7F FF F3 |               
+FF 00 00 00 FF FF 81 FF 80 00 00 FE 3C 00 7F C0 |             <  
+00 00 7C 00 00 7F 60 00 01 F8 00 00 7F E0 00 01 |   |  `        
+F0 00 00 1F E0 00 01 F0 00 00 3F E0 00 03 E0 00 |           ?     
+00 3F E0 00 03 E0 00 00 1F F0 00 03 F8 00 00 3F |  ?             ?
+F0 00 03 E0 00 00 3F F0 00 07 E0 00 00 3F F0 00 |       ?      ?  
+0F E0 00 20 3F F0 00 07 E0 01 E0 7F F0 00 07 FF |     ?          
+07 F0 7F FC 00 07 FF DF FC FF F4 00 07 FF CF FC |                
+7F F0 00 01 FF C7 FE 3F F8 00 03 FF C3 F6 7F 8C |       ?       
+00 00 FF 81 C0 1F 8C 00 00 FD 81 00 1F CC 00 00 |                 
+7D 00 00 39 88 00 00 49 00 00 38 80 00 00 40 00 | }  9   I  8   @ 
+00 78 80 00 00 61 02 00 F8 00 00 00 61 83 07 F8 |  x   a      a   
+00 00 00 33 FD 8F F0 20 00 00 3F FC DA F8 60 00 |    3      ?   ` 
+00 3F E0 6E ED C0 00 00 1F E0 3C 6F 80 00 00 1F |  ? n      <o    
+F8 CC 7F 00 00 00 1F FF C8 7E 00 00 00 1F 00 1E |         ~      
+3C 00 00 00 1F FE 0E 7C 00 00 00 0F F0 28 7C 00 | <      |     (| 
+00 00 0F 07 FE 78 00 00 00 1F FF FF F0 00 00 00 |      x          
+1F FF FF E0 00 00 00 1F FF FF C0 00 00 00 0F FF |                 
+FF 04 00 00 00 0F FF FE 06 00 00 00 07 FF F8 0E |                 
+00 00 00 07 FF F0 1F 00 00 00 03 FF C0 3F 00 00 |              ?  
+00 01 FF 80 FF 80 00 00 07 FE 01 FF 80 00 00 0F |                 
+F8 06 FF C0 00 00 1F FF 1D FF 60 00 00 3F FF FF |           `  ?  
+FF F0 00 00 7F FF FB FE F8 00 00 FF FF E7 FF FF |                
+00 03 BF FE EF FD FF C0 07 3F FF CF FB FF C0 0F |          ?      
+3F FF 0F FB FF C0 1F 83 FE 1F F7 FF C0 FF DE 7C | ?              |
+3F E7 FF C0 FE FC 00 7F EF FF C0 FF F0 00 7F FF | ?             
+FF C0 FD E0 00 FF DF FF C0 FB E0 00 FF FF FF C0 |                 
+FB C0 01 FF FF FF C0 F7 C0 03 FF FF FF C0 DF 02 |                 
+55 00 4A 00 3C 00 00 00 00 00 00 00 00 00 00 00 | U J <           
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 00 00 20 00 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+00 00 08 00 00 14 00 00 00 00 24 00 00 1A 40 00 |           $   @ 
+00 00 36 00 00 3C 80 00 00 04 12 00 00 FC 80 00 |   6  <          
+00 00 1B 80 00 FF 80 00 00 10 0D 80 00 FD 00 00 |                 
+00 00 01 80 00 FD 00 00 00 0C 00 C0 00 FF 00 00 |                 
+00 3E 00 C0 00 FF 00 00 00 1F 02 40 00 FF 00 00 |  >         @    
+00 7E 02 00 00 FF 00 00 00 3F 01 00 00 FF 00 00 |  ~       ?      
+00 FF 90 00 00 FF 18 07 FE 7F A0 00 00 FF 1F 8F |                
+FF FF EC 60 00 FF 01 8F F7 FF D8 60 00 FE 00 9F |    `       `    
+01 FF 73 C0 00 FF 3F 8F FF FF FF 38 00 FF 2F 8F |   s   ?    8  / 
+FF FF FE 78 00 FF 01 0F 81 FF FD FC 00 FF 00 07 |    x            
+07 FF FF FC 00 FF 00 0E 81 DD DF F8 00 FF 00 0E |                 
+43 CF 9F DC 00 FF 00 1E 3F 07 FB F8 00 FF 00 1C | C       ?       
+00 1F F9 F0 00 FF 00 1F 00 7F B9 B0 00 FF 00 3F |               ?
+03 FF 53 20 00 FF 02 3B 80 FF A6 40 00 FF 06 3F |   S    ;   @   ?
+80 7F BC C0 00 FF 07 FF C0 FF 39 00 00 FF 0C FF |          9     
+C0 6F 78 00 00 FF 0C 7F E0 1E 78 00 00 FF 18 5F |  ox      x    _
+F4 9C 3A 00 00 FF 10 01 7C 9D 2E 00 00 FE 00 01 |   :     | .     
+59 73 6C 00 00 FE 81 FB 4D F9 8C 00 00 FF 8B FB | Ysl     M       
+4F F8 88 00 00 FF 0F FF E7 BC 08 00 00 FF 0E 03 | O               
+E7 FC 1E 00 00 FF 08 01 F3 FE 3F 00 00 FE 00 0B |           ?     
+91 F8 F7 00 00 FE 00 00 81 F9 E7 80 00 FF 00 02 |                 
+01 F3 C7 80 00 FF 00 68 01 E7 8F C0 00 FF 00 42 |        h       B
+9B FF 3F E0 00 FF 00 01 E7 FE 7F E0 00 FF 00 0C |   ?            
+E7 F8 FF F0 00 FF 00 02 E7 E3 FF F8 00 FF 80 31 |                1
+DF C7 FF FC 00 FF E0 71 3E 0F FF FF 00 FE F0 07 |        q>       
+FC 3F FF FF C0 FF F8 01 F0 7F FF FF F0 FF FC 0B |  ?             
+E0 FF FF FF F0 FF F8 CF 81 FF FF FF F0 7F F8 46 |               F
+03 FF FF FF F0 FF F0 60 07 FF FF FF F0 FF F0 60 |        `       `
+0F FF FF FF F0 FF F0 00 1F FF FF FF F0 FF F0 80 |                 
+3F FF FF FF F0 FF E1 E0 7F FF FF FF F0 FF EF F0 | ?              
+FF FF FF FF F0 FF FF FB FF FF FF FF F0 FF FF 7F |                
+FF FF FF FF F0 DF 02 9F 00 4A 00 45 00 00 00 00 |          J E    
+00 00 00 00 00 00 00 00 0E 00 00 00 00 00 00 00 |                 
+00 00 02 00 00 00 00 00 00 01 00 00 40 00 00 00 |             @   
+00 00 05 F8 0F C8 00 00 00 00 00 04 F0 01 FE 00 |                 
+00 00 00 00 4A AC 03 FE 00 00 00 00 00 18 4E 40 |     J         N@
+77 00 00 00 00 00 30 56 03 F7 00 00 00 00 00 01 | w     0V        
+A5 81 E1 80 00 00 00 00 00 63 00 0D C0 00 00 00 |          c      
+04 01 90 00 F1 C0 00 00 00 09 07 00 00 3F C0 00 |              ?  
+00 00 12 16 40 00 07 E0 00 00 00 17 10 00 00 01 |     @           
+F0 00 00 00 03 22 00 00 00 F0 00 00 00 03 44 00 |      "        D 
+00 00 70 00 00 00 10 90 00 00 00 60 00 00 00 13 |   p        `    
+04 00 00 00 70 00 00 00 03 00 00 00 00 30 00 00 |     p        0  
+00 03 00 00 00 00 30 00 00 00 00 40 00 00 00 30 |       0    @   0
+00 00 00 10 00 00 00 00 18 00 00 00 00 00 00 00 |                 
+00 18 00 00 00 08 80 00 00 0F F8 00 00 00 08 00 |                 
+00 BC 3E 70 00 00 00 0C 00 01 FF BF B8 00 00 00 |   >p            
+10 04 02 3E 3F E8 00 00 00 10 00 19 FC 3F D8 00 |    >?        ?  
+00 00 00 00 03 F8 3E 68 00 00 00 06 00 07 D8 3C |       >h       <
+78 00 00 00 06 00 00 10 0E 38 00 00 00 04 C0 00 | x        8      
+20 00 18 00 00 00 04 C8 00 00 10 08 00 00 00 06 |                 
+88 00 00 18 10 00 00 00 06 00 00 00 08 18 00 00 |                 
+00 13 00 00 08 04 18 00 00 00 07 00 00 08 06 10 |                 
+00 00 00 46 80 00 19 9F 14 00 00 02 07 40 00 17 |    F         @  
+FB 0C 00 00 00 1B 40 00 33 FD 8C 00 00 00 0D 20 |       @ 3       
+00 60 79 CE 00 00 00 06 C0 00 E0 7F D8 00 00 02 |  `y            
+01 E0 00 80 7F 4E 00 10 00 0F E0 00 03 FF 29 80 |     N        ) 
+00 04 1F C0 00 4F FF 28 00 00 00 BF C0 00 7C 03 |      O (      | 
+28 00 00 00 86 C0 00 30 61 0C 80 00 00 60 40 00 | (      0a    `@ 
+61 B8 FD 00 00 02 38 00 00 81 B8 30 00 00 06 00 | a     8    0    
+30 06 00 00 F0 00 00 04 80 30 06 00 01 78 00 00 | 0        0   x  
+02 00 70 0F 00 00 78 00 00 00 00 D8 1F 00 02 FC |   p   x         
+00 00 00 01 F8 07 C0 E4 FE 00 00 00 03 EC 03 FF |                 
+F8 FF 00 00 00 0F EC 01 FF F0 FF C0 00 00 3E ED |               > 
+01 FF B0 FF F0 00 01 FF FE 40 FF E0 FF FF 00 03 |          @      
+FF FB 00 8F C0 FF FF C0 0F FF F9 20 7F BF FF FF |                
+F0 3F FF F9 BF 7F FF FF FF F8 FF FB F8 DF FF FF |  ?             
+FF FF F8 FF F3 F8 7D 6F FF FF FF F8 FF F3 F8 61 |       }o       a
+65 7F FF FF F8 FF F7 F8 3F 3B FD FF FF F8 FF F7 | e      ?;      
+F0 3E DF FF FF FF F8 FF F7 90 1F FF FF FF FF F8 |  >              
+FF E7 F0 1F C8 FF FF FF F8 FF E0 00 07 C3 FF FF |                 
+FF F8 FF 18 20 06 27 FF FF FF F8 FF 8F E0 03 D7 |       '         
+3F FF FF F8 FF 00 20 07 FF EF FF FF F8 FA 04 00 | ?               
+05 DF CF FF FF F8 DF 02 55 00 4A 00 3D FF FB FF |         U J =   
+FF FF FF FF F8 7F 3F FF FF FF FF FF F8 FF FF FF |      ?         
+FF 80 7F FF F8 FE FF FF FF FE 3F FF F8 FD FF FF |          ?     
+CF F9 0F FF F8 FF FF FF FF E0 07 FF F8 FF FF FF |                 
+FF 88 07 FF F8 FF FF FF FF F0 03 FF F8 7F FF FF |                
+FF 88 03 FF F8 5F FF FC 00 00 03 FF F8 7F FF F0 |      _         
+00 00 01 FF F8 1F FF C0 00 00 00 7F F8 DF FF 80 |                
+00 00 00 3F F8 4F FD 00 00 00 00 1F F8 5B FF 00 |    ? O       [  
+00 00 00 0F F8 0F FF 00 00 00 00 0F F8 1F FF 00 |                 
+00 00 00 07 F8 3F FE 00 00 00 00 07 F8 3F FF 00 |      ?       ?  
+00 00 00 07 F8 07 FF 00 00 00 00 03 F8 47 FF 00 |              G  
+00 00 00 03 F8 07 FF 00 00 00 00 01 F8 8F FE 80 |                 
+00 00 00 01 F8 03 FC 80 00 00 00 01 F8 07 F5 80 |                 
+00 00 00 00 F8 07 E5 00 00 00 00 01 F8 0F E5 00 |                 
+00 00 00 01 F8 3F EA 00 00 00 00 01 F8 3F 89 00 |      ?       ?  
+00 00 00 01 F8 3F CC 00 23 80 00 03 F8 0C 60 00 |      ?  #     ` 
+77 E0 00 07 F8 18 04 00 09 7C 01 C7 F8 12 00 00 | w        |      
+3F FA 03 03 F8 10 00 00 FE F8 06 07 F8 18 22 01 | ?             " 
+00 F9 1F C7 F8 18 00 00 00 34 9B 27 F8 28 30 00 |          4 ' (0 
+50 60 80 07 F8 18 32 00 00 60 80 07 F8 1C 62 00 | P`    2  `    b 
+00 00 40 07 F8 34 40 00 01 80 40 07 F8 06 22 00 |   @  4@   @   " 
+00 40 20 07 F8 0A 38 40 00 06 00 07 F8 03 0C 00 |  @    8@        
+00 01 20 07 F8 09 00 00 00 30 40 07 F8 0D 91 00 |          0@     
+01 7C 00 07 F8 07 C0 00 01 EF A0 07 F8 03 C2 00 |  |              
+05 C6 F2 07 F8 01 F6 00 01 1E E0 07 F8 03 F0 00 |                 
+03 3F 20 07 F8 03 F8 00 40 7C 20 0F F8 02 F8 00 |  ?      @|      
+1C 08 00 0F F8 02 F8 00 04 0B 00 0F F8 00 F8 40 |                @
+08 FF 90 1F F8 00 FC 40 0B 80 06 1F F8 01 FC 20 |        @        
+07 04 00 1F F8 03 F9 30 0C 6C 00 3F F8 02 F9 18 |        0 l ?    
+00 7C 00 3F F8 03 F0 9A 01 9C 00 7F F8 03 F0 4D |  | ?          M
+2C 80 00 7F F8 0F F0 33 F4 08 00 FF F8 1F F0 1D | ,     3        
+E8 0C 01 FF F8 3F F0 06 7C 10 03 FF F8 5F F8 03 |      ?  |    _  
+AF 90 83 FF F8 7F F8 00 C3 F1 87 FF F8 7F FC 00 |               
+34 F9 CF FF F8 FF FE 00 1C FF 97 FF F8 FF FF 00 | 4               
+06 7E 1B FF F8 FF FF 00 03 80 1B FF F8 FF FF 80 |  ~              
+00 60 9B FF F8 FF FF C0 00 01 1D FF F8 FF FF E0 |  `              
+00 02 1C FF F8 FF FF F0 00 00 1C 7F F8 FF FF F8 |                
+00 02 1E F7 F8 FF FF F0 00 3B 1E 1C 78 DF 02 9F |          ;  x   
+00 4A 00 43 C7 E0 F8 00 0F FF FF FF E0 C7 E0 FC |  J C            
+03 FF FF FF FF E0 CF E0 FC 0F FF 07 FF FF E0 CF |                 
+E0 FE 3D 0F E3 FF FF E0 CF E0 FF F0 67 01 FF FF |   =         g   
+E0 CF E0 FF 82 38 C0 7F FF E0 DF EC 1B 80 00 04 |      8         
+3F FF E0 EF F8 33 80 00 04 3F FF E0 E7 F8 7C 00 | ?    3   ?    | 
+00 22 1F FF E0 E0 08 F8 00 00 00 0F FF E0 E0 0C |  "              
+C0 00 00 00 07 FF E0 E0 0D C0 00 00 00 07 FF E0 |                 
+F0 07 80 00 00 00 03 FF E0 F0 0E 00 00 00 00 03 |                 
+FF E0 F0 1E 00 00 00 00 03 FF E0 F0 1E 00 00 00 |                 
+00 03 FF E0 74 7E 00 00 00 00 03 FF E0 3F 7C 00 |     t~       ?| 
+00 00 00 03 DF E0 1F 7C 00 00 00 00 01 DF E0 0F |        |        
+FC 00 00 00 00 01 FF E0 07 FC 00 00 00 00 01 FF |                 
+E0 83 FC 00 00 00 00 01 FF E0 83 7C 00 00 00 00 |            |    
+01 FF E0 81 FC 00 00 00 00 01 FF E0 80 FC 00 00 |                 
+00 00 01 FF E0 80 FC 00 00 00 00 01 DF E0 80 7C |                |
+00 00 00 08 01 1F E0 80 3E 00 00 00 00 04 6F E0 |         >     o 
+80 3E 00 00 00 40 0C EF E0 80 1E 00 00 00 00 0D |  >   @          
+EF E0 80 0F 00 00 00 00 04 0F E0 80 0F 00 00 00 |                 
+00 07 2F E0 80 0C 80 00 01 C0 05 1F E0 80 07 00 |   /             
+00 03 E4 04 1F E0 80 03 80 00 0E 06 00 1F E0 80 |                 
+00 80 00 38 F4 02 1F E0 C0 00 56 00 67 FC 02 3F |    8      V g  ?
+E0 C0 00 C3 D8 F9 84 00 7F E0 C0 00 DF F0 F0 00 |                
+00 7F E0 C0 00 77 10 0C 48 02 7F E0 C0 00 30 10 |     w  H    0 
+0C 00 02 7F E0 C0 00 10 00 00 00 81 7F E0 E0 00 |               
+10 00 00 01 80 7F E0 E0 00 08 08 00 07 00 7F E0 |               
+F0 00 20 18 00 07 00 7F E0 F0 00 20 10 00 02 00 |                
+7B E0 F8 00 30 10 18 00 00 7D E0 FC 00 10 20 8B | {   0    }      
+08 04 7D E0 FC 00 18 60 09 84 04 7E E0 FE 00 18 |   }    `   ~    
+30 78 C4 04 7F E0 FF 00 18 18 F0 06 0C 7F E0 FF | 0x            
+80 08 0F C0 06 0C FF E0 FF 80 0C 07 80 22 18 FF |              "  
+E0 FF C0 0C 01 80 F2 1C FF E0 FF E0 04 E0 03 E1 |                 
+19 FF E0 FF E0 06 70 7E 02 19 FF E0 FF F0 3E 1F |       p~      > 
+E0 03 71 FF E0 FF F8 7F 0C 08 00 F1 FF E0 FF F8 |   q            
+FF 87 F0 03 E3 FF E0 FF FD FF C3 00 07 E3 FF E0 |                 
+FF FF FF E0 00 1F C3 FF E0 FF FF FF F0 00 1F 87 |                 
+FF E0 FF FF FF F8 00 7F 07 FF E0 FF FF FF FC 00 |                
+FE 07 FF E0 FF FF FF FF 07 FE 07 FF E0 BF FF FF |                 
+FF FF FC 0F FF E0 BF FF FF FF FF F0 0F FF E0 BF |                 
+FF FF FF FF E0 1F FF E0 9F FF FF FF F7 C0 1F FF |                 
+E0 8F FF FF FF F3 80 1F FF E0 8F FF FF FF F7 00 |                 
+3F FF E0 87 FF FF FF FF 00 3F FF E0 83 FF FF FF | ?        ?      
+FF 80 7F FF E0 81 FF FF FF FF 80 7F FF E0 DF 02 |               
+19 00 4C 00 37 DF B7 AF 7F FF FF FE 9D 9F E9 6F |   L 7         o
+F7 7F FE 57 FF FF F3 D7 BF FE FE BF EA F5 7F FF |   W           
+FE EF DF EB FF FB FF FE D9 AD 18 17 EF FF FE 6F |                o
+DC FF C0 DF AF FA 59 AB FF FF 1A F3 DE 95 27 FF |       Y       ' 
+FF C7 FC FE 77 CB FF FF F3 FF BE AA 9F FF FF F9 |     w           
+FF FE 7E 63 F7 00 15 FB 88 49 FF AF 83 FF C0 00 |   ~c     I      
+1F 01 FE 00 FC 70 58 F8 06 3F F8 FF FE BF FF FE |      pX  ?      
+FE 00 00 00 1F C0 00 FB E7 00 18 FF 40 80 01 00 |             @   
+C0 D7 00 00 3F 00 7C 00 02 FF E0 FC 7C 00 3F E1 |     ? |     | ? 
+FF 07 FF F0 FF 80 00 FF F0 00 E0 FF CF FF E0 FF |                 
+FF E0 FF 78 DF EE FF C0 80 C0 80 00 18 00 FF 00 |    x            
+00 04 FF FF C0 FF E0 00 00 00 00 00 40 FF FE 80 |             @   
+00 EF FC 03 FF FF FF E0 00 00 00 78 00 00 7C F8 |            x  | 
+00 C0 00 E0 FF F0 FF FF F0 FF F0 00 01 FF C0 BF |                 
+FF FE 01 9F 80 DF FE 00 FF FF 80 40 08 79 6E E2 |            @ yn 
+FF 08 76 F9 03 3F F7 FB 40 3F 87 FF FF FF FE FF |   v  ?  @?      
+FF FF FE FF FE FF EF FF EE FF FF FE 17 F8 FF 00 |                 
+00 01 60 00 02 F7 FC 00 00 7F E8 00 04 C0 FF FE |   `            
+80 FF C0 00 80 00 03 00 00 03 00 81 FF F0 FF A0 |                 
+C3 F9 70 90 50 FD 40 00 FF D0 3E FF FF FF FF FF |   p P @   >     
+FF FF 00 1F FF C0 FF 00 C0 FF E0 FF E7 3F 3F FE |              ?? 
+FF 0F FF FE 3E FF FE 00 19 FF FF FE FF 00 00 10 |     >           
+00 03 80 A0 0F F9 FF F8 00 FF FF F8 FF F8 FF 07 |                 
+F8 FF 00 80 07 FF 82 42 FE 3F F8 FF FF F9 FF FF |        B ?      
+F6 FF E0 80 BF FF FF 70 FE FF FF 07 FF 00 00 03 |        p        
+F8 01 82 00 FF 7F FF DF 63 00 FF FF 55 00 4A FF |        c   U J 
+00 00 C4 28 03 C0 00 60 FF FF CF FF FF 87 F3 9B |    (   `        
+EF 00 00 FD AC E0 04 00 07 93 EC 1F D2 FF FF FF |                 
+00 48 6F 20 72 65 65 00 F0 F0 15 F0 39 E4 00 87 |  Ho ree     9   
+01 01 00 20 45 02 E8 54 00 63 6F 01 1F 19 75 73 |     E  T co   us
+5C 02 01 1F 65 6E 74 74 75 73 00 30 E4 E8 00 20 | \   enttus 0    
+20 62 79 3D 3D 3D 00 46 E5 72 20 33 34 74 68 00 |  by=== F r 34th 
+4E E5 37 00 2D 72 20 34 6C 69 61 6A 70 31 00 31 | N 7 -r 4liajp1 1
+32 0E 00 4A 61 72 20 31 36 74 6F 6E 00 00 2D 00 | 2  Jar 16ton  - 
+31 38 38 38 35 00 2D 00 43 00 4A E5 32 35 00 2C | 18885 - C J 25 ,
+31 39 61 6D 20 62 6C 69 72 20 33 31 73 74 46 72 | 19am blir 31stFr
+61 75 62 6C 20 32 32 20 32 32 33 37 74 64 20 52 | aubl 22 2237td R
+E5 00 52 2D 00 4A 34 32 00 4A 61 6E 53 74 61 65 |   R- J42 JanStae
+20 70 27 51 27 54 45 52 74 72 65 69 2E 65 69 64 |  p'Q'TERtrei.eid
+40 00 00 00 70 00 00 00 01 FF F6 7F FF 87 BF 7F | @   p         
+FF E0 FF 1F FF FF 00 FF FF C0 07 00 FF F0 7D 00 |               } 
+03 FF 00 3F 07 07 FF 9F FF 00 01 E7 80 C0 FF 38 |    ?           8
+00 00 7F FF 00 00 00 00 09 08 00 FE 40 10 3F FF |            @ ? 
+E0 0F FF FF F0 FF FF 8C FF 00 00 00 D9 17 FE FF |                 
+E0 00 FF FF F0 FF FC 03 00 00 04 06 90 00 00 02 |                 
+00 09 10 38 F8 FF FF 00 03 80 D0 02 3F C0 C3 20 |    8        ?   
+E0 00 1E 01 96 00 FF FC 00 FF 0F 80 CF C0 FF C0 |                 
+FF F7 FF FF FF 00 3F FF 00 17 7F 7E FF 3A FE FF |       ?   ~ :  
+D8 08 18 00 C3 DE 07 FE 80 1F 00 00 00 00 00 1E |                 
+BF FF B0 21 FF FF 79 FF FF FF C0 00 FF C0 FF DF |    !  y         
+C0 FF FF FF F0 FF FF FF FF FF FF FE FF FE 3F FF |               ? 
+FF 07 FF FF FE 7F FF FF FF E0 FF FF FE FE 2F FE |              / 
+BA 8D F0 00 4C 5E 03 03 BF FF FF FE 20 6A 04 54 |     L^       j T
+48 EE 08 56 00 00 98 78 00 00 08 56 00 00 08 09 | H  V   x   V    
+00 00 98 56 00 00 98 15 EE 03 FF FF FF FF 41 EE |    V          A 
+FF EA 2E 88 2F 0A 3F 2E 00 08 FA 60 5C 8F 4A 40 |   . / ?.   `\ J@
+67 1C FA 44 3D 40 FF E8 3E BC 00 00 3F 00 FA 5D | g  D=@  >   ?  ]
+54 8F 22 6B 04 24 B9 D1 67 04 FA 44 36 00 F9 55 | T "k $  g  D6  U
+33 FC 00 00 FF FF FF FF 43 EE FF E8 2E 89 F8 98 | 3       C   .   
+22 6B 04 24 22 8C 4A 44 67 04 3E 84 F9 53 F9 55 | "k $" JDg >  S U
+60 02 34 84 30 03 4C EE 1C 18 FF EC 4E 5E 4E 75 | ` 4 0 L     N^Nu
+4E 56 FF 8C 48 EE 0C 38 FF EC 24 6E 00 0C 78 00 | NV  H  8  $n  x 
+42 40 10 12 E1 48 42 42 14 2A 00 01 D0 42 54 40 | B@   HBB *   BT@
+3A 00 43 EE FF 90 2E 89 F9 54 36 00 66 5A 43 EE | : C   .  T6 fZC 
+FF D8 2E 89 2F 2E 00 08 FB E9 58 8F 4A 40 66 44 |   . /.    X J@fD
+43 EE FF EB 2E 89 FB 3B 22 4A 56 89 2E 89 3F 05 | C   .  ;"JV . ? 
+3F 3C 40 02 48 6E FF EB F8 86 50 8F 26 00 67 24 | ?<@ Hn    P & g$
+2E 83 F8 79 26 48 20 0B 67 1A 38 2B 00 0C 67 14 | .  y&H  g 8+  g 
+70 00 30 05 2E 80 2F 0A 3F 04 F8 96 54 8F 2F 08 | p 0 . / ?   T / 
+FA 6A 50 8F F9 55 60 0C 3E BC 00 00 3F 03 F9 51 |  jP  U` >   ?  Q
+70 00 60 02 30 04 4C EE 0C 38 FF EC 4E 5E 4E 75 | p ` 0 L  8  N^Nu
+28 29 00 00 4E 56 FF EC 48 EE 04 18 FF F4 70 50 | ()  NV  H     pP
+2E 80 F8 90 36 00 67 4C 2E AE 00 08 3F 03 F8 96 | .   6 gL.   ?   
+54 8F 24 48 2F 0A FA 6C 2E BC FF FF FF FF 2F 0A | T $H/  l.     / 
+FA 6E 41 EE FF F2 2E 88 3F 03 4E BA FE 7C 4F EF |  nA   . ? N  |O 
+00 0A 38 00 67 04 3E 84 F8 97 3E 83 F8 97 4A 6E |   8 g >   >   Jn
+FF F2 67 10 3E BC 00 00 3F 2E FF F2 F9 51 30 3C |   g >   ?.   Q0<
+00 00 60 04 30 3C 00 01 4C EE 04 18 FF F4 4E 5E |   ` 0<  L     N^
+4E 75 4E 56 FF A0 41 EE FF A4 2E 88 F9 54 4A 40 | NuNV  A   .  TJ@
+66 1C 41 EE FF EC 2E 88 2F 2E 00 08 FB E9 58 8F | f A   . /.    X 
+4A 40 66 08 41 EE FF FF 2E 88 FB 3B F9 55 4E 5E | J@f A   .  ; UN^
+4E 75 70 6F 74 75 73 00 70 6F 74 75 73 5C 61 6A | Nupotus potus\aj
+30 37 00 70 6F 74 75 73 5C 61 6A 31 37 00 70 6F | 07 potus\aj17 po
+74 75 73 5C 61 6C 31 36 00 70 6F 74 75 73 5C 62 | tus\al16 potus\b
+68 32 33 00 70 6F 74 75 73 5C 63 61 32 31 00 70 | h23 potus\ca21 p
+6F 74 75 73 5C 63 63 33 30 00 70 6F 74 75 73 5C | otus\cc30 potus\
+64 65 33 34 00 70 6F 74 75 73 5C 66 70 31 34 00 | de34 potus\fp14 
+70 6F 74 75 73 5C 66 72 33 32 00 70 6F 74 75 73 | potus\fr32 potus
+5C 67 62 34 31 00 70 6F 74 75 73 5C 67 62 34 33 | \gb41 potus\gb43
+00 70 6F 74 75 73 5C 67 63 32 32 00 70 6F 74 75 |  potus\gc22 potu
+73 5C 67 66 33 38 00 70 6F 74 75 73 5C 67 77 30 | s\gf38 potus\gw0
+31 00 70 6F 74 75 73 5C 68 68 33 31 00 70 6F 74 | 1 potus\hh31 pot
+75 73 5C 68 74 33 33 00 70 6F 74 75 73 5C 6A 61 | us\ht33 potus\ja
+30 32 00 70 6F 74 75 73 5C 6A 61 30 36 00 70 6F | 02 potus\ja06 po
+74 75 73 5C 6A 62 31 35 00 70 6F 74 75 73 5C 6A | tus\jb15 potus\j
+63 33 39 00 70 6F 74 75 73 5C 6A 67 32 30 00 70 | c39 potus\jg20 p
+6F 74 75 73 5C 6A 6B 33 35 00 70 6F 74 75 73 5C | otus\jk35 potus\
+6A 6D 30 34 00 70 6F 74 75 73 5C 6A 6D 30 35 00 | jm04 potus\jm05 
+70 6F 74 75 73 5C 6A 70 31 31 00 70 6F 74 75 73 | potus\jp11 potus
+5C 6A 74 31 30 00 70 6F 74 75 73 5C 6C 6A 33 36 | \jt10 potus\lj36
+00 70 6F 74 75 73 5C 6D 62 30 38 00 70 6F 74 75 |  potus\mb08 potu
+73 5C 6D 66 31 33 00 70 6F 74 75 73 5C 70 6F 74 | s\mf13 potus\pot
+75 73 00 70 6F 74 75 73 5C 70 72 64 62 00 70 6F | us potus\prdb po
+74 75 73 5C 72 65 61 64 6D 65 00 70 6F 74 75 73 | tus\readme potus
+5C 72 68 31 39 00 70 6F 74 75 73 5C 72 6E 33 37 | \rh19 potus\rn37
+00 70 6F 74 75 73 5C 72 72 34 30 00 70 6F 74 75 |  potus\rr40 potu
+73 5C 74 6A 30 33 00 70 6F 74 75 73 5C 74 72 32 | s\tj03 potus\tr2
+36 00 70 6F 74 75 73 5C 75 67 31 38 00 70 6F 74 | 6 potus\ug18 pot
+75 73 5C 77 63 34 32 00 70 6F 74 75 73 5C 77 68 | us\wc42 potus\wh
+30 39 00 70 6F 74 75 73 5C 77 68 32 39 00 70 6F | 09 potus\wh29 po
+74 75 73 5C 77 6D 32 35 00 70 6F 74 75 73 5C 77 | tus\wm25 potus\w
+74 32 37 00 70 6F 74 75 73 5C 77 77 32 38 00 70 | t27 potus\ww28 p
+6F 74 75 73 5C 7A 72 31 32 00 70 6F 74 75 73 5C | otus\zr12 potus\
+70 6F 74 75 73 00 70 6F 74 75 73 00 4D 41 49 4E | potus potus MAIN
+00 00 48 E7 00 30 51 8F 24 6F 00 18 4A 79 FF FF |   H  0Q $o  Jy  
+FF FF 66 3A 36 7C 00 C8 26 53 20 4B 0C A0 00 00 |   f:6|  &S K    
+05 DB 6D 0E 20 6B 17 68 4E 90 0C 68 02 04 00 02 |   m  k hN  h    
+64 14 41 F9 FF FF FF FF 28 81 08 56 00 00 98 78 | d A     (  V   x
+00 00 08 56 00 00 08 09 00 00 98 56 00 00 98 15 |    V       V    
+D6 03 70 14 91 C0 08 E8 00 04 00 01 60 00 02 E0 |   p         `   
+33 FC 00 01 FF FF FF FF 70 00 30 12 0C 80 00 00 | 3       p 0     
+07 03 67 0E 0C 80 00 00 07 07 67 00 02 C2 60 00 |   g       g   ` 
+02 BA 4A 79 FF FF FF FF 66 00 02 B4 3E BC 00 E5 |   Jy    f   >   
+FA EE 2E 8A F9 57 2E BC FF FF FF FF 4E BA FB 02 |   .  W.     N   
+2E BC FF FF FF FF 48 7A FD 6A 4E BA FC 1E 2E BC | .     Hz jN   . 
+FF FF FF FF 48 7A FD 67 4E BA FC 10 2E BC FF FF |     Hz gN   .   
+FF FF 48 7A FD 64 4E BA FC 02 2E BC FF FF FF FF |   Hz dN   .     
+48 7A FD 61 4E BA FB F4 2E BC FF FF FF FF 48 7A | Hz aN   .     Hz
+FD 5E 4E BA FB E6 2E BC FF FF FF FF 48 7A FD 5B |  ^N   .     Hz [
+4E BA FB D8 2E BC FF FF FF FF 48 7A FD 58 4E BA | N   .     Hz XN 
+FB CA 2E BC FF FF FF FF 48 7A FD 55 4E BA FB BC |   .     Hz UN   
+2E BC FF FF FF FF 48 7A FD 52 4E BA FB AE 2E BC | .     Hz RN   . 
+FF FF FF FF 48 7A FD 4F 4E BA FB A0 2E BC FF FF |     Hz ON   .   
+FF FF 48 7A FD 4C 4E BA FB 92 2E BC FF FF FF FF |   Hz LN   .     
+48 7A FD 49 4E BA FB 84 2E BC FF FF FF FF 48 7A | Hz IN   .     Hz
+FD 46 4E BA FB 76 2E BC FF FF FF FF 48 7A FD 43 |  FN  v.     Hz C
+4E BA FB 68 2E BC FF FF FF FF 48 7A FD 40 4E BA | N  h.     Hz @N 
+FB 5A 2E BC FF FF FF FF 48 7A FD 3D 4E BA FB 4C |  Z.     Hz =N  L
+2E BC FF FF FF FF 48 7A FD 3A 4E BA FB 3E 2E BC | .     Hz :N  >. 
+FF FF FF FF 48 7A FD 37 4E BA FB 30 2E BC FF FF |     Hz 7N  0.   
+FF FF 48 7A FD 34 4E BA FB 22 2E BC FF FF FF FF |   Hz 4N  ".     
+48 7A FD 31 4E BA FB 14 2E BC FF FF FF FF 48 7A | Hz 1N   .     Hz
+FD 2E 4E BA FB 06 2E BC FF FF FF FF 48 7A FD 2B |  .N   .     Hz +
+4E BA FA F8 2E BC FF FF FF FF 48 7A FD 28 4E BA | N   .     Hz (N 
+FA EA 2E BC FF FF FF FF 48 7A FD 25 4E BA FA DC |   .     Hz %N   
+2E BC FF FF FF FF 48 7A FD 22 4E BA FA CE 2E BC | .     Hz "N   . 
+FF FF FF FF 48 7A FD 1F 4E BA FA C0 2E BC FF FF |     Hz  N   .   
+FF FF 48 7A FD 1C 4E BA FA B2 2E BC FF FF FF FF |   Hz  N   .     
+48 7A FD 19 4E BA FA A4 2E BC FF FF FF FF 48 7A | Hz  N   .     Hz
+FD 16 4E BA FA 96 2E BC FF FF FF FF 48 7A FD 13 |   N   .     Hz  
+4E BA FA 88 2E BC FF FF FF FF 48 7A FD 11 4E BA | N   .     Hz  N 
+FA 7A 2E BC FF FF FF FF 48 7A FD 0E 4E BA FA 6C |  z.     Hz  N  l
+2E BC FF FF FF FF 48 7A FD 0D 4E BA FA 5E 2E BC | .     Hz  N  ^. 
+FF FF FF FF 48 7A FD 0A 4E BA FA 50 2E BC FF FF |     Hz  N  P.   
+FF FF 48 7A FD 07 4E BA FA 42 2E BC FF FF FF FF |   Hz  N  B.     
+48 7A FD 04 4E BA FA 34 2E BC FF FF FF FF 48 7A | Hz  N  4.     Hz
+FD 01 4E BA FA 26 2E BC FF FF FF FF 48 7A FC FE |   N  &.     Hz  
+4E BA FA 18 2E BC FF FF FF FF 48 7A FC FB 4E BA | N   .     Hz  N 
+FA 0A 2E BC FF FF FF FF 48 7A FC F8 4E BA F9 FC |   .     Hz  N   
+2E BC FF FF FF FF 48 7A FC F5 4E BA F9 EE 2E BC | .     Hz  N   . 
+FF FF FF FF 48 7A FC F2 4E BA F9 E0 2E BC FF FF |     Hz  N   .   
+FF FF 48 7A FC EF 4E BA F9 D2 2E BC FF FF FF FF |   Hz  N   .     
+48 7A FC EC 4E BA F9 C4 2E BC FF FF FF FF 48 7A | Hz  N   .     Hz
+FC E9 4E BA F9 B6 4F EF 00 B4 2E BC FF FF FF FF |   N   O   .     
+4E BA FA 4C 2E BC FF FF FF FF 4E BA F8 D6 2E BC | N  L.     N   . 
+FF FF FF FF F8 E4 FC 8E 60 04 2E 8A F9 57 50 8F |         ` .  WP 
+4C DF 0C 00 4E 75 43 6F 6E 63 65 70 74 20 41 70 | L   NuConcept Ap
+70 3A 55 53 20 50 72 65 73 69 64 65 6E 74 73 0A | p:US Presidents 
+55 53 50 52 45 53 0A 56 65 72 73 69 6F 6E 20 31 | USPRES Version 1
+2E 30 30 0A 30 32 2F 30 31 2F 32 30 30 31 00 00 | .00 02/01/2001  
+41 FA FF C4 4E 75 00 00 70 01 4E 75 00 36 40 06 | A   Nu  p Nu 6@ 
+00 05 F0 12 00 02 00 00 00 00 00 00 FF FF FF FF |                 
+CF FF 00 00 00 22 85 04 00 27 FF FF FF FF 85 00 |      "   '      
+00 08 85 01 00 0F 85 02 00 16 85 03 00 1C FF FF |                 
+FF FF 41 63 74 69 6F 6E 73 00 57 69 6E 53 74 72 |   Actions WinStr
+00 44 69 61 6C 6F 67 00 50 6F 70 75 70 00 47 72 |  Dialog Popup Gr
+61 79 65 64 2D 6F 75 74 00 48 46 4F 4E 54 00 00 | ayed-out HFONT  
+00 48 00 05 B4 46 FF FF FF FF 02 04 0C 0E 00 00 |  H   F          
+00 00 00 0A 0B 00 02 04 0C 18 00 06 00 0B 00 0A |                 
+0B 00 0A 01 0C 22 00 0C FF FF FF FF 00 00 0A 01 |      "          
+0C 2C 00 18 FF FF FF FF 3C 30 08 56 00 00 98 78 |  ,      <0 V   x
+00 00 08 56 00 00 08 09 00 00 98 56 00 00 98 15 |    V       V    
+FF 00 00 01 08 80 00 00 00 22 01 04 00 00 00 00 |          "      
+00 00 45 44 49 54 31 00 45 44 49 54 32 00 46 49 |   EDIT1 EDIT2 FI
+52 53 54 20 50 4F 50 55 50 00 32 4E 44 20 50 4F | RST POPUP 2ND PO
+50 55 50 00 44 49 41 4C 4F 47 20 48 45 41 44 45 | PUP DIALOG HEADE
+52 00 00 00 00 20 40 05 00 02 00 13 00 02 00 00 | R     @         
+00 00 00 00 FF FF FF FF 80 01 00 00 80 02 00 09 |                 
+FF FF FF FF 49 74 65 6D 20 31 2D 31 00 49 74 65 |     Item 1-1 Ite
+6D 20 31 2D 32 00 00 24 40 05 00 03 00 1B 00 03 | m 1-2  $@       
+00 00 00 00 00 00 FF FF FF FF 80 01 00 00 80 02 |                 
+00 09 80 03 00 12 FF FF FF FF 49 74 65 6D 20 32 |           Item 2
+2D 31 00 49 74 65 6D 20 32 2D 32 00 49 74 65 6D | -1 Item 2-2 Item
+20 32 2D 33 00 00 FF FF FF FF 00 00 00 00 02 0D |  2-3            
+40 7B 63 E2 8E 10 CA 7D 36 1B 23 A7 44 1C 14 28 | @{c    }6 # D  (
+63 11 D9 6C 17 07 DC 94 9A 15 98 F0 64 7B BA CB | c  l        d{  
+36 B2 86 5B D2 E0 A3 7A D4 1F 61 FB 2C 5F 8B 2A | 6  [   z  a ,_ *
+48 6A 6D D8 15 76 AE 86 90 09 CA 96 06 A9 65 67 | Hjm  v        eg
+87 CD 4C 08 56 00 00 98 92 00 00 08 56 00 00 
