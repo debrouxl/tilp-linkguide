@@ -16,13 +16,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-
-#define WIDTH	12
 
 static const unsigned char machine_id[] =
 {
@@ -30,6 +28,14 @@ static const unsigned char machine_id[] =
   0x00, 0x82, 0x83, 0x85, 0x86, 0x74, 0x98, 0x88, 0x89, 0x73,
   0xff
 };
+
+static const char* machine_way[] = 
+{
+	"PC>TI", "PC>TI", "PC>TI", "PC>TI", "PC>TI", "PC>TI", "PC>TI", "PC>TI", "PC>TI", "PC>TI",
+	"TI>PC", "TI>PC", "TI>PC", "TI>PC", "TI>PC", "TI>PC", "TI>PC", "TI>PC", "TI>PC", "TI>PC",
+	"",
+};
+
 static const unsigned char command_id[] =
 {
 	0x06, 0x09, 0x15, 0x2d, 0x36, 0x47, 0x56, 0x5A, 0x68, 0x6D, 
@@ -37,7 +43,7 @@ static const unsigned char command_id[] =
 	0xff
 };
 
-static const char string_id[][8] =
+static const char command_name[][8] =
 {
 	"VAR", "CTS", "XDP", "FLH", "SKP", "SID", "ACK", "ERR", "RDY", "SCR", "RID",
 	"CNT", "KEY", "EOT", "REQ", "IND", "RTS", 
@@ -70,6 +76,38 @@ int is_a_command_id(unsigned char id)
   return i;
 }
 
+#define WIDTH	12
+
+int fill_buf(FILE *f, char data, int flush)
+{
+	static char buf[WIDTH];
+	static unsigned int cnt = 0;
+	unsigned int i, j;
+
+	if(!flush)
+		buf[cnt++] = data;
+
+	if((cnt >= WIDTH) || flush)
+	{
+		//printf(".");
+		fprintf(f, "    ");
+		for(i = 0; i < cnt; i++)
+			fprintf(f, "%02X ", 0xff & buf[i]);
+
+		if(flush)
+			for(j = i; j < WIDTH; j++)
+				fprintf(f, "   ");
+
+		fprintf(f, "| ");
+		for(i = 0; i < cnt; i++)
+			fprintf(f, "%c", isalnum(buf[i]) ? buf[i] : '.');
+
+		fprintf(f, "\n");
+		cnt = 0;
+	}
+
+	return 0;
+}
 
 /*
   Format of data: 8 hexadecimal numbers with spaces
@@ -82,11 +120,16 @@ int pkdecomp(const char *filename)
     long file_size;
     struct stat st;
     unsigned char *buffer;
-    int i, j, k, l;
+    int i;
+	unsigned int j;
     int num_bytes;
-	char str[17];
-	int mid, cid;
+	char str[256];
+	unsigned char mid, cid;
+	unsigned int length;
+	int idx;
+	int ret = 0;
     
+	// build filenames
     strcpy(src_name, filename);
     strcat(src_name, ".log");
     
@@ -96,6 +139,7 @@ int pkdecomp(const char *filename)
     stat(src_name, &st);
     file_size = st.st_size;
     
+	// allocate buffer
     buffer = (unsigned char*)calloc(file_size/2, 1);
     memset(buffer, 0xff, file_size/2);
     if(buffer == NULL)
@@ -104,6 +148,7 @@ int pkdecomp(const char *filename)
         exit(-1);
     }
     
+	// open files
     fi = fopen(src_name, "rt");
     fo = fopen(dst_name, "wt");
     
@@ -113,10 +158,15 @@ int pkdecomp(const char *filename)
         return -1;
     }
 
-    fprintf(fo, "TI packet decompiler, version 1.1\n");
-    
-    i = 0;
-    while(!feof(fi))
+    fprintf(fo, "TI packet decompiler, version 1.2\n");
+
+	// skip comments
+	fgets(str, sizeof(str), fi);
+	fgets(str, sizeof(str), fi);
+	fgets(str, sizeof(str), fi);
+
+	// read source file
+	for(i = 0; !feof(fi);)
     {
         for(j = 0; j < 16 && !feof(fi); j++)
 		{
@@ -131,46 +181,73 @@ int pkdecomp(const char *filename)
     num_bytes = i-1; // -1 due to EOF char
     fprintf(stdout, "%i bytes read.\n", num_bytes);
 
-    /*
-    for(i=0; i<num_bytes; i++)
-      fprintf(stdout, "%02X ", buffer[i]);
-    */
-    
+	// process data
+	for(i = 0; i < num_bytes;)
+    {
+restart:
+		mid = buffer[i+0];
+		cid = buffer[i+1];
+		length = buffer[i+2];
+        length |= buffer[i+3] << 8;
+
+		// check for valid packet
+		if(is_a_machine_id(mid) == -1)
+		{
+			ret = -1;
+			goto exit;
+		}
+
+		// check for valid packet
+		idx = is_a_command_id(cid);
+        if(idx == -1)
+		{
+			ret = -2;
+			goto exit;
+		}
+
+		fprintf(fo, "%02X %02X %02X %02X", mid, cid, length >> 8, length & 0xff);
+		for(j = 4; j <= WIDTH; j++)
+			fprintf(fo, "   ");
+		fprintf(fo, "  | ");
+		fprintf(fo, "%s: %s\n", machine_way[is_a_machine_id(mid)], command_name[is_a_command_id(cid)]);
+
+		i += 4;
+
+		// get data & checksum
+		if(cmd_with_data[idx])
+		{
+			// data
+			for(j = 0; j < length; j++, i++)
+			{
+				if(buffer[i] == 0x98 && (buffer[i+1] == 0x15 ||  buffer[i+1] == 0x56))
+				{
+					fprintf(stdout, "Warning: there is packets in data !\n");
+					fprintf(fo, "Beware : length of previous packet is wrong !\n");
+					goto restart;
+				}
+
+				fill_buf(fo, buffer[i], 0);
+			}
+
+			fill_buf(fo, 0, !0);
+			//fprintf(fo, "\n");
+
+			// write checksum
+			fprintf(fo, "    ");
+			fprintf(fo, "%02X ", buffer[i++]);
+			fprintf(fo, "%02X ", buffer[i++]);
+			fprintf(fo, "\n");
+		}
+	}
+
+#if 0
     for(i = 0; i < num_bytes;)
     {
-        int index;
-        unsigned int length;
-
-        if(is_a_machine_id(mid = buffer[i]) != -1)
-			fprintf(fo, "\n%02X ", buffer[i++]);
-        else
-		{
-		  fprintf(stderr, "Error 1!\n");
-		  fclose(fi);
-		  fclose(fo);
-		  return -1;
-		}      
-
-        index = is_a_command_id(cid = buffer[i]);
-        if(index != -1)
-			fprintf(fo, "%02X ", buffer[i++]);
-        else
-		{
-			fprintf(stderr, "Error 2: index=%i, data=%02X !\n", index, buffer[i-1]);
-			fclose(fi);
-			fclose(fo);
-			return -1;
-		}      
-
-        length = buffer[i];
-        length |= buffer[i+1] << 8;
-        fprintf(fo, "%02X ", buffer[i++]);
-        fprintf(fo, "%02X ", buffer[i++]);
 
 		for(l = 4; l <= WIDTH; l++)
 			fprintf(fo, "   ");
 		fprintf(fo, "  | ");
-		fprintf(fo, "%s", string_id[is_a_command_id(cid)]);
+		fprintf(fo, "%s: %s", machine_way[is_a_machine_id(mid)], command_name[is_a_command_id(cid)]);
 
         if(cmd_with_data[index])
 		{
@@ -199,11 +276,17 @@ int pkdecomp(const char *filename)
 			fprintf(fo, "%02X ", buffer[i++]);
 		}
     }
-    
+#endif
+
+exit:
+	if(ret < 0)
+		fprintf(stdout, "Error %i\n", -ret);
+
+	free(buffer);
 	fclose(fi);
 	fclose(fo);
     
-	return 0;
+	return ret;
 }
 
 int main(int argc, char **argv)
