@@ -39,20 +39,20 @@ static const char* machine_way[] =
 static const unsigned char command_id[] =
 {
 	0x06, 0x09, 0x15, 0x2d, 0x36, 0x47, 0x56, 0x5A, 0x68, 0x6D, 
-	0x74, 0x78, 0x87, 0x92, 0xA2, 0xB7, 0xC9, 
+	0x74, 0x78, 0x87, 0x88, 0x92, 0xA2, 0xB7, 0xC9, 
 	0xff
 };
 
 static const char command_name[][8] =
 {
 	"VAR", "CTS", "XDP", "FLH", "SKP", "SID", "ACK", "ERR", "RDY", "SCR", "RID",
-	"CNT", "KEY", "EOT", "REQ", "IND", "RTS", 
+	"CNT", "KEY", "FLD", "EOT", "REQ", "IND", "RTS", 
 	""
 };
 
 static const int cmd_with_data[] =
 {
-	!0, 0, !0, 0, !0, !0, 0, 0, 0, 0, 0, 0, 0, 0, !0, !0, !0, -1
+	!0, 0, !0, 0, !0, !0, 0, 0, 0, 0, 0, 0, 0, 0, !0, !0, !0, !0, -1
 };
 
 int is_a_machine_id(unsigned char id)
