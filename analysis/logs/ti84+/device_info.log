@@ -1,0 +1,113 @@
+AVR decoder, version 1.1, \2000
+Copyright (c) 1999-2001, Romain Lievin
+
+23 68 00 00 73 56 00 08 23 2D 00 00 73 56 00 00 | #h  sV  #-  sV  
+23 09 00 00 73 56 00 00 73 15 0B 00 02 16 01 00 | #   sV  s       
+00 03 09 01 00 00 00 26 00 23 56 00 00 23 A2 0B |        & #V  #  
+00 00 00 26 AA 00 00 00 00 00 00 00 D0 00 73 56 |    &          sV
+00 00 73 06 0B 00 0B 00 26 AA 00 00 00 00 00 00 |   s     &       
+00 DB 00 23 56 00 00 23 09 00 00 73 56 00 00 73 |    #V  #   sV  s
+15 0B 00 01 00 00 80 0A 32 CC E3 01 21 18 A6 02 |         2   !   
+23 56 00 00 23 68 00 00 73 56 00 08 23 2D 00 00 | #V  #h  sV  #-  
+73 56 00 00 23 09 00 00 73 56 00 00 73 15 0B 00 | sV  #   sV  s   
+02 16 01 00 00 03 09 01 00 00 00 26 00 23 56 00 |            & #V 
+00 23 A2 0B 00 00 00 19 00 00 00 00 00 00 00 00 |  #              
+19 00 73 56 00 00 73 15 02 00 BF 5E 1D 01 23 56 |   sV  s    ^  #V
+00 00 73 06 0D 00 09 00 00 41 00 00 00 00 00 00 |   s      A      
+00 00 00 4A 00 23 56 00 00 73 06 0D 00 09 00 00 |    J #V  s      
+42 00 00 00 00 00 00 00 00 00 4B 00 23 56 00 00 | B         K #V  
+73 06 0D 00 02 00 01 5D 00 00 00 00 00 00 00 00 | s      ]        
+00 60 00 23 56 00 00 73 06 0D 00 02 00 01 5D 01 |  ` #V  s      ] 
+00 00 00 00 00 00 00 00 61 00 23 56 00 00 73 06 |         a #V  s 
+0D 00 02 00 01 5D 02 00 00 00 00 00 00 00 00 62 |      ]         b
+00 23 56 00 00 73 06 0D 00 02 00 01 5D 03 00 00 |  #V  s      ]   
+00 00 00 00 00 00 63 00 23 56 00 00 73 06 0D 00 |       c #V  s   
+02 00 01 5D 04 00 00 00 00 00 00 00 00 64 00 23 |    ]         d #
+56 00 00 73 06 0D 00 02 00 01 5D 05 00 00 00 00 | V  s      ]     
+00 00 00 00 65 00 23 56 00 00 73 92 0D 00 23 56 |     e #V  s   #V
+00 00 23 A2 0B 00 00 00 27 00 00 00 00 00 00 00 |   #     '       
+00 27 00 73 56 00 00 73 06 00 00 23 56 00 00 23 |  ' sV  s   #V  #
+09 00 00 73 56 00 00 73 15 00 01 0A 15 0A 32 CC |    sV  s      2 
+E3 01 0A 2D 40 00 00 00 00 00 00 00 00 00 00 00 |    -@           
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 00 04 12 21 18 03 26 09 04 0B D4 31 |        !  &    1
+B0 02 0D 40 A4 F7 87 78 B9 DA 56 1A 21 97 57 2E |    @   x  V ! W.
+90 DE 87 7A 0B 6C 5F 63 2C 01 8A 32 17 9B 65 73 |    z l_c,  2  es
+AF B1 A1 1B 2F 0C 0B 67 B8 F7 84 22 44 04 BD 33 |     /  g   "D  3
+76 F8 06 2E 82 57 FF 63 A1 C9 27 8E F4 46 8E B1 | v  . W c  '  F  
+EA 96 C3 9A 80 0F 00 00 00 00 80 11 0A 80 21 02 |               ! 
+80 31 16 80 A1 03 80 81 12 80 7F 00 00 00 00 02 |  1             
+0D 40 45 7B C7 77 86 58 42 24 A3 75 A8 3D 08 C3 |  @E{ w XB$ u =  
+BD 02 48 49 07 0A AD EE 3D 19 4F 37 D1 4D 33 F2 |   HI    = O7 M3 
+DB 2D 7D 35 FB 40 77 7F 89 01 CA 8F 98 A2 48 6D |  -}5 @w      Hm
+45 76 07 8D 59 01 23 3D 18 BF DB 83 99 18 1A 73 | Ev  Y #=       s
+5F 3A FF FF FF FF FF FF FF FF FF BA 4B 23 56 00 | _:          K#V 
+00 23 09 00 00 73 56 00 00 73 15 00 01 FF FF FF |  #   sV  s      
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF 00 FF 23 |                #
+56 00 00 23 09 00 00 73 56 00 00 73 15 00 01 FF | V  #   sV  s    
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 00 |                 
+FF 23 56 00 00 23 09 00 00 73 56 00 00 73 15 00 |  #V  #   sV  s  
+01 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF 00 00 00 00 00 00 00 00 |                 
+00 00 00 00 FC FF FF FF FF FF FF FF FF FF FF FF |                 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
+FF 09 F3 23 56 00 00 23 09 00 00 73 56 00 00 73 |    #V  #   sV  s
+92 00 00 23 56 00 00 23 A2 0B 00 00 00 19 00 00 |    #V  #        
+00 00 00 00 00 00 19 00 73 56 00 00 73 15 02 00 |         sV  s   
+BF 5E 1D 01 23 56 00 00 73 06 0D 00 09 00 00 41 |  ^  #V  s      A
+00 00 00 00 00 00 00 00 00 4A 00 23 56 00 00 73 |          J #V  s
+06 0D 00 09 00 00 42 00 00 00 00 00 00 00 00 00 |       B         
+4B 00 23 56 00 00 73 06 0D 00 02 00 01 5D 00 00 | K #V  s      ]  
+00 00 00 00 00 00 00 60 00 23 56 00 00 73 06 0D |        ` #V  s  
+00 02 00 01 5D 01 00 00 00 00 00 00 00 00 61 00 |     ]         a 
+23 56 00 00 73 06 0D 00 02 00 01 5D 02 00 00 00 | #V  s      ]    
+00 00 00 00 00 62 00 23 56 00 00 73 06 0D 00 02 |      b #V  s    
+00 01 5D 03 00 00 00 00 00 00 00 00 63 00 23 56 |   ]         c #V
+00 00 73 06 0D 00 02 00 01 5D 04 00 00 00 00 00 |   s      ]      
+00 00 00 64 00 23 56 00 00 73 06 0D 00 02 00 01 |    d #V  s      
+5D 05 00 00 00 00 00 00 00 00 65 00 23 56 00 00 | ]         e #V  
+73 92 0D 00 23 56 00 00 
