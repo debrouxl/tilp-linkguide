@@ -201,53 +201,33 @@ data</i></td>
       <th bgcolor="#dddddd" width="85%">Description</th>
     </tr>
     <tr>
-      <td width="7%">0</td>
-      <td width="8%">4 bytes</td>
-      <td width="85%">Always 00h</td>
-    </tr>
-    <tr>
-      <td width="7%">4</td>
+      <td width="7%">0<br>
+      </td>
       <td width="8%">2&nbsp;bytes</td>
       <td width="85%">Always 00h</td>
     </tr>
     <tr>
-      <td width="7%">6<br>
+      <td width="7%">2<br>
       </td>
-      <td width="8%">2 bytes</td>
-      <td width="85%">Year&nbsp;</td>
-    </tr>
-    <tr>
-      <td valign="top">8<br>
-      </td>
-      <td valign="top">2 bytes<br>
-      </td>
-      <td valign="top">Month and Day (MM:DD)<br>
+      <td width="8%">4 bytes</td>
+      <td width="85%">Number of seconds elapsed since January the 1st,
+1997. A year = 365 days !<br>
       </td>
     </tr>
     <tr>
-      <td valign="top">10<br>
+      <td style="vertical-align: top;">8<br>
       </td>
-      <td valign="top">3 bytes<br>
+      <td style="vertical-align: top;">1 byte<br>
       </td>
-      <td valign="top">Hour, Minutes and Seconds (hh:mm:ss) encoded as
-an 24h-format<br>
-      </td>
+      <td style="vertical-align: top;">Date Display Formatting (1:
+MM/DD/YY, 2: DD/MM/YY, 3: YY/MM/DD</td>
     </tr>
     <tr>
-      <td height="47" valign="top">13<br>
-      </td>
-      <td height="47" valign="top">1 byte<br>
-      </td>
-      <td height="47" valign="top">Date Display Formatting (1:
-MM/DD/YY, 2: DD/MM/YY, 3: MM.DD.YY, 4: DD.MM.YY, 5: YY.MM.DD, 6:
-MM-DD-YY, 7: DD-MM-YY, 8: YY-MM-DD)</td>
-    </tr>
-    <tr>
-      <td valign="top">14<br>
+      <td valign="top">9<br>
       </td>
       <td valign="top">1 byte<br>
       </td>
-      <td valign="top"> Time Display Formatting (12: AM/PM, 24: 24
+      <td valign="top"> Time Display Formatting (12/28: AM/PM, 24: 24
 hours)<br>
       </td>
     </tr>
@@ -325,7 +305,7 @@ below)</td>
       <p align="center"><img src="graphics/right.gif" alt="===&gt;"
  align="bottom" border="0" height="13" width="22"> </p>
       </td>
-      <td width="80%">DATA</td>
+      <td width="80%">XDP</td>
     </tr>
     <tr>
       <td width="7%">
@@ -380,7 +360,7 @@ pseudo-variable</i></td>
     </tr>
     <tr>
       <td bgcolor="#ccffcc">&nbsp;</td>
-      <td bgcolor="#ccffcc" width="50%"><tt><b>23 15 10 00 </b>00 07
+      <td bgcolor="#ccffcc" width="50%"><tt><b>23 15 09 00 </b>00 07
 0F FE 74 1F 01 0C FF <b>B3 02</b></tt></td>
       <td bgcolor="#ccffcc" width="50%"><i>Variable data</i></td>
     </tr>
