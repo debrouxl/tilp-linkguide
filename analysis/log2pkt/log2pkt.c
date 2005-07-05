@@ -45,8 +45,8 @@ static const unsigned char command_id[] =
 
 static const char command_name[][8] =
 {
-	"VAR", "CTS", "XDP", "FLH", "SKP", "SID", "ACK", "ERR", "RDY", "SCR", "RID",
-	"CNT", "KEY", "FLD", "EOT", "REQ", "IND", "RTS", 
+	"VAR", "CTS", "XDP", "VER", "SKP", "SID", "ACK", "ERR", "RDY", "SCR", "RID",
+	"CNT", "KEY", "DEL", "EOT", "REQ", "IND", "RTS", 
 	""
 };
 
