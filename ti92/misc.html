@@ -21,12 +21,8 @@ status and memory size.<br>
 <p></p>
 <h4><a name="rts"></a>Creating a folder</h4>
 <p>In fact, Ti-Connect use an ersatz for this: it sends an empy var
-with full path and next delete variable into by using remote control.<br>
-Key sequence: 010B (undocumented), 0108 (ESC), 0108 (ESC), 0108 (ESC),
-0108 (ESC), 1108 (QUIT), 1108 (QUIT), 2051 (HOME), 0107 (CLEAR),
-0107 (CLEAR), 0107 (CLEAR), 0064 (d), 0065 (e), 006C (l), 0076 (v),
-0061 (a), 0072 (r),
-0020 (SPC) and next varname with full path.<br>
+with full path and next delete variable into by using remote control
+(see next pragraph).<br>
 </p>
 <p>The protocol for silently creating a folder is shown below:
 <table nosave="" bgcolor="#ffffff" border="1" cellspacing="0"
@@ -251,8 +247,10 @@ Key sequence: 010B (undocumented), 0108 (ESC), 0108 (ESC), 0108 (ESC),
 <h4><a name="rts"></a>Deleting a variable</h4>
 <p>In fact, Ti-Connect use an ersatz for this: it sends command and
 write remotely 'DelVar 'varname'.<br>
-Key sequence: 010B, 0108, 0108, 0108, 0108, 1108, 1108, 2051, 0107,
-0107, 0107, 0064 (d), 0065 (e), 006C (l), 0076 (v), 0061 (a), 0072 (r),
+Key sequence: 010B (ON), 0108 (ESC), 0108 (ESC), 0108 (ESC), 0108
+(ESC), 1108 (QUIT), 1108 (QUIT), 2051 (HOME), 0107 (CLEAR),
+0107 (CLEAR), 0107 (CLEAR), 0064 (d), 0065 (e), 006C (l), 0076 (v),
+0061 (a), 0072 (r),
 0020 (SPC) and next varname with full path.<br>
 </p>
 The protocol for silently deleteing a variable is shown below:
