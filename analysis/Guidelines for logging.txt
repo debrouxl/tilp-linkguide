@@ -10,10 +10,12 @@ Some offsets used by my DSK tools for storing data:
 - ChemBio: 23000
 - TI83PlusOS114.8XU: 260000
 
-2°) My second method (w/ TI-GraphLink software) : AVR Analyzer + RS232_log
+2°) My second method (w/ TI-GraphLink software) : GrayLink + AVR Analyzer + RS232_log
 
 The AVR analyzer is a µC which realize a D-BUS/RS232 bridge at 57600 bauds.
 The RS232_log provides an hexdump log which can be processed with log2pkt.exe.
+
+Note: BlackLink seems to be too fast for analyzer. Long packets have lost bytes.
 
 3°) My third method (with Ti-Connect software) : UsbSnoopy
 

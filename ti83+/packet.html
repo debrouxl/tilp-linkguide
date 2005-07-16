@@ -75,11 +75,12 @@ packet. It can have one of the following values:
     </tr>
     <tr>
       <td width="13%">23h</td>
-      <td>Computer sending TI-83+ data</td>
+      <td>Computer sending TI-83+/TI-84+ data</td>
     </tr>
     <tr>
       <td width="13%">73h</td>
-      <td>TI-83+</td>
+      <td>TI-83+ or TI-84+<br>
+      </td>
     </tr>
     <tr>
       <td width="13%">82h</td>
@@ -479,7 +480,7 @@ below)</td>
       <td bgcolor="#ffffff" width="7%">5</td>
       <td bgcolor="#ffffff" width="8%">1 byte</td>
       <td bgcolor="#ffffff" width="85%">Flag - Always has a value of 0h
-but bit 7 is set if archived.</td>
+but bit 7 is set if archived (*).</td>
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="7%">6</td>
@@ -493,7 +494,10 @@ but bit 7 is set if archived.</td>
     </tr>
   </tbody>
 </table>
-<br>
+When sending FLASH OS:<br>
+- first and last page have flag set;<br>
+- others have flag clear.<br>
+When sending FLASH app: flag is always set.<br>
 <p></p>
 <p>
 <table border="0" cellspacing="0" width="100%">
