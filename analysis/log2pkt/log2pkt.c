@@ -38,21 +38,25 @@ static const char* machine_way[] =
 
 static const unsigned char command_id[] =
 {
-	0x06, 0x09, 0x15, 0x2d, 0x36, 0x47, 0x56, 0x5A, 0x68, 0x6D, 
-	0x74, 0x78, 0x87, 0x88, 0x92, 0xA2, 0xB7, 0xC9, 
+	0x06, 0x09, 0x15, 0x2d, 0x36, 0x47, 0x56, 0x5A, 
+	0x68, 0x6D, 0x74, 0x78, 0x87, 0x88, 0x92, 0xA2, 
+	0xB7, 0xC9, 
 	0xff
 };
 
 static const char command_name[][8] =
 {
-	"VAR", "CTS", "XDP", "VER", "SKP", "SID", "ACK", "ERR", "RDY", "SCR", "RID",
-	"CNT", "KEY", "DEL", "EOT", "REQ", "IND", "RTS", 
+	"VAR", "CTS", "XDP", "VER", "SKP", "SID", "ACK", "ERR", 
+	"RDY", "SCR", "RID", "CNT", "KEY", "DEL", "EOT", "REQ", 
+	"IND", "RTS", 
 	""
 };
 
 static const int cmd_with_data[] =
 {
-	!0, 0, !0, 0, !0, !0, 0, 0, 0, 0, 0, 0, 0, 0, !0, !0, !0, !0, -1
+	!0, 0, !0, 0, !0, !0, 0, !0, 
+	0, 0, 0, 0, 0, 0, 0, !0,
+	!0, !0, -1
 };
 
 int is_a_machine_id(unsigned char id)
@@ -112,7 +116,7 @@ int fill_buf(FILE *f, char data, int flush)
 /*
   Format of data: 8 hexadecimal numbers with spaces
 */
-int pkdecomp(const char *filename)
+int pkdecomp(const char *filename, int resync)
 {
     char src_name[1024];
     char dst_name[1024];
@@ -219,7 +223,7 @@ restart:
 			// data
 			for(j = 0; j < length; j++, i++)
 			{
-				if(buffer[i] == 0x98 && (buffer[i+1] == 0x15 ||  buffer[i+1] == 0x56))
+				if(resync && buffer[i] == 0x98 && (buffer[i+1] == 0x15 ||  buffer[i+1] == 0x56))
 				{
 					fprintf(stdout, "Warning: there is packets in data !\n");
 					fprintf(fo, "Beware : length of previous packet is wrong !\n");
@@ -240,44 +244,6 @@ restart:
 		}
 	}
 
-#if 0
-    for(i = 0; i < num_bytes;)
-    {
-
-		for(l = 4; l <= WIDTH; l++)
-			fprintf(fo, "   ");
-		fprintf(fo, "  | ");
-		fprintf(fo, "%s: %s", machine_way[is_a_machine_id(mid)], command_name[is_a_command_id(cid)]);
-
-        if(cmd_with_data[index])
-		{
-			fprintf(fo, "\n");
-			for(j = 0; j < length; /*j++*/ )
-			{
-				fprintf(fo, "\t");
-				for(k = 0; k < WIDTH && j < length; k++, j++)
-				{
-					if(buffer[i] >= 0x20 && buffer[i] <= 0x7f)
-						str[k] = buffer[i] ;
-					else
-						str[k] = '.';
-					fprintf(fo, "%02X ", buffer[i++]);
-				}
-				str[k] = '\0';
-
-				for(l = k; l < WIDTH; l++)
-					fprintf(fo, "   ");
-
-				fprintf(fo, " | %s", str);
-				fprintf(fo, "\n");
-			}
-
-			fprintf(fo, "\t%02X ", buffer[i++]);
-			fprintf(fo, "%02X ", buffer[i++]);
-		}
-    }
-#endif
-
 exit:
 	if(ret < 0)
 		fprintf(stdout, "Error %i\n", -ret);
@@ -291,11 +257,17 @@ exit:
 
 int main(int argc, char **argv)
 {
+	int resync = 0;
+
+
 	if(argc < 2)
     {
 		fprintf(stderr, "Usage: log2pkt [file]\n");
 		exit(0);
     }
+
+	if(argc > 2)
+		resync = !0;
   
-	return pkdecomp(argv[1]);
+	return pkdecomp(argv[1], resync);
 }
