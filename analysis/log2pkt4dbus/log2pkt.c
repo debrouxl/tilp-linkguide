@@ -162,7 +162,7 @@ int pkdecomp(const char *filename, int resync)
         return -1;
     }
 
-    fprintf(fo, "TI packet decompiler, version 1.2\n");
+    fprintf(fo, "TI packet decompiler for D-BUS, version 1.2\n");
 
 	// skip comments
 	fgets(str, sizeof(str), fi);
@@ -218,7 +218,7 @@ restart:
 		i += 4;
 
 		// get data & checksum
-		if(cmd_with_data[idx])
+		if(cmd_with_data[idx] && length > 0)
 		{
 			// data
 			for(j = 0; j < length; j++, i++)

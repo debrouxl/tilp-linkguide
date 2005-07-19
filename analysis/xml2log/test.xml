@@ -9,7 +9,7 @@
         
 <function>GET_DESCRIPTOR_FROM_DEVICE</function>
         
-<timestamp>1322</timestamp>
+<timestamp>28400</timestamp>
         
 <endpoint>-1</endpoint>
     
@@ -19,37 +19,7 @@
         
 <function>CONTROL_TRANSFER</function>
         
-<timestamp>1322</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>18</payloadcount>
-            
-<payloadbytes>1201100100000008510401e0030101020001</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="2">
-        
-<function>GET_DESCRIPTOR_FROM_DEVICE</function>
-        
-<timestamp>1322</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="2">
-        
-<function>CONTROL_TRANSFER</function>
-        
-<timestamp>1322</timestamp>
+<timestamp>28400</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -59,17 +29,47 @@
             
 <payloadcount>9</payloadcount>
             
-<payloadbytes>09022000010100a032</payloadbytes>
+<payloadbytes>09022300010100e000</payloadbytes>
         
 </payload>
     
 </urb>
     
-<urb sequence="3">
+<urb sequence="2">
         
 <function>GET_DESCRIPTOR_FROM_DEVICE</function>
         
-<timestamp>1322</timestamp>
+<timestamp>28400</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="2">
+        
+<function>CONTROL_TRANSFER</function>
+        
+<timestamp>28410</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>35</payloadcount>
+            
+<payloadbytes>09022300010100e0000904000002ff0100000705810240000007050202400000030903</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="3">
+        
+<function>SELECT_CONFIGURATION</function>
+        
+<timestamp>28410</timestamp>
         
 <endpoint>-1</endpoint>
     
@@ -77,9 +77,69 @@
     
 <urb sequence="3">
         
+<function>SELECT_CONFIGURATION</function>
+        
+<timestamp>28461</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="4">
+        
+<function>RESET_PIPE</function>
+        
+<timestamp>28461</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="4">
+        
+<function>RESET_PIPE</function>
+        
+<timestamp>28461</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="5">
+        
+<function>RESET_PIPE</function>
+        
+<timestamp>28461</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="5">
+        
+<function>RESET_PIPE</function>
+        
+<timestamp>28461</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="6">
+        
+<function>GET_DESCRIPTOR_FROM_DEVICE</function>
+        
+<timestamp>29462</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="6">
+        
 <function>CONTROL_TRANSFER</function>
         
-<timestamp>1322</timestamp>
+<timestamp>29462</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -87,89 +147,9 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>18</payloadcount>
             
-<payloadbytes>09022000010100a0320904000002ff0000000705810220000007050202200000</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="4">
-        
-<function>SELECT_CONFIGURATION</function>
-        
-<timestamp>1322</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="4">
-        
-<function>SELECT_CONFIGURATION</function>
-        
-<timestamp>1362</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="5">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>36112</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="5">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>36112</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="6">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>36112</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="6">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>36112</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="7">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>36112</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>08</payloadbytes>
+<payloadbytes>1201000200000040510408e0000101020001</payloadbytes>
         
 </payload>
     
@@ -177,49 +157,49 @@
     
 <urb sequence="7">
         
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
+<function>RESET_PIPE</function>
         
-<timestamp>36112</timestamp>
+<timestamp>29462</timestamp>
         
 <endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="7">
         
-<packetcount>1</packetcount>
+<function>RESET_PIPE</function>
         
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
+<timestamp>29472</timestamp>
         
-</payload>
+<endpoint>-1</endpoint>
     
 </urb>
     
 <urb sequence="8">
         
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
+<function>RESET_PIPE</function>
         
-<timestamp>36112</timestamp>
+<timestamp>29472</timestamp>
         
 <endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>68</payloadbytes>
-        
-</payload>
     
 </urb>
     
 <urb sequence="8">
         
+<function>RESET_PIPE</function>
+        
+<timestamp>29472</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="9">
+        
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>36112</timestamp>
+<timestamp>35911</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -227,9 +207,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>000000040100000400</payloadbytes>
         
 </payload>
     
@@ -239,7 +219,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>36112</timestamp>
+<timestamp>35911</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -247,27 +227,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>00</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="9">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>36112</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -279,7 +239,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>36112</timestamp>
+<timestamp>35971</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -287,9 +247,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -299,7 +259,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>36122</timestamp>
+<timestamp>35971</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -307,9 +267,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000402000000fa</payloadbytes>
         
 </payload>
     
@@ -319,7 +279,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>36122</timestamp>
+<timestamp>36272</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -327,9 +287,9 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>21</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>00000010040000000a0001000300010000000007d0</payloadbytes>
         
 </payload>
     
@@ -339,7 +299,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>36122</timestamp>
+<timestamp>36272</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -347,9 +307,9 @@
         
 <payload packet="0">
             
-<payloadcount>4</payloadcount>
+<payloadcount>21</payloadcount>
             
-<payloadbytes>98560c10</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -357,49 +317,9 @@
     
 <urb sequence="12">
         
-<function>RESET_PIPE</function>
-        
-<timestamp>40498</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="12">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>40498</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="13">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>40498</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="13">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>40498</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="14">
-        
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>36332</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -407,9 +327,69 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>08</payloadbytes>
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="12">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>36332</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="13">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>36632</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="13">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>36632</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>15</payloadcount>
+            
+<payloadbytes>0000000a04000000040012000007d0</payloadbytes>
         
 </payload>
     
@@ -419,7 +399,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>36933</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -427,7 +407,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="14">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>36933</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -439,7 +439,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>36993</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -447,9 +447,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>43</payloadcount>
             
-<payloadbytes>68</payloadbytes>
+<payloadbytes>000000260400000020000c000649444c6973740001ffffffff000200030008000100110004f00700260000</payloadbytes>
         
 </payload>
     
@@ -459,7 +459,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>36993</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -467,7 +467,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>43</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -479,7 +479,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>37053</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -487,9 +487,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -499,7 +499,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>37053</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -507,7 +507,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="17">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>37353</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -519,7 +539,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>37353</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -527,29 +547,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>37</payloadcount>
             
-<payloadbytes>00</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="17">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>40498</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
+<payloadbytes>00000020040000001a000a000649444c697374000002000300000101000800000400000000</payloadbytes>
         
 </payload>
     
@@ -559,7 +559,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>37654</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -567,9 +567,9 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -579,7 +579,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>40498</timestamp>
+<timestamp>37654</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -587,9 +587,9 @@
         
 <payload packet="0">
             
-<payloadcount>4</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>98560c10</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -597,49 +597,9 @@
     
 <urb sequence="19">
         
-<function>RESET_PIPE</function>
-        
-<timestamp>41069</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="19">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>41069</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="20">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>41069</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="20">
-        
-<function>RESET_PIPE</function>
-        
-<timestamp>41079</timestamp>
-        
-<endpoint>-1</endpoint>
-    
-</urb>
-    
-<urb sequence="21">
-        
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>37714</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -647,9 +607,69 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>08</payloadbytes>
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="19">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>37714</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>22</payloadcount>
+            
+<payloadbytes>00000011040000000b000d010000800a32cce3012118</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="20">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>38004</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="20">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>38004</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -659,7 +679,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>38365</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -667,7 +687,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
+            
+<payloadbytes>000000040100000400</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="21">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>38365</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>9</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -679,7 +719,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>38425</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -687,9 +727,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>a2</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -699,7 +739,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>38425</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -707,9 +747,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000402000000fa</payloadbytes>
         
 </payload>
     
@@ -719,7 +759,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>38725</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -727,9 +767,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>21</payloadcount>
             
-<payloadbytes>06</payloadbytes>
+<payloadbytes>00000010040000000a0001000300010000000007d0</payloadbytes>
         
 </payload>
     
@@ -739,7 +779,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>38725</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -747,7 +787,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>21</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -759,7 +799,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>38785</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -767,9 +807,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -779,7 +819,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>38785</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -787,7 +827,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="25">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>39086</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -799,7 +859,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>39086</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -807,29 +867,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>15</payloadcount>
             
-<payloadbytes>00</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="25">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41079</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000a04000000040012000007d0</payloadbytes>
         
 </payload>
     
@@ -839,7 +879,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>39386</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -847,9 +887,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -859,7 +899,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>39386</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -867,7 +907,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -879,7 +919,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>39446</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -887,9 +927,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>41</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>00000024040000001e0007000e000b00040006000700010002000a0037000d00380009000e002d0003</payloadbytes>
         
 </payload>
     
@@ -899,7 +939,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>39446</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -907,7 +947,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>41</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -919,7 +959,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>39506</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -927,9 +967,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>1f</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -939,7 +979,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>39506</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -947,7 +987,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="29">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>39807</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -959,7 +1019,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>39807</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -967,29 +1027,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>15</payloadcount>
             
-<payloadbytes>1a</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="29">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41079</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000a0400000004bb000001d4c0</payloadbytes>
         
 </payload>
     
@@ -999,7 +1039,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41079</timestamp>
+<timestamp>40097</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1007,9 +1047,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1019,7 +1059,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41089</timestamp>
+<timestamp>40097</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1027,7 +1067,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1039,7 +1079,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41089</timestamp>
+<timestamp>40157</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1047,9 +1087,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>39</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -1059,7 +1099,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41089</timestamp>
+<timestamp>40157</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1067,9 +1107,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>149</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>00000090040000008a0008000e000b000004000216000004000002000300060000010900070000010100010000040000000a000200001954492d383420506c75732053696c7665722045646974696f6e000a00000101003700000101000d0000080000000000005efd003800000100000900000400010000000e0000080000000000005ed6002d0000010100030000050a32cce301</payloadbytes>
         
 </payload>
     
@@ -1079,7 +1119,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41089</timestamp>
+<timestamp>42190</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1087,9 +1127,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1099,7 +1139,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41089</timestamp>
+<timestamp>42190</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1107,7 +1147,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1119,7 +1159,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41089</timestamp>
+<timestamp>42551</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1127,9 +1167,9 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>9</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>000000040100000400</payloadbytes>
         
 </payload>
     
@@ -1139,7 +1179,67 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41109</timestamp>
+<timestamp>42551</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>9</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="34">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>42611</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="34">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>42611</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>9</payloadcount>
+            
+<payloadbytes>0000000402000000fa</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="35">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>42901</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1149,47 +1249,7 @@
             
 <payloadcount>21</payloadcount>
             
-<payloadbytes>9856000098060b000e00000e1a046d61696e03e201</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="34">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41109</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>08</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="34">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41109</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
+<payloadbytes>00000010040000000a0001000300010000000007d0</payloadbytes>
         
 </payload>
     
@@ -1199,7 +1259,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41109</timestamp>
+<timestamp>42901</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1207,27 +1267,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>56</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="35">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41119</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
+<payloadcount>21</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1239,7 +1279,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>42961</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1247,9 +1287,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -1259,7 +1299,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>42961</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1267,7 +1307,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="37">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>43262</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1279,7 +1339,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>43262</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1287,29 +1347,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>15</payloadcount>
             
-<payloadbytes>00</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="37">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41119</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000a04000000040012000007d0</payloadbytes>
         
 </payload>
     
@@ -1319,7 +1359,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>43422</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1327,9 +1367,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>08</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1339,7 +1379,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>43422</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1347,7 +1387,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1359,7 +1399,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>43482</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1367,9 +1407,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>15</payloadcount>
             
-<payloadbytes>09</payloadbytes>
+<payloadbytes>0000000a0400000004000700010031</payloadbytes>
         
 </payload>
     
@@ -1379,7 +1419,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>43482</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1387,7 +1427,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>15</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1399,7 +1439,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>43542</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1407,9 +1447,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -1419,7 +1459,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>43542</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1427,7 +1467,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="41">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>43893</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1439,7 +1499,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>43893</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1447,29 +1507,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>15</payloadcount>
             
-<payloadbytes>00</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="41">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41119</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000a0400000004bb000001d4c0</payloadbytes>
         
 </payload>
     
@@ -1479,7 +1519,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41119</timestamp>
+<timestamp>44183</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1487,9 +1527,9 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1499,7 +1539,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>44183</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1507,47 +1547,7 @@
         
 <payload packet="0">
             
-<payloadcount>28</payloadcount>
-            
-<payloadbytes>9856000098151200000000006d61696e000000001f0000000003c701</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="43">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41129</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>08</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="43">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41129</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1555,11 +1555,11 @@
     
 </urb>
     
-<urb sequence="44">
+<urb sequence="43">
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>44203</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1567,9 +1567,29 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>56</payloadbytes>
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="43">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>52625</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>255</payloadcount>
+            
+<payloadbytes>000000fa030000054f0008000100310005480a150a32cce3010a2d400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004122118032609040bd431b0020d40a4f78778b9da561a2197572e90de877a0b6c5f632c018a32179b6573afb1a11b2f0c0b67b8f784224404bd3376f8062e8257ff63a1c9278ef4468eb1ea96c39a800f0000000080110a80210280311680a103808112807f00000000800f0000502e801201048021018031018046436f6e696373808102809080a1010326090407f7815d020d40c21e65ba403258f2ead79351a5c0</payloadbytes>
         
 </payload>
     
@@ -1579,7 +1599,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53006</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1587,7 +1607,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="44">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>53006</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1599,7 +1639,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53016</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1607,9 +1647,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -1619,7 +1659,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53026</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1627,9 +1667,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>255</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>000000fa037c8dd3ec6b36c70321ef9360c7e3de43d01c2c3c29ed0cd354291e5ed13c98309c023525351010bc39c3e35c7fd0fceda526807f00000000800f00006c2480120104802101803101804843424c4578706d748081028090032609040539d385020d402b8080bff0a4962e7b40ebcf739da79eed50e16026bbf90fa4202c65f30c4cbc85beb99aaf7354bbbd67f6f99e4abd5b2f3a75c250cd7ac70730b5aa40f01e90807f00000000800f000056408012010480210180310180484368656d42696f2080908081020326090406ce9a6f020d40cc24d1f8317f8d61fa3de0c2ebfd05d6b4a4d1311b50fe8152bb58574881dad4bfa71e9b3fc97026</payloadbytes>
         
 </payload>
     
@@ -1639,7 +1679,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53106</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1647,9 +1687,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1659,7 +1699,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53106</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1667,7 +1707,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1679,7 +1719,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53126</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1687,7 +1727,7 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>256</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1699,7 +1739,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53126</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1707,9 +1747,9 @@
         
 <payload packet="0">
             
-<payloadcount>4</payloadcount>
+<payloadcount>255</payloadcount>
             
-<payloadbytes>98920000</payloadbytes>
+<payloadbytes>000000fa039d2b38d26e22fd94703fc50efa1c5463452345932793fa5e807f00000000020d408ef75d237b6c2b829779bd83184d76fcb3e484f2bf6a6f07069f82b418a87966966c862b148e2aaf84211d63af805e5907d0f454f487225c67611baebd2a7c0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</payloadbytes>
         
 </payload>
     
@@ -1719,7 +1759,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53226</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1727,9 +1767,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>08</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1739,7 +1779,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53226</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1747,7 +1787,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1759,7 +1799,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53246</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1767,9 +1807,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>56</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -1779,7 +1819,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53246</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1787,9 +1827,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>255</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>000000fa03ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8000ffff8000ffff8000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</payloadbytes>
         
 </payload>
     
@@ -1799,7 +1839,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53346</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1807,9 +1847,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1819,7 +1859,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53346</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1827,7 +1867,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1839,7 +1879,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53366</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1847,9 +1887,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -1859,7 +1899,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53366</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1867,9 +1907,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>255</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>000000fa03ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000fcffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</payloadbytes>
         
 </payload>
     
@@ -1879,7 +1919,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41129</timestamp>
+<timestamp>53467</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1887,9 +1927,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>08</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1899,7 +1939,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41139</timestamp>
+<timestamp>53467</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1907,7 +1947,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1919,7 +1959,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
+<timestamp>53487</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1927,9 +1967,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>a2</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -1939,7 +1979,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
+<timestamp>53487</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1947,9 +1987,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>120</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000007304ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000fcffffffffffffffffffffffffffffffffffffff</payloadbytes>
         
 </payload>
     
@@ -1959,7 +1999,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
+<timestamp>53587</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1967,9 +2007,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>0a</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -1979,7 +2019,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
+<timestamp>53587</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -1987,7 +2027,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -1999,7 +2039,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
+<timestamp>53867</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2007,9 +2047,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>000000040100000400</payloadbytes>
         
 </payload>
     
@@ -2019,7 +2059,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
+<timestamp>53867</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2027,7 +2067,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -2039,7 +2079,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
+<timestamp>53887</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2047,9 +2087,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -2059,7 +2099,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
+<timestamp>53887</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2067,9 +2107,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000402000000fa</payloadbytes>
         
 </payload>
     
@@ -2079,467 +2119,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>00</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="57">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="58">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>00</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="58">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="59">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>1b</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="59">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="60">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>1a</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="60">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="61">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>04</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="61">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="62">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>6d</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="62">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="63">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41159</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>61</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="63">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="64">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>69</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="64">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="65">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>6e</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="65">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="66">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>de</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="66">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="67">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>01</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="67">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="68">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41169</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>32</payloadcount>
-            
-<payloadbytes></payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="68">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41199</timestamp>
+<timestamp>53987</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2549,17 +2129,17 @@
             
 <payloadcount>21</payloadcount>
             
-<payloadbytes>9856000098060b006200000e1a046d61696e033602</payloadbytes>
+<payloadbytes>00000010040000000a0001000300010000000007d0</payloadbytes>
         
 </payload>
     
 </urb>
     
-<urb sequence="69">
+<urb sequence="57">
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>53987</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2567,27 +2147,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>08</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="69">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41199</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
+<payloadcount>21</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -2595,11 +2155,11 @@
     
 </urb>
     
-<urb sequence="70">
+<urb sequence="58">
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>54007</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2607,9 +2167,469 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>56</payloadbytes>
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="58">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54007</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="59">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54107</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="59">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54107</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>15</payloadcount>
+            
+<payloadbytes>0000000a04000000040012000007d0</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="60">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54208</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="60">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54208</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="61">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54228</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>34</payloadcount>
+            
+<payloadbytes>0000001d040000001700090000000600020003000500010041004200010001000101</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="61">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54228</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>34</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="62">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54248</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="62">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54248</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="63">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54348</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="63">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54348</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>50</payloadcount>
+            
+<payloadbytes>0000002d0400000027000a0001410000060002000004f0070000000300000101000501000100000400000009004101004201</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="64">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54448</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="64">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54448</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="65">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54468</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="65">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54468</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>50</payloadcount>
+            
+<payloadbytes>0000002d0400000027000a0001420000060002000004f0070000000300000101000501000100000400000009004101004201</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="66">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54568</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="66">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54568</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="67">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54588</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="67">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54588</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>53</payloadcount>
+            
+<payloadbytes>00000030040000002a000a00044ce282810000060002000004f0070001000300000100000501000100000400000002004101004201</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="68">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54688</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="68">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54688</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="69">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54708</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="69">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54708</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>53</payloadcount>
+            
+<payloadbytes>00000030040000002a000a00044ce282820000060002000004f0070001000300000100000501000100000400000002004101004201</payloadbytes>
         
 </payload>
     
@@ -2619,7 +2639,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>54838</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2627,7 +2647,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="70">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>54838</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -2639,7 +2679,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>54859</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2647,9 +2687,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -2659,7 +2699,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>54859</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2667,9 +2707,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>53</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>00000030040000002a000a00044ce282830000060002000004f0070001000300000100000501000100000400000002004101004201</payloadbytes>
         
 </payload>
     
@@ -2679,7 +2719,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>54949</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2687,9 +2727,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -2699,7 +2739,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>54949</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2707,7 +2747,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -2719,7 +2759,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>54969</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2727,9 +2767,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>08</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -2739,7 +2779,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>54969</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2747,9 +2787,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>53</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>00000030040000002a000a00044ce282840000060002000004f0070001000300000100000501000100000400000002004101004201</payloadbytes>
         
 </payload>
     
@@ -2759,7 +2799,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>55069</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2767,9 +2807,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>09</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -2779,7 +2819,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>55069</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2787,7 +2827,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -2799,7 +2839,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41199</timestamp>
+<timestamp>55089</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2807,9 +2847,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -2819,7 +2859,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41209</timestamp>
+<timestamp>55089</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2827,9 +2867,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>53</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>00000030040000002a000a00044ce282850000060002000004f0070001000300000100000501000100000400000002004101004201</payloadbytes>
         
 </payload>
     
@@ -2839,7 +2879,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41209</timestamp>
+<timestamp>55189</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2847,9 +2887,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -2859,7 +2899,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41209</timestamp>
+<timestamp>55189</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2867,7 +2907,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -2879,7 +2919,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41209</timestamp>
+<timestamp>55209</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2887,7 +2927,7 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>256</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -2899,7 +2939,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41209</timestamp>
+<timestamp>55209</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2907,9 +2947,9 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>53</payloadcount>
             
-<payloadbytes>9856000098156600000000006d61696e000000001f0000000003780000000000</payloadbytes>
+<payloadbytes>00000030040000002a000a00044ce282860000060002000004f0070001000300000100000501000100000400000002004101004201</payloadbytes>
         
 </payload>
     
@@ -2919,7 +2959,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41209</timestamp>
+<timestamp>55309</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2927,9 +2967,9 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -2939,7 +2979,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41219</timestamp>
+<timestamp>55309</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2947,27 +2987,7 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
-            
-<payloadbytes>0000000005000003790000000000000000010500000079790000000000000000</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="79">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41239</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>32</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -2979,7 +2999,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41239</timestamp>
+<timestamp>55329</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -2987,9 +3007,29 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>050000037a000000000000000003050000005449464e414e4345240085a80000</payloadbytes>
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="79">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>55339</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>57</payloadcount>
+            
+<payloadbytes>00000034040000002e000a000843424c4578706d740000060002000004f0070024000300000101000501000100000400006c6f004101004201</payloadbytes>
         
 </payload>
     
@@ -2999,7 +3039,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41239</timestamp>
+<timestamp>55409</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3007,9 +3047,9 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -3019,7 +3059,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41239</timestamp>
+<timestamp>55409</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3027,47 +3067,7 @@
         
 <payload packet="0">
             
-<payloadcount>16</payloadcount>
-            
-<payloadbytes>55535052455300002400198200007c0a</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="81">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41239</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
-            
-<payloadbytes>08</payloadbytes>
-        
-</payload>
-    
-</urb>
-    
-<urb sequence="81">
-        
-<function>BULK_OR_INTERRUPT_TRANSFER</function>
-        
-<timestamp>41239</timestamp>
-        
-<endpoint>-1</endpoint>
-        
-<packetcount>1</packetcount>
-        
-<payload packet="0">
-            
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -3075,11 +3075,11 @@
     
 </urb>
     
-<urb sequence="82">
+<urb sequence="81">
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41239</timestamp>
+<timestamp>55429</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3087,9 +3087,29 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>56</payloadbytes>
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="81">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>55439</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>57</payloadcount>
+            
+<payloadbytes>00000034040000002e000a00084368656d42696f200000060002000004f007002400030000010100050100010000040000568b004101004201</payloadbytes>
         
 </payload>
     
@@ -3099,7 +3119,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41239</timestamp>
+<timestamp>55509</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3107,7 +3127,27 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="82">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>55509</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -3119,7 +3159,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41239</timestamp>
+<timestamp>55529</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3127,9 +3167,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -3139,7 +3179,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41239</timestamp>
+<timestamp>55539</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3147,9 +3187,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>55</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>00000032040000002c000a0006436f6e6963730000060002000004f0070024000300000101000501000100000400005079004101004201</payloadbytes>
         
 </payload>
     
@@ -3159,7 +3199,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41239</timestamp>
+<timestamp>55610</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3167,9 +3207,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -3179,7 +3219,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41249</timestamp>
+<timestamp>55610</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3187,7 +3227,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -3199,7 +3239,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41249</timestamp>
+<timestamp>55630</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3207,7 +3247,7 @@
         
 <payload packet="0">
             
-<payloadcount>32</payloadcount>
+<payloadcount>256</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -3219,7 +3259,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41249</timestamp>
+<timestamp>55630</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3227,9 +3267,9 @@
         
 <payload packet="0">
             
-<payloadcount>4</payloadcount>
+<payloadcount>11</payloadcount>
             
-<payloadbytes>98920000</payloadbytes>
+<payloadbytes>000000060400000000dd00</payloadbytes>
         
 </payload>
     
@@ -3239,7 +3279,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41920</timestamp>
+<timestamp>55730</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3247,9 +3287,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
-<payloadbytes>08</payloadbytes>
+<payloadbytes>0000000205e000</payloadbytes>
         
 </payload>
     
@@ -3259,7 +3299,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41920</timestamp>
+<timestamp>55730</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3267,7 +3307,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>7</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -3279,7 +3319,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41920</timestamp>
+<timestamp>56010</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3287,9 +3327,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
-<payloadbytes>56</payloadbytes>
+<payloadbytes>000000040100000400</payloadbytes>
         
 </payload>
     
@@ -3299,7 +3339,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41920</timestamp>
+<timestamp>56010</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3307,7 +3347,7 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
 <payloadbytes></payloadbytes>
         
@@ -3319,7 +3359,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41920</timestamp>
+<timestamp>56030</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3327,9 +3367,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>256</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes></payloadbytes>
         
 </payload>
     
@@ -3339,7 +3379,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41920</timestamp>
+<timestamp>56030</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3347,9 +3387,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>9</payloadcount>
             
-<payloadbytes></payloadbytes>
+<payloadbytes>0000000402000000fa</payloadbytes>
         
 </payload>
     
@@ -3359,7 +3399,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41920</timestamp>
+<timestamp>56130</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3367,9 +3407,9 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>21</payloadcount>
             
-<payloadbytes>00</payloadbytes>
+<payloadbytes>00000010040000000a0001000300010000000007d0</payloadbytes>
         
 </payload>
     
@@ -3379,7 +3419,7 @@
         
 <function>BULK_OR_INTERRUPT_TRANSFER</function>
         
-<timestamp>41920</timestamp>
+<timestamp>56130</timestamp>
         
 <endpoint>-1</endpoint>
         
@@ -3387,11 +3427,411 @@
         
 <payload packet="0">
             
-<payloadcount>1</payloadcount>
+<payloadcount>21</payloadcount>
             
 <payloadbytes></payloadbytes>
         
 </payload>
+    
+</urb>
+    
+<urb sequence="90">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56150</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="90">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56150</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="91">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56251</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="91">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56251</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>15</payloadcount>
+            
+<payloadbytes>0000000a04000000040012000007d0</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="92">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56351</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="92">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56351</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="93">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56371</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>15</payloadcount>
+            
+<payloadbytes>0000000a040000000400070001000e</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="93">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56371</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>15</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="94">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56391</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="94">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56391</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="95">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56491</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="95">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56491</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>15</payloadcount>
+            
+<payloadbytes>0000000a0400000004bb000001d4c0</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="96">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56591</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="96">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56591</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="97">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56611</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>256</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="97">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56611</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>26</payloadcount>
+            
+<payloadbytes>00000015040000000f00080001000e0000080000000000005ed6</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="98">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56711</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes>0000000205e000</payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="98">
+        
+<function>BULK_OR_INTERRUPT_TRANSFER</function>
+        
+<timestamp>56711</timestamp>
+        
+<endpoint>-1</endpoint>
+        
+<packetcount>1</packetcount>
+        
+<payload packet="0">
+            
+<payloadcount>7</payloadcount>
+            
+<payloadbytes></payloadbytes>
+        
+</payload>
+    
+</urb>
+    
+<urb sequence="99">
+        
+<function>RESET_PIPE</function>
+        
+<timestamp>56731</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="99">
+        
+<function>RESET_PIPE</function>
+        
+<timestamp>56731</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="100">
+        
+<function>RESET_PIPE</function>
+        
+<timestamp>56731</timestamp>
+        
+<endpoint>-1</endpoint>
+    
+</urb>
+    
+<urb sequence="100">
+        
+<function>RESET_PIPE</function>
+        
+<timestamp>56731</timestamp>
+        
+<endpoint>-1</endpoint>
     
 </urb>
 

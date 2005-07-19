@@ -63,6 +63,10 @@ int main(int argc, char **argv)
 	if(fi == NULL || fo == NULL)
 		return -1;
 
+	fprintf(fo, "XML2LOG converter for use with SnoopyPro, version 1.0\n");
+	fprintf(fo, "Copyright (c) 2005, Romain Lievin\n");
+	fprintf(fo, "\n");
+
 	while(!feof(fi))
 	  {
 	    char line[4096];

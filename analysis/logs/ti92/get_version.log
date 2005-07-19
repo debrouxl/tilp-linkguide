@@ -1,0 +1,7 @@
+AVR decoder, version 1.1, \2000
+Copyright (c) 1999-2001, Romain Lievin
+
+09 68 00 00 89 56 00 00 09 A2 12 00 00 00 00 00 |  h   V          
+1D 0C 6D 61 69 6E 5C 76 65 72 73 69 6F 6E 30 05 |   main\version0 
+89 56 00 00 89 06 0A 00 00 04 00 00 1D 04 31 2E |  V            1.
+31 31 E6 00 09 5A 00 00 

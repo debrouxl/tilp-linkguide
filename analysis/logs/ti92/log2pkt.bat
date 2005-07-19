@@ -11,3 +11,5 @@ log2pkt.exe send_backup
 log2pkt.exe send_var_x
 log2pkt.exe send_var_y
 log2pkt.exe send_vars
+
+log2pkt.exe get_version
