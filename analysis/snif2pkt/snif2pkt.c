@@ -1,4 +1,4 @@
-/*  pkdecomp - an TI packet decompiler for insulating packets
+/*  snif2pkt - a packet decompiler for use with SniffUsb
  *  Copyright (C) 2005  Romain Lievin
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -30,6 +30,12 @@
 	|			  |    |			 |		 |								 |
 	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
 */
+
+#define TOKEN1	"-- URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER"
+#define TOKEN2	"  TransferBufferMDL    = "
+#define TOKEN3	"  UrbLink              = "
+#define TOKEN4	"  PipeHandle           = 813f4184 [endpoint "
+#define TOKEN5	"    00000000: "
 
 typedef unsigned char	uint8_t;
 typedef unsigned short	uint16_t;
@@ -117,6 +123,13 @@ const char* name_of_data(uint16_t id)
 	return "";
 }
 
+const char* ep_way(int ep)
+{
+	if(ep == 0x01) return "TI>PC";
+	else if(ep == 0x02) return "PC>TI";
+	else return "??>??";
+}
+
 typedef struct
 {
 	uint32_t	size;
@@ -128,6 +141,13 @@ typedef struct
 	uint32_t	size;
 	uint16_t	opcode;
 } DataHdr;
+
+typedef struct
+{
+	uint8_t	ep;			// endpoint aka direction (0x81 = IN, 0x02 = OUT)
+	uint8_t	size;		// #bytes
+	uint8_t	data[256];	// data
+} Urb;
 
 #define WIDTH	12
 
@@ -162,102 +182,69 @@ int fill_buf(FILE *f, uint8_t data, int flush)
 	return 0;
 }
 
+Urb** buffer;
+
 /*
-  Format of data: 8 hexadecimal numbers with spaces
+  Format of data: 12 hexadecimal numbers with spaces
 */
-int pkdecomp(const char *filename, int resync)
+int pkt_write(const char *filename, int nurbs)
 {
-    char src_name[1024];
-    char dst_name[1024];
-    FILE *fi, *fo;
-    long file_size;
-    struct stat st;
-    unsigned char *buffer;
-    int i;
+	FILE *fo;
+	int i;
 	unsigned int j;
-    int num_bytes;
-	char str[256];
-	int ret = 0;
-    
-	// build filenames
-    strcpy(src_name, filename);
-    strcat(src_name, ".log");
-    
-    strcpy(dst_name, filename);
-    strcat(dst_name, ".pkt");
-    
-    stat(src_name, &st);
-    file_size = st.st_size;
-    
-	// allocate buffer
-    buffer = (unsigned char*)calloc(file_size/2, 1);
-    memset(buffer, 0xff, file_size/2);
-    if(buffer == NULL)
+
+	fo = fopen(filename, "wt");
+    if(fo == NULL)
     {
-        fprintf(stderr, "calloc error.\n");
-        exit(-1);
-    }
-    
-	// open files
-    fi = fopen(src_name, "rt");
-    fo = fopen(dst_name, "wt");
-    
-    if(fi == NULL)
-    {
-        fprintf(stderr, "Unable to open this file: %s\n", src_name);
+        fprintf(stderr, "Unable to open this file: %s\n", filename);
         return -1;
     }
 
+#if 0
+
+	for(ptr = buffer; *ptr; ptr++)
+	{
+		Urb *u = *ptr;
+
+		fprintf(fo, "%i: (%3i) ", u->ep, u->size);
+
+		for(i = 0; i <u->size; i++)
+			fprintf(fo, "%02X ", u->data[i]);
+		fprintf(fo, "\n");
+	}
+
+#else
+    
     fprintf(fo, "TI packet decompiler for D-USB, version 1.0\n");
 
-	// skip comments
-	fgets(str, sizeof(str), fi);
-	fgets(str, sizeof(str), fi);
-	fgets(str, sizeof(str), fi);
-
-	// read source file
-	for(i = 0; !feof(fi);)
-    {
-        for(j = 0; j < 16 && !feof(fi); j++)
-		{
-			fscanf(fi, "%02X", &(buffer[i+j]));
-			fgetc(fi);
-		}
-        i += j;
-
-        for(j=0; j<18 && !feof(fi); j++)
-			fgetc(fi);
-    }
-    num_bytes = i-1; // -1 due to EOF char
-    fprintf(stdout, "%i bytes read.\n", num_bytes);
-
 	// process data
-	for(i = 0; i < num_bytes;)
+	for(i = 0; i < nurbs; i++)
     {
+		Urb *u = buffer[i];
 		uint32_t pkt_size;
 		uint8_t pkt_type;
 		uint32_t data_size;
 		uint16_t data_code;
 
-		pkt_size = buffer[3+i] | (buffer[2+i] << 8) | (buffer[1+i] << 16) | (buffer[0+i] << 24);
-		pkt_type = buffer[4+i];
-		data_size = buffer[8+i] | (buffer[7+i] << 8) | (buffer[6+i] << 16) | (buffer[5+i] << 24);
+		pkt_size = u->data[3] | (u->data[2] << 8) | (u->data[1] << 16) | (u->data[0] << 24);
+		pkt_type = u->data[4];
+		data_size = u->data[8] | (u->data[7] << 8) | (u->data[6] << 16) | (u->data[5] << 24);
 
 		fprintf(fo, "%08x %02x ", pkt_size, pkt_type);
 		fprintf(fo, "\t\t\t\t");
-		fprintf(fo, "| %s\n", name_of_packet(pkt_type));
+		fprintf(fo, "| %s: %s\n", ep_way(u->ep), name_of_packet(pkt_type));
 		
 		if(is_a_packet_with_data(pkt_type))
 		{
-			data_code = buffer[10+i] | (buffer[9+i] << 8);
+			data_code = u->data[10] | (u->data[9] << 8);
 		
 			fprintf(fo, "\t%08x %04x ", data_size, data_code);
 			fprintf(fo, "\t\t");
-			fprintf(fo, "|  %s\n", name_of_data(data_code));
+			fprintf(fo, "| %s: %s\n", "CMD", name_of_data(data_code));
 
 			for(j = 0; j < data_size && j < pkt_size-5; j++)
 			{
-				fill_buf(fo, buffer[11 + i + j], 0);
+				fill_buf(fo, u->data[11 + j], 0);
 			}
 			fill_buf(fo, 0, !0);
 		}		
@@ -272,25 +259,135 @@ int pkdecomp(const char *filename, int resync)
 		}
 
 		fprintf(fo, "\n");
-
-		i += pkt_size + 5;
-		printf("%i ", i);
 	}
 
-	if(ret < 0)
-		fprintf(stdout, "Error %i\n", -ret);
+#endif
 
-	free(buffer);
-	fclose(fi);
 	fclose(fo);
+	return 0;
+}
+
+//"     00000000: 00 00 00 0a 04 00 00 00 04 00 12 00 00 07 d0"
+int read_line(const char* str, uint8_t* data)
+{
+	const char *s = str + strlen(TOKEN5);
+	unsigned int i;
+
+	for(i = 0; (i <= strlen(s) / 3) && (i < 16); i++)
+		sscanf(&s[3*i], "%02x", &data[i]);
+
+	return i;
+}
+
+/*
+	Packet can have up to 255 bytes and we always have a TI packet per URB. Easy !
+ */
+int snif_read(const char* filename, int* nurbs)
+{
+    FILE *fi;
+	char str[1024];
+	int ret = 0;
+	int found = 0;
+	int nlines = 0;
+	int j = 0;
+	int ep = -1;
     
-	return ret;
+    // open file
+	fi = fopen(filename, "rt");
+    if(fi == NULL)
+    {
+        fprintf(stderr, "Unable to open this file: %s\n", filename);
+        return -1;
+    }
+
+	// first pass: count data
+	while(!feof(fi))
+	{
+		fgets(str, sizeof(str), fi);
+
+		if(!strncmp(str, TOKEN1, strlen(TOKEN1)))
+			found = 1;
+
+		if(found && !strncmp(str, TOKEN2, strlen(TOKEN2)))
+		{
+			for(fgets(str, sizeof(str), fi);
+				strncmp(str, TOKEN3, strlen(TOKEN3)); 
+				fgets(str, sizeof(str), fi))
+			{
+				nlines++;
+			}
+			found = 0;
+		}
+
+	}
+    
+	// allocate a NULL-terminated array of Urb's
+    buffer = (Urb **)calloc(nlines + 1, sizeof(Urb *));
+    if(buffer == NULL)
+    {
+        fprintf(stderr, "calloc error.\n");
+        exit(-1);
+    }
+
+	// second pass: load data
+    rewind(fi);
+	while(!feof(fi))
+	{
+		fgets(str, sizeof(str), fi);
+
+		if(!strncmp(str, TOKEN1, strlen(TOKEN1)))
+		{
+			found = 1;
+			fgets(str, sizeof(str), fi);
+			sscanf(str + strlen(TOKEN4), "0x%08x]", &ep);
+		}
+
+		if(found && !strncmp(str, TOKEN2, strlen(TOKEN2)))
+		{
+			uint8_t line[20], data[256];
+			int size;
+			int i = 0;
+
+			for(fgets(str, sizeof(str), fi);
+				strncmp(str, TOKEN3, strlen(TOKEN3)); 
+				fgets(str, sizeof(str), fi))
+			{
+				str[strlen(str)-1] = 0;
+
+				size = read_line(str, line);
+				memcpy(&data[i], line, size);
+				i += size;
+
+				//printf("%s (%i)\n", str, size);
+				printf(".");
+			}
+	
+			if(i > 0)
+			{
+				Urb *urb = calloc(1, sizeof(Urb));
+				urb->ep = ep & ~0x80;
+				urb->size = i;
+				memcpy(urb->data, data, 255);
+				buffer[j++] = urb;
+			}
+
+			found = 0;
+		}
+
+	}
+
+	*nurbs = j-1;
+	fclose(fi);
+    
+	return 0;
 }
 
 int main(int argc, char **argv)
 {
-	int resync = 0;
-
+	char* filename = argv[1];
+	char src_name[1024];
+	char dst_name[1024];
+	int nurbs;
 
 	if(argc < 2)
     {
@@ -298,8 +395,16 @@ int main(int argc, char **argv)
 		exit(0);
     }
 
-	if(argc > 2)
-		resync = !0;
+	strcpy(src_name, filename);
+    strcat(src_name, ".log");
+
+	strcpy(dst_name, filename);
+    strcat(dst_name, ".pkt");
+    
+	snif_read(src_name, &nurbs);
+	pkt_write(dst_name,  nurbs);
+
+	free(buffer);
   
-	return pkdecomp(argv[1], resync);
+	return 0;
 }
