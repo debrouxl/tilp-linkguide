@@ -184,6 +184,34 @@ int fill_buf(FILE *f, uint8_t data, int flush)
 
 Urb** buffer;
 
+int add_pkt_type(uint8_t* array, uint8_t type, int *count)
+{
+	int i;
+	
+	for(i = 0; i < *count; i++)
+		if(array[i] == type)
+			return 0;
+
+	array[++i] = type;
+	*count = i;
+
+	return i;
+}
+
+int add_data_code(uint16_t* array, uint16_t code, int *count)
+{
+	int i;
+	
+	for(i = 0; i < *count; i++)
+		if(array[i] == code)
+			return 0;
+
+	array[++i] = code;
+	*count = i;
+
+	return i;
+}
+
 /*
   Format of data: 12 hexadecimal numbers with spaces
 */
@@ -192,6 +220,10 @@ int pkt_write(const char *filename, int nurbs)
 	FILE *fo;
 	int i;
 	unsigned int j;
+
+	uint8_t pkt_type_found[256] = { 0 };
+	uint16_t data_code_found[256] = { 0 };
+	int ptf=0, dcf=0;
 
 	fo = fopen(filename, "wt");
     if(fo == NULL)
@@ -233,10 +265,14 @@ int pkt_write(const char *filename, int nurbs)
 		fprintf(fo, "%08x %02x ", pkt_size, pkt_type);
 		fprintf(fo, "\t\t\t\t");
 		fprintf(fo, "| %s: %s\n", ep_way(u->ep), name_of_packet(pkt_type));
+
+		add_pkt_type(pkt_type_found, pkt_type, &ptf);	//pkt_type_found[ptf++] = pkt_type;
 		
 		if(is_a_packet_with_data(pkt_type))
 		{
 			data_code = u->data[10] | (u->data[9] << 8);
+			
+			add_data_code(data_code_found, data_code, &dcf);	//data_code_found[dcf++] = data_code;
 		
 			fprintf(fo, "\t%08x %04x ", data_size, data_code);
 			fprintf(fo, "\t\t");
@@ -260,6 +296,13 @@ int pkt_write(const char *filename, int nurbs)
 
 		fprintf(fo, "\n");
 	}
+
+	fprintf(fo, "Packet types found: ");
+	for(i = 0; i < ptf; i++) fprintf(fo, "%02x ", pkt_type_found[i]);
+	fprintf(fo, "\n");
+	fprintf(fo, "Data codes found: ");
+	for(i = 0; i < dcf; i++) fprintf(fo, "%04x ", data_code_found[i]);
+	fprintf(fo, "\n");
 
 #endif
 
