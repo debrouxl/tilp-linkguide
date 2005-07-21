@@ -1,153 +1,17 @@
 AVR decoder, version 1.1, \2000
 Copyright (c) 1999-2001, Romain Lievin
 
-23 A2 0B 00 00 00 26 AA 00 00 00 00 00 00 00 D0 | #     &         
-00 73 56 00 00 73 06 0B 00 0B 00 26 AA 00 00 00 |  sV  s     &    
-00 00 00 00 DB 00 23 56 00 00 23 09 00 00 73 56 |       #V  #   sV
-00 00 73 15 0B 00 01 00 00 80 0A 32 CC E3 01 21 |   s        2   !
-18 A6 02 23 56 00 00 23 68 00 00 73 56 00 08 23 |    #V  #h  sV  #
-2D 00 00 73 56 00 00 23 09 00 00 73 56 00 00 73 | -  sV  #   sV  s
-15 0B 00 02 16 01 00 00 03 09 01 00 00 00 26 00 |               & 
-23 56 00 00 23 A2 0B 00 00 00 19 00 00 00 00 00 | #V  #           
-00 00 00 19 00 73 56 00 00 73 15 02 00 D6 5E 34 |      sV  s    ^4
-01 23 56 00 00 73 06 0D 00 09 00 00 41 00 00 00 |  #V  s      A   
-00 00 00 00 00 80 CA 00 23 56 00 00 73 06 0D 00 |         #V  s   
-09 00 00 42 00 00 00 00 00 00 00 00 80 CB 00 23 |    B           #
-56 00 00 73 06 0D 00 02 00 01 5D 00 00 00 00 00 | V  s      ]     
-00 00 00 00 60 00 23 56 00 00 73 06 0D 00 02 00 |     ` #V  s     
-01 5D 01 00 00 00 00 00 00 00 00 61 00 23 56 00 |  ]         a #V 
-00 73 06 0D 00 02 00 01 5D 02 00 00 00 00 00 00 |  s      ]       
-00 00 62 00 23 56 00 00 73 06 0D 00 02 00 01 5D |   b #V  s      ]
-03 00 00 00 00 00 00 00 00 63 00 23 56 00 00 73 |          c #V  s
-06 0D 00 02 00 01 5D 04 00 00 00 00 00 00 00 00 |       ]         
-64 00 23 56 00 00 73 06 0D 00 02 00 01 5D 05 00 | d #V  s      ]  
-00 00 00 00 00 00 00 65 00 23 56 00 00 73 06 0D |        e #V  s  
-00 02 67 24 43 42 4C 45 78 70 6D 74 00 00 6C 03 |   g$CBLExpmt  l 
-23 56 00 00 73 06 0D 00 02 65 24 43 68 65 6D 42 | #V  s    e$ChemB
-69 6F 20 00 00 42 03 23 56 00 00 73 06 0D 00 02 | io   B #V  s    
-69 24 43 6F 6E 69 63 73 00 00 00 00 EE 02 23 56 | i$Conics      #V
-00 00 73 92 0D 00 23 56 00 00 23 A2 0B 00 00 00 |   s   #V  #     
-27 00 00 00 00 00 00 00 00 27 00 73 56 00 00 73 | '        ' sV  s
-06 00 00 23 56 00 00 23 09 00 00 73 56 00 00 73 |    #V  #   sV  s
-15 00 01 0A 15 0A 32 CC E3 01 0A 2D 40 00 00 00 |       2    -@   
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
-00 00 00 00 00 00 00 00 00 00 00 00 00 04 12 21 |                !
-18 03 26 09 04 0B D4 31 B0 02 0D 40 A4 F7 87 78 |   &    1   @   x
-B9 DA 56 1A 21 97 57 2E 90 DE 87 7A 0B 6C 5F 63 |   V ! W.   z l_c
-2C 01 8A 32 17 9B 65 73 AF B1 A1 1B 2F 0C 0B 67 | ,  2  es    /  g
-B8 F7 84 22 44 04 BD 33 76 F8 06 2E 82 57 FF 63 |    "D  3v  . W c
-A1 C9 27 8E F4 46 8E B1 EA 96 C3 9A 80 0F 00 00 |   '  F          
-00 00 80 11 0A 80 21 02 80 31 16 80 A1 03 80 81 |       !  1      
-12 80 7F 00 00 00 00 80 0F 00 00 50 2E 80 12 01 |           P.   
-04 80 21 01 80 31 01 80 46 43 6F 6E 69 63 73 80 |   !  1  FConics 
-81 02 80 90 80 A1 01 03 26 09 04 07 F7 81 5D 02 |         &     ] 
-0D 40 C2 1E 65 BA 40 32 58 F2 EA D7 93 51 A5 C0 |  @  e @2X    Q  
-7C 8D D3 EC 6B 36 C7 03 21 EF 93 60 C7 E3 DE 43 | |   k6  !  `   C
-D0 1C 2C 0E 46 23 56 00 00 23 09 00 00 73 56 00 |   , F#V  #   sV 
-00 73 15 00 01 3C 29 ED 0C D3 54 29 1E 5E D1 3C |  s   <)   T) ^ <
-98 30 9C 02 35 25 35 10 10 BC 39 C3 E3 5C 7F D0 |  0  5%5   9  \ 
-FC ED A5 26 80 7F 00 00 00 00 80 0F 00 00 6C 24 |    &         l$
-80 12 01 04 80 21 01 80 31 01 80 48 43 42 4C 45 |      !  1  HCBLE
-78 70 6D 74 80 81 02 80 90 03 26 09 04 05 39 D3 | xpmt      &   9 
-85 02 0D 40 2B 80 80 BF F0 A4 96 2E 7B 40 EB CF |    @+      .{@  
-73 9D A7 9E ED 50 E1 60 26 BB F9 0F A4 20 2C 65 | s    P `&     ,e
-F3 0C 4C BC 85 BE B9 9A AF 73 54 BB BD 67 F6 F9 |   L      sT  g  
-9E 4A BD 5B 2F 3A 75 C2 50 CD 7A C7 07 30 B5 AA |  J [/:u P z  0  
-40 F0 1E 90 80 7F 00 00 00 00 80 0F 00 00 56 40 | @            V@
-80 12 01 04 80 21 01 80 31 01 80 48 43 68 65 6D |      !  1  HChem
-42 69 6F 20 80 90 80 81 02 03 26 09 04 06 CE 9A | Bio       &     
-6F 02 0D 40 CC 24 D1 F8 31 7F 8D 61 FA 3D E0 C2 | o  @ $  1 a =  
-EB FD 05 D6 B4 A4 D1 31 1B 50 FE 81 52 BB 58 57 |        1 P  R XW
-48 81 DA D4 BF A7 1E 9B 3F C9 70 26 9D 2B 38 D2 | H       ? p& +8 
-6E 22 FD 94 70 3F C5 0E FA 1C 54 63 45 23 45 93 | n"  p?    TcE#E 
-27 93 FA 5E 80 7D 68 23 56 00 00 23 09 00 00 73 | '  ^ }h#V  #   s
-56 00 00 73 15 00 01 7F 00 00 00 00 02 0D 40 8E | V  s         @ 
-F7 5D 23 7B 6C 2B 82 97 79 BD 83 18 4D 76 FC B3 |  ]#{l+  y   Mv  
-E4 84 F2 BF 6A 6F 07 06 9F 82 B4 18 A8 79 66 96 |     jo       yf 
-6C 86 2B 14 8E 2A AF 84 21 1D 63 AF 80 5E 59 07 | l +  *  ! c  ^Y 
-D0 F4 54 F4 87 22 5C 67 61 1B AE BD 2A 7C 0F FF |   T  "\ga   *|  
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF 50 D5 23 56 00 00 23 09 00 |        P #V  #  
-00 73 56 00 00 73 15 00 01 FF FF FF FF FF FF FF |  sV  s          
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF 80 00 FF FF 80 00 FF FF 80 00 FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF 86 FA 23 56 00 00 23 |            #V  #
-09 00 00 73 56 00 00 73 15 00 01 FF FF FF FF FF |    sV  s        
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 00 |                 
-00 00 00 00 00 00 00 FC FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF 05 F7 23 56 00 |              #V 
-00 23 09 00 00 73 56 00 00 73 15 00 01 FF FF FF |  #   sV  s      
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 |                 
-00 FC FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF |                 
-FF FF FF FF FF FF FF FF FF FF FF FF FF 09 F3 23 |                #
-56 00 00 23 09 00 00 73 56 00 00 73 92 00 00 23 | V  #   sV  s   #
-56 00 00 23 A2 0B 00 00 00 19 00 00 00 00 00 00 | V  #            
-00 00 19 00 73 56 00 00 73 15 02 00 D6 5E 34 01 |     sV  s    ^4 
-23 56 00 00 73 06 0D 00 09 00 00 41 00 00 00 00 | #V  s      A    
-00 00 00 00 80 CA 00 23 56 00 00 73 06 0D 00 09 |        #V  s    
-00 00 42 00 00 00 00 00 00 00 00 80 CB 00 23 56 |   B           #V
-00 00 73 06 0D 00 02 00 01 5D 00 00 00 00 00 00 |   s      ]      
-00 00 00 60 00 23 56 00 00 73 06 0D 00 02 00 01 |    ` #V  s      
-5D 01 00 00 00 00 00 00 00 00 61 00 23 56 00 00 | ]         a #V  
-73 06 0D 00 02 00 01 5D 02 00 00 00 00 00 00 00 | s      ]        
-00 62 00 23 56 00 00 73 06 0D 00 02 00 01 5D 03 |  b #V  s      ] 
-00 00 00 00 00 00 00 00 63 00 23 56 00 00 73 06 |         c #V  s 
-0D 00 02 00 01 5D 04 00 00 00 00 00 00 00 00 64 |      ]         d
-00 23 56 00 00 73 06 0D 00 02 00 01 5D 05 00 00 |  #V  s      ]   
-00 00 00 00 00 00 65 00 23 56 00 00 73 06 0D 00 |       e #V  s   
-02 67 24 43 42 4C 45 78 70 6D 74 00 00 6C 03 23 |  g$CBLExpmt  l #
-56 00 00 73 06 0D 00 02 65 24 43 68 65 6D 42 69 | V  s    e$ChemBi
-6F 20 00 00 42 03 23 56 00 00 73 06 0D 00 02 69 | o   B #V  s    i
-24 43 6F 6E 69 63 73 00 00 00 00 EE 02 23 56 00 | $Conics      #V 
-00 73 92 0D 00 23 56 00 00 
+08 68 00 00 88 56 0C 10 08 2D 00 00 88 56 00 00 |  h   V   -   V  
+08 09 00 00 88 56 00 00 88 15 0E 00 02 09 01 07 |      V          
+00 01 09 01 00 00 00 00 00 01 1F 00 08 56 00 00 |              V  
+08 68 00 00 88 56 0C 10 08 2D 00 00 88 56 00 00 |  h   V   -   V  
+08 09 00 00 88 56 00 00 88 15 0E 00 02 09 01 07 |      V          
+00 01 09 01 00 00 00 00 00 01 1F 00 08 56 00 00 |              V  
+08 68 00 00 88 56 0C 10 08 87 0B 01 88 56 00 00 |  h   V       V  
+08 87 08 01 88 56 00 00 08 87 08 01 88 56 00 00 |      V       V  
+08 87 08 01 88 56 00 00 08 87 08 01 88 56 00 00 |      V       V  
+08 87 08 11 88 56 00 00 08 87 08 11 88 56 00 00 |      V       V  
+08 87 51 20 88 56 00 00 08 87 07 01 88 56 00 00 |   Q  V       V  
+08 87 07 01 88 56 00 00 08 87 07 01 88 56 00 00 |      V       V  
+08 88 0C 00 00 00 00 00 00 06 6D 61 69 6E 5C 78 |           main\x
+7F 02 88 56 00 00 88 56 00 00 

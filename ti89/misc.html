@@ -16,16 +16,16 @@ can not be put at another place.</p>
 <p></p>
 <h4><a name="rts"></a>Creating a folder</h4>
 <p>In fact, Ti-Connect use an ersatz for this: it sends an empy var
-with full path 'new_fld\a1234567' and next delete variable.<br>
+with full path like 'new_fld\a1234567' and next delete variable.<br>
 </p>
-<p>Key sequence to returns to HOME: 010B (undocumented), 0108 (ESC),
+Key sequence to returns to HOME: 010B (undocumented), 0108 (ESC),
 0108 (ESC), 0108 (ESC),
 0108 (ESC), 1108 (QUIT), 1108 (QUIT), 2051 (HOME), 0107 (CLEAR),
 0107 (CLEAR), 0107 (CLEAR), 0064 (d), 0065 (e), 006C (l), 0076 (v),
 0061 (a), 0072 (r),
 0020 (SPC) and next varname with full path.<br>
-</p>
-<p>The protocol for silently deleting a variable is shown below:
+<p>
+The protocol for silently creating a folder is shown below:
 <table nosave="" bgcolor="#ffffff" border="1" cellspacing="0"
  width="92%">
   <tbody>
@@ -81,9 +81,9 @@ with full path 'new_fld\a1234567' and next delete variable.<br>
   <tbody>
     <tr>
       <td bgcolor="#ccffcc">PC:</td>
-      <td bgcolor="#ccffcc" width="50%"><b><tt>08 88 00 16</tt></b><tt>
-10 00 00 00 00 10 6E 65 77 5F 66 6C 64 5C 61 31 32 33 34 35 36 37 <b>28
-05</b></tt></td>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>08 C9 00 17</tt></b><tt>
+00 00 00 00 00 0A 40 00 21 00 00 00 00 00 00 23 <b>8E
+00</b></tt></td>
       <td bgcolor="#ccffcc" width="50%"><i>Variable header:
 "new_fld\a1234567"<br>
       </i></td>
@@ -96,15 +96,43 @@ with full path 'new_fld\a1234567' and next delete variable.<br>
     </tr>
     <tr nosave="" bgcolor="#ffcccc">
       <td nosave="">TI:</td>
+      <td nosave="" bgcolor="#ffcccc" width="50%"><b><tt>98 09
+00&nbsp;00</tt></b></td>
+      <td width="50%"><i>Clear To Send<br>
+      </i></td>
+    </tr>
+    <tr>
+      <td bgcolor="#ccffcc">PC:</td>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>08 56 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="50%"><i><br>
+      </i></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">.... See sending of vars<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#ccffcc">PC:</td>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>08 56 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="50%"><i>Send key<br>
+      </i></td>
+    </tr>
+    <tr nosave="" bgcolor="#ffcccc">
+      <td nosave="">TI:</td>
       <td nosave="" bgcolor="#ffcccc" width="50%"><b><tt>98 56
 00&nbsp;00</tt></b></td>
-      <td width="50%"><i>Acknowledgement of deletion ?<br>
+      <td width="50%"><i>Acknowledgment of Key<br>
       </i></td>
     </tr>
   </tbody>
 </table>
 <h4><a name="rts"></a>Deleting a variable</h4>
-<p>In fact, Ti-Connect send a key sequence to returns to HOME and
+<p>In fact, Ti-Connect send a key sequence to returns to HOME (same as
+above) and
 next send a command to delete variable.<br>
 </p>
 <p>The protocol for silently deleting a variable is shown below:

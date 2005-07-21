@@ -55,7 +55,7 @@ static const char command_name[][8] =
 static const int cmd_with_data[] =
 {
 	!0, 0, !0, 0, !0, !0, 0, !0, 
-	0, 0, 0, 0, 0, 0, 0, !0,
+	0, 0, 0, 0, 0, !0, 0, !0,
 	!0, !0, -1
 };
 

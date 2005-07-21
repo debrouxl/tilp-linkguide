@@ -14,3 +14,5 @@ snif2pkt recv_var_b
 
 snif2pkt send_var_a
 snif2pkt send_var_b
+
+snif2pkt screenshot
