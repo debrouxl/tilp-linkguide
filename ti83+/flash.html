@@ -854,7 +854,12 @@ header</i></td>
   </tbody>
 </table>
 <p><i></i></p>
-<p><br>
+<p><a name="rts"></a><b>Receiving Certificate</b><br>
+</p>
+<p>The protocol for silently receiving a certificate is the same as
+requesting a variable (ID = 0x27 and name is "") but the variable
+header has only the 3+8 first bytes and the VAR answer (step 3) has no
+data part.<br>
 &nbsp; </p>
 <table border="0" cellspacing="0" width="100%">
   <tbody>

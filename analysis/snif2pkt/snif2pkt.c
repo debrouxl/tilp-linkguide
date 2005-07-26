@@ -257,22 +257,26 @@ int pkt_write(const char *filename, int nurbs)
 		uint8_t pkt_type;
 		uint32_t data_size;
 		uint16_t data_code;
+		static int concat = 0;
 
 		pkt_size = u->data[3] | (u->data[2] << 8) | (u->data[1] << 16) | (u->data[0] << 24);
 		pkt_type = u->data[4];
-		data_size = u->data[8] | (u->data[7] << 8) | (u->data[6] << 16) | (u->data[5] << 24);
 
 		fprintf(fo, "%08x %02x ", pkt_size, pkt_type);
 		fprintf(fo, "\t\t\t\t");
 		fprintf(fo, "| %s: %s\n", ep_way(u->ep), name_of_packet(pkt_type));
 
-		add_pkt_type(pkt_type_found, pkt_type, &ptf);	//pkt_type_found[ptf++] = pkt_type;
+		add_pkt_type(pkt_type_found, pkt_type, &ptf);
 		
-		if(is_a_packet_with_data(pkt_type))
+		if(is_a_packet_with_data(pkt_type) && !concat)
 		{
+			if(pkt_type == 0x03 && pkt_size == 0xFA)
+				concat = 1;
+
+			data_size = u->data[8] | (u->data[7] << 8) | (u->data[6] << 16) | (u->data[5] << 24);
 			data_code = u->data[10] | (u->data[9] << 8);
 			
-			add_data_code(data_code_found, data_code, &dcf);	//data_code_found[dcf++] = data_code;
+			add_data_code(data_code_found, data_code, &dcf);
 		
 			fprintf(fo, "\t%08x %04x ", data_size, data_code);
 			fprintf(fo, "\t\t");
@@ -283,7 +287,18 @@ int pkt_write(const char *filename, int nurbs)
 				fill_buf(fo, u->data[11 + j], 0);
 			}
 			fill_buf(fo, 0, !0);
-		}		
+		}
+		else if(concat && ((pkt_type == 0x03) || (pkt_type == 0x04)))
+		{
+			if(pkt_type == 0x04)
+				concat = 0;
+
+			for(j = 0; j < pkt_size; j++)
+			{
+				fill_buf(fo, u->data[5 + j], 0);
+			}
+			fill_buf(fo, 0, !0);
+		}
 		else
 		{
 			if(pkt_type == 5)

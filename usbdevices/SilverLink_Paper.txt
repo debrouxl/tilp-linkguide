@@ -24,7 +24,8 @@ then it requires a specific device driver.
 
 The device uses 'Bulk' mode for data transfers. There are two bulk endpoints 
 (IN & OUT) and one control endpoint (mandatory). Transfers are achieved by 
-packets. The endpoints advertise a maximum packet size of 32 bytes.
+packets. The endpoints advertise a maximum packet size of 32 bytes but data
+are usually transfered as 256-bytes chunks (URBs) by TI-Connect.
 
 
 Ti-Connect behaviour:
@@ -35,7 +36,7 @@ The TI-Connect software systematically do the following sequence:
 	- try to read 1024 bytes (probably for flushing IN pipe),
 	- reset the pipes again (URB_FUNCTION_RESET_PIPE)
 before transfering anything.
-This information was got by sniffing with UsbSnoopy/SnifferUSB.
+This information was got by sniffing with UsbSnoopy/SniffUSB.
 
 The TI's driver does not use Power Management.
 
@@ -61,7 +62,7 @@ Although the maximum packet size is 32 bytes, you can not read/write bytes as yo
 	when getting the TI89 ID-LIST. A guy told me it was specific to Cypress devices.
 	=> solution: retry a read/ReadFile access.
 
-4°) write: you can send how many bytes you want: from 1 to 32 bytes.
+[ 4°) write: you can send how many bytes you want: from 1 to 32 bytes.
 	Theoritically, it is better to send a block of bytes rather than byte per
 	byte. This is less CPU consuming for USB layers & OS.
 	Practically, transfers are more reliable if we send byte per byte because the
@@ -70,7 +71,7 @@ Although the maximum packet size is 32 bytes, you can not read/write bytes as yo
 	Using full transfer triggers some transfer interruptions.	
 	=> solution: bufferize writing by sending block at once if it's full and sending it byte per byte
 		when the block is incomplete. Exception: if this block is the last one of a transfer 
-		(just before switching in receive mode), send it byte per byte.
+		(just before switching in receive mode), send it byte per byte. ] -> not true any longer
 
 By following these 4 rules, I got good drivers for both Linux & Windows.
 
@@ -128,5 +129,5 @@ Configuration:
 Author:
 -------
 
-(c) 2004, Romain Liévin
-Developer of TiLP & TiEmu.
+(C) Romain Liévin, developer of TiLP & TiEmu.
+July the 23th, 2005
