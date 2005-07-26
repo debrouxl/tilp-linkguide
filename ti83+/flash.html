@@ -690,7 +690,8 @@ are)</i></td>
 <p><u>Note:</u> the TI84+ has a slightly different VAR header: it's the
 same as flash-style header.<br>
 </p>
-<p><u>Example (PC receiving an application from TI):</u> </p>
+<u>Example (PC receiving an application from TI):</u>
+<p> </p>
 <table nosave="" border="0" cellspacing="0" width="100%">
   <tbody>
     <tr bgcolor="#ffcccc">
@@ -857,10 +858,251 @@ header</i></td>
 <p><a name="rts"></a><b>Receiving Certificate</b><br>
 </p>
 <p>The protocol for silently receiving a certificate is the same as
-requesting a variable (ID = 0x27 and name is "") but the variable
-header has only the 3+8 first bytes and the VAR answer (step 3) has no
-data part.<br>
-&nbsp; </p>
+requesting a FLASH app (ID = 0x27 and name is "") but the VAR answer
+(step 3) has no
+data part. </p>
+<table nosave="" bgcolor="#ffffff" border="1" cellspacing="0"
+ width="92%">
+  <tbody>
+    <tr>
+      <th bgcolor="#008800" width="7%"><font color="#ffffff">Step</font></th>
+      <th colspan="3" bgcolor="#008800"><font color="#ffffff">Direction</font></th>
+      <th bgcolor="#008800" width="80%"><font color="#ffffff">Packet</font></th>
+    </tr>
+    <tr nosave="">
+      <td bgcolor="#ffffff" width="7%">
+      <p align="center">1 </p>
+      </td>
+      <td rowspan="9" nosave="">
+      <p align="center"><img src="graphics/comp.gif" alt="Computer"
+ align="bottom" border="0" height="33" width="30"> </p>
+      </td>
+      <td bgcolor="#ffffff">
+      <p align="center"><img src="graphics/right.gif" alt="===&gt;"
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td rowspan="9" nosave="">
+      <p align="center"><img src="graphics/calc.gif" alt="Calculator"
+ align="bottom" border="0" height="35" width="60"> </p>
+      </td>
+      <td bgcolor="#ffffff" width="80%">REQ with <a
+ href="packet.html#reqbackup">request-style idlist header</a>.</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">
+      <p align="center">2 </p>
+      </td>
+      <td bgcolor="#ffffff">
+      <p align="center"><img src="graphics/left.gif" alt="&lt;==="
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td bgcolor="#ffffff" width="80%">ACK</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">
+      <p align="center">3 </p>
+      </td>
+      <td bgcolor="#ffffff">
+      <p align="center"><img src="graphics/left.gif" alt="&lt;==="
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td bgcolor="#ffffff" width="80%">VAR with <span
+ style="text-decoration: underline;">no</span> header</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">
+      <p align="center">4 </p>
+      </td>
+      <td bgcolor="#ffffff">
+      <p align="center"><img src="graphics/right.gif" alt="===&gt;"
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td bgcolor="#ffffff" width="80%">ACK</td>
+    </tr>
+    <tr>
+      <td width="7%">
+      <p align="center">5 </p>
+      </td>
+      <td>
+      <p align="center"><img src="graphics/right.gif" alt="===&gt;"
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td width="80%">CTS</td>
+    </tr>
+    <tr>
+      <td width="7%">
+      <p align="center">6 </p>
+      </td>
+      <td>
+      <p align="center"><img src="graphics/left.gif" alt="&lt;==="
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td width="80%">ACK</td>
+    </tr>
+    <tr>
+      <td width="7%">
+      <p align="center">7 </p>
+      </td>
+      <td>
+      <p align="center"><img src="graphics/left.gif" alt="&lt;==="
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td width="80%">DATA (a 256 bytes block) or EOT<br>
+      </td>
+    </tr>
+    <tr>
+      <td width="7%">
+      <p align="center">8 </p>
+      </td>
+      <td>
+      <p align="center"><img src="graphics/right.gif" alt="===&gt;"
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td width="80%">ACK</td>
+    </tr>
+    <tr>
+      <td width="7%">
+      <p align="center">&nbsp; </p>
+      </td>
+      <td>&nbsp;</td>
+      <td width="80%"><i>(Repeat steps 5-8 for as many pages as there
+are)</i></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<u>Example (PC receiving a certificate from TI):</u>
+<p> </p>
+<table nosave="" border="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc" width="2%">PC:</td>
+      <td bgcolor="#ccffcc" width="49%"><tt><b><u>73</u> A2 0B 00 </b>00
+00
+27 00 00 00 00 00 00 00 00 <b>27 00</b></tt></td>
+      <td bgcolor="#ccffcc" width="49%"><i>Request certificate.</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc" width="2%">TI:</td>
+      <td bgcolor="#ffcccc" width="49%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="49%"><i>Acknowledgement of request</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc" width="2%">&nbsp;</td>
+      <td bgcolor="#ffcccc" width="49%"><b><tt>73 06 <span
+ style="text-decoration: underline;">00</span> 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="49%"><i>TI reply with void VAR<br>
+      </i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc" width="2%">PC:</td>
+      <td bgcolor="#ccffcc" width="49%"><b><tt>23 56 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="49%"><i>Acknowledgement of variable
+header</i></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc" width="2%">&nbsp;</td>
+      <td bgcolor="#ccffcc" width="49%"><tt><b>23 09 00 00</b></tt></td>
+      <td bgcolor="#ccffcc" width="49%"><i>Acknowledgement of request</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc" width="2%">TI:</td>
+      <td bgcolor="#ffcccc" width="49%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="49%"><i>Acknowledgement of CTS</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc" width="2%">&nbsp;</td>
+      <td bgcolor="#ffcccc" width="49%"><b><tt>73 15 01 00 </tt></b><tt>&lt;...
+0100h bytes of data ...&gt;</tt><b><tt> CHK</tt></b></td>
+      <td bgcolor="#ffcccc" width="49%"><i>Data block: 256 bytes</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc" width="2%">PC:</td>
+      <td bgcolor="#ccffcc" width="49%"><b><tt>23 56 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="49%"><i>Acknowledgement of variable
+header</i></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><span
+ style="font-weight: bold;">...</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold;">...<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc" width="2%">&nbsp;PC:</td>
+      <td bgcolor="#ccffcc" width="49%"><tt><b>23 09 00 00</b></tt></td>
+      <td bgcolor="#ccffcc" width="49%"><i>Acknowledgement of request</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc" width="2%">TI:</td>
+      <td bgcolor="#ffcccc" width="49%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="49%"><i>Acknowledgement of CTS</i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ffcccc" width="2%">TI:</td>
+      <td bgcolor="#ffcccc" width="49%"><b><tt>73 92 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="49%"><i>End Of Transmission<br>
+      </i></td>
+    </tr>
+    <tr bgcolor="#ffcccc">
+      <td bgcolor="#ccffcc" width="2%">PC:</td>
+      <td bgcolor="#ccffcc" width="49%"><b><tt>23 56 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="49%"><i>Acknowledgement of EOT</i></td>
+    </tr>
+  </tbody>
+</table>
 <table border="0" cellspacing="0" width="100%">
   <tbody>
     <tr>
