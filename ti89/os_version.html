@@ -189,7 +189,8 @@ data</i></td>
       </td>
       <td style="vertical-align: top;">1 byte<br>
       </td>
-      <td style="vertical-align: top;">Always 01 ?<br>
+      <td style="vertical-align: top;">Hardware Revision (1 = HW1, 2 =
+HW2, 3 = HW3)<br>
       </td>
     </tr>
     <tr>
@@ -197,7 +198,7 @@ data</i></td>
       </td>
       <td valign="top">2 bytes<br>
       </td>
-      <td valign="top">?<br>
+      <td valign="top">Always 09 01<br>
       </td>
     </tr>
     <tr>
@@ -205,23 +206,22 @@ data</i></td>
       </td>
       <td valign="top">2 bytes<br>
       </td>
-      <td valign="top">?<br>
-      </td>
+      <td valign="top">Always 00 00 </td>
     </tr>
     <tr>
       <td valign="top">12<br>
       </td>
       <td valign="top">2 bytes<br>
       </td>
-      <td valign="top">?<br>
-      </td>
+      <td valign="top">Always 00 00 </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">14<br>
       </td>
       <td style="vertical-align: top;">2 bytes<br>
       </td>
-      <td style="vertical-align: top;">?<br>
+      <td style="vertical-align: top;">Hardware ID (1 = 92+, 3 = 89, 8
+= V200, 9 = Titanium); see TIGCC doc.<br>
       </td>
     </tr>
   </tbody>
@@ -229,7 +229,18 @@ data</i></td>
 </p>
 <p></p>
 <p></p>
-<h4>&nbsp; </h4>
+Examples :<br>
+<small><span style="font-family: courier;">TI89 HW1&nbsp; : 02 09 01 00
+00 00 09 01 00 00 00 00 00 03</span><br style="font-family: courier;">
+</small><span style="font-family: courier;"><small>TI89 HW2&nbsp; : 02
+09 01 00 00 01 09 01 00 00 00 00 00 03<br>
+TI92+ HW1 : 02 09 01 00 00 00 09 01 00 00 00 00 00 01<br>
+TI92+ HW2 : 02 09 01 01 00 01 09 01 00 00 00 00 00 01<br>
+V200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 02 09 01 02 00 02 09 01 00 00 00
+00 00 08<br>
+89T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 03 01 01 03 00 03 09 01 00 00
+00 00 00 09<br>
+</small></span><br>
 <table border="0" cellspacing="0" width="100%">
   <tbody>
     <tr>
