@@ -180,8 +180,16 @@ data</i></td>
     <tr>
       <td width="7%">6<br>
       </td>
-      <td width="8%">2 bytes</td>
-      <td width="85%">Battery level ?<br>
+      <td width="8%">1 byte</td>
+      <td width="85%">Battery level (00 = good, 01 = low)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">7<br>
+      </td>
+      <td style="vertical-align: top;">1 byte<br>
+      </td>
+      <td style="vertical-align: top;">??<br>
       </td>
     </tr>
     <tr>
@@ -189,7 +197,7 @@ data</i></td>
       </td>
       <td valign="top">2 bytes<br>
       </td>
-      <td valign="top">?<br>
+      <td valign="top">Always 09 01<br>
       </td>
     </tr>
     <tr>
@@ -197,16 +205,14 @@ data</i></td>
       </td>
       <td valign="top">2 bytes<br>
       </td>
-      <td valign="top">?<br>
-      </td>
+      <td valign="top">Always 00 00 </td>
     </tr>
     <tr>
       <td valign="top">12<br>
       </td>
       <td valign="top">2 bytes<br>
       </td>
-      <td valign="top">?<br>
-      </td>
+      <td valign="top">Always 00 00 </td>
     </tr>
   </tbody>
 </table>
@@ -215,15 +221,24 @@ data</i></td>
 <p></p>
 <h4><span style="font-weight: normal;">Note : when calculator is
 waiting for OS arrival, any packet is rejected unless this one. But, it
-returns 0.00 as OS version.</span><br>
-</h4>
+returns 0.00 as OS version.<br>
+Note : this packet seems to the same as TI9X hand-helds without the
+last 2 bytes.</span></h4>
+Examples :<br>
+<small><span style="font-family: courier;">TI84+ : 02 16 01 00
+00 03 09 01 00 00 00 00</span><br style="font-family: courier;">
+</small><span style="font-family: courier;"><small>TI83+ : 01 0C 01 00
+00 00 09 01 00 00 00 18 (VTi5b1)<br>
+<br>
+</small></span>
+<hr style="width: 100%; height: 2px;">
 <table border="0" cellspacing="0" width="100%">
   <tbody>
     <tr>
       <td width="32%">
-      <center><a href="silent.html"><a href="clock.html"><img
+      <center><a href="silent.html"></a><a href="clock.html"><img
  src="graphics/prevpage.gif" alt="[previous page]"
- style="border: 2px solid ; width: 32px; height: 32px;"></a> </a> <br>
+ style="border: 2px solid ; width: 32px; height: 32px;"></a> <br>
       <a href="clock.html">Clock</a></center>
       </td>
       <td width="34%">
