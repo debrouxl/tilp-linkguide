@@ -63,20 +63,26 @@ be utilized any time the calculator is ready to accept a keypress.
 command.
 Scancodes are defined in the section ?? TI-83+ guidebook or can be
 found
-in the TI83+ FLASH SDK (ti83plus.inc).
-</p>
+in the TI83+ FLASH SDK (ti83plus.inc).</p>
 <p><u>Example:</u>
 <table border="0" cellspacing="0" width="100%">
   <tbody>
     <tr>
       <td bgcolor="#ccffcc">PC:</td>
-      <td bgcolor="#ccffcc" width="50%"><b><tt>03 87 9B 00</tt></b></td>
-      <td bgcolor="#ccffcc" width="50%"><i>Command: Key &lt;B&gt;</i></td>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>23 87 A6 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="50%"><i>Command: Key &lt;M&gt;</i></td>
     </tr>
     <tr>
       <td bgcolor="#ffcccc">TI:</td>
-      <td bgcolor="#ffcccc" width="50%"><b><tt>83 56 9B 00</tt></b></td>
-      <td bgcolor="#ffcccc" width="50%"><i>Acknowledgement of command</i></td>
+      <td bgcolor="#ffcccc" width="50%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="50%"><i>Acknowledgement of key</i></td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffcccc">TI:</td>
+      <td bgcolor="#ffcccc" width="50%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="50%"><i>Acknowledgement of
+processing the key<br>
+      </i></td>
     </tr>
   </tbody>
 </table>
