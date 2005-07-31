@@ -22,3 +22,6 @@ rem log2pkt.exe send_var_z
 rem log2pkt.exe send_vars
 log2pkt.exe idlist
 log2Pkt probing
+
+log2Pkt send_cert
+log2Pkt send_cert_1

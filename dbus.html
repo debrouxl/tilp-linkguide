@@ -16,7 +16,7 @@
 add a TI view. <br>
 While I was working on TiEmu II, I had to fix linkport support which
 was quite broken. Unfortunately, I didn't know very much about how
-linkport works on TI side. This was quite boring. Then, I decided to
+linkport works on TI side. This was quite annoying. Then, I decided to
 dis-assemble low-level linkport routines and the result of this work is
 below.<br>
 </p>
@@ -182,10 +182,7 @@ given that STX is usually set).</td>
     </tr>
   </tbody>
 </table>
-<span style="font-style: italic;">Warning:</span> reading this register
-resets it ! Take to read it once and store its value for subsequent
-operations.<br>
-<br>
+<span style="font-style: italic;"></span><br>
 Status:<br>
 <table style="width: 100%; text-align: left;" border="1" cellpadding="2"
  cellspacing="2">
@@ -258,6 +255,11 @@ are toggling). Used by AMS &gt;= 2.08<br>
     </tr>
   </tbody>
 </table>
+<span style="font-style: italic;">Warning:</span> reading this register
+resets it ! Take to read it once and store its value for subsequent
+operations.<br>
+<span style="font-style: italic;">Warning2:</span> this is what TI says
+in their SDK but I'm not sure that's true (at least in TiEmu).<br>
 <br>
 <table style="width: 100%; text-align: left;" border="1" cellpadding="2"
  cellspacing="2">
@@ -386,7 +388,7 @@ bytes each. Each buffer is managed as a stucture.<br>
 In normal operating mode, AE, CLE, CA and CRX are enabled. CTX is set
 in the transmit routine. It is disabled at the end of the
 handler when
-no more chars have been to be transmitted.<br>
+no more chars have to be transmitted.<br>
 <br>
 Some informations comes from dis-assembling, some others comes from
 TIGCC documentation (after check-up).<br>
