@@ -600,12 +600,10 @@ of 0.</td>
 </p>
 <h3>
 <hr align="center">The TI-89 FLASH file format</h3>
-A FLASH file may be made up of 3 parts: a License header (not
-compulsory),
-a Certificate header (for signed applications) and a Data header. These
-3
-headers shares the same format.
-<p></p>
+A FLASH file usually contains between 1 and 3 headers with data and the
+header has
+the same format than the TI83+ one.<br>
+Headers can contains : license or data (app/os/certificate).<br>
 <p>The header takes the following format: <br>
 <i>Note - All 2-byte and 4-byte integers are stored little-endian
 Intel-style (least significant byte first).</i>
@@ -656,7 +654,8 @@ as
       <td bgcolor="#ffffff" width="11%">8 bytes</td>
       <td bgcolor="#ffffff" width="81%">Application name or 'basecode'
 for
-OS (zero terminated unless 8 characters long).</td>
+OS or '' for certificate. Name is null-terminated unless 8 characters
+long.</td>
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="8%">25 (19h)</td>

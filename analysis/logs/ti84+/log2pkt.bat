@@ -18,3 +18,5 @@ log2pkt.exe send_flash_os
 log2pkt.exe send_var_a
 log2pkt.exe send_var_b
 log2pkt.exe send_vars
+
+log2pkt.exe send_cert

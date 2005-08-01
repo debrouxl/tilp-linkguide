@@ -423,10 +423,12 @@ section.</td>
 </p>
 <h3>
 <hr align="center"> The TI-83+ FLASH file format</h3>
-<p>A FLASH file usually contains a single header (a Data header) which
-has
-the same format than the TI89/92+ one.</p>
-<p>The header takes the following format: <br>
+<p>A FLASH file usually contains between 1 and 3 headers with data and
+the header has
+the same format than the TI89/92+ one.<br>
+Headers can contains : license or data (app/os/certificate).<br>
+</p>
+<p>The header takes the following format : <br>
 <i>Note - All 2-byte and 4-byte integers are stored little-endian
 Intel-style (least significant byte first).</i>
 <table border="1" cellspacing="0" width="92%">

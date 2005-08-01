@@ -457,7 +457,8 @@ FLASH application name and size.&nbsp;</td>
       <center><img src="graphics/right.gif" alt="===&gt;" align="bottom"
  border="0" height="13" width="22"></center>
       </td>
-      <td width="80%">ACK</td>
+      <td width="80%">ACK or ERR (if certificate is rejected)<br>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -888,7 +889,7 @@ data</i></td>
     <tr nosave="" bgcolor="#99ffcc">
       <td bgcolor="#ccffcc" height="22" width="2%">PC:</td>
       <td nosave="" bgcolor="#ccffcc" height="22" width="49%"><b><tt>08
-5600 00</tt></b></td>
+56 00 00</tt></b></td>
       <td nosave="" bgcolor="#ccffcc" height="22" width="49%"><i>End Of
 Transmission</i></td>
     </tr>
@@ -899,6 +900,12 @@ Transmission</i></td>
 Same as requesting FLASH app but type ID is 20h and name is "".<br>
 <h4><a name="rts"></a>Sending Certificate</h4>
 Same as sending FLASH app but type ID is 20h and name is "".<br>
+When rejected, this ERR packets is sent : <small><span
+ style="font-family: courier new,courier,monospace;">88 36 00 05&nbsp; </span><span
+ style="font-family: courier new,courier,monospace;">05 00 0A 00
+00&nbsp; </span><span
+ style="font-family: courier new,courier,monospace;">0F 00</span></small>
+<br>
 <p>&nbsp;
 <table border="0" cellspacing="0" width="100%">
   <tbody>
