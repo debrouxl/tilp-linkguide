@@ -5,10 +5,10 @@
  content="text/html; charset=iso-8859-1">
   <meta name="GENERATOR"
  content="Mozilla/4.7 [en] (X11; I; Linux 2.4.0-test6 i586) [Netscape]">
-  <title>TI-83+ Link Protocol Guide - OS &amp; BIOS version</title>
+  <title>TI-73 Link Protocol Guide - OS &amp; BIOS version</title>
 </head>
 <body bgcolor="#ffffe8">
-<b>TI-83+ Link Protocol Guide</b> - Getting OS &amp; BIOS version
+<b>TI-73 Link Protocol Guide</b> - Getting OS &amp; BIOS version
 <center>
 <h2>
 <hr align="center">OS &amp; BIOS version</h2>
@@ -122,35 +122,35 @@ Indeed, the request is like sending a TI84+ FLASH.
   <tbody>
     <tr bgcolor="#ffcccc">
       <td bgcolor="#ccffcc">PC:</td>
-      <td bgcolor="#ccffcc" width="50%"><tt><b>23 2D 00 00</b></tt></td>
+      <td bgcolor="#ccffcc" width="50%"><tt><b>07 2D 00 00</b></tt></td>
       <td bgcolor="#ccffcc" width="50%"><i>Request informations</i></td>
     </tr>
     <tr bgcolor="#ffcccc">
       <td bgcolor="#ffcccc">TI:</td>
-      <td bgcolor="#ffcccc" width="50%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="50%"><b><tt>74 56 00 00</tt></b></td>
       <td bgcolor="#ffcccc" width="50%"><i>Acknowledgement of REQ</i></td>
     </tr>
     <tr bgcolor="#ffcccc">
       <td bgcolor="#ccffcc">PC:</td>
-      <td bgcolor="#ccffcc" width="50%"><b><tt>23 09 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>07 09 00 00</tt></b></td>
       <td bgcolor="#ccffcc" width="50%"><i>Clear to send variable</i></td>
     </tr>
     <tr bgcolor="#ffcccc">
       <td bgcolor="#ffcccc">TI:</td>
-      <td bgcolor="#ffcccc" width="50%"><b><tt>73 56 00 00</tt></b></td>
+      <td bgcolor="#ffcccc" width="50%"><b><tt>74 56 00 00</tt></b></td>
       <td bgcolor="#ffcccc" width="50%"><i>Acknowledgement of CTS</i></td>
     </tr>
     <tr bgcolor="#ffcccc">
       <td bgcolor="#ffcccc" height="44">&nbsp;</td>
-      <td bgcolor="#ffcccc" height="44" width="50%"><tt><b>73 15 0B 00 </b>02
-16 01 00 00 03 09 01 00 00 00 <b>26 00</b></tt></td>
+      <td bgcolor="#ffcccc" height="44" width="50%"><tt><b>74 15 0B 00 </b>01
+60 01 00 00 00 09 01 42 52 00 <b>01 00</b></tt></td>
       <td bgcolor="#ffcccc" height="44" width="50%"><i>Variable data:
-11 bytes
-(OS: 2.22, BIOS: 1.00)</i></td>
+12 bytes
+(OS: 1.60, BIOS: 1.00)</i></td>
     </tr>
     <tr bgcolor="#ffcccc">
       <td bgcolor="#ccffcc">PC:</td>
-      <td bgcolor="#ccffcc" width="50%"><b><tt>23 56 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>07 56 00 00</tt></b></td>
       <td bgcolor="#ccffcc" width="50%"><i>Acknowledgement of variable
 data</i></td>
     </tr>
@@ -170,7 +170,8 @@ data</i></td>
     <tr>
       <td width="7%">0</td>
       <td width="8%">2 bytes</td>
-      <td width="85%">OS version like 02 15 for 2.21</td>
+      <td width="85%">OS version like 01 60 for 1.60<br>
+      </td>
     </tr>
     <tr>
       <td width="7%">4</td>
@@ -205,15 +206,15 @@ data</i></td>
       </td>
       <td valign="top">2 bytes<br>
       </td>
-      <td valign="top">Always 00 00 </td>
+      <td valign="top">?? <br>
+      </td>
     </tr>
     <tr>
       <td valign="top">12<br>
       </td>
-      <td valign="top">1 bytes<br>
+      <td valign="top">1 byte<br>
       </td>
-      <td valign="top">Always 00<br>
-      </td>
+      <td valign="top">Always 00 </td>
     </tr>
   </tbody>
 </table>
@@ -223,9 +224,11 @@ data</i></td>
 <h4><span style="font-weight: normal;">Note : when calculator is
 waiting for OS arrival, any packet is rejected unless this one. But, it
 returns 0.00 as OS version.<br>
-Note : this packet seems to the same as TI9X hand-helds without the
-last 3 bytes.</span></h4>
+Note : this packet seems to the same as TI8X+ hand-helds.</span></h4>
 Examples :<br>
+<small><span style="font-family: courier;">TI73&nbsp; : </span></small><tt>01
+60 01 00 00 00 09 01 42 52 00</tt><small><span
+ style="font-family: courier;"></span></small><br>
 <small><span style="font-family: courier;">TI84+ : 02 16 01 00
 00 03 09 01 00 00 00 00</span><br style="font-family: courier;">
 </small><span style="font-family: courier;"><small>TI83+ : 01 0C 01 00
@@ -237,10 +240,10 @@ Examples :<br>
   <tbody>
     <tr>
       <td width="32%">
-      <center><a href="silent.html"></a><a href="clock.html"><img
+      <center><a href="silent.html"></a><a href="flash.html"><img
  src="graphics/prevpage.gif" alt="[previous page]"
  style="border: 2px solid ; width: 32px; height: 32px;"></a> <br>
-      <a href="clock.html">Clock</a></center>
+      <a href="flash.html">Flash Transfers</a></center>
       </td>
       <td width="34%">
       <center><a href="index.html"><img src="graphics/home.gif"

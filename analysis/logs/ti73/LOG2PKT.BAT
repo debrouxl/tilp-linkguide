@@ -14,4 +14,5 @@ log2pkt recv_flash_app
 log2pkt send_flash_app
 
 log2pkt device_info_1
+log2pkt device_info_2
 log2pkt probing
