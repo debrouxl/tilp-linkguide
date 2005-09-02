@@ -218,7 +218,8 @@ bits of the sum of all bytes in the data section.</td>
     <tr>
       <td bgcolor="#ffffff" width="8%">0</td>
       <td bgcolor="#ffffff" width="11%">2 bytes</td>
-      <td bgcolor="#ffffff" width="81%">Always has a value of 13 (Dh).</td>
+      <td bgcolor="#ffffff" width="81%">Always has a value of 11 or 13
+(Bh or Dh).</td>
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="8%">2</td>
@@ -242,13 +243,15 @@ characters (0h) on the right.</td>
     <tr>
       <td bgcolor="#ffffff" width="8%">13 (Dh)</td>
       <td bgcolor="#ffffff" width="11%">1 byte</td>
-      <td bgcolor="#ffffff" width="81%">Version. Usually set to 0.</td>
+      <td bgcolor="#ffffff" width="81%">Version. Usually set to 0
+(present if first bytes are Dh).<br>
+      </td>
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="8%">14 (Eh)</td>
       <td bgcolor="#ffffff" width="11%">1 byte</td>
       <td bgcolor="#ffffff" width="81%">Flag. Set to 80h if variable is
-archived, 00h else.</td>
+archived, 00h else (present if first bytes are Dh).</td>
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="8%">15 (Fh)</td>

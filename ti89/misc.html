@@ -18,14 +18,7 @@ can not be put at another place.</p>
 <p>In fact, Ti-Connect use an ersatz for this: it sends an empy var
 with full path like 'new_fld\a1234567' and next delete variable.<br>
 </p>
-Key sequence to returns to HOME: 010B (undocumented), 0108 (ESC),
-0108 (ESC), 0108 (ESC),
-0108 (ESC), 1108 (QUIT), 1108 (QUIT), 2051 (HOME), 0107 (CLEAR),
-0107 (CLEAR), 0107 (CLEAR), 0064 (d), 0065 (e), 006C (l), 0076 (v),
-0061 (a), 0072 (r),
-0020 (SPC) and next varname with full path.<br>
-<p>
-The protocol for silently creating a folder is shown below:
+<p>The protocol for silently creating a folder is shown below:
 <table nosave="" bgcolor="#ffffff" border="1" cellspacing="0"
  width="92%">
   <tbody>
@@ -117,24 +110,29 @@ The protocol for silently creating a folder is shown below:
     </tr>
     <tr>
       <td bgcolor="#ccffcc">PC:</td>
-      <td bgcolor="#ccffcc" width="50%"><b><tt>08 56 00 00</tt></b></td>
-      <td bgcolor="#ccffcc" width="50%"><i>Send key<br>
+      <td bgcolor="#ccffcc" width="50%"><b><tt>08 92 00 00</tt></b></td>
+      <td bgcolor="#ccffcc" width="50%"><i>End Of Transmission<br>
       </i></td>
     </tr>
     <tr nosave="" bgcolor="#ffcccc">
       <td nosave="">TI:</td>
       <td nosave="" bgcolor="#ffcccc" width="50%"><b><tt>98 56
 00&nbsp;00</tt></b></td>
-      <td width="50%"><i>Acknowledgment of Key<br>
+      <td width="50%"><i>Acknowledgment of EOT<br>
       </i></td>
     </tr>
   </tbody>
 </table>
-<h4><a name="rts"></a>Deleting a variable (&gt;= AMS 2.09)<br>
+<h4><a name="rts"></a>Deleting a variable<br>
 </h4>
-<p>In fact, Ti-Connect send a key sequence to returns to HOME (same as
-above) and
-next send a command to delete variable.<br>
+At first, Ti-Connect send a key sequence to returns to HOME : 010B
+(undocumented), 0108 (ESC),
+0108 (ESC), 0108 (ESC),
+0108 (ESC), 1108 (QUIT), 1108 (QUIT), 2051 (HOME), 0107 (CLEAR),
+0107 (CLEAR), 0107 (CLEAR).<br>
+<p>The next operation depends on AMS version; with AMS &gt;= 2.09, it
+sends a command to delete variable. Else, it circumvent this by&nbsp;
+remotely typing DelVar 'varname' (see TI92 doc).<br>
 </p>
 <p>The protocol for silently deleting a variable is shown below:
 <table nosave="" bgcolor="#ffffff" border="1" cellspacing="0"
