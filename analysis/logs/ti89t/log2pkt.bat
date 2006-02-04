@@ -6,8 +6,7 @@ log2pkt.exe delete_var_y
 log2pkt.exe delete_var_z
 log2pkt.exe device_info
 log2pkt.exe dirlist
-log2pkt.exe new_fld1
-log2pkt.exe new_fld2
+log2pkt.exe new_folder
 log2pkt.exe recv_backup
 log2pkt.exe recv_flash_app
 log2pkt.exe recv_var_x
