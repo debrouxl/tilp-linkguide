@@ -12,7 +12,55 @@
 <hr align="center">Miscellaneous</h2>
 </center>
 <p>This topic contains various stuffs introduced with Ti-Connect which
-can not be put at another place.</p>
+can not be put at another place.<br>
+</p>
+<h4><a name="request"></a>Ready / Status<br>
+</h4>
+The protocol for getting statuss is shown below:
+<table nosave="" bgcolor="#ffffff" border="1" cellspacing="0"
+ width="92%">
+  <tbody>
+    <tr>
+      <th bgcolor="#008800" width="7%"><font color="#ffffff">Step</font></th>
+      <th colspan="3" bgcolor="#008800"><font color="#ffffff">Direction</font></th>
+      <th bgcolor="#008800" width="80%"><font color="#ffffff">Packet</font></th>
+    </tr>
+    <tr nosave="">
+      <td bgcolor="#ffffff" width="7%">
+      <p align="center">1 </p>
+      </td>
+      <td rowspan="2" nosave="">
+      <p align="center"><img src="../ti89/graphics/comp.gif"
+ alt="Computer" align="bottom" border="0" height="33" width="30"> </p>
+      </td>
+      <td bgcolor="#ffffff">
+      <p align="center"><img src="../ti89/graphics/right.gif" alt="===&gt;"
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td rowspan="2" nosave="">
+      <p align="center"><img src="../ti89/graphics/calc.gif"
+ alt="Calculator" align="bottom" border="0" height="35" width="60"> </p>
+      </td>
+      <td bgcolor="#ffffff" width="80%">RDY<br>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" width="7%">
+      <p align="center">2 </p>
+      </td>
+      <td bgcolor="#ffffff">
+      <p align="center"><img src="../ti89/graphics/left.gif" alt="&lt;==="
+ align="bottom" border="0" height="13" width="22"> </p>
+      </td>
+      <td bgcolor="#ffffff" width="80%">ACK with status<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+The 2 bytes after the MID &amp; CID contains a status word. The status
+word may contain version information but this is unsure. <br>
+But, the bit #0 of the MSB contains status (0 = ready, 1 = not ready).<br>
 <h4><a name="request"></a>Device Info<br>
 </h4>
 <p>No informations yet. Ti-Connect seems to be able to get battery
