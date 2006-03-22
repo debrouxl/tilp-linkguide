@@ -239,14 +239,23 @@ Communication flow for deleting variable from calculator:
     -> ACK
   ( USB endpoints reset after this... ? )
 
-Communication flow for requesting a screenshot:
-	<- ???
-	-> Request SCR
-	<- ACK
-	-> Data
-	<- ACK
+
+
+Communication flow for requesting a screenshot (TI <-/-> PC):
+
+	<- Handshake
+	-> Ack Hsk
+	
+	<- Data packet (request)
+	-> Ack
+
+	-> Data packet (answer ?)
+	<- Ack
+
+	-> Data packet (data of screen)
+	<- Ack
+
 	...
-	-> Data
-	<- ACK
-	-> Data last
-	<- ACK
+
+	-> Data (last)
+
