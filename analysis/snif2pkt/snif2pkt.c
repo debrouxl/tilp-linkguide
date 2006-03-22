@@ -264,7 +264,7 @@ int pkt_write(const char *filename, int nurbs)
 		pkt_size = u->data[3] | (u->data[2] << 8) | (u->data[1] << 16) | (u->data[0] << 24);
 		pkt_type = u->data[4];
 
-		fprintf(fo, "%08x %02x ", pkt_size, pkt_type);
+		fprintf(fo, "%08x (%02x) ", pkt_size, pkt_type);
 		fprintf(fo, "\t\t\t\t");
 		fprintf(fo, "| %s: %s\n", ep_way(u->ep), name_of_packet(pkt_type));
 
@@ -285,7 +285,7 @@ int pkt_write(const char *filename, int nurbs)
 			
 			add_data_code(data_code_found, data_code, &dcf);
 		
-			fprintf(fo, "\t%08x %04x ", data_size, data_code);
+			fprintf(fo, "\t%08x {%04x} ", data_size, data_code);
 			fprintf(fo, "\t\t");
 			fprintf(fo, "| %s: %s\n", "CMD", name_of_data(data_code));
 
@@ -309,9 +309,9 @@ int pkt_write(const char *filename, int nurbs)
 		else
 		{
 			if(pkt_type == 5)
-				fprintf(fo, "\t%04x\t\t", data_size >> 16);
+				fprintf(fo, "\t[%04x]\t\t", data_size >> 16);
 			else
-				fprintf(fo, "\t%08x", data_size);
+				fprintf(fo, "\t[%08x]", data_size);
 			fprintf(fo, "\t\t\t\t\t");
 			fprintf(fo, "|\n");
 		}
@@ -319,10 +319,10 @@ int pkt_write(const char *filename, int nurbs)
 		fprintf(fo, "\n");
 	}
 
-	fprintf(fo, "Packet types found: ");
+	fprintf(fo, "() Packet types found: ");
 	for(i = 0; i < ptf; i++) fprintf(fo, "%02x ", pkt_type_found[i]);
 	fprintf(fo, "\n");
-	fprintf(fo, "Data codes found: ");
+	fprintf(fo, "{} Data codes found: ");
 	for(i = 0; i < dcf; i++) fprintf(fo, "%04x ", data_code_found[i]);
 	fprintf(fo, "\n");
 
