@@ -4,7 +4,7 @@ The endpoints used are 0x02 (for computer to calculator messages) and
 0x81 (for calculator to computer messages).  All messages are sent via
 bulk transfer.
 
-There is almost 255 bytes per URB (250 + 5, see below).
+There is usually 255 bytes per URB (5 + 250, see below).
 
 
 0°) Introduction
@@ -18,11 +18,14 @@ The generic format for URB is below:
 	|			  |    |			 |		 |								 |
 	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
 
+The following notation may be used: xxyyzztt (type) xxyyzztt {code} [pure data]
 
-1°) Packet Header
------------------
+
+1°) Packet Header (5 bytes)
+---------------------------
 
 Each USB packet starts with the following header (packet header):
+
   LL LL LL LL		= four-byte big-endian length of non-header part
 			  of packet (after opcode)
   OO			= one-byte packet type
@@ -38,12 +41,14 @@ Types of packets include:
   05 = acknowledgement
 
 The handshake consists of:
-  -> (01) 00 00 04 00
-  <- (02) 00 00 00 fa
+
+  -> 00000004 (01) [00 00 04 00]
+  <- 00000004 (02) [00 00 00 fa]
   
 The acknowledgment (ACK) packet is packet type 05.  The data of the
 ACK packet is always e0 00:
-	-> (05) e0 00
+
+	-> 00000002 (05) [e0 00]
 
 Types 01,02 have 4 bytes of data, type 05 has 2 bytes only.
 
@@ -51,14 +56,16 @@ Types 01,02 have 4 bytes of data, type 05 has 2 bytes only.
 2°) Data header
 ---------------
 
-When sending any piece of data, the following header (data header) is prepended:
+When sending any piece of data, the following header (data header) is 
+prepended on the _first_ data packet:
+
   LL LL LL LL		= four-byte big-endian length of non-header part
 			  of data (after opcode)
   OO OO			= two-byte opcode
   ...
 
-Then, the data is sent in 250-byte chunks, each in one packet.  Packet
-type 03 is used for each of the packet except the last, and packet
+Then, the data is sent in 245 or 250-byte chunks, each in one packet. 
+Packet type 03 is used for each of the packet except the last, and packet
 type 04 is used for the last packet.  Each data packet is acknowledged
 with packet type 05.  Thus, you have, for short data:
 
