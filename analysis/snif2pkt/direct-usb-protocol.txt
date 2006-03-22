@@ -12,9 +12,9 @@ There is usually 255 bytes per URB (5 + 250, see below).
 
 The generic format for URB is below:
 
-	| packet header    | data												 |
-	|				   | data header         |								 |
-	| size		  | ty | size		 | code	 | data							 |
+	| packet header    | data (250 bytes max)								 |
+	|				   | data hdr (1st pkt)  |								 |
+	| size		  | ty | size		 | code	 | data	(246 bytes)				 |
 	|			  |    |			 |		 |								 |
 	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
 
@@ -34,11 +34,11 @@ Each USB packet starts with the following header (packet header):
 Packets will be represented as "(opcode) data" in the following text.
 
 Types of packets include:
-  01 = handshake
-  02 = handshake response
-  03 = data packet
-  04 = data packet (last in sequence)
-  05 = acknowledgement
+  01 = handshake (HSK)
+  02 = handshake response (ANS)
+  03 = data packet (DATA)
+  04 = last data packet (LAST)
+  05 = acknowledgement (ACK)
 
 The handshake consists of:
 

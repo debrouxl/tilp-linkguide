@@ -58,8 +58,8 @@ typedef struct
 
 static const Packet packets[] = 
 {
-	{ 0x01, "Handshake", 0, 4}, { 0x02, "Ack handshake", 0, 4}, 
-	{ 0x03, "Data Packet", 1, 6}, { 0x04, "Data packet (last)", 1, 6}, 
+	{ 0x01, "Handshake", 0, 4}, { 0x02, "Response", 0, 4}, 
+	{ 0x03, "Data", 1, 6}, { 0x04, "Last data", 1, 6}, 
 	{ 0x05, "Acknowledge", 0, 2}, 
 	{ 0 },
 };
