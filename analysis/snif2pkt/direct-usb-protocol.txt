@@ -1,0 +1,242 @@
+The initialization sequence for the direct USB cable seems to always
+be setting the alternate interface to 0 and the configuration to 1.
+The endpoints used are 0x02 (for computer to calculator messages) and
+0x81 (for calculator to computer messages).  All messages are sent via
+bulk transfer.
+
+There is almost 255 bytes per URB (250 + 5, see below).
+
+
+0°) Introduction
+----------------
+
+The generic format for URB is below:
+
+	| packet header    | data header         | data							 |
+	| size		  | ty | size		 | code	 |								 |
+	|			  |    |			 |		 |								 |
+	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
+
+
+1°) Packet Header
+-----------------
+
+Each USB packet starts with the following header (packet header):
+  LL LL LL LL		= four-byte big-endian length of non-header part
+			  of packet (after opcode)
+  OO			= one-byte packet type
+  ...
+
+Packets will be represented as "(opcode) data" in the following text.
+
+Types of packets include:
+  01 = handshake
+  02 = handshake response
+  03 = data packet
+  04 = data packet (last in sequence)
+  05 = acknowledgement
+
+The handshake consists of:
+  -> (01) 00 00 04 00
+  <- (02) 00 00 00 fa
+  
+The acknowledgment (ACK) packet is packet type 05.  The data of the
+ACK packet is always e0 00:
+	-> (05) e0 00
+
+
+2°) Data header
+---------------
+
+When sending any piece of data, the following header (data header) is prepended:
+  LL LL LL LL		= four-byte big-endian length of non-header part
+			  of data (after opcode)
+  OO OO			= two-byte opcode
+  ...
+
+Then, the data is sent in 250-byte chunks, each in one packet.  Packet
+type 03 is used for each of the packet except the last, and packet
+type 04 is used for the last packet.  Each data packet is acknowledged
+with packet type 05.  Thus, you have, for short data:
+
+  -> (04) header, data... 
+  <- ACK
+
+And for longer data, you might have:
+
+  -> (03) header, data...
+  <- ACK
+  -> (03) data...
+  <- ACK
+  -> (04) last part of data...
+  <- ACK
+
+3°) OpCodes
+-----------
+
+Data opcodes include:
+
+	0001 = unknown
+		00 03 00 01 00 00 00 00 07 D0		
+		Get opcode 0012 as answer
+		
+	0007 = request screenshot ?
+		00 01 00 22
+
+  0008 = get clock
+  	00 04 00 25 00 00 04 10 15 16 74 00 | ..........t.
+    27 00 00 01 01 00 28 00 00 01 00 00 | ............
+    24 00 00 01 01
+    
+    10 15 16 74 is the clock value
+
+  0009 = Request directory from calculator
+    00 00 00 06 00 02 00 03 00 05 00 01 00 41 00 42
+    00 01 00 01 00 01 01
+
+  000a = Directory entry
+    LL LL name...	= big-endian length of name, followed by name
+
+    00 00 06 00 02 00
+    00 04 f0 07 00
+    TT			= type of variable
+    00 03 00 00 01
+    FF			= some kind of flags?
+                            bit 0 (0x01) = archived
+    00 05
+    GG			= more flags?
+			    bit 0 (0x01) = auxiliary data present
+
+    If auxiliary data present:
+      LL LL data...     = big-endian length of data, followed by data
+
+    00 01 00 00 04
+    SS SS SS SS		= big-endian size of variable in bytes
+    00 04 01 00 42 01
+
+  000b = Send variable to calculator
+    LL LL name...	= big-endian length of name, followed by name
+    00
+    SS SS SS SS		= big-endian size of variable in bytes
+    01 00
+    FF			= not sure what this is...
+			    FF = 0x03 for lists and programs
+                                 0x02 for flash applications
+    00 02 00 04 f0 07
+    00
+    TT			= type of variable
+    00 03 00 01 00
+
+    00 08 00 04 00	= don't know what this means?
+    00 00 00
+      ( The last 8 bytes did not appear during flash application
+        transfer, but they did during list and program transfer. )
+
+  000c = Request variable from calculator
+    LL LL name...	= big-endian length of name, followed by name
+    00 01 ff ff ff ff
+    00 02 00 03 00 08
+    00 01 00 11 00 04
+    f0 07 00
+    TT			= type of variable
+    00 00
+
+  000d = Variable data being transferred
+    (Format depends on type of variable; seems to be related to the
+     .8x? file types)
+    Programs:
+      SS SS		= little-endian size of data in bytes
+      ...		= tokenized data
+    Lists:
+      LL LL		= little-endian length of list in elements
+      ...		= packed real numbers in TI-83+ BCD format
+      
+  000e = set clock
+  	00 25 00 04 10 15 17 01
+  	The last 4 bytes are clock (number of seconds elapsed since January the 1st, 1997 with leap years (2000, 2004, ...)
+  	Date & Time display formatting shoud be encoded somewhere (25 or 04) ?
+
+  0010 = Delete variable from calculator
+    LL LL name...	= big-endian length of name, followed by name
+    00 00 02 00 01 00
+    f0 07 00
+    TT			= type of variable?
+    00 13 00 01 00 01
+    00 00 00 00
+    
+  0011 = ?
+  
+  0012 = ?
+  	00 00 07 D0 
+  	Answer of opcode 0001 (data contains the last 4 bytes of opcode 0001 ?!)
+    
+  aa00 = Clear to send (CTS)
+    01
+    
+  bb00 = Screenshot ?
+  	00 01 d4 c0 (pure data)
+
+  dd00 = End of transmission (EOT)
+    (no data)
+
+  ee00 = Error
+    CC CC		= two-byte error code
+
+    Error codes include:
+      00 0c = out of memory?
+      00 0e = invalid name?
+
+4°) Communication Flow
+----------------------
+
+Communication flow for requesting directory from calculator:
+  -> Request directory
+  <- ACK
+  (
+    <- Directory entry | EOT
+    -> ACK
+  )*
+
+Communication flow for sending variable to calculator:
+  -> Send variable
+    <- ACK
+  <- CTS | Error
+    -> ACK
+  -> Variable data
+    <- ACK
+  <- CTS
+    -> ACK
+  ( Maybe jump back to earlier stage here if sending more
+    than one variable simultaneously? )
+  -> EOT
+    <- ACK
+
+Communication flow for requesting variable from calculator:
+  -> Request variable
+    <- ACK
+  <- Directory entry
+    -> ACK
+  <- Variable data
+    -> ACK
+  ( The USB endpoints were always reset after this transction, so
+    it's hard to tell whether there was supposed to be anything else
+    after this. )
+
+Communication flow for deleting variable from calculator:
+  -> Delete variable
+    <- ACK
+  <- CTS
+    -> ACK
+  ( USB endpoints reset after this... ? )
+
+Communication flow for requesting a screenshot:
+	<- ???
+	-> Request SCR
+	<- ACK
+	-> Data
+	<- ACK
+	...
+	-> Data
+	<- ACK
+	-> Data last
+	<- ACK
