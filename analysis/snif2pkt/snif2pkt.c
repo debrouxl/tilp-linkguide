@@ -208,7 +208,7 @@ int add_data_code(uint16_t* array, uint16_t code, int *count)
 		if(array[i] == code)
 			return 0;
 
-	array[++i] = code;
+	array[i++] = code;
 	*count = i;
 
 	return i;
