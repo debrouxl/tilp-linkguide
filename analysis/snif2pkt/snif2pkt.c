@@ -25,8 +25,9 @@
 /*
 	Format:
 
-	| packet header    | data header         | data							 |
-	| size		  | ty | size		 | code	 |								 |
+	| packet header    | data												 |
+	|				   | data header         |								 |
+	| size		  | ty | size		 | code	 | data							 |
 	|			  |    |			 |		 |								 |
 	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
 */
@@ -45,6 +46,7 @@ typedef struct
 {
 	uint8_t		type;
 	const char*	name;
+	int			data_hdr;
 	int			data;
 } Packet;
 
@@ -56,9 +58,9 @@ typedef struct
 
 static const Packet packets[] = 
 {
-	{ 0x01, "Handshake", 0}, { 0x02, "Ack handshake", 0}, 
-	{ 0x03, "Data Packet", 1}, { 0x04, "Data packet (last)", 1}, 
-	{ 0x05, "Acknowledge", 0}, 
+	{ 0x01, "Handshake", 0, 4}, { 0x02, "Ack handshake", 0, 4}, 
+	{ 0x03, "Data Packet", 1, 6}, { 0x04, "Data packet (last)", 1, 6}, 
+	{ 0x05, "Acknowledge", 0, 2}, 
 	{ 0 },
 };
 
@@ -90,13 +92,13 @@ const char* name_of_packet(uint8_t id)
 	return "";
 }
 
-int is_a_packet_with_data(uint8_t id)
+int is_a_packet_with_data_header(uint8_t id)
 {
 	int i;
   
   for(i=0; packets[i].name; i++)
     if(id == packets[i].type)
-		if(packets[i].data)
+		if(packets[i].data_hdr)
 			return 1;
 
   return 0;
@@ -267,8 +269,13 @@ int pkt_write(const char *filename, int nurbs)
 		fprintf(fo, "| %s: %s\n", ep_way(u->ep), name_of_packet(pkt_type));
 
 		add_pkt_type(pkt_type_found, pkt_type, &ptf);
+
+		if((pkt_type == 1) || pkt_type == 2)
+			data_size = u->data[8] | (u->data[7] << 8) | (u->data[6] << 16) | (u->data[5] << 24);
+		else if(pkt_type == 5)
+			data_size = u->data[6] | (u->data[5] << 8);
 		
-		if(is_a_packet_with_data(pkt_type) && !concat)
+		if(is_a_packet_with_data_header(pkt_type) && !concat)
 		{
 			if(pkt_type == 0x03 && pkt_size == 0xFA)
 				concat = 1;
