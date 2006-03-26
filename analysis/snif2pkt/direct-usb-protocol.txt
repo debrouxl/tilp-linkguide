@@ -4,7 +4,9 @@ The endpoints used are 0x02 (for computer to calculator messages) and
 0x81 (for calculator to computer messages).  All messages are sent via
 bulk transfer.
 
-There is usually 255 bytes per URB (5 + 250, see below).
+There is usually:
+- TI84+: 255 bytes per URB (5 + 250, see below),
+- Titanium: 1023 bytes per URB (5 and next 1023 or 5 + 250).
 
 
 0°) Introduction
@@ -54,8 +56,8 @@ ACK packet is always E0 00 (if successful):
 Types 01,02 have 4 bytes of data, type 05 has 2 bytes only.
 
 
-2°) Data header
----------------
+2°) Data header (6 bytes)
+-------------------------
 
 When sending any piece of data, the following header (data header) is 
 prepended on the _first_ data packet:
@@ -81,6 +83,10 @@ And for longer data, you might have:
   <- ACK
   -> (04) last part of data...
   <- ACK
+
+Note: when Titanium is sending huge data, packet header is sent alone and next, 1023 bytes
+of data are sent.
+
 
 3°) OpCodes
 -----------
