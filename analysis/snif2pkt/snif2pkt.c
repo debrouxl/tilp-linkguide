@@ -309,7 +309,7 @@ int pkt_write(const char *filename, int nurbs)
 		else
 		{
 			if(pkt_type == 0x05)
-				fprintf(fo, "\t[%04x]\t\t", data_size >> 16);
+				fprintf(fo, "\t[%04x]\t\t", data_size);
 			else
 				fprintf(fo, "\t[%08x]", data_size);
 			fprintf(fo, "\t\t\t\t\t");
@@ -413,6 +413,8 @@ int snif_read(const char* filename, int* nurbs)
 			uint8_t line[20], data[256];
 			int size;
 			int i = 0;
+
+			memset(data, 0, sizeof(data));
 
 			for(fgets(str, sizeof(str), fi);
 				strncmp(str, TOKEN3, strlen(TOKEN3)); 
