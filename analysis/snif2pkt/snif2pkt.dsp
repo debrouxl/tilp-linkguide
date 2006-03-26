@@ -101,6 +101,30 @@ SOURCE=.\snif2pkt.c
 
 SOURCE=".\direct-usb-protocol.txt"
 # End Source File
+# Begin Source File
+
+SOURCE=.\screenshot_84.log
+# End Source File
+# Begin Source File
+
+SOURCE=.\screenshot_84.pkt
+# End Source File
+# Begin Source File
+
+SOURCE=.\screenshot_89.log
+# End Source File
+# Begin Source File
+
+SOURCE=.\screenshot_89.pkt
+# End Source File
+# Begin Source File
+
+SOURCE=.\test.log
+# End Source File
+# Begin Source File
+
+SOURCE=.\test.pkt
+# End Source File
 # End Group
 # End Target
 # End Project

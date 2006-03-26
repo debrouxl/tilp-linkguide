@@ -184,7 +184,7 @@ int fill_buf(FILE *f, uint8_t data, int flush)
 	return 0;
 }
 
-Urb** buffer;
+Urb** urbs;
 
 int add_pkt_type(uint8_t* array, uint8_t type, int *count)
 {
@@ -236,7 +236,7 @@ int pkt_write(const char *filename, int nurbs)
 
 #if 0
 
-	for(ptr = buffer; *ptr; ptr++)
+	for(ptr = urbs; *ptr; ptr++)
 	{
 		Urb *u = *ptr;
 
@@ -254,7 +254,7 @@ int pkt_write(const char *filename, int nurbs)
 	// process data
 	for(i = 0; i < nurbs; i++)
     {
-		Urb *u = buffer[i];
+		Urb *u = urbs[i];
 		uint32_t pkt_size;
 		uint8_t pkt_type;
 		uint32_t data_size;
@@ -308,7 +308,7 @@ int pkt_write(const char *filename, int nurbs)
 		}
 		else
 		{
-			if(pkt_type == 5)
+			if(pkt_type == 0x05)
 				fprintf(fo, "\t[%04x]\t\t", data_size >> 16);
 			else
 				fprintf(fo, "\t[%08x]", data_size);
@@ -345,7 +345,8 @@ int read_line(const char* str, uint8_t* data)
 }
 
 /*
-	Packet can have up to 255 bytes and we always have a TI packet per URB. Easy !
+	Packet can have up to 255 bytes and we often have a TI packet per URB but
+	this is not always the case (especially with TiConnect&Titanium).
  */
 int snif_read(const char* filename, int* nurbs)
 {
@@ -387,8 +388,8 @@ int snif_read(const char* filename, int* nurbs)
 	}
     
 	// allocate a NULL-terminated array of Urb's
-    buffer = (Urb **)calloc(nlines + 1, sizeof(Urb *));
-    if(buffer == NULL)
+    urbs = (Urb **)calloc(nlines + 1, sizeof(Urb *));
+    if(urbs == NULL)
     {
         fprintf(stderr, "calloc error.\n");
         exit(-1);
@@ -433,7 +434,7 @@ int snif_read(const char* filename, int* nurbs)
 				urb->ep = ep & ~0x80;
 				urb->size = i;
 				memcpy(urb->data, data, 255);
-				buffer[j++] = urb;
+				urbs[j++] = urb;
 			}
 
 			found = 0;
@@ -469,7 +470,7 @@ int main(int argc, char **argv)
 	snif_read(src_name, &nurbs);
 	pkt_write(dst_name,  nurbs);
 
-	free(buffer);
+	free(urbs);
   
 	return 0;
 }

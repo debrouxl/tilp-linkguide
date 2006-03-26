@@ -13,7 +13,7 @@ There is usually 255 bytes per URB (5 + 250, see below).
 The generic format for URB is below:
 
 	| packet header    | data (250 bytes max)								 |
-	|				   | data hdr (1st pkt)  |								 |
+	|				   |  or												 |
 	| size		  | ty | size		 | code	 | data	(246 bytes)				 |
 	|			  |    |			 |		 |								 |
 	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
@@ -43,12 +43,13 @@ Types of packets include:
 The handshake consists of:
 
   -> 00000004 (01) [00 00 04 00]
-  <- 00000004 (02) [00 00 00 fa]
+  <- 00000004 (02) [00 00 00 fa] TI84+
+  <- 00000004 (02) [00 00 03 ff] Titanium
   
 The acknowledgment (ACK) packet is packet type 05.  The data of the
-ACK packet is always e0 00:
+ACK packet is always E0 00 (if successful):
 
-	-> 00000002 (05) [e0 00]
+	-> 00000002 (05) [E0 00]
 
 Types 01,02 have 4 bytes of data, type 05 has 2 bytes only.
 
