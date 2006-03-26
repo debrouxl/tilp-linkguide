@@ -148,7 +148,7 @@ typedef struct
 {
 	uint8_t	ep;			// endpoint aka direction (0x81 = IN, 0x02 = OUT)
 	uint8_t	size;		// #bytes
-	uint8_t	data[256];	// data
+	uint8_t	data[1024];	// data
 } Urb;
 
 #define WIDTH	12
@@ -357,6 +357,9 @@ int snif_read(const char* filename, int* nurbs)
 	int nlines = 0;
 	int j = 0;
 	int ep = -1;
+
+	Urb *prev = NULL;
+	int concat = 0;
     
     // open file
 	fi = fopen(filename, "rt");
@@ -410,9 +413,10 @@ int snif_read(const char* filename, int* nurbs)
 
 		if(found && !strncmp(str, TOKEN2, strlen(TOKEN2)))
 		{
-			uint8_t line[20], data[256];
-			int size;
-			int i = 0;
+			uint8_t line[20], data[1024];
+			unsigned int size;
+			unsigned int i = 0;
+			uint32_t ps;
 
 			memset(data, 0, sizeof(data));
 
@@ -427,16 +431,40 @@ int snif_read(const char* filename, int* nurbs)
 				i += size;
 
 				//printf("%s (%i)\n", str, size);
-				printf(".");
+				//printf(".");
 			}
-	
+
+			if(!i)
+				continue;
+
+			ps = (data[3] | (data[2] << 8) | (data[1] << 16) | (data[0] << 24)) + 5;
+			printf("<%08x-%08x> ", ps, i);
+
 			if(i > 0)
 			{
-				Urb *urb = calloc(1, sizeof(Urb));
-				urb->ep = ep & ~0x80;
-				urb->size = i;
-				memcpy(urb->data, data, 255);
-				urbs[j++] = urb;
+				if(ps == i)
+				{
+					Urb *urb = calloc(1, sizeof(Urb));
+					urb->ep = ep & ~0x80;
+					urb->size = i;
+					memcpy(urb->data, data, i);
+					urbs[j++] = prev = urb;
+				}
+				else if(ps != i && !concat)
+				{
+					Urb *urb = calloc(1, sizeof(Urb));
+					urb->ep = ep & ~0x80;
+					urb->size = i;
+					memcpy(urb->data, data, i);
+					urbs[j++] = prev = urb;
+					concat = 1;
+				}
+				else if(concat)
+				{
+					memcpy(prev->data + prev->size, data, i);
+					prev->size += i;
+					concat = 0;
+				}
 			}
 
 			found = 0;
@@ -473,6 +501,8 @@ int main(int argc, char **argv)
 	pkt_write(dst_name,  nurbs);
 
 	free(urbs);
+
+	while(!kbhit());
   
 	return 0;
 }
