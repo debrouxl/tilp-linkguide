@@ -146,9 +146,10 @@ typedef struct
 
 typedef struct
 {
-	uint8_t	ep;			// endpoint aka direction (0x81 = IN, 0x02 = OUT)
-	uint8_t	size;		// #bytes
-	uint8_t	data[1024];	// data
+	uint8_t		ep;			// endpoint aka direction (0x81 = IN, 0x02 = OUT)
+	uint8_t		size;		// size of packet
+	uint8_t		data[1024];	// data
+	uint32_t	len;		// length of data
 } Urb;
 
 #define WIDTH	12
@@ -344,6 +345,68 @@ int read_line(const char* str, uint8_t* data)
 	return i;
 }
 
+// parse file on a per-urb basis
+static Urb* load_urb(FILE *fi)
+{
+	int found = 0;
+	char str[1024];
+	unsigned int ep = -1;
+	unsigned int nbytes;
+	Urb *urb;
+	
+	urb = calloc(1, sizeof(Urb));
+
+	for(nbytes = 0; found < 2 && !feof(fi);)
+	{
+		fgets(str, sizeof(str), fi);
+
+		if(!strncmp(str, TOKEN1, strlen(TOKEN1)))
+		{
+			found = 1;
+			fgets(str, sizeof(str), fi);
+			sscanf(str + strlen(TOKEN4), "0x%08x]", &ep);
+		}
+
+		if(found && !strncmp(str, TOKEN2, strlen(TOKEN2)))
+		{
+			uint8_t line[20], data[1024];
+			unsigned int size;
+
+			memset(data, 0, sizeof(data));
+
+			for(fgets(str, sizeof(str), fi);
+				strncmp(str, TOKEN3, strlen(TOKEN3)); 
+				fgets(str, sizeof(str), fi))
+			{
+				str[strlen(str)-1] = 0;
+
+				size = read_line(str, line);
+				memcpy(&data[nbytes], line, size);
+				nbytes += size;
+
+				printf("%s (%i)\n", str, size);
+				//printf(".");
+			}
+
+			if(!nbytes)
+				continue;
+
+			urb->size = (data[3] | (data[2] << 8) | (data[1] << 16) | (data[0] << 24)) + 5;
+
+			if(nbytes > 0)
+			{
+				urb->ep = ep & ~0x80;
+				urb->len = nbytes;
+				memcpy(urb->data, data, urb->len);
+			}
+
+			found = 2;
+		}
+	}
+
+	return urb;
+}
+
 /*
 	Packet can have up to 255 bytes and we often have a TI packet per URB but
 	this is not always the case (especially with TiConnect&Titanium).
@@ -353,10 +416,8 @@ int snif_read(const char* filename, int* nurbs)
     FILE *fi;
 	char str[1024];
 	int ret = 0;
-	int found = 0;
 	int nlines = 0;
 	int j = 0;
-	int ep = -1;
 
 	Urb *prev = NULL;
 	int concat = 0;
@@ -402,44 +463,8 @@ int snif_read(const char* filename, int* nurbs)
     rewind(fi);
 	while(!feof(fi))
 	{
-		fgets(str, sizeof(str), fi);
-
-		if(!strncmp(str, TOKEN1, strlen(TOKEN1)))
-		{
-			found = 1;
-			fgets(str, sizeof(str), fi);
-			sscanf(str + strlen(TOKEN4), "0x%08x]", &ep);
-		}
-
-		if(found && !strncmp(str, TOKEN2, strlen(TOKEN2)))
-		{
-			uint8_t line[20], data[1024];
-			unsigned int size;
-			unsigned int i = 0;
-			uint32_t ps;
-
-			memset(data, 0, sizeof(data));
-
-			for(fgets(str, sizeof(str), fi);
-				strncmp(str, TOKEN3, strlen(TOKEN3)); 
-				fgets(str, sizeof(str), fi))
-			{
-				str[strlen(str)-1] = 0;
-
-				size = read_line(str, line);
-				memcpy(&data[i], line, size);
-				i += size;
-
-				//printf("%s (%i)\n", str, size);
-				//printf(".");
-			}
-
-			if(!i)
-				continue;
-
-			ps = (data[3] | (data[2] << 8) | (data[1] << 16) | (data[0] << 24)) + 5;
-			printf("<%08x-%08x> ", ps, i);
-
+		urbs[j++] = load_urb(fi);
+/*
 			if(i > 0)
 			{
 				if(ps == i)
@@ -469,7 +494,7 @@ int snif_read(const char* filename, int* nurbs)
 
 			found = 0;
 		}
-
+		*/
 	}
 
 	*nurbs = j-1;

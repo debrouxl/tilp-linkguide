@@ -6,7 +6,7 @@ bulk transfer.
 
 There is usually:
 - TI84+: 255 bytes per URB (5 + 250, see below),
-- Titanium: 1023 bytes per URB (5 and next 1023 or 5 + 250).
+- Titanium: 1023 bytes per URB (5 = 250 _or_ 5 and next 1023).
 
 
 0°) Introduction
@@ -21,6 +21,9 @@ The generic format for URB is below:
 	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
 
 The following notation may be used: xxyyzztt (type) xxyyzztt {code} [pure data]
+
+On Titanium, the data part may follow the packet header or may be sent 
+in another URB (split).
 
 
 1°) Packet Header (5 bytes)
