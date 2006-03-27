@@ -23,7 +23,7 @@ The generic format for URB is below:
 The following notation may be used: xxyyzztt (type) xxyyzztt {code} [pure data]
 
 On Titanium, the data part may follow the packet header or may be sent 
-in another URB (split).
+in another URB (fragmented).
 
 
 1°) Packet Header (5 bytes)

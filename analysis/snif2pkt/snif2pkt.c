@@ -16,6 +16,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#include <conio.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -147,9 +148,11 @@ typedef struct
 typedef struct
 {
 	uint8_t		ep;			// endpoint aka direction (0x81 = IN, 0x02 = OUT)
-	uint8_t		size;		// size of packet
-	uint8_t		data[1024];	// data
+	uint32_t	size;		// size of packet
+	uint8_t		data[2048];	// data
 	uint32_t	len;		// length of data
+
+	int			frag;		// fragmented
 } Urb;
 
 #define WIDTH	12
@@ -353,6 +356,9 @@ static Urb* load_urb(FILE *fi)
 	unsigned int ep = -1;
 	unsigned int nbytes;
 	Urb *urb;
+
+	if(feof(fi))
+		return NULL;
 	
 	urb = calloc(1, sizeof(Urb));
 
@@ -369,7 +375,7 @@ static Urb* load_urb(FILE *fi)
 
 		if(found && !strncmp(str, TOKEN2, strlen(TOKEN2)))
 		{
-			uint8_t line[20], data[1024];
+			uint8_t line[20], data[2048];
 			unsigned int size;
 
 			memset(data, 0, sizeof(data));
@@ -384,7 +390,7 @@ static Urb* load_urb(FILE *fi)
 				memcpy(&data[nbytes], line, size);
 				nbytes += size;
 
-				printf("%s (%i)\n", str, size);
+				//printf("%s (%i)\n", str, size);
 				//printf(".");
 			}
 
@@ -416,12 +422,15 @@ int snif_read(const char* filename, int* nurbs)
     FILE *fi;
 	char str[1024];
 	int ret = 0;
+	int found = 0;
 	int nlines = 0;
+	int i = 0;
 	int j = 0;
+	int k = 0;
 
 	Urb *prev = NULL;
 	int concat = 0;
-    
+   
     // open file
 	fi = fopen(filename, "rt");
     if(fi == NULL)
@@ -459,46 +468,51 @@ int snif_read(const char* filename, int* nurbs)
         exit(-1);
     }
 
+	fprintf(stdout, "Reading data:\n");
+
 	// second pass: load data
     rewind(fi);
 	while(!feof(fi))
 	{
-		urbs[j++] = load_urb(fi);
-/*
-			if(i > 0)
-			{
-				if(ps == i)
-				{
-					Urb *urb = calloc(1, sizeof(Urb));
-					urb->ep = ep & ~0x80;
-					urb->size = i;
-					memcpy(urb->data, data, i);
-					urbs[j++] = prev = urb;
-				}
-				else if(ps != i && !concat)
-				{
-					Urb *urb = calloc(1, sizeof(Urb));
-					urb->ep = ep & ~0x80;
-					urb->size = i;
-					memcpy(urb->data, data, i);
-					urbs[j++] = prev = urb;
-					concat = 1;
-				}
-				else if(concat)
-				{
-					memcpy(prev->data + prev->size, data, i);
-					prev->size += i;
-					concat = 0;
-				}
-			}
+		Urb *tmp, *urb;
+		
+		urb = load_urb(fi);
+		if(!urb) break;
+		printf(".");
 
-			found = 0;
+		// Big blocks of data on Titanium are fragmented. Re-assemble here
+		if(urb->len < urb->size)
+		{
+			urb->frag = 1;
+			i++;
+			//printf("!! <%08x-%08x> \n", urb->len, urb->size);
+			
+			do
+			{
+				tmp = load_urb(fi);
+				if(!tmp) break;
+				printf("*");
+				k++;
+				
+				memcpy(urb->data + urb->len, tmp->data, tmp->len);
+				urb->len += tmp->len;
+
+				free(tmp);
+			} while(urb->len < urb->size);
+
+			//printf("$ <%08x-%08x> \n", urb->len, urb->size);
 		}
-		*/
+		//else
+			//printf(<%08x-%08x> \n", urb->len, urb->size);
+
+		urbs[j++] = urb;
 	}
 
-	*nurbs = j-1;
+ 	*nurbs = --j;
 	fclose(fi);
+
+	printf("\n");
+	fprintf(stdout, "Processed %i blocks into %i packets (%i packets were fragmented into %i blocks).\n", j+k, j, i, k);
     
 	return 0;
 }
