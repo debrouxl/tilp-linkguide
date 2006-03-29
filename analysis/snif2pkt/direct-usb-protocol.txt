@@ -4,6 +4,8 @@
 					*****************************
 
 
+Based on preliminary work made by "Drake Wilson" <drake@libcom.com>. Thanks !
+
 
 The initialization sequence for the direct USB cable seems to always
 be setting the alternate interface to 0 and the configuration to 1.
@@ -122,12 +124,12 @@ And for longer data, you might have:
 
 Data opcodes include:
 
-	0001 = unknown
-		00 03 00 01 00 00 00 00 07 D0		
-		Get opcode 0012 as answer
+	0001 = unknown request (data = 00 03 00 01 00 00 00 00 07 D0)
+		Reply with opcode 0012 and data = 00 00 07 D0
 		
-	0007 = request screenshot ?
-		00 01 00 22
+	0007 = request screenshot with (data = 00 01 00 22)
+		Reply with opcode 0008 and send screen size and screen bitmap:
+		00 01 00 22 LL HH 00 [LLHH bytes of screen]
 
   0008 = get clock
   	00 04 00 25 00 00 04 10 15 16 74 00 | ..........t.
@@ -276,26 +278,39 @@ Communication flow for deleting variable from calculator:
   ( USB endpoints reset after this... ? )
 
 
-5°) Screenshot
+5°) Screenshot on Titanium
+--------------------------
 
 Communication flow for requesting a screenshot (TI <-/-> PC):
 
-	<- Handshake
-	-> Ack Hsk
+	PC: Handshake
+	TI: Response
 	
-	<- Data packet (request)
-	-> Ack
+	PC: Data	{0007} 00 01 00 22   
+	TI: Ack	
 
-	-> Data packet (answer ?)
-	<- Ack
+	TI: Data	{0008} 00 01 00 22 00 0F 00 [3840 bytes of screen] (*)
+	PC:	Ack
 
-	-> Data packet (data of screen)
-	<- Ack
+	TI: Data	[3840 bytes of screen]
+	PC:	Ack
 
-	...
+	TI: Data	[3840 bytes of screen]
+	PC:	Ack
 
-	-> Data (last)
+	TI: Last	[3840 bytes of screen]
+	PC:	Ack
+
+(*) 00 0F = 3840 bytes -> size of screen
 
 
-Request: 00000004 {0007} 00 01 00 22   
-Data: 00000307 {0008} 00 01 00 22 LL HH 00 where LLHH is size of bitmap
+
+6°) Others
+-----------
+
+
+	PC: Data	{0001} 00 03 00 01 00 00 00 00 07 D0
+	TI: Ack
+	
+	TI: Data	{0012} 00 00 07 D0
+	PC:	Ack
