@@ -542,7 +542,7 @@ int main(int argc, char **argv)
 
 	free(urbs);
 
-	while(!kbhit());
+	//while(!kbhit());
   
 	return 0;
 }
