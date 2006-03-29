@@ -126,6 +126,8 @@ Data opcodes include:
 
 	0001 = unknown request (data = 00 03 00 01 00 00 00 00 07 D0)
 		Reply with opcode 0012 and data = 00 00 07 D0
+
+		Same for all calcs. Is an echo ?
 		
 	0007 = request screenshot with (data = 00 01 00 22)
 		Reply with opcode 0008 and send screen size and screen bitmap:
@@ -278,8 +280,8 @@ Communication flow for deleting variable from calculator:
   ( USB endpoints reset after this... ? )
 
 
-5°) Screenshot on Titanium
---------------------------
+5°) Screenshot (on Titanium)
+----------------------------
 
 Communication flow for requesting a screenshot (TI <-/-> PC):
 
@@ -288,6 +290,11 @@ Communication flow for requesting a screenshot (TI <-/-> PC):
 	
 	PC: Data	{0007} 00 01 00 22   
 	TI: Ack	
+
+---- 84+ ----
+	TI: Data	{bb00} 00 01 D4 C0
+	PC: Ack
+---- 84+ ----
 
 	TI: Data	{0008} 00 01 00 22 00 0F 00 [3840 bytes of screen] (*)
 	PC:	Ack
