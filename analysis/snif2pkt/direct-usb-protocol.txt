@@ -1,35 +1,57 @@
+					*****************************
+					* Direct Cable(tm) protocol *
+					* by roms 2006				*
+					*****************************
+
+
+
 The initialization sequence for the direct USB cable seems to always
 be setting the alternate interface to 0 and the configuration to 1.
 The endpoints used are 0x02 (for computer to calculator messages) and
 0x81 (for calculator to computer messages).  All messages are sent via
 bulk transfer.
 
-There is usually:
-- TI84+: 255 bytes per URB (5 + 250, see below),
-- Titanium: 1023 bytes per URB (5 = 250 _or_ 5 and next 1023).
+Data are sent on a per-block basis (URB = Usb Request Block).
+Block length is 256 bytes for TI84+ and Titanium.
+
+Please note this is different of packets below because URBs are managed by driver
+or lower layers (at least for Titanium).
+Packet length (chunck) is:
+- 255 bytes on TI84+,
+- 1023 bytes on Titanium.
+
+Clearly: 
+- on TI84+, a packet is always contained in an URBs (255 < 256),
+- on Titanium, a packet may be contained in one or more URBs (1023 > 256).
+
+If this is not clear for you, take a look at screenshot.log (SniffUsb) and screenshot.pkt.
 
 
 0°) Introduction
 ----------------
 
-The generic format for URB is below:
+The generic format for packets is below:
 
-	| packet header    | data (250 bytes max)								 |
+	| packet header    | data (250/1018 bytes max)							 |
 	|				   |  or												 |
-	| size		  | ty | size		 | code	 | data	(246 bytes)				 |
+	| size		  | ty | size		 | code	 | data	(246/1012 bytes)		 |
 	|			  |    |			 |		 |								 |
 	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
 
-The following notation may be used: xxyyzztt (type) xxyyzztt {code} [pure data]
+The following notation will be used in this doc: 
 
-On Titanium, the data part may follow the packet header or may be sent 
-in another URB (fragmented).
+	aabbccdd (type) xxyyzztt {code} [pure data]
+
+Note: on Titanium, the data part usually follows the packet header but it may be sent in
+another URB (fragmented) when the data part is huge (> 1012). In this case, the packet
+header is sent alone in URB and is next followed by a 1023-bytes chunk of data in a second URB.
+TI seems not to like easy things :-(
 
 
 1°) Packet Header (5 bytes)
 ---------------------------
 
-Each USB packet starts with the following header (packet header):
+Each packet starts with the following header (packet header):
 
   LL LL LL LL		= four-byte big-endian length of non-header part
 			  of packet (after opcode)
@@ -70,7 +92,14 @@ prepended on the _first_ data packet:
   OO OO			= two-byte opcode
   ...
 
-Then, the data is sent in 245 or 250-byte chunks, each in one packet. 
+On TI84+, the data is sent in 245-bytes chunks for the first packet or in 250-bytes
+chunks for the others. If data is greater than 245 bytes, then data is sent in several 
+packets (several data/ack steps).
+
+On Titanium, the data is sent in 1012-bytes chunks for the first packet or in 1018-bytes
+chunks for the others. If data is greater than 1012 bytes, then data is sent in several 
+packets (several data/ack steps).
+
 Packet type 03 is used for each of the packet except the last, and packet
 type 04 is used for the last packet.  Each data packet is acknowledged
 with packet type 05.  Thus, you have, for short data:
@@ -86,9 +115,6 @@ And for longer data, you might have:
   <- ACK
   -> (04) last part of data...
   <- ACK
-
-Note: when Titanium is sending huge data, packet header is sent alone and next, 1023 bytes
-of data are sent.
 
 
 3°) OpCodes
@@ -250,6 +276,7 @@ Communication flow for deleting variable from calculator:
   ( USB endpoints reset after this... ? )
 
 
+5°) Screenshot
 
 Communication flow for requesting a screenshot (TI <-/-> PC):
 
@@ -269,3 +296,6 @@ Communication flow for requesting a screenshot (TI <-/-> PC):
 
 	-> Data (last)
 
+
+Request: 00000004 {0007} 00 01 00 22   
+Data: 00000307 {0008} 00 01 00 22 LL HH 00 where LLHH is size of bitmap
