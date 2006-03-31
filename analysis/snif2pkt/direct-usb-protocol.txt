@@ -121,8 +121,17 @@ And for longer data, you might have:
 Note: usually, the data header size is 7 bytes greater than the size of real data because
 7 bytes are prepended to data (4 bytes of request and 3 bytes of data size).
 
+3°) Request IDs
+---------------
 
-3°) OpCodes
+- 0022: screen
+- 0024: related to clock (dst ?)
+- 0025: clock value
+- 0027: date format
+- 0028: time format (am/pm or 24h)
+
+
+4°) OpCodes
 -----------
 
 Data opcodes include:
@@ -362,4 +371,8 @@ Communication flow for requesting a screenshot (TI <-/-> PC):
 	TI: Last	{0008} 00 04 00 25 00 00 04 10 15 16 74 00 27 00 00 01 01 00 28 00 00 01 00 00 24 00 00 01 01 (*)
 	PC:	Ack
 
-(*) 10 15 16 74 is the clock value
+(*) 
+25 is followed by the the clock value
+27 is followed by the date formatting (1: MDY, 2: DMY, 0:YMD)
+28 is followed by the clock mode (0: am/pm or 1: 24h)
+
