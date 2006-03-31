@@ -121,18 +121,18 @@ And for longer data, you might have:
 Note: usually, the data header size is 7 bytes greater than the size of real data because
 7 bytes are prepended to data (4 bytes of request and 3 bytes of data size).
 
-3°) Request IDs
----------------
+3°) Type IDs (tid)
+------------------
 
 - 0022: screen
-- 0024: related to clock (dst ?)
+- 0024: related to clock (???)
 - 0025: clock value
 - 0027: date format
 - 0028: time format (am/pm or 24h)
 
 
-4°) OpCodes
------------
+4°) Op-codes (opc)
+------------------
 
 Data opcodes include:
 
@@ -140,30 +140,47 @@ Data opcodes include:
 		Reply with opcode 0012 and data = 00 00 07 D0
 
 		Same for all calcs. Is an echo ?
+
+	0012 = ???
+		Answer of 0001
 		
-	0007 = request:
+	0007 = request (REQ)
 
 		The format seems to be the following:
-		00 NN req1 req2 ... reqN	where NN is the number of requests and reqI the request on 2 bytes)
+		00 NN tid1 tid2 ... tidN	where NN is the number of requests and tidI the request on 2 bytes)
 		Replied with opcode 0008 below.
 
-		- screenshot with data = 00 01 00 22
+		- screenshot with data = 00 01  00 22
 
-		- clock with data = 00 04 00 25  00 27 00 28 00 24		
+		- clock with data = 00 04  00 25  00 27  00 28  00 24		
 
-	0008 = request answer
+	0008 = request answer (VAR)
 
 		The format seems to be the following:
-		00 NN [req1 size1 data1] [req2 size2 data2] ... [reqN sizeN dataN]
+		00 NN [tid1 size1 data1] [tid2 size2 data2] ... [tidN sizeN dataN]
 
 		where:
 		- NN is the number of request 
-		- reqI is the previous request reqI (2 bytes)
+		- tidI is the previous request tidI (2 bytes)
 		- sizeI is the size of data following (3 bytes)
-		- dataI is the data request by reqI (sizeI bytes)
+		- dataI is the data request by tidI (sizeI bytes)
 		and so on...
 
-	EE00 = error
+	000e = request to send (RTS)
+	
+		The format is the following: tid size data
+		where tid is the type id, size is the size of data
+
+	aa00 = clear to send (CTS)
+		01
+
+	bb00 = clear to receive (CTR)
+  		00 01 d4 c0
+
+	dd00 = end of transmission (EOT)
+		no data
+
+	ee00 = error
 
 	    data = CC CC		where CCCC is a two-byte error code
 
@@ -235,11 +252,6 @@ Data opcodes include:
       LL LL		= little-endian length of list in elements
       ...		= packed real numbers in TI-83+ BCD format
       
-  000e = set clock
-  	00 25 00 04 10 15 17 01
-  	The last 4 bytes are clock (number of seconds elapsed since January the 1st, 1997 with leap years (2000, 2004, ...)
-  	Date & Time display formatting shoud be encoded somewhere (25 or 04) ?
-
   0010 = Delete variable from calculator
     LL LL name...	= big-endian length of name, followed by name
     00 00 02 00 01 00
@@ -254,12 +266,6 @@ Data opcodes include:
   	00 00 07 D0 
   	Answer of opcode 0001 (data contains the last 4 bytes of opcode 0001 ?!)
     
-  aa00 = Clear to send (CTS)
-    01
-    
-  bb00 = Screenshot ?
-  	00 01 d4 c0 (pure data)
-
   dd00 = End of transmission (EOT)
     (no data)
 
@@ -352,8 +358,8 @@ Communication flow for requesting a screenshot (TI <-/-> PC):
 (*) 00 0F = 3840 bytes -> size of screen
 
 
-6°) Clock (on TI84+)
---------------------
+6°) Getting clock (on TI84+)
+----------------------------
 
 Communication flow for requesting a screenshot (TI <-/-> PC):
 
@@ -372,7 +378,46 @@ Communication flow for requesting a screenshot (TI <-/-> PC):
 	PC:	Ack
 
 (*) 
+24 is followed by ???
 25 is followed by the the clock value
 27 is followed by the date formatting (1: MDY, 2: DMY, 0:YMD)
 28 is followed by the clock mode (0: am/pm or 1: 24h)
 
+
+7°) Setting clock (on TI84+)
+----------------------------
+
+	PC: Handshake
+	TI: Response
+	
+	PC: Data	{000e} 00 25 00 04 10 15 17 01 
+	TI: Ack	
+
+---- 84+ ----
+	TI: Data	{aa00} 01
+	PC: Ack
+---- 84+ ----
+
+	PC: Data	{000e} 00 27 00 01 01
+	TI: Ack	
+
+---- 84+ ----
+	TI: Data	{aa00} 01
+	PC: Ack
+---- 84+ ----
+
+	PC: Data	{000e} 00 28 00 01 00
+	TI: Ack	
+
+---- 84+ ----
+	TI: Data	{aa00} 01
+	PC: Ack
+---- 84+ ----
+
+	PC: Data	{000e} 00 24 00 01 01
+	TI: Ack	
+
+---- 84+ ----
+	TI: Data	{aa00} 01
+	PC: Ack
+---- 84+ ----

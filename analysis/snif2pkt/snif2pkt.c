@@ -67,9 +67,14 @@ static const Packet packets[] =
 
 static const Opcode opcodes[] = 
 {
+	{ 0x0001, "???"}, { 0x0007, "REQ"}, { 0x0008, "VAR"}, { 0x000e, "RTS"},
+	{ 0xaa00, "CTS"}, { 0xbb00, "CTR"},	{ 0xdd00, "EOT"}, { 0xee00, "ERR"},
+
+	/*
 	{ 0xaa00, "CTS"}, { 0xdd00, "EOT"}, { 0xee00, "ERR"}, { 0x0009, "RDIR"}, 
 	{ 0x000a, "DIR"}, { 0x000b, "RTS"}, { 0x000c, "REQ"}, { 0x000d, "???"}, 
 	{ 0x0010, "DEL"},
+	*/
 	{ 0 },
 };
 
