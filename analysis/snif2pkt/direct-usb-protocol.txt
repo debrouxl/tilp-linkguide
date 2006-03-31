@@ -133,26 +133,35 @@ Data opcodes include:
 		Same for all calcs. Is an echo ?
 		
 	0007 = request:
-	
-		- screenshot with (data = 00 01 00 22)
-		Reply with opcode 0008 and send screen size and screen bitmap:
-		00 01 00 22 HL LH LL [LLHH bytes of screen]
 
-		TI84+: reply with opcode bb00 before sending real data
-		(data = 00 01 D4 C0)
+		The format seems to be the following:
+		00 NN req1 req2 ... reqN	where NN is the number of requests and reqI the request on 2 bytes)
+		Replied with opcode 0008 below.
 
-		- clock with (data = 00 04 00 25  00 27 00 28 00 24)
-		Reply with opcode 0008 and send clock:
-		00 04 00 25 ..........
+		- screenshot with data = 00 01 00 22
 
-		Note: the 4 bytes of request are always present in 4 first bytes of the 0008 answer
-		packet. It may be the requets itself.
+		- clock with data = 00 04 00 25  00 27 00 28 00 24		
 
 	0008 = request answer
 
-		XX YY ZZ TT HH HL LL [data] where:
-		- XX YY ZZ TT is the data request
-		- HH HL LL the size of data after data header
+		The format seems to be the following:
+		00 NN [req1 size1 data1] [req2 size2 data2] ... [reqN sizeN dataN]
+
+		where:
+		- NN is the number of request 
+		- reqI is the previous request reqI (2 bytes)
+		- sizeI is the size of data following (3 bytes)
+		- dataI is the data request by reqI (sizeI bytes)
+		and so on...
+
+	EE00 = error
+
+	    data = CC CC		where CCCC is a two-byte error code
+
+		Error codes include:
+		00 08 = transmission error or invalid code?
+		00 0c = out of memory?
+		00 0e = invalid name?
 
 ////
 
@@ -245,12 +254,6 @@ Data opcodes include:
   dd00 = End of transmission (EOT)
     (no data)
 
-  ee00 = Error
-    CC CC		= two-byte error code
-
-    Error codes include:
-      00 0c = out of memory?
-      00 0e = invalid name?
 
 4°) Communication Flow
 ----------------------
@@ -294,6 +297,19 @@ Communication flow for deleting variable from calculator:
   <- CTS
     -> ACK
   ( USB endpoints reset after this... ? )
+
+
+10°) Unknown (all calcs)
+-----------------------
+
+This step is systematically done at startup after the HSK/RES.
+Moreover, it's needed for TI84+ else any other commands is rejected with error code 0008.
+
+	PC: Data	{0001} 00 03 00 01 00 00 00 00 07 D0
+	TI: Ack
+	
+	TI: Data	{0012} 00 00 07 D0
+	PC:	Ack
 
 
 5°) Screenshot (on Titanium)
@@ -347,15 +363,3 @@ Communication flow for requesting a screenshot (TI <-/-> PC):
 	PC:	Ack
 
 (*) 10 15 16 74 is the clock value
-
-
-10°) Unknown (all calcs)
------------------------
-
-Communication flow. Request systematically done at startup after the HSK/RES.
-
-	PC: Data	{0001} 00 03 00 01 00 00 00 00 07 D0
-	TI: Ack
-	
-	TI: Data	{0012} 00 00 07 D0
-	PC:	Ack
