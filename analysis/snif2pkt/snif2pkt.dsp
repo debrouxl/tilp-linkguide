@@ -99,23 +99,15 @@ SOURCE=.\snif2pkt.c
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\clock_get.pkt
+# End Source File
+# Begin Source File
+
+SOURCE=.\clock_set.pkt
+# End Source File
+# Begin Source File
+
 SOURCE=".\direct-usb-protocol.txt"
-# End Source File
-# Begin Source File
-
-SOURCE=.\screenshot_84.log
-# End Source File
-# Begin Source File
-
-SOURCE=.\screenshot_84.pkt
-# End Source File
-# Begin Source File
-
-SOURCE=.\screenshot_89.log
-# End Source File
-# Begin Source File
-
-SOURCE=.\screenshot_89.pkt
 # End Source File
 # Begin Source File
 

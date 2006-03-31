@@ -55,8 +55,8 @@ TI seems not to like easy things :-(
 
 Each packet starts with the following header (packet header):
 
-  LL LL LL LL		= four-byte big-endian length of non-header part
-			  of packet (after opcode)
+  HH HL LH LL	= four-byte big-endian length of non-header part
+					of packet (after opcode)
   OO			= one-byte packet type
   ...
 
@@ -89,7 +89,7 @@ Types 01,02 have 4 bytes of data, type 05 has 2 bytes only.
 When sending any piece of data, the following header (data header) is 
 prepended on the _first_ data packet:
 
-  LL LL LL LL		= four-byte big-endian length of non-header part
+  HH HL LH LL	= four-byte big-endian length of non-header part
 			  of data (after opcode)
   OO OO			= two-byte opcode
   ...
@@ -118,6 +118,9 @@ And for longer data, you might have:
   -> (04) last part of data...
   <- ACK
 
+Note: usually, the data header size is 7 bytes greater than the size of real data because
+7 bytes are prepended to data (4 bytes of request and 3 bytes of data size).
+
 
 3°) OpCodes
 -----------
@@ -129,16 +132,29 @@ Data opcodes include:
 
 		Same for all calcs. Is an echo ?
 		
-	0007 = request screenshot with (data = 00 01 00 22)
+	0007 = request:
+	
+		- screenshot with (data = 00 01 00 22)
 		Reply with opcode 0008 and send screen size and screen bitmap:
-		00 01 00 22 LL HH 00 [LLHH bytes of screen]
+		00 01 00 22 HL LH LL [LLHH bytes of screen]
 
-  0008 = get clock
-  	00 04 00 25 00 00 04 10 15 16 74 00 | ..........t.
-    27 00 00 01 01 00 28 00 00 01 00 00 | ............
-    24 00 00 01 01
-    
-    10 15 16 74 is the clock value
+		TI84+: reply with opcode bb00 before sending real data
+		(data = 00 01 D4 C0)
+
+		- clock with (data = 00 04 00 25  00 27 00 28 00 24)
+		Reply with opcode 0008 and send clock:
+		00 04 00 25 ..........
+
+		Note: the 4 bytes of request are always present in 4 first bytes of the 0008 answer
+		packet. It may be the requets itself.
+
+	0008 = request answer
+
+		XX YY ZZ TT HH HL LL [data] where:
+		- XX YY ZZ TT is the data request
+		- HH HL LL the size of data after data header
+
+////
 
   0009 = Request directory from calculator
     00 00 00 06 00 02 00 03 00 05 00 01 00 41 00 42
@@ -311,10 +327,32 @@ Communication flow for requesting a screenshot (TI <-/-> PC):
 (*) 00 0F = 3840 bytes -> size of screen
 
 
+6°) Clock (on TI84+)
+--------------------
 
-6°) Others
------------
+Communication flow for requesting a screenshot (TI <-/-> PC):
 
+	PC: Handshake
+	TI: Response
+	
+	PC: Data	{0007} 00 04 00 25 00 27 00 28 00 24
+	TI: Ack	
+
+---- 84+ ----
+	TI: Data	{bb00} 00 01 D4 C0
+	PC: Ack
+---- 84+ ----
+
+	TI: Last	{0008} 00 04 00 25 00 00 04 10 15 16 74 00 27 00 00 01 01 00 28 00 00 01 00 00 24 00 00 01 01 (*)
+	PC:	Ack
+
+(*) 10 15 16 74 is the clock value
+
+
+10°) Unknown (all calcs)
+-----------------------
+
+Communication flow. Request systematically done at startup after the HSK/RES.
 
 	PC: Data	{0001} 00 03 00 01 00 00 00 00 07 D0
 	TI: Ack
