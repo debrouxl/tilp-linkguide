@@ -227,7 +227,7 @@ March 31, 2006
   0x0011    Unknown
   0x0012    Acknowledgement of Mode Setting
   0xAA00    Acknowledgement of Data
-  0xBB00    Unknown
+  0xBB00    Acknowledgement of Parameter Request
   0xDD00    End of Transmission
   0xEE00    Error
 
@@ -402,6 +402,7 @@ March 31, 2006
   0xF0070000, or 0xF00B0000.  (Perhaps this varies with the device
   type.)
 
+
  Type 0x000B: Request to Send
  ----------------------------
 
@@ -420,6 +421,7 @@ March 31, 2006
 
   Note the lack of VV bytes, as all attributes the PC is sending are
   presumably valid.
+
 
  Type 0x000C: Variable Request
  -----------------------------
@@ -450,12 +452,14 @@ March 31, 2006
   Note: When you specify the variable type, you must use attribute
   0x0011 rather than 0x0002.  I don't know why.
 
+
  Type 0x000D: Variable Contents
  ------------------------------
 
   This packet simply contains the contents of the variable previously
   agreed upon.  All meta-data is sent as part of the 0x000A or 0x000B
   packet.
+
 
  Type 0x000E: Parameter Set
  --------------------------
@@ -482,6 +486,7 @@ March 31, 2006
 
   If successful, the calculator sends an 0xAA00 (Acknowledgement of
   Data) packet in response.
+
 
  Type 0x0012: Acknowledgement of Mode Setting
  --------------------------------------------
@@ -519,6 +524,11 @@ March 31, 2006
   This packet indicates an error; the contents are a 2-byte error
   code.
 
+  Error codes include:
+	00 08 = transmission error or invalid code?
+	00 0c = out of memory?
+	00 0e = invalid name?
+
 
 6  Variable Transfers
 ---------------------
@@ -550,6 +560,17 @@ March 31, 2006
  To request that a variable be deleted:
 
   PC->TI: Delete Variable (0x0010)
+  TI->PC: Acknowledge (0xAA00)
+
+ To request a parameter to be sent
+
+  PC->TI: Request Parameter (0x0007)
+  TI->PC: Acknowledge (0xBB00)
+  PC->TI: Parameter Data (0x0008)
+
+ To request to send a parameter
+
+  PC->TI: Parameter Set (0x000E)
   TI->PC: Acknowledge (0xAA00)
 
 
