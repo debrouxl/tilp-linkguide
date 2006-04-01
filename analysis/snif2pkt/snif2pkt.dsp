@@ -93,22 +93,18 @@ SOURCE=.\snif2pkt.c
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE="..\..\direct-usb-protocol.txt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\..\usb-protocol.txt"
+# End Source File
 # End Group
 # Begin Group "Resource Files"
 
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
-# Begin Source File
-
-SOURCE="..\logs\ti84+_usb\device_info.pkt"
-# End Source File
-# Begin Source File
-
-SOURCE=".\direct-usb-protocol.txt"
-# End Source File
-# Begin Source File
-
-SOURCE="..\logs\ti84+_usb\dirlist.pkt"
-# End Source File
 # Begin Source File
 
 SOURCE=.\test.log
