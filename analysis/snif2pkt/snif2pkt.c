@@ -59,22 +59,36 @@ typedef struct
 
 static const Packet packets[] = 
 {
-	{ 0x01, "Handshake", 0, 4}, { 0x02, "Response", 0, 4}, 
-	{ 0x03, "Data", 1, 6}, { 0x04, "Last data", 1, 6}, 
-	{ 0x05, "Acknowledge", 0, 2}, 
+	{ 0x01, "Buffer Size Request", 0, 4 }, 
+	{ 0x02, "Buffer Size Allocation", 0, 4 }, 
+	{ 0x03, "Virtual Packet Data with Continuation", 1, 6 }, 
+	{ 0x04, "Virtual Packet Data Final", 1, 6 }, 
+	{ 0x05, "Virtual Packet Data Acknowledgement", 0, 2 }, 
 	{ 0 },
 };
 
 static const Opcode opcodes[] = 
 {
-	{ 0x0001, "???"}, { 0x0007, "REQ"}, { 0x0008, "VAR"}, { 0x000e, "RTS"},
-	{ 0xaa00, "CTS"}, { 0xbb00, "CTR"},	{ 0xdd00, "EOT"}, { 0xee00, "ERR"},
-
-	/*
-	{ 0xaa00, "CTS"}, { 0xdd00, "EOT"}, { 0xee00, "ERR"}, { 0x0009, "RDIR"}, 
-	{ 0x000a, "DIR"}, { 0x000b, "RTS"}, { 0x000c, "REQ"}, { 0x000d, "???"}, 
-	{ 0x0010, "DEL"},
-	*/
+	{ 0x0001, "Ping / Set Mode" }, 
+	{ 0x0002, "Begin OS Transfer" },
+	{ 0x0003, "Acknowledgement of OS Transfer" },
+	{ 0x0005, "OS Data" },
+	{ 0x0006, "Acknowledgement of EOT" },
+	{ 0x0007, "Parameter Request"}, 
+	{ 0x0008, "Parameter Data"}, 
+	{ 0x0009, "Request Directory Listing" },
+	{ 0x000a, "Variable Header" },
+	{ 0x000b, "Request to Send" },
+	{ 0x000c, "Request Variable" },
+	{ 0x000D, "Variable Contents" },
+	{ 0x000e, "Parameter Set"},
+	{ 0x0010, "Delete Variable"}, 
+	{ 0x0011, "Unknown"}, 
+	{ 0x0012, "Acknowledgement of Mode Setting"}, 
+	{ 0xaa00, "Acknowledgement of Data"}, 
+	{ 0xbb00, "Unknown"},	
+	{ 0xdd00, "End of Transmission"}, 
+	{ 0xee00, "Error"},
 	{ 0 },
 };
 

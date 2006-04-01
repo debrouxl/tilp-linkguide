@@ -99,15 +99,15 @@ SOURCE=.\snif2pkt.c
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
-SOURCE=.\clock_get.pkt
-# End Source File
-# Begin Source File
-
-SOURCE=.\clock_set.pkt
+SOURCE="..\logs\ti84+_usb\device_info.pkt"
 # End Source File
 # Begin Source File
 
 SOURCE=".\direct-usb-protocol.txt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\dirlist.pkt"
 # End Source File
 # Begin Source File
 
