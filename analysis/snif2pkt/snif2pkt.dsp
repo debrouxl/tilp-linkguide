@@ -90,7 +90,7 @@ LINK32=link.exe
 SOURCE=.\snif2pkt.c
 # End Source File
 # End Group
-# Begin Group "Header Files"
+# Begin Group "Doc Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
@@ -112,6 +112,58 @@ SOURCE=.\test.log
 # Begin Source File
 
 SOURCE=.\test.pkt
+# End Source File
+# End Group
+# Begin Group "Log Files"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\clock_get.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\clock_set.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\delete_app.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\delete_var_a.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\delete_var_b.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\device_info.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\dirlist.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\recv_var_a.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\recv_var_b.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\screenshot.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\send_var_a.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\send_var_b.pkt"
 # End Source File
 # End Group
 # End Target

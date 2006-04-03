@@ -505,10 +505,13 @@ March 31, 2006
  Type 0xBB00
  -----------
 
-  This is a strange one.  The calculator appears to ignore this packet
+  [This is a strange one.  The calculator appears to ignore this packet
   when it is received.  Sometimes it is sent after an 0x0007 packet is
   received; sometimes it isn't.  It usually contains the number
-  0x0001d4c0 (120000).
+  0x0001d4c0 (120000).]
+
+  This packet is sent to aknowledge a parameter request command.
+  It usually contains the number 0x0001d4c0 (120000).
 
 
  Type 0xDD00: End of Transmission
@@ -560,17 +563,6 @@ March 31, 2006
  To request that a variable be deleted:
 
   PC->TI: Delete Variable (0x0010)
-  TI->PC: Acknowledge (0xAA00)
-
- To request a parameter to be sent
-
-  PC->TI: Request Parameter (0x0007)
-  TI->PC: Acknowledge (0xBB00)
-  PC->TI: Parameter Data (0x0008)
-
- To request to send a parameter
-
-  PC->TI: Parameter Set (0x000E)
   TI->PC: Acknowledge (0xAA00)
 
 
@@ -690,3 +682,14 @@ March 31, 2006
  0037        Byte       0 = not at homescreen, 1 = at homescreen
  0038        Byte       Unknown (always 0)
  0039        Byte       0 = screen not split, 1 = screen split
+
+ To request a parameter to be sent
+
+  PC->TI: Request Parameter (0x0007)
+  TI->PC: Acknowledge (0xBB00)
+  PC->TI: Parameter Data (0x0008)
+
+ To request to send a parameter
+
+  PC->TI: Parameter Set (0x000E)
+  TI->PC: Acknowledge (0xAA00)
