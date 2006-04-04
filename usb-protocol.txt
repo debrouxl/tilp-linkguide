@@ -360,6 +360,7 @@ March 31, 2006
 
    LL LL UU ... 0x00 NN NN ( II II VV [ JJ JJ DD ... ] ) ...
                 \??/
+				NULL terminator
 
   LLLL = length of variable's name;
   UU = variable name in UTF-8 (LLLL bytes);
@@ -396,7 +397,14 @@ March 31, 2006
    0x0001  Variable size (4 bytes)
    0x0002  Variable type (4 bytes)
    0x0003  Is archived / in Flash? (1 byte)
+   0x0004  Unknown (always 0).
+   0x0005  First four bytes of an AppVar.  (By TI's convention, the first four
+			bytes identify the program that created the AppVar.)
+   0x0008  Variable "version".  This is 0 for most variables, but 1 for programs
+			that include 83+-specific functions (and thus won't work on an 82 or 83.) 
+			It's probably increased for 84+-specific functions as well.
    0x0011  Variable type (used for requesting variables) (4 bytes)
+   0x0013  Unknown (always 0, used for deleting of variable)
 
   A variable type is the standard type ID plus either 0xF0030000,
   0xF0070000, or 0xF00B0000.  (Perhaps this varies with the device
