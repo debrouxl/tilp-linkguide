@@ -86,7 +86,7 @@ static const Opcode opcodes[] =
 	{ 0x0011, "Unknown"}, 
 	{ 0x0012, "Acknowledgement of Mode Setting"}, 
 	{ 0xaa00, "Acknowledgement of Data"}, 
-	{ 0xbb00, "Unknown"},	
+	{ 0xbb00, "Acknowledgement of Parameter Request"},	
 	{ 0xdd00, "End of Transmission"}, 
 	{ 0xee00, "Error"},
 	{ 0 },
