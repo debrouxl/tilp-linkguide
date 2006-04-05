@@ -360,6 +360,7 @@ March 31, 2006
 
    LL LL UU ... 0x00 NN NN ( II II VV [ JJ JJ DD ... ] ) ...
                 \??/
+				|
 				NULL terminator
 
   LLLL = length of variable's name;
@@ -417,7 +418,9 @@ March 31, 2006
   This is a variation of the variable header packet.  Its contents are:
 
    LL LL UU ... 00 00 00 00 09 01 NN NN ( II II JJ JJ DD ... ) ...
-                \--- ??????? ---/
+			   \??/\_varsize_/\??/
+			    |
+				NULL terminator
 
   LLLL = length of name;
   UU = variable name in UTF-8 (LLLL bytes);
