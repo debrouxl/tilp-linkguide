@@ -119,6 +119,10 @@ SOURCE=.\test.pkt
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE="..\logs\ti84+_usb\check_updates.pkt"
+# End Source File
+# Begin Source File
+
 SOURCE="..\logs\ti84+_usb\clock_get.pkt"
 # End Source File
 # Begin Source File
@@ -147,6 +151,10 @@ SOURCE="..\logs\ti84+_usb\dirlist.pkt"
 # End Source File
 # Begin Source File
 
+SOURCE="..\logs\ti84+_usb\recv_flash_app.pkt"
+# End Source File
+# Begin Source File
+
 SOURCE="..\logs\ti84+_usb\recv_var_a.pkt"
 # End Source File
 # Begin Source File
@@ -155,7 +163,27 @@ SOURCE="..\logs\ti84+_usb\recv_var_b.pkt"
 # End Source File
 # Begin Source File
 
+SOURCE="..\logs\ti84+_usb\recv_vars.pkt"
+# End Source File
+# Begin Source File
+
 SOURCE="..\logs\ti84+_usb\screenshot.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\send_cert.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\send_flash_app.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\send_flash_os.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\send_l1.pkt"
 # End Source File
 # Begin Source File
 
@@ -164,6 +192,10 @@ SOURCE="..\logs\ti84+_usb\send_var_a.pkt"
 # Begin Source File
 
 SOURCE="..\logs\ti84+_usb\send_var_b.pkt"
+# End Source File
+# Begin Source File
+
+SOURCE="..\logs\ti84+_usb\send_vars.pkt"
 # End Source File
 # End Group
 # End Target

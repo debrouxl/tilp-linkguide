@@ -275,20 +275,31 @@ March 31, 2006
 
   This packet begins an OS transfer (or maybe also a certificate
   transfer?)  It's only accepted in mode 2.  An 0x0003
-  (Acknowledgement of OS Transfer) is sent in response.  I don't have
-  any details of this packet, but I'm guessing that it is a single
-  byte which is 0 for an OS and other values for other things.
+  (Acknowledgement of OS Transfer) is sent in response.  
+  
+  The contents of this packet are:
+
+	XX XX XX XX XX XX XX XX XX XX HH HL LH LL
+
+  XXXXXXXX = unknown.
+  HHHLLHLL = size of OS data plus header (page, offset and flag)
 
 
  Type 0x0003: Acknowledgement of OS Transfer
  -------------------------------------------
 
   This packet is sent in response to an 0x0002 packet.  Its contents
-  will be something like:
+  is the following:
 
-   0x00 0x00 0x01 0x04 0x00 0x00 0x00 0x00
+   HH HL LH LL 00 00 00 00
 
-  The 0x0104 might be the maximum allowed size of an 0x0005 packet.
+  where HHHLLHLL is the maximum allowed size of an 0x0005 packet.
+
+
+ Type 0x0004: OS Header ?
+ ------------------------
+
+  This packet is sent before sending OS data.
 
 
  Type 0x0005: OS Data
@@ -580,7 +591,7 @@ March 31, 2006
 7  Flash Transfers
 ------------------
 
- Transferring FLASH apps or OS is done by the same overall method used in
+ Transferring FLASH apps is done by the same overall method used in
  the DBUS protocol.  
 
  To request a FLASH app to be sent (same as requesting of var):
@@ -594,13 +605,42 @@ March 31, 2006
   PC->TI: Request to Send (0x000B)
   TI->PC: Acknowledge (0xBB00)
   TI->PC: Acknowledge (0xAA00)
+
   PC->TI: Variable Contents (0x000D)
   TI->PC: Acknowledge (0xBB00)
   TI->PC: Acknowledge (0xAA00)
+
   PC->TI: End of Transmission (0xDD00)
 
 
-8  Calculator Parameters
+8 OS Transfers
+--------------
+
+ Transferring FLASH OS is done on the following scheme:
+  
+  PC->TI: Ping / Set Mode (to basic mode)
+  TI->PC: Acknowledge (0x0012)
+
+  PC->TI: Begin OS Transfer (0x0002)
+	  TI->PC: Buffer Size Request (size = 256 + 10 bytes)
+	  PC->TI: Buffer Size Negotiation
+  TI->PC: Acknowledge of OS Transfer (0x0003)
+
+  PC->TI: OS Header (0x0004)
+  TI->PC: Acknowledge of OS Transfer (0x0003)
+
+  PC->TI: OS Data (0x0005)
+  TI->PC: Acknowledge (0xAA00)
+	...
+  PC->TI: OS Data (0x0005)
+  TI->PC: Acknowledge (0xAA00)
+
+  PC->TI: End Of Transmission (0xDD00)
+  TI->PC: Acknowledge (0xBB00)
+  TI->PC: Acknowledge of EOT (0x0006)
+
+
+9  Calculator Parameters
 ------------------------
 
  A great deal of non-variable data (much more than was ever available
