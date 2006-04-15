@@ -577,7 +577,30 @@ March 31, 2006
   TI->PC: Acknowledge (0xAA00)
 
 
-7  Calculator Parameters
+7  Flash Transfers
+------------------
+
+ Transferring FLASH apps or OS is done by the same overall method used in
+ the DBUS protocol.  
+
+ To request a FLASH app to be sent (same as requesting of var):
+
+  PC->TI: Request Variable (0x000C)
+  TI->PC: Variable Header (0x000A)
+  TI->PC: Variable Contents (0x000D)
+
+ To request to send a FLASH app:
+
+  PC->TI: Request to Send (0x000B)
+  TI->PC: Acknowledge (0xBB00)
+  TI->PC: Acknowledge (0xAA00)
+  PC->TI: Variable Contents (0x000D)
+  TI->PC: Acknowledge (0xBB00)
+  TI->PC: Acknowledge (0xAA00)
+  PC->TI: End of Transmission (0xDD00)
+
+
+8  Calculator Parameters
 ------------------------
 
  A great deal of non-variable data (much more than was ever available
@@ -687,7 +710,7 @@ March 31, 2006
  0029        Byte       Unknown (always 0)
  002D  *     Byte       0 = battery low, 1 = battery good
  0030     *  32 bytes   Unknown
- 0031        Unknown    Unknown
+ 0031        Unknown    List of Certificates
  0032     *  Byte       Unknown (0 or 1 according to system flag 5,(iy+51))
  0036        16 bytes   Calculator ID, maybe?
  0037        Byte       0 = not at homescreen, 1 = at homescreen
