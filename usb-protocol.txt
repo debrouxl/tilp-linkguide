@@ -279,7 +279,7 @@ March 31, 2006
   
   The contents of this packet are:
 
-	XX XX XX XX XX XX XX XX XX XX HH HL LH LL
+	XX XX XX XX XX XX XX HH HL LH LL
 
   XXXXXXXX = unknown.
   HHHLLHLL = size of OS data plus header (page, offset and flag)
@@ -299,7 +299,8 @@ March 31, 2006
  Type 0x0004: OS Header ?
  ------------------------
 
-  This packet is sent before sending OS data.
+  This packet is sent before sending OS data. It may contains the header.
+  Same format as packet type 0x0005.
 
 
  Type 0x0005: OS Data
@@ -535,6 +536,12 @@ March 31, 2006
   This packet is sent to aknowledge a parameter request command.
   It usually contains the number 0x0001d4c0 (120000).
 
+  [Incidentally, I have an idea about the BB00 packet.  Its contents seem to
+	be used as a timeout.  Perhaps it simply means "wait for X milliseconds
+	for the next packet," and it's sent whenever the calculator expects to
+	take a long time to respond.  That would seem to make sense in the
+	contexts where it is used.]
+
 
  Type 0xDD00: End of Transmission
  --------------------------------
@@ -638,6 +645,11 @@ March 31, 2006
   PC->TI: End Of Transmission (0xDD00)
   TI->PC: Acknowledge (0xBB00)
   TI->PC: Acknowledge of EOT (0x0006)
+
+  Note: 
+	OS header and first packet have AAAA=4000, PP=7A, FF=80.
+	Last packet has AAAA=4100, PP=7A, FF=80. 
+	Others begins with AAAA=4000 and FF=00.
 
 
 9  Calculator Parameters
