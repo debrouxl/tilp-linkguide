@@ -1,6 +1,10 @@
-The TI-84 Plus USB Protocol: A Partial Analysis
-Benjamin Moody
+The TI-84 Plus USB Protocol
+Benjamin Moody (and some updates by R. Liévin)
 March 31, 2006
+
+The TI-89 Titanium USB Protocol
+Romain Liévin
+May 2, 2006
 ======================================================================
 
 1  Introduction
@@ -84,13 +88,17 @@ March 31, 2006
  and the 89 Titanium limits them to 1023 bytes, yet that may change in
  the future.
 
- The device wishing to intiate communication, therefore, begins by
+ The device wishing to initiate communication, therefore, begins by
  sending a type 1 (Buffer Size Request) raw packet.  The contents of
  this packet are a 32-bit integer (big endian, remember) which is the
  largest size of raw packet the device is willing to handle.  Note
  that this length does not include the header; so the TI-84 Plus,
  which can handle a total raw packet size of 255 bytes, sends the
- number 0xFA, or 250.
+ number 0xFA, or 250. 
+ 
+ The Titanium sends the number 0x3FF or 1023 but acts slightly differently.
+ It should handle 1028 bytes but instead sends 5 bytes of header and next,
+ 1023 bytes.
 
  The receiving device must then decide whether the chosen buffer size
  is acceptable, or whether it must be made smaller still.  (For
@@ -757,7 +765,7 @@ March 31, 2006
  0023        Byte       Unknown (always 1)
  0024     *  Byte       0 = clock off, 1 = clock on
  0025     *  Int32      Clock (seconds since 1997 Jan 1)
- 0027     *  Byte       0 = Y/M/D, 1 = M/D/Y, 2 = D/M/Y style
+ 0027     *  Byte       0 = Y/M/D, 1 = M/D/Y, 2 = D/M/Y | 3 = M.D.Y, 4 = D.M.Y, 5 = Y.M.D, 6 = M-D-Y, 7 = D-M-Y, 8 = Y-M-D (Titanium date style)
  0028     *  Byte       0 = 12 hour, 1 = 24 hour mode
  0029        Byte       Unknown (always 0)
  002D  *     Byte       0 = battery low, 1 = battery good
@@ -772,7 +780,7 @@ March 31, 2006
  To request a parameter to be sent
 
   PC->TI: Request Parameter (0x0007)
-  TI->PC: Acknowledge (0xBB00)
+  TI->PC: Acknowledge (0xBB00) on TI84+ only
   PC->TI: Parameter Data (0x0008)
 
  To request to send a parameter
