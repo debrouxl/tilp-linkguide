@@ -290,7 +290,8 @@ May 2, 2006
 	XX XX XX XX XX XX XX HH HL LH LL
 
   XXXXXXXX = unknown.
-  HHHLLHLL = size of OS data plus header (page, offset and flag)
+  HHHLLHLL = size of OS data plus header (page, offset and flag), TI84+ only
+  HHHLLHLL = size of OS data, Titanium only
 
 
  Type 0x0003: Acknowledgement of OS Transfer
@@ -376,12 +377,23 @@ May 2, 2006
   "attributes," which can be any sort of variable metadata (type,
   size, archived state, perhaps the folder name...)
 
-  The contents of this packet are:
+  The contents of this packet are (TI84+):
 
-   LL LL UU ... 0x00 NN NN ( II II VV [ JJ JJ DD ... ] ) ...
-                \??/
-				|
-				NULL terminator
+   LL LL UU ... 0x00 | NN NN ( II II VV [ JJ JJ DD ... ] ) ...
+                \__/
+				 |
+				 NULL terminator
+
+  The contents of this packet are (Titanium):
+
+   LL UU ... 0x00 LL UU ... 0x00 | NN NN ( II II VV [ JJ JJ DD ... ] ) ...
+      \_________/    \_________/
+	    folder		   varname
+
+
+  Note that the header changes between TI84+ & Titanium (vars only, FLASH app follows the
+  same scheme as TI84+). The same header apply for 0x000B, 0x000C and 0x0010 packets. 
+  You will have to update them consequently...
 
   LLLL = length of variable's name;
   UU = variable name in UTF-8 (LLLL bytes);
@@ -437,10 +449,11 @@ May 2, 2006
 
   This is a variation of the variable header packet.  Its contents are:
 
-   LL LL UU ... 00 00 00 00 09 01 NN NN ( II II JJ JJ DD ... ) ...
-			   \??/\_varsize_/\??/
+   LL LL UU ... 00 | 00 00 00 09 01 NN NN ( II II JJ JJ DD ... ) ...
+			    \/   \_varsize_/ \?/
 			    |
-				NULL terminator
+				NULL terminator			 
+
 
   LLLL = length of name;
   UU = variable name in UTF-8 (LLLL bytes);
@@ -463,8 +476,8 @@ May 2, 2006
   attributes the calculator needs to provide (variable size, is it
   archived?)  Its contents are:
 
-                /-------- ????????? --------\
-   LL LL UU ... 0x00 0x01 0xFF 0xFF 0xFF 0xFF
+                       /----- ?????????? -----\
+   LL LL UU ... 0x00 | 0x01 0xFF 0xFF 0xFF 0xFF
    NN NN ( II II ) ...
    MM MM ( II II JJ JJ DD ... ) 0x00 0x00
                                 \- ??? -/
@@ -504,7 +517,7 @@ May 2, 2006
   This is yet another variation of the variable header packet.  Its
   contents are:
 
-   LL LL UU ... 0x00 NN NN ( II II JJ JJ DD ... ) ...
+   LL LL UU ... 0x00 | NN NN ( II II JJ JJ DD ... ) ...
    0x01 0x00 0x00 0x00 0x00
 
   LLLL = length of name;
@@ -600,6 +613,7 @@ May 2, 2006
  To request that a variable be deleted:
 
   PC->TI: Delete Variable (0x0010)
+  TI->PC: Acknowledge (0xBB00), Titanium only
   TI->PC: Acknowledge (0xAA00)
 
 
@@ -637,27 +651,33 @@ May 2, 2006
   TI->PC: Acknowledge (0x0012)
 
   PC->TI: Begin OS Transfer (0x0002)
-	  TI->PC: Buffer Size Request (size = 256 + 10 bytes)
-	  PC->TI: Buffer Size Negotiation
+	  TI->PC: Buffer Size Request (size = 256 + 10 bytes)	(*)
+	  PC->TI: Buffer Size Negotiation						(*)
   TI->PC: Acknowledge of OS Transfer (0x0003)
 
   PC->TI: OS Header (0x0004)
+  TI->PC: Acknowledge (0xBB00), Titanium only
   TI->PC: Acknowledge of OS Transfer (0x0003)
 
   PC->TI: OS Data (0x0005)
+  TI->PC: Acknowledge (0xBB00), Titanium only
   TI->PC: Acknowledge (0xAA00)
 	...
   PC->TI: OS Data (0x0005)
+  TI->PC: Acknowledge (0xBB00), Titanium only
   TI->PC: Acknowledge (0xAA00)
 
   PC->TI: End Of Transmission (0xDD00)
-  TI->PC: Acknowledge (0xBB00)
+  TI->PC: Acknowledge (0xBB00), TI84+ only
   TI->PC: Acknowledge of EOT (0x0006)
 
-  Note: 
+  Note (TI84+): 
 	OS header and first packet have AAAA=4000, PP=7A, FF=80.
 	Last packet has AAAA=4100, PP=7A, FF=80. 
 	Others begins with AAAA=4000 and FF=00.
+
+  (*) the negotiation takes place on the first transfer attempt. If transfer failed (hand-held
+  in boot mode, waiting for OS receival), then this step is skipped.
 
 
 9  Calculator Parameters
@@ -780,7 +800,7 @@ May 2, 2006
  To request a parameter to be sent
 
   PC->TI: Request Parameter (0x0007)
-  TI->PC: Acknowledge (0xBB00) on TI84+ only
+  TI->PC: Acknowledge (0xBB00), TI84+ only
   PC->TI: Parameter Data (0x0008)
 
  To request to send a parameter
