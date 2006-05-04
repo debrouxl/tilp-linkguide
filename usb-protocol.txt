@@ -676,6 +676,10 @@ May 2, 2006
 	Last packet has AAAA=4100, PP=7A, FF=80. 
 	Others begins with AAAA=4000 and FF=00.
 
+  Note (Titanium):
+    OS header contains the certificate part.
+	Other packets are raw data.
+
   (*) the negotiation takes place on the first transfer attempt. If transfer failed (hand-held
   in boot mode, waiting for OS receival), then this step is skipped.
 
@@ -807,3 +811,7 @@ May 2, 2006
 
   PC->TI: Parameter Set (0x000E)
   TI->PC: Acknowledge (0xAA00)
+  
+---
+$Id
+Available on TiLP CVS at <http://svn.tilp.info/cgi-bin/viewcvs.cgi/linkguide/trunk/usb-protocol.txt?rev=2245&root=tilp&view=auto>
