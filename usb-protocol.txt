@@ -390,10 +390,16 @@ May 2, 2006
       \_________/    \_________/
 	    folder		   varname
 
-
   Note that the header changes between TI84+ & Titanium (vars only, FLASH app follows the
   same scheme as TI84+). The same header apply for 0x000B, 0x000C and 0x0010 packets. 
   You will have to update them consequently...
+
+  Kevin Kofler says that a generic format for all hand-helds could be:
+
+   LL MM UU ... 0x00 | NN NN ( II II VV [ JJ JJ DD ... ] ) ... 
+     
+   LL UU ... 0x00 MM UU ... 0x00 | NN NN ( II II VV [ JJ JJ DD ... ] ) ...
+
 
   LLLL = length of variable's name;
   UU = variable name in UTF-8 (LLLL bytes);
