@@ -767,9 +767,9 @@ May 2, 2006
 
  0001  *     Int32      Product number? (0x0000000A for the 84 Plus)
  0002  *     String     Product name, e.g. "TI-84 Plus Silver Edition"
- 0003  *     5 bytes    Main part of calculator ID (in binary)
+ 0003  *     5 bytes    Main part of calculator ID in binary (TI84+), Full part of ID-LIST in ASCII (Titanium)
  0004  *     Int16      Hardware version
- 0005     *  Unknown    Unknown
+ 0005     *  Unknown    Unknown (TI84+), 18-bytes ID-LIST (Titanium)
  0006        Byte       Language ID
  0007        Byte       Sub-Language ID
  0008  *     Int16      DBUS device type? (0x0073 for the 84 Plus)
