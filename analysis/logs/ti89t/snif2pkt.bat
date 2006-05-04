@@ -10,6 +10,8 @@ snif2pkt device_info
 
 snif2pkt dirlist
 
+snif2pkt new_folder
+
 snif2pkt recv_flash_app
 
 snif2pkt recv_var_x
