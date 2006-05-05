@@ -338,14 +338,58 @@ May 2, 2006
  Type 0x0007: Parameter Request
  ------------------------------
 
-  This packet requests calculator "parameters."  More on that later.
+  This packet requests calculator "parameters". This packet's contents are
+
+  NN NN ( II II ) ...
+
+  NNNN = number of parameters requested;
+  IIII = 16-bit ID of each parameter requested.
+
+  For example, sending a type 0x0007 packet containing
+	0x0001 0x0002
+  requests parameter number 2, which happens to be the product name.
 
 
  Type 0x0008: Parameter Data
  ---------------------------
 
   This packet is sent in response to an 0x0007 (Parameter Request)
-  packet.  More on that later.
+  packet, whose contents are:
+
+  NN NN ( II II VV [ LL LL DD ... ] ) ...
+
+  NNNN = number of parameters requested;
+  for each parameter:
+   IIII = 16-bit parameter ID;
+   VV = 0 if the given parameter ID is valid, 1 if it isn't;
+	and if VV = 0:
+    LLLL = length of the parameter data;
+    DD = parameter data (LLLL bytes.)
+
+  So for parameter 0x0002, the calculator might reply with a type
+  0x0008 packet containing:
+
+   0x0001                    (one parameter requested)
+    0x0002                   (parameter number 2)
+    0x00                     (parameter is valid)
+    0x0019                   (parameter data is 0x19 bytes long)
+
+    0x54 0x49 0x2D 0x38      (parameter data: in this case, an
+    0x34 0x20 0x50 0x6C	     ASCII string)
+    0x75 0x73 0x20 0x53
+    0x69 0x6C 0x76 0x65
+    0x72 0x20 0x45 0x64
+    0x69 0x74 0x69 0x6F
+    0x6E
+
+  Multiple parameters can be requested at once; for example a type
+  0x0007 packet could contain:
+
+  0x0004 0x0002 0x000E 0x0011 0x0025
+
+  if you wanted to retrieve not only the product name, but also the
+  amount of free RAM, free archive space, and the current time from the
+  calculator's clock.
 
 
  Type 0x0009: Request Directory Listing
@@ -442,6 +486,7 @@ May 2, 2006
    0x0008	1 byte	Variable "version".  This is 0 for most variables, but 1 for programs
 					that include 83+-specific functions (and thus won't work on an 82 or 83.) 
 					It's probably increased for 84+-specific functions as well.
+   0x0008	4 bytes Set to 1 when sending app on Titanium (Titanium only).
    0x0011	4 bytes	Variable type : used for requesting variables instead of type 0x0002.
    0x0013	1 byte	Unknown (always 0, used for deleting of variable)
    0x0041	1 byte	Is locked
@@ -517,7 +562,16 @@ May 2, 2006
  Type 0x000E: Parameter Set
  --------------------------
 
-  This packet attempts to set a parameter value.  More on that later.
+  This packet attempts to set a parameter value.
+  You can also remotely assign values to certain parameters.  (This is
+  the way to set the clock, for instance.)  To set a parameter, send an
+  0x000E packet containing:
+
+   II II LL LL DD ...
+
+  The calculator will either acknowledge with 0xAA00, or return an
+  0x0022 error if the parameter ID is invalid.  Note that only one
+  parameter can be set at once.
 
 
  Type 0x0010: Delete Variable
@@ -701,68 +755,8 @@ May 2, 2006
  These are simply strings of binary data which can be read from (and
  some written to) the calculator.
 
- A parameter is read using the type 0x0007 (Parameter Request) packet.
- This packet's contents are
-
-  NN NN ( II II ) ...
-
- NNNN = number of parameters requested;
- IIII = 16-bit ID of each parameter requested.
-
- For example, sending a type 0x0007 packet containing
-
-  0x0001 0x0002
-
- requests parameter number 2, which happens to be the product name.
- In response, the calculator sends a type 0x0008 (Parameter Data)
- packet, whose contents are:
-
-  NN NN ( II II VV [ LL LL DD ... ] ) ...
-
- NNNN = number of parameters requested;
- for each parameter:
-  IIII = 16-bit parameter ID;
-  VV = 0 if the given parameter ID is valid, 1 if it isn't;
-  and if VV = 0:
-   LLLL = length of the parameter data;
-   DD = parameter data (LLLL bytes.)
-
- So for parameter 0x0002, the calculator might reply with a type
- 0x0008 packet containing:
-
-   0x0001                    (one parameter requested)
-    0x0002                   (parameter number 2)
-    0x00                     (parameter is valid)
-    0x0019                   (parameter data is 0x19 bytes long)
-
-    0x54 0x49 0x2D 0x38      (parameter data: in this case, an
-    0x34 0x20 0x50 0x6C	     ASCII string)
-    0x75 0x73 0x20 0x53
-    0x69 0x6C 0x76 0x65
-    0x72 0x20 0x45 0x64
-    0x69 0x74 0x69 0x6F
-    0x6E
-
- Multiple parameters can be requested at once; for example a type
- 0x0007 packet could contain:
-
-  0x0004 0x0002 0x000E 0x0011 0x0025
-
- if you wanted to retrieve not only the product name, but also the
- amount of free RAM, free archive space, and the current time from the
- calculator's clock.
-
- You can also remotely assign values to certain parameters.  (This is
- the way to set the clock, for instance.)  To set a parameter, send an
- 0x000E packet containing:
-
-  II II LL LL DD ...
-
- The calculator will either acknowledge with 0xAA00, or return an
- 0x0022 error if the parameter ID is invalid.  Note that only one
- parameter can be set at once.
-
- The following parameters are present on the TI-84 Plus as of OS 2.40:
+ The following parameters are present on the TI-84 Plus as of OS 2.40
+ and Titanium as of OS 3.00:
 
  (B = parameter available in boot mode; W = parameter writable.)
 
