@@ -433,21 +433,24 @@ May 2, 2006
    0x01         (Attribute is invalid)
 
   Known attributes:
-   0x0001  Variable size (4 bytes)
-   0x0002  Variable type (4 bytes)
-   0x0003  Is archived / in Flash? (1 byte)
-   0x0004  Unknown (always 0).
-   0x0005  First four bytes of an AppVar. By TI's convention, the first four
-			bytes identify the program that created the AppVar.
-   0x0008  Variable "version".  This is 0 for most variables, but 1 for programs
-			that include 83+-specific functions (and thus won't work on an 82 or 83.) 
-			It's probably increased for 84+-specific functions as well.
-   0x0011  Variable type (4 bytes): used for requesting variables instead of type 0x0002.
-   0x0013  Unknown (always 0, used for deleting of variable)
+   0x0001	4 bytes	Variable size
+   0x0002	4 bytes	Variable type
+   0x0003	1 byte	Is archived / in Flash
+   0x0004	1 byte	Unknown (always 0).
+   0x0005	4 bytes	First four bytes of an AppVar. By TI's convention, the first four
+					bytes identify the program that created the AppVar.
+   0x0008	1 byte	Variable "version".  This is 0 for most variables, but 1 for programs
+					that include 83+-specific functions (and thus won't work on an 82 or 83.) 
+					It's probably increased for 84+-specific functions as well.
+   0x0011	4 bytes	Variable type : used for requesting variables instead of type 0x0002.
+   0x0013	1 byte	Unknown (always 0, used for deleting of variable)
+   0x0041	1 byte	Is locked
+   0x0042	1 byte	Unknown
 
   A variable type is the standard type ID plus either 0xF0030000,
   0xF0070000, or 0xF00B0000.  (Perhaps this varies with the device
   type.)
+  Titanium: 0xF00C0000.
 
 
  Type 0x000B: Request to Send
@@ -772,7 +775,7 @@ May 2, 2006
  0005     *  Unknown    Unknown (TI84+), 18-bytes ID-LIST (Titanium)
  0006        Byte       Language ID
  0007        Byte       Sub-Language ID
- 0008  *     Int16      DBUS device type? (0x0073 for the 84 Plus)
+ 0008  *     Int16      DBUS device type (0x0073 for the 84 Plus, 0x98 for the Titanium)
  0009  *     4 bytes    Boot Version (16 bit major, 8 bit minor, 8 bit micro)
  000A  *     Byte       0 = no OS loaded (boot mode), 1 = OS loaded
  000B        4 bytes    OS Version (16 bit major, 8 bit minor, 8 bit micro)
