@@ -235,7 +235,7 @@ May 2, 2006
   0x0011    Unknown
   0x0012    Acknowledgement of Mode Setting
   0xAA00    Acknowledgement of Data
-  0xBB00    Acknowledgement of Parameter Request
+  0xBB00    Delay Acknowledgement
   0xDD00    End of Transmission
   0xEE00    Error
 
@@ -612,13 +612,10 @@ May 2, 2006
  Type 0xBB00
  -----------
 
-  [This is a strange one.  The calculator appears to ignore this packet
+  This is a strange one.  The calculator appears to ignore this packet
   when it is received.  Sometimes it is sent after an 0x0007 packet is
   received; sometimes it isn't.  It usually contains the number
-  0x0001d4c0 (120000).]
-
-  This packet is sent to aknowledge a parameter request command.
-  It usually contains the number 0x0001d4c0 (120000).
+  0x0001d4c0 (120000) or 0x00057E40 (360000).
 
   [Incidentally, I have an idea about the BB00 packet.  Its contents seem to
 	be used as a timeout.  Perhaps it simply means "wait for X milliseconds
@@ -641,6 +638,8 @@ May 2, 2006
   code.
 
   Error codes include:
+    00 04 = invalid argument or name ?
+	00 06 = can't delete app ?
 	00 08 = transmission error or invalid code?
 	00 0c = out of memory?
 	00 0e = invalid name?
@@ -676,7 +675,7 @@ May 2, 2006
  To request that a variable be deleted:
 
   PC->TI: Delete Variable (0x0010)
-  TI->PC: Acknowledge (0xBB00), Titanium only
+  TI->PC: Acknowledge (0xBB00), Titanium only or TI84+ when deleting FLASH app (garbage collecing).
   TI->PC: Acknowledge (0xAA00)
 
 
@@ -800,7 +799,7 @@ May 2, 2006
  0031        Unknown    List of Certificates
  0032     *  Byte       Unknown (0 or 1 according to system flag 5,(iy+51))
  0036        16 bytes   Calculator ID, maybe?
- 0037        Byte       0 = not at homescreen, 1 = at homescreen
+ 0037     *  Byte       0 = not at homescreen, 1 = at homescreen
  0038        Byte       Unknown (always 0)
  0039        Byte       0 = screen not split, 1 = screen split
 
@@ -808,7 +807,7 @@ May 2, 2006
 
   PC->TI: Request Parameter (0x0007)
   TI->PC: Acknowledge (0xBB00), TI84+ only
-  PC->TI: Parameter Data (0x0008)
+  TI->PC: Parameter Data (0x0008)
 
  To request to send a parameter
 
