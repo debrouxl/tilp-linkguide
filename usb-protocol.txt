@@ -641,6 +641,7 @@ May 2, 2006
     00 04 = invalid argument or name ?
 	00 06 = can't delete app ?
 	00 08 = transmission error or invalid code?
+	00 09 = using basic mode while being in boot mode
 	00 0c = out of memory?
 	00 0e = invalid name?
 
