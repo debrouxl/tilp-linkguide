@@ -639,12 +639,13 @@ May 2, 2006
   code.
 
   Error codes include:
-    00 04 = invalid argument or name ?
+    	00 04 = invalid argument or name ?
 	00 06 = can't delete app ?
 	00 08 = transmission error or invalid code?
 	00 09 = using basic mode while being in boot mode
 	00 0c = out of memory?
 	00 0e = invalid name?
+	00 2b = battery low (sending OS)
 
 
 6  Variable Transfers
@@ -819,3 +820,4 @@ May 2, 2006
 ---
 $Id
 Available on TiLP CVS at <http://svn.tilp.info/cgi-bin/viewcvs.cgi/linkguide/trunk/usb-protocol.txt?rev=2245&root=tilp&view=auto>
+
