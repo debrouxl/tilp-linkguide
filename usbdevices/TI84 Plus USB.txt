@@ -42,34 +42,70 @@ I:  If#= 0 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=01 Prot=00 Driver=(none)
 E:  Ad=81(I) Atr=02(Bulk) MxPS=  64 Ivl=0ms
 E:  Ad=02(O) Atr=02(Bulk) MxPS=  64 Ivl=0ms
 
-002/011     0451/E008
-- Unable to fetch manufacturer string
-- Unable to fetch product string
-  wTotalLength:         35
-  bNumInterfaces:       1
-  bConfigurationValue:  1
-  iConfiguration:       0
-  bmAttributes:         e0h
-  MaxPower:             0
-    bInterfaceNumber:   0
-    bAlternateSetting:  0
-    bNumEndpoints:      2
-    bInterfaceClass:    255
-    bInterfaceSubClass: 1
-    bInterfaceProtocol: 0
-    iInterface:         0
-      bEndpointAddress: 81h
-      bmAttributes:     02h
-      wMaxPacketSize:   64
-      bInterval:        0
-      bRefresh:         0
-      bSynchAddress:    0
-      bEndpointAddress: 02h
-      bmAttributes:     02h
-      wMaxPacketSize:   64
-      bInterval:        0
-      bRefresh:         0
-      bSynchAddress:    0
+Bus 001 Device 003: ID 0451:e008 Texas Instruments, Inc. TI-84 Plus Silver Calculator
+Device Descriptor:
+  bLength                18
+  bDescriptorType         1
+  bcdUSB               2.00
+  bDeviceClass            0 (Defined at Interface level)
+  bDeviceSubClass         0 
+  bDeviceProtocol         0 
+  bMaxPacketSize0        64
+  idVendor           0x0451 Texas Instruments, Inc.
+  idProduct          0xe008 TI-84 Plus Silver Calculator
+  bcdDevice            1.10
+  iManufacturer           1 Texas Instruments Incorporated
+  iProduct                2 TI-84 Plus Silver Edition
+  iSerial                 0 
+  bNumConfigurations      1
+OTG Descriptor:
+  bLength                 3
+  bDescriptorType         9
+  bmAttributes         0x03
+    SRP (Session Request Protocol)
+    HNP (Host Negotiation Protocol)
+  Configuration Descriptor:
+    bLength                 9
+    bDescriptorType         2
+    wTotalLength           35
+    bNumInterfaces          1
+    bConfigurationValue     1
+    iConfiguration          0 
+    bmAttributes         0xc0
+      Self Powered
+    MaxPower                0mA
+    Interface Descriptor:
+      bLength                 9
+      bDescriptorType         4
+      bInterfaceNumber        0
+      bAlternateSetting       0
+      bNumEndpoints           2
+      bInterfaceClass       255 Vendor Specific Class
+      bInterfaceSubClass      1 
+      bInterfaceProtocol      0 
+      iInterface              0 
+      Endpoint Descriptor:
+        bLength                 7
+        bDescriptorType         5
+        bEndpointAddress     0x81  EP 1 IN
+        bmAttributes            2
+          Transfer Type            Bulk
+          Synch Type               None
+          Usage Type               Data
+        wMaxPacketSize     0x0040  1x 64 bytes
+        bInterval               0
+      Endpoint Descriptor:
+        bLength                 7
+        bDescriptorType         5
+        bEndpointAddress     0x02  EP 2 OUT
+        bmAttributes            2
+          Transfer Type            Bulk
+          Synch Type               None
+          Usage Type               Data
+        wMaxPacketSize     0x0040  1x 64 bytes
+        bInterval               0
+Device Status:     0x0000
+  (Bus Powered)
 
       
 Author:
