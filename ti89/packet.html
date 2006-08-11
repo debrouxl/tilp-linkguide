@@ -118,8 +118,8 @@ is sending. It can have one of the following values:
     </tr>
     <tr>
       <td width="22%">36h</td>
-      <td width="259">Out of Memory (MEM)</td>
-      <td>Five bytes of unknown data</td>
+      <td width="259">Skip/Exit (SKIP/EXIT)</td>
+      <td>A five-byte rejection code (see codes below)</td>
     </tr>
     <tr>
       <td width="22%">56h</td>
@@ -179,7 +179,12 @@ no checksum.</i></td>
   </tbody>
 </table>
 <h4>
-The Checksum</h4>
+The SKP packet</h4>
+It is made up of 5 bytes: 05 00 XX 00 00 where XX seems to be an error
+ID:<br>
+- 03: varname is invalid<br>
+- 25: can't delete application<br>
+<h4>The Checksum</h4>
 The checksum is a 16-bit value used to verify the integrity of the data
 in the packet. It only present if data is present.
 <br>
