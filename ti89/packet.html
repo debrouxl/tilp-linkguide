@@ -183,9 +183,10 @@ The SKP packet</h4>
 It is made up of 5 bytes: 05 00 XX 00 00 where XX seems to be an error
 ID:<br>
 - 03: can't delete application<br>
+- 07: FLASH app not targeted for this model (01 00 07 00 81)<br>
 - 1E: can't overwrite variable<br>
 - 21: can't delete variable<br>
-- 25: invalid varname
+- 25: invalid varname<br>
 <h4>The Checksum</h4>
 The checksum is a 16-bit value used to verify the integrity of the data
 in the packet. It only present if data is present.
