@@ -639,12 +639,16 @@ May 2, 2006
   code.
 
   Error codes include:
-    00 04 = invalid argument or name ?
-	00 06 = can't delete app ?
-	00 08 = transmission error or invalid code?
+    00 04 = invalid argument or name
+	00 06 = can't delete app
+	00 08 = transmission error or invalid code
 	00 09 = using basic mode while being in boot mode
-	00 0c = out of memory?
-	00 0e = invalid name?
+	00 0c = out of memory
+	00 0e = invalid name
+	00 12 = can't overwrite, variable is locked/archived
+	00 1c = mode token too small
+	00 1d = mode token too large
+	00 22 = invalid parameter ID
 	00 2b = battery low (sending OS)
 
 
