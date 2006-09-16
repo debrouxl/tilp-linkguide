@@ -650,6 +650,7 @@ May 2, 2006
 	00 1d = mode token too large
 	00 22 = invalid parameter ID
 	00 2b = battery low (sending OS)
+	00 34 = invalid FLASH app?
 
 
 6  Variable Transfers
