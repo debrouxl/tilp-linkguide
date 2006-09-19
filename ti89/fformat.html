@@ -607,7 +607,7 @@ Headers can contain : license or data (app/os/certificate).<br>
 <p>The header takes the following format: <br>
 <i>Note - All 2-byte and 4-byte integers are stored little-endian
 Intel-style (least significant byte first).</i>
-<table border="1" cellspacing="0" width="92%">
+<table style="width: 92%;" border="1" cellspacing="0">
   <tbody>
     <tr>
       <th bgcolor="#008800" width="8%"><font color="#ffffff">Offset</font></th>
@@ -678,13 +678,28 @@ certificate: 25h, license: 3Eh)</td>
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="8%">50 (32H)</td>
-      <td bgcolor="#ffffff" width="11%">24 bytes</td>
+      <td bgcolor="#ffffff" width="11%">22 bytes</td>
       <td bgcolor="#ffffff" width="81%">Filler (unused, set to 00h).</td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">72
+(48h)<br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">2
+bytes<br>
+      </td>
+      <td
+ style="background-color: rgb(255, 255, 255); vertical-align: top;">Hardware
+ID (1 = 92+, 3 = 89, 8
+= V200, 9 = Titanium); see TIGCC doc.</td>
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="8%">74 (4Ah)</td>
       <td bgcolor="#ffffff" width="11%">4 bytes</td>
-      <td bgcolor="#ffffff" width="81%">Size of data in bytes</td>
+      <td style="width: 81%; background-color: rgb(255, 255, 255);">Size
+of data in bytes</td>
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="8%">78 (4Eh)</td>

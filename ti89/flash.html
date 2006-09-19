@@ -357,9 +357,11 @@ In the case of a FLASH OS (AMS), there is no name : <span
  style="font-weight: bold;">08 c9 06 00</span> 47 e3 12 00&nbsp;
 23&nbsp; 00&nbsp; <span style="font-weight: bold;">5f 01</span>. Older
 AMS releases sent 'basecode' but I'm unsure.<br>
-TI89 Titanium and V200PLT (AMS 3.xx) uses a slightly different packet :
+TI89 Titanium and V200PLT use a slightly different packet :
 <span style="font-weight: bold;">08 c9 09 0</span>0 b3 4e 14 00&nbsp;
-23&nbsp; 00 08 00 09&nbsp; <span style="font-weight: bold;">49 01</span>.<br>
+23&nbsp; 00 08 00 0X&nbsp; <span style="font-weight: bold;">49 01</span>
+where 0X is the hardware ID (1 = 92+, 3 = 89, 8
+= V200, 9 = Titanium).
 <p>The protocol for silently sending a FLASH file is shown below:
 <table nosave="" bgcolor="#ffffff" border="1" cellspacing="0"
  width="92%">
