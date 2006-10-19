@@ -822,6 +822,9 @@ May 2, 2006
   PC->TI: Parameter Set (0x000E)
   TI->PC: Acknowledge (0xAA00)
   
+Beware: it seems that requesting more than 16 parameters at a time makes Titanium less responsive
+	for a while (1 to 2 seconds).
+
 ---
 $Id
 Available on TiLP CVS at <http://svn.tilp.info/cgi-bin/viewcvs.cgi/linkguide/trunk/usb-protocol.txt?rev=2245&root=tilp&view=auto>
