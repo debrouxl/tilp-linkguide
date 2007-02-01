@@ -232,7 +232,7 @@ May 2, 2006
   0x000C    Request Variable
   0x000D    Variable Contents
   0x000E    Parameter Set
-  0x0010    Delete Variable
+  0x0010    Delete Variable/Application
   0x0011    Unknown
   0x0012    Acknowledgement of Mode Setting
   0xAA00    Acknowledgement of Data
@@ -575,8 +575,8 @@ May 2, 2006
   parameter can be set at once.
 
 
- Type 0x0010: Delete Variable
- ----------------------------
+ Type 0x0010: Delete Variable/Application
+ ----------------------------------------
 
   This is yet another variation of the variable header packet.  Its
   contents are:
@@ -680,7 +680,7 @@ May 2, 2006
   TI->PC: Acknowledge (0xAA00)
   PC->TI: End of Transmission (0xDD00)
 
- To request that a variable be deleted:
+ To request that a variable/application be deleted:
 
   PC->TI: Delete Variable (0x0010)
   TI->PC: Acknowledge (0xBB00), Titanium only or TI84+ when deleting FLASH app (garbage collecing).
