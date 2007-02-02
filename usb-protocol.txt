@@ -599,7 +599,7 @@ Jan 2, 2007
 
   This packet allows to:
   - remotely execute: a program, an assembly program or a FLASH application by its name
-  - enqueue a key
+  - enqueue a single key
   
   The contents of this packet are:
 
@@ -613,7 +613,7 @@ Jan 2, 2007
 
   Known actions and remarks:
    0x00		run program by name				folder may be empty
-											data = NULL-terminated comma-separated parameters 
+											data = comma-separated parameters 
 											(those passed to function/program); may be empty, hopefully...
    0x01		run assembly program by name	same
    0x02		run FLASH applicatio by name	folder and data must be empty
@@ -626,6 +626,8 @@ Jan 2, 2007
 		05 'h' 'e' 'l' 'l' 'o' 00 (varname)
 		00 (run PRGM)
 		'1' ',' '2' (params)
+
+	00 00 03 00 41	send 'A' key
 
 
  Type 0x0012: Acknowledgement of Mode Setting
