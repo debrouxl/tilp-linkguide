@@ -4,7 +4,7 @@ March 31, 2006
 
 The TI-89 Titanium USB Protocol
 Romain Liévin
-May 2, 2006
+Jan 2, 2007
 ======================================================================
 
 1  Introduction
@@ -233,7 +233,7 @@ May 2, 2006
   0x000D    Variable Contents
   0x000E    Parameter Set
   0x0010    Delete Variable/Application
-  0x0011    Unknown
+  0x0011    Remote Control
   0x0012    Acknowledgement of Mode Setting
   0xAA00    Acknowledgement of Data
   0xBB00    Delay Acknowledgement
@@ -442,11 +442,10 @@ May 2, 2006
   Kevin Kofler says that a generic format for all hand-helds could be:
 
    LL MM UU ... 0x00 | NN NN ( II II VV [ JJ JJ DD ... ] ) ... 
-     
    LL UU ... 0x00 MM UU ... 0x00 | NN NN ( II II VV [ JJ JJ DD ... ] ) ...
+   In fact, if variable name is empty, size is set to 0 and no name is provided at all.
 
-
-  LLLL = length of variable's name;
+  LL = length of variable's name;
   UU = variable name in UTF-8 (LLLL bytes);
   NNNN = number of variable attributes;
   for each attribute:
@@ -595,6 +594,32 @@ May 2, 2006
   If successful, the calculator sends an 0xAA00 (Acknowledgement of
   Data) packet in response.
 
+ Type 0x0011: Remote Control
+ ---------------------------
+
+  This packet allows to:
+  - remotely execute: a program, an assembly program or a FLASH application by its name
+  - enqueue a key
+  
+  The contents of this packet are:
+
+	LL UU ... 0x00 LL UU ... 0x00 | AC | unformatted DATA ...
+      \_________/    \_________/
+	    folder		   varname
+
+  LL = length of variable's name;
+  UU = variable name in UTF-8 (LLLL bytes);
+  AC = action
+
+  Known actions and remarks:
+   0x00		run program by name				folder may be empty
+											data = comma-separated parameters (those passed to function/program); may be empty, hopefully...
+   0x01		run assembly program by name	same
+   0x02		run FLASH applicatio by name	folder and data must be empty
+   0x03		enqueue key						folder and varname must be empty, 
+											data = key code in big endian (MSB first)
+   0x04		send stuffs						not supported? always produces error 41 (0x29), may be 84+ only
+
 
  Type 0x0012: Acknowledgement of Mode Setting
  --------------------------------------------
@@ -644,11 +669,13 @@ May 2, 2006
 	00 08 = transmission error or invalid code
 	00 09 = using basic mode while being in boot mode
 	00 0c = out of memory
+	00 0d = invalid folder name?
 	00 0e = invalid name
 	00 12 = can't overwrite, variable is locked/archived
 	00 1c = mode token too small
 	00 1d = mode token too large
 	00 22 = invalid parameter ID
+	00 29 = remote control?
 	00 2b = battery low (sending OS)
 	00 34 = invalid FLASH app?
 
