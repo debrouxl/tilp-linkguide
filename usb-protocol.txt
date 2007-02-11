@@ -613,12 +613,13 @@ Jan 2, 2007
 
   Known actions and remarks:
    0x00		run program by name				folder may be empty
-											data = comma-separated parameters 
+											data = comma-separated parameters in TI-charset
 											(those passed to function/program); may be empty, hopefully...
+											no error is returned if number of args don't match
    0x01		run assembly program by name	same
-   0x02		run FLASH applicatio by name	folder and data must be empty
+   0x02		run FLASH application by name	folder and data must be empty
    0x03		enqueue key						folder and varname must be empty, 
-											data = key code in big endian (MSB first)
+											data = key code in TI endianess (MSB first on TI89, LSB first on TI84+)
    0x04		send stuffs						not supported? always produces error 41 (0x29), may be 84+ only
    
    Example:
