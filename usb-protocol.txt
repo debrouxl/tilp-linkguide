@@ -681,13 +681,14 @@ Jan 2, 2007
 	00 0c = out of memory
 	00 0d = invalid folder name?
 	00 0e = invalid name
+	00 11 = busy? sent after 2 keys (remote control?)
 	00 12 = can't overwrite, variable is locked/archived
 	00 1c = mode token too small
 	00 1d = mode token too large
 	00 22 = invalid parameter ID
 	00 29 = remote control?
 	00 2b = battery low (sending OS)
-	00 34 = invalid FLASH app?
+	00 34 = hand-held is busy (not at HOME)
 
 
 6  Variable Transfers
@@ -861,6 +862,19 @@ Jan 2, 2007
   
 Beware: it seems that requesting more than 16 parameters at a time makes Titanium less responsive
 	for a while (1 to 2 seconds).
+
+
+10 Remote Control
+-----------------
+
+ Using remote control is done on the following scheme:
+
+  PC->TI: Remote Control (0x0011)
+  TI->PC: Acknowledge (0xBB00), TI84+ only (beware: delay is set to 0xffff)
+  TI->PC: Acknowledge (0xAA00)
+
+ Please note that answer is asynchronous ie hand-held replies just after 0x0011 packet 
+ but before program execution.
 
 ---
 $Id
