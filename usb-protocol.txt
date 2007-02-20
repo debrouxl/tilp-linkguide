@@ -685,7 +685,7 @@ Jan 2, 2007
 	00 12 = can't overwrite, variable is locked/archived
 	00 1c = mode token too small
 	00 1d = mode token too large
-	00 22 = invalid parameter ID
+	00 22 = invalid parameter ID or invalid data
 	00 29 = remote control?
 	00 2b = battery low (sending OS)
 	00 34 = hand-held is busy (not at HOME)
@@ -714,9 +714,17 @@ Jan 2, 2007
 
   PC->TI: Request to Send (0x000B)
   TI->PC: Acknowledge (0xAA00)
+	PC->TI: Buffer Size Request (size = ???)		(*)
+	TI->PC: Buffer Size Negotiation					(*)
   PC->TI: Variable Contents (0x000D)
   TI->PC: Acknowledge (0xAA00)
   PC->TI: End of Transmission (0xDD00)
+
+  (*) It has been noticed that Ti-Connect may renegotiate buffer size at this location in
+  some situations. The reason is unclear but not doing that will make transfer fail.
+  For instance, sending an ASM program of 309 bytes triggers a renegotiation of buffer size at
+  0x3a bytes. I think that any variable with a size less than the default buffer size should
+  renegotiate at a buffer size less than the variable size. In this example, 0xff could be good.
 
  To request that a variable/application be deleted:
 
@@ -789,7 +797,7 @@ Jan 2, 2007
 	Other packets are raw data.
 
   (*) the negotiation takes place on the first transfer attempt. If transfer failed (hand-held
-  in boot mode, waiting for OS receival), then this step is skipped.
+  in boot mode, waiting for OS receival), then this step is skipped. 84+ only?
 
 
 9  Calculator Parameters
