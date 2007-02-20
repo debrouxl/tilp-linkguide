@@ -279,11 +279,12 @@ int pkt_write(const char *filename, int nurbs)
 	for(i = 0; i < nurbs; i++)
     {
 		Urb *u = urbs[i];
-		uint32_t pkt_size;
-		uint8_t pkt_type;
-		uint32_t data_size;
-		uint16_t data_code;
+		uint32_t pkt_size = 0;
+		uint8_t pkt_type = 0;
+		uint32_t data_size = 0;
+		uint16_t data_code = 0;
 		static int concat = 0;
+		static uint32_t buf_size = 0x3ff;
 
 		pkt_size = u->data[3] | (u->data[2] << 8) | (u->data[1] << 16) | (u->data[0] << 24);
 		pkt_type = u->data[4];
@@ -295,13 +296,18 @@ int pkt_write(const char *filename, int nurbs)
 		add_pkt_type(pkt_type_found, pkt_type, &ptf);
 
 		if((pkt_type == 1) || pkt_type == 2)
+		{
 			data_size = u->data[8] | (u->data[7] << 8) | (u->data[6] << 16) | (u->data[5] << 24);
+			if(pkt_type == 2)
+				buf_size = data_size;
+		}
 		else if(pkt_type == 5)
 			data_size = u->data[6] | (u->data[5] << 8);
 		
 		if(is_a_packet_with_data_header(pkt_type) && !concat)
 		{
-			if(pkt_type == 0x03 && (pkt_size == 0xFA || pkt_size == 0x3FF))
+			//if(pkt_type == 0x03 && (pkt_size == 0xFA || pkt_size == 0x3FF))
+			if((pkt_type == 0x03) && (pkt_size == buf_size))
 				concat = 1;
 
 			data_size = u->data[8] | (u->data[7] << 8) | (u->data[6] << 16) | (u->data[5] << 24);
