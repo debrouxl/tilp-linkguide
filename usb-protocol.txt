@@ -714,7 +714,7 @@ Jan 2, 2007
 
   PC->TI: Request to Send (0x000B)
   TI->PC: Acknowledge (0xAA00)
-	PC->TI: Buffer Size Request (size = ???)		(*)
+	PC->TI: Buffer Size Request (size < varsize)	(*)
 	TI->PC: Buffer Size Negotiation					(*)
   PC->TI: Variable Contents (0x000D)
   TI->PC: Acknowledge (0xAA00)
