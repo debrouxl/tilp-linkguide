@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	DCB dcb;
 	HANDLE hCom;
 	BOOL fSuccess;
-	char comPort[256] = "COM1";
+	char comPort[256] = "COM2";
 	DWORD i;
 	int ch;
 	int c;
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 		return 3;
 	}
 
-	dcb.BaudRate = CBR_57600;				// 9600 bauds
+	dcb.BaudRate = CBR_9600;				// 9600 bauds
 	dcb.fBinary = TRUE;						// Binary mode
 	dcb.fParity = FALSE;					// Parity checking diabled
 	dcb.fOutxCtsFlow = FALSE;				// No output flow control
