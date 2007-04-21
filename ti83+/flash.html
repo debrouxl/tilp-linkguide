@@ -563,16 +563,20 @@ header</i></td>
   </tbody>
 </table>
 </p>
-<p><i>Important remark:</i> for FLASH OS and TI73/83+, a pause must be
+<p><i>Important remark:</i> for FLASH OS and TI73/83+/84+, a pause must
+be
 inserted:<br>
 - just after the first page (1 second),<br>
 - and just
-before sending the last page (which is the 'digital signature') else
-the entire
+before sending the last page (which is the 'digital signature')
+otherwise
+the whole
 operation will not be validated. TI's soft seems to use a very long
 pause
-(2..3s). Practically, a pause of 1 second seems to be enough.<br>
-This pause is not needed for TI84+ (it will make transfer fail in fact).<br>
+(2 to 3s). Practically, a pause of 1 second seems to be enough.</p>
+<p>This pause is <span style="text-decoration: underline;">not </span>needed
+at all for Silver Edition of TI83+ and TI84+ (it will make transfer
+fail in fact).<br>
 </p>
 <p><br>
 &nbsp; <a name="rts"></a><b>Receiving FLASH</b></p>

@@ -33,3 +33,11 @@ With DirectLink: use SniffUsb; the log file must be processed with snif2pkt.
 
 At the time where I have added my analysis tools to the link guide, 
 methods 2 & 3 were used.
+
+5°) Since April 2007, I use another method: GrayLink + RS232_log
+
+I built a RS232 'T' made-up of 2 SUB-D 25 connectors and 1 SUB-D 9 connector.
+Both connectors are wired 1:1 and RxD & TxD signals are wired to the SUB-D 9
+connector thru 2 silicon diodes (electrical OR).
+
+GrayLink is on COM1, RS232_log on COM2.
