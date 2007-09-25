@@ -723,8 +723,8 @@ Jan 2, 2007
   (*) It has been noticed that Ti-Connect may renegotiate buffer size at this location in
   some situations. The reason is unclear but not doing that will make transfer fail.
   For instance, sending an ASM program of 309 bytes triggers a renegotiation of buffer size at
-  0x3a bytes. I think that any variable with a size less than the default buffer size should
-  renegotiate at a buffer size less than the variable size. In this example, 0xff could be good.
+  0x3a bytes. I think that any variable with odd size should renegotiate a buffer size with an even size. 
+  In this example, 0x3a could be good.
 
  To request that a variable/application be deleted:
 

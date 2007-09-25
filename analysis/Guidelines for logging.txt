@@ -19,9 +19,9 @@ Note: BlackLink seems to be too fast for analyzer. Long packets have lost bytes.
 
 3°) My third method (with Ti-Connect software) : UsbSnoopy
 
-Use SnoopyPro (UsbSnoopy) to sniff USB packet and get an XML log.
+Use SnoopyPro to sniff USB packet and get an XML log.
 
-With SilverLink: use SnoopyPro; the XML log can be processed with xml2log and next with log2pkt.
+With SilverLink: use SnoopyPro; the XML log can be processed with xml2log and with log2pkt next.
 With DirectLink: use SniffUsb; the log file must be processed with snif2pkt.
 	SniffUsb needs a reboot before use.
 
