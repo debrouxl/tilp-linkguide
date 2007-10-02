@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 	
 	if(argc < 2)
 	{
-		fprintf(stderr, "Usage: xml2log [file]\n");
+		fprintf(stderr, "Usage: xml2hex [file]\n");
 		return -1;
 	}
 
