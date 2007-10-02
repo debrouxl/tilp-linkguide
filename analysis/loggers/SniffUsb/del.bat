@@ -1,0 +1,1 @@
+del c:\windows\usbsnoop.log

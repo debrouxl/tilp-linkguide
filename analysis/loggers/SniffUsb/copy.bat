@@ -1,0 +1,1 @@
+copy c:\windows\usbsnoop.log
