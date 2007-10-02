@@ -135,7 +135,7 @@ int pkdecomp(const char *filename, int resync)
     
 	// build filenames
     strcpy(src_name, filename);
-    strcat(src_name, ".log");
+    strcat(src_name, ".hex");
     
     strcpy(dst_name, filename);
     strcat(dst_name, ".pkt");
@@ -262,7 +262,7 @@ int main(int argc, char **argv)
 
 	if(argc < 2)
     {
-		fprintf(stderr, "Usage: log2pkt [file]\n");
+		fprintf(stderr, "Usage: hex2dbus [file]\n");
 		exit(0);
     }
 
