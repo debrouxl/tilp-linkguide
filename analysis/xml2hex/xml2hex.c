@@ -33,7 +33,9 @@ int fill_buf(FILE *f, char data, int flush)
 	static unsigned int cnt = 0;
 	unsigned int i, j;
 
-	buf[cnt++] = data;
+	if(!flush)
+		buf[cnt++] = data;
+	
 	if(cnt > 15 || flush)
 	{
 		printf(".");
