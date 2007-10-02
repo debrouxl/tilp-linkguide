@@ -1,5 +1,5 @@
-/*  snif2pkt - a packet decompiler for use with SniffUsb
- *  Copyright (C) 2005  Romain Lievin
+/*  log2hex - a SniffUsb log to hex converter
+ *  Copyright (C) 2005-2007  Romain Lievin
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
