@@ -74,7 +74,7 @@ int main(int argc, char **argv)
     strcat(src_name, ".xml");
     
     strcpy(dst_name, filename);
-    strcat(dst_name, ".log");
+    strcat(dst_name, ".hex");
 
 	fi = fopen(src_name, "rt");
 	fo = fopen(dst_name, "wt");
