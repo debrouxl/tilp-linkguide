@@ -23,16 +23,6 @@
 #include <string.h>
 #include <sys/stat.h>
 
-/*
-	Format:
-
-	| packet header    | data												 |
-	|				   | data header         |								 |
-	| size		  | ty | size		 | code	 | data							 |
-	|			  |    |			 |		 |								 |
-	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
-*/
-
 #define TOKEN0  "-- URB_FUNCTION_CONTROL_TRANSFER"
 #define TOKEN1	"-- URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER"
 #define TOKEN2	"  TransferBufferMDL    = "
@@ -44,13 +34,18 @@ typedef unsigned char	uint8_t;
 typedef unsigned short	uint16_t;
 typedef unsigned long	uint32_t;
 
-int fill_buf(FILE *f, char data, int flush)
+int fill_buf(FILE *f, char data, int flush, int ep)
 {
 	static char buf[16];
 	static unsigned int cnt = 0;
+
 	unsigned int i, j;
 
-	if(!flush)
+	if(ep)
+	{
+	}
+
+	if(!flush && !ep)
 		buf[cnt++] = data;
 
 	if(cnt > 15 || flush)
@@ -121,6 +116,15 @@ int main(int argc, char **argv)
 		if(strstr(line, TOKEN1))
 		{
 			int end = 0;
+			char ep = 0;
+
+			fgets(line, sizeof(line), fi);
+			fgets(line, sizeof(line), fi);
+
+			if(strstr(line, "_IN"))
+				ep = 'i';
+			if(strstr(line, "_OUT"))
+				ep = 'o';
 
 			while(!feof(fi))
 			{
@@ -132,6 +136,8 @@ int main(int argc, char **argv)
 				else
 					break;
 			}
+
+			fill_buf(fo, value, 0, ep);
 
 			while(!feof(fi))
 			{
@@ -148,7 +154,7 @@ int main(int argc, char **argv)
 					data[2] = '\0';	
 
 					sscanf(data, "%02X", &value);
-					fill_buf(fo, value, 0);
+					fill_buf(fo, value, 0, 0);
 				}
 			
 				fgets(line, sizeof(line), fi);
@@ -156,7 +162,7 @@ int main(int argc, char **argv)
 			}
 		}
 	}
-	fill_buf(fo, 0, !0);
+	fill_buf(fo, 0, !0, 0);
 
 	fclose(fi);
 	fclose(fo);
