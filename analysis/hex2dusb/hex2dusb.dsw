@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "snif2pkt"=.\snif2pkt.dsp - Package Owner=<4>
+Project: "hex2dusb"=.\hex2dusb.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

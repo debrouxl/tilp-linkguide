@@ -1,5 +1,5 @@
-/*  snif2pkt - a packet decompiler for use with SniffUsb
- *  Copyright (C) 2005  Romain Lievin
+/*  hex2dusb - an D-USB packet decompiler
+ *  Copyright (C) 2005-2007  Romain Lievin
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,12 +32,6 @@
 	|			  |    |			 |		 |								 |
 	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
 */
-
-#define TOKEN1	"-- URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER"
-#define TOKEN2	"  TransferBufferMDL    = "
-#define TOKEN3	"  UrbLink              = "
-#define TOKEN4	"  PipeHandle           = 813f4184 [endpoint "
-#define TOKEN5	"    00000000: "
 
 typedef unsigned char	uint8_t;
 typedef unsigned short	uint16_t;
