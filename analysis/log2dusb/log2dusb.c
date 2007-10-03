@@ -1,4 +1,4 @@
-/*  snif2pkt - a packet decompiler for use with SniffUsb
+/*  log2dusb - a D-USB packet decompiler for use with SniffUsb
  *  Copyright (C) 2005  Romain Lievin
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -552,7 +552,7 @@ int main(int argc, char **argv)
 
 	if(argc < 2)
     {
-		fprintf(stderr, "Usage: log2pkt [file]\n");
+		fprintf(stderr, "Usage: log2dusb [file]\n");
 		exit(0);
     }
 
