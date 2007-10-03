@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	int c;
 	COMMTIMEOUTS cto;
 	FILE *txt;
-	char filename[256] = "test.log";
+	char filename[256] = "test.hex";
 	int j=0;
 	int buffer[17];
 	int k;
