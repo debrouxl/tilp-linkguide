@@ -1,4 +1,4 @@
-/*  hex2bus - an D-BUS packet decompiler
+/*  hex2dbus - an D-BUS packet decompiler
  *  Copyright (C) 2002-2007  Romain Liévin
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -116,7 +116,7 @@ int fill_buf(FILE *f, char data, int flush)
 /*
   Format of data: 8 hexadecimal numbers with spaces
 */
-int pkdecomp(const char *filename, int resync)
+int dbus_decomp(const char *filename, int resync)
 {
     char src_name[1024];
     char dst_name[1024];
@@ -259,7 +259,6 @@ int main(int argc, char **argv)
 {
 	int resync = 0;
 
-
 	if(argc < 2)
     {
 		fprintf(stderr, "Usage: hex2dbus [file]\n");
@@ -269,5 +268,5 @@ int main(int argc, char **argv)
 	if(argc > 2)
 		resync = !0;
   
-	return pkdecomp(argv[1], resync);
+	return dbus_decomp(argv[1], resync);
 }
