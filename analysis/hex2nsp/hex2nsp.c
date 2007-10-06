@@ -25,13 +25,9 @@
 #include <sys/stat.h>
 
 /*
-	Format:
+	Format (see http://hackspire.unsads.com/USB_Protocol#Service_identifiers):
 
-	| packet header    | data												 |
-	|				   | data header         |								 |
-	| size		  | ty | size		 | code	 | data							 |
-	|			  |    |			 |		 |								 |
-	| 00 00 00 10 | 04 | 00 00 00 0A | 00 01 | 00 03 00 01 00 00 00 00 07 D0 |	
+	54 FD SA SA SS SS DA DA DS DS DC DC SZ AK SQ CK [data part]
 */
 
 typedef unsigned char	uint8_t;
@@ -42,107 +38,60 @@ typedef unsigned long	uint32_t;
 
 typedef struct
 {
-	uint8_t		type;
-	const char*	name;
-	int			data_hdr;
-	int			data;
+	uint16_t	unused;
+	uint16_t	src_addr;
+	uint16_t	src_id;
+	uint16_t	dst_addr;
+	uint16_t	dst_id;
+	uint16_t	data_sum;
+	uint8_t		data_size;
+	uint8_t		ack;
+	uint8_t		seq;
+	uint8_t		hdr_sum;
 } Packet;
 
 typedef struct
 {
 	uint16_t		type;
 	const char*		name;
-} Opcode;
+} ServiceId;
 
-static const Packet packets[] = 
+static const ServiceId sids[] = 
 {
-	{ 0x01, "Buffer Size Request", 0, 4 }, 
-	{ 0x02, "Buffer Size Allocation", 0, 4 }, 
-	{ 0x03, "Virtual Packet Data with Continuation", 1, 6 }, 
-	{ 0x04, "Virtual Packet Data Final", 1, 6 }, 
-	{ 0x05, "Virtual Packet Data Acknowledgement", 0, 2 }, 
-	{ 0 },
-};
-
-static const Opcode opcodes[] = 
-{
-	{ 0x0001, "Ping / Set Mode" }, 
-	{ 0x0002, "Begin OS Transfer" },
-	{ 0x0003, "Acknowledgement of OS Transfer" },
-	{ 0x0005, "OS Data" },
-	{ 0x0006, "Acknowledgement of EOT" },
-	{ 0x0007, "Parameter Request"}, 
-	{ 0x0008, "Parameter Data"}, 
-	{ 0x0009, "Request Directory Listing" },
-	{ 0x000a, "Variable Header" },
-	{ 0x000b, "Request to Send" },
-	{ 0x000c, "Request Variable" },
-	{ 0x000D, "Variable Contents" },
-	{ 0x000e, "Parameter Set"},
-	{ 0x0010, "Delete Variable"}, 
-	{ 0x0011, "Unknown"}, 
-	{ 0x0012, "Acknowledgement of Mode Setting"}, 
-	{ 0xaa00, "Acknowledgement of Data"}, 
-	{ 0xbb00, "Acknowledgement of Parameter Request"},	
-	{ 0xdd00, "End of Transmission"}, 
-	{ 0xee00, "Error"},
+	{ 0x00FE, "Reception Acknowledgment" },
+	{ 0x00FF, "Reception Ack" },
+	{ 0x4002, "Echo" },
+	{ 0x4003, "Device Address Request" },
+	{ 0x4020, "Device Information" },
+	{ 0x4021, "Screen Capture" },
+	{ 0x4024, "Screen Capture w/ RLE" },
+	{ 0x4050, "Login" },
+	{ 0x4060, "File Management" },
+	{ 0x4080, "OS Installation" },
+	{ 0x40DE, "Service Deconnection" },
 	{ 0 },
 };
 
 /* */
 
-int is_a_packet(uint8_t id)
+int is_a_sid(uint8_t id)
 {
   int i;
   
-  for(i=0; packets[i].name; i++)
-    if(id == packets[i].type)
+  for(i=0; sids[i].name; i++)
+    if(id == sids[i].type)
       break;
   return i;
 }
 
-const char* name_of_packet(uint8_t id)
+const char* name_of_sid(uint8_t id)
 {
 	int i;
   
-	for(i=0; packets[i].name; i++)
-		if(id == packets[i].type)
-			return packets[i].name;
+	for(i=0; sids[i].name; i++)
+		if(id == sids[i].type)
+			return sids[i].name;
 	return "";
-}
-
-int is_a_packet_with_data_header(uint8_t id)
-{
-	int i;
-  
-  for(i=0; packets[i].name; i++)
-    if(id == packets[i].type)
-		if(packets[i].data_hdr)
-			return 1;
-
-  return 0;
-}
-
-int is_a_opcode(uint16_t id)
-{
-  int i;
-
-  for(i=0; opcodes[i].name; i++)
-    if(id == opcodes[i].type)
-      break;
-
-  return i;
-}
-
-const char* name_of_data(uint16_t id)
-{
-	int i;
-  
-	for(i=0; opcodes[i].name; i++)
-		if(id == opcodes[i].type)
-			return opcodes[i].name;
-
-	return "unknown";
 }
 
 const char* ep_way(int ep)
@@ -154,29 +103,29 @@ const char* ep_way(int ep)
 
 /* */
 
-int add_pkt_type(uint8_t* array, uint8_t type, int *count)
+int add_sid(uint16_t* array, uint16_t id, int *count)
 {
 	int i;
 	
 	for(i = 0; i < *count; i++)
-		if(array[i] == type)
+		if(array[i] == id)
 			return 0;
 
-	array[++i] = type;
+	array[++i] = id;
 	*count = i;
 
 	return i;
 }
 
-int add_data_code(uint16_t* array, uint16_t code, int *count)
+int add_addr(uint16_t* array, uint8_t addr, int *count)
 {
 	int i;
 	
 	for(i = 0; i < *count; i++)
-		if(array[i] == code)
+		if(array[i] == addr)
 			return 0;
 
-	array[i++] = code;
+	array[++i] = addr;
 	*count = i;
 
 	return i;
@@ -214,105 +163,87 @@ int hex_read(unsigned char *data)
 	return 0;
 }
 
-uint8_t pkt_type_found[256] = { 0 };
-uint16_t data_code_found[256] = { 0 };
-int ptf=0, dcf=0;
+uint16_t sid_found[256] = { 0 };
+uint16_t addr_found[256] = { 0 };
+int sif=0, af=0;
 
 int dusb_write(int dir, uint8_t data)
 {
 	static int array[20];
   	static int i = 0;
 	static unsigned long state = 1;
-	static uint32_t raw_size;
-	static uint8_t raw_type;
-	static uint32_t vtl_size;
-	static uint16_t vtl_type;
+	static uint16_t src_addr, src_id;
+	static uint16_t dst_addr, dst_id;
+	static uint8_t data_size, ack, sq;
 	static int cnt;
-	static int first = 1;
 
   	if (log == NULL)
     		return -1;
 
-	//printf("<%i %i> ", i, state);
 	array[i++ % 16] = data;
 
 	switch(state)	// Finite State Machine
 	{
-	case 1: break;
-	case 2: break;
-	case 3: break;
+	case 1:
+	case 2:
+		break;
+
+	case 3: 
+		break;
 	case 4: 
-		raw_size = (array[0] << 24) | (array[1] << 16) | (array[2] << 8) | (array[3] << 0);
-		fprintf(log, "%08x ", raw_size);
+		src_addr = (array[3] << 8) | (array[2] << 0);
+		fprintf(log, "%04x:", src_addr);
 		break;
+
 	case 5: 
-		raw_type = array[4];
-		fprintf(log, "(%02X) ", raw_type);
-
-		fprintf(log, "\t\t\t\t\t\t\t");
-		fprintf(log, "| %s: %s\n", ep_way(dir), name_of_packet(raw_type));
-		add_pkt_type(pkt_type_found, raw_type, &ptf);
-
 		break;
-	case 6: break;
-	case 7:
-		if(raw_type == 5)
-		{
-			uint16_t tmp = (array[5] << 8) | (array[6] << 0);
-			fprintf(log, "\t[%04x]\n", tmp);
-			state = 0;
-		}
+	case 6: 
+		src_id = (array[5] << 8) | (array[4] << 0);
+		fprintf(log, "%04x->", src_id);
 		break;
-	case 8: break;
-	case 9:
-		if(raw_type == 1 || raw_type == 2)
-		{
-			uint32_t tmp = (array[5] << 24) | (array[6] << 16) | (array[7] << 8) | (array[8] << 0);
-			fprintf(log, "\t[%08x]\n", tmp);
-			state = 0;
-		}
-		else if(first && ((raw_type == 3) || (raw_type == 4)))
-		{
-			vtl_size = (array[5] << 24) | (array[6] << 16) | (array[7] << 8) | (array[8] << 0);
-			fprintf(log, "\t%08x ", vtl_size);
-			cnt = 0;
-			first = (raw_type == 3) ? 0 : 1;
-			raw_size -= 6;
-		}
-		else if(!first && ((raw_type == 3) || (raw_type == 4)))
-		{
-			fprintf(log, "\t");
-			fprintf(log, "%02X %02X %02X ", array[5], array[6], array[7]);
-			cnt = 3;
-			raw_size -= 3;
-			first = (raw_type == 3) ? 0 : 1;
 
-			state = 12;
-			goto push;
-		}			
+	case 7: 
 		break;
-	case 10: break;
-	case 11:
-		vtl_type = (array[9] << 8) | (array[10] << 0);
-		fprintf(log, "{%04x}", vtl_type);
+	case 8: 
+		dst_addr = (array[7] << 8) | (array[6] << 0);
+		fprintf(log, "%04x:", dst_addr);
+		break;
+
+	case 9: 
+		break;
+	case 10: 
+		dst_id = (array[9] << 8) | (array[8] << 0);
+		fprintf(log, "%04x ", dst_id);
+		break;
 		
-		fprintf(log, "\t\t\t\t\t\t");
-		fprintf(log, "| %s: %s\n\t\t", "CMD", name_of_data(vtl_type));
-		add_data_code(data_code_found, vtl_type, &dcf);
-
-		if(!vtl_size)
-		{
-			fprintf(log, "\n");
-			state = 0;
-		}
+	case 11:	break;	// checksum
+	case 12: break;
+		
+	case 13:
+		data_size = array[12];
 		break;
-	default: push:
+
+	case 14: 
+		ack = array[13];
+		fprintf(log, "AK=%02x ", ack);
+		break;
+
+	case 15:
+		sq = array[13];
+		fprintf(log, "SQ=%02x ", sq);
+
+		fprintf(log, "(%i bytes)\n", data_size);
+		cnt = 0;
+		break;
+
+
+	default:
 		fprintf(log, "%02X ", data);
 
 		if(!(++cnt % 12))
 			fprintf(log, "\n\t\t");
 		
-		if(--raw_size == 0)
+		if(--data_size == 0)
 		{
 			fprintf(log, "\n");
 			state = 0;
@@ -372,11 +303,11 @@ int dusb_decomp(const char *filename)
 		dusb_write(0, data);
 	}
 
-	fprintf(log, "() Packet types found: ");
-	for(i = 0; i < ptf; i++) fprintf(log, "%02x ", pkt_type_found[i]);
+	fprintf(log, "() Service IDs found: ");
+	for(i = 0; i < sif; i++) fprintf(log, "%04x ", sid_found[i]);
 	fprintf(log, "\n");
-	fprintf(log, "{} Data codes found: ");
-	for(i = 0; i < dcf; i++) fprintf(log, "%04x ", data_code_found[i]);
+	fprintf(log, "() Addresses found: ");
+	for(i = 0; i < af; i++) fprintf(log, "%04x ", addr_found[i]);
 	fprintf(log, "\n");
 
 	fclose(hex);
