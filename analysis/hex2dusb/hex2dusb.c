@@ -17,7 +17,6 @@
  */
 
 
-#include <conio.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -196,7 +195,7 @@ int hex_read(unsigned char *data)
 	if(feof(hex))
 		return -1;
 
-	ret = fscanf(hex, "%02X", data);
+	ret = fscanf(hex, "%02X", (int *)data);
 	if(ret < 1)
 		return -1;
 	fgetc(hex);
@@ -243,11 +242,11 @@ int dusb_write(int dir, uint8_t data)
 	case 3: break;
 	case 4: 
 		raw_size = (array[0] << 24) | (array[1] << 16) | (array[2] << 8) | (array[3] << 0);
-		fprintf(log, "%08x ", raw_size);
+		fprintf(log, "%08x ", (unsigned int)raw_size);
 		break;
 	case 5: 
 		raw_type = array[4];
-		fprintf(log, "(%02X) ", raw_type);
+		fprintf(log, "(%02X) ", (unsigned int)raw_type);
 
 		fprintf(log, "\t\t\t\t\t\t\t");
 		fprintf(log, "| %s: %s\n", ep_way(dir), name_of_packet(raw_type));
@@ -259,7 +258,7 @@ int dusb_write(int dir, uint8_t data)
 		if(raw_type == 5)
 		{
 			uint16_t tmp = (array[5] << 8) | (array[6] << 0);
-			fprintf(log, "\t[%04x]\n", tmp);
+			fprintf(log, "\t[%04x]\n", (unsigned int)tmp);
 			state = 0;
 		}
 		break;
@@ -274,7 +273,7 @@ int dusb_write(int dir, uint8_t data)
 		else if(first && ((raw_type == 3) || (raw_type == 4)))
 		{
 			vtl_size = (array[5] << 24) | (array[6] << 16) | (array[7] << 8) | (array[8] << 0);
-			fprintf(log, "\t%08x ", vtl_size);
+			fprintf(log, "\t%08x ", (unsigned int)vtl_size);
 			cnt = 0;
 			first = (raw_type == 3) ? 0 : 1;
 			raw_size -= 6;
