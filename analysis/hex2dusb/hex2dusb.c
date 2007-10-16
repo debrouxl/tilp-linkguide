@@ -249,8 +249,8 @@ int dusb_write(int dir, uint8_t data)
 		raw_type = array[4];
 		fprintf(log, "(%02X) ", (unsigned int)raw_type);
 
-		fprintf(log, "\t\t\t\t\t\t\t");
-		fprintf(log, "| %s: %s\n", ep_way(dir), name_of_packet(raw_type));
+		fprintf(log, "\t\t\t\t\t\t\t\t\t\t\t\t\t");
+		fprintf(log, "  %s: %s\n", ep_way(dir), name_of_packet(raw_type));
 		add_pkt_type(pkt_type_found, raw_type, &ptf);
 
 		break;
@@ -281,7 +281,7 @@ int dusb_write(int dir, uint8_t data)
 		}
 		else if(!first && ((raw_type == 3) || (raw_type == 4)))
 		{
-			fprintf(log, "\t");
+			fprintf(log, "\t\t");
 			fprintf(log, "%02X %02X %02X ", array[5], array[6], array[7]);
 			cnt = 3;
 			raw_size -= 3;
@@ -296,8 +296,8 @@ int dusb_write(int dir, uint8_t data)
 		vtl_type = (array[9] << 8) | (array[10] << 0);
 		fprintf(log, "{%04x}", vtl_type);
 		
-		fprintf(log, "\t\t\t\t\t\t");
-		fprintf(log, "| %s: %s\n\t\t", "CMD", name_of_data(vtl_type));
+		fprintf(log, "\t\t\t\t\t\t\t\t\t\t\t\t");
+		fprintf(log, "  %s: %s\n", "CMD", name_of_data(vtl_type));
 		add_data_code(data_code_found, vtl_type, &dcf);
 
 		if(!vtl_size)
@@ -307,19 +307,29 @@ int dusb_write(int dir, uint8_t data)
 		}
 		break;
 	default: push:
+		if(!cnt)
+			fprintf(log, "\t\t");
+
 		fprintf(log, "%02X ", data);
 		ascii[cnt % HEXDUMP_SIZE] = data;
 
 		if(!(++cnt % HEXDUMP_SIZE))
 		{
-			fprintf(log, " | ");
+			fprintf(log, "| ");
 			for(i = 0; i < HEXDUMP_SIZE; i++)
 				fprintf(log, "%c", isalnum(ascii[i]) ? ascii[i] : '.');
+
 			fprintf(log, "\n\t\t");
 		}
 		
 		if(--raw_size == 0)
 		{
+			for(i = 0; i < HEXDUMP_SIZE - (cnt%HEXDUMP_SIZE); i++)
+				fprintf(log, "   ");
+			fprintf(log, "| ");
+			for(i = 0; i < (cnt%HEXDUMP_SIZE); i++)
+				fprintf(log, "%c", isalnum(ascii[i]) ? ascii[i] : '.');
+
 			fprintf(log, "\n");
 			state = 0;
 		}

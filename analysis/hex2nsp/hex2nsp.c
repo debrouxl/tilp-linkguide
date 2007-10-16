@@ -16,13 +16,14 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #include <conio.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+
+#define HEXDUMP_SIZE	12
 
 /*
 	Format (see http://hackspire.unsads.com/USB_Protocol#Service_identifiers):
@@ -33,8 +34,6 @@
 typedef unsigned char	uint8_t;
 typedef unsigned short	uint16_t;
 typedef unsigned long	uint32_t;
-
-#define HEXDUMP_SIZE	12
 
 /* */
 
@@ -265,10 +264,10 @@ int dusb_write(int dir, uint8_t data)
 		break;
 
 	case 16:		// header checksum
-		fprintf(log, "(%i bytes) ", data_size);
+		fprintf(log, "(%3i bytes) ", data_size);
 		cnt = 0;
 
-		fprintf(log, "\t\t\t%s (%s) ==> %s (%s)\n", 
+		fprintf(log, "\t\t\t\t\t%s (%s) ==> %s (%s)\n", 
 			name_of_addr(src_addr), name_of_sid(src_id), 
 			name_of_addr(dst_addr), name_of_sid(dst_id));
 
@@ -288,11 +287,18 @@ int dusb_write(int dir, uint8_t data)
 			fprintf(log, " | ");
 			for(i = 0; i < HEXDUMP_SIZE; i++)
 				fprintf(log, "%c", isalnum(ascii[i]) ? ascii[i] : '.');
+
 			fprintf(log, "\n\t\t");
 		}
 		
 		if(--data_size == 0)
 		{
+			for(i = 0; i < HEXDUMP_SIZE - (cnt%HEXDUMP_SIZE); i++)
+				fprintf(log, "   ");
+			fprintf(log, " | ");
+			for(i = 0; i < (cnt%HEXDUMP_SIZE); i++)
+				fprintf(log, "%c", isalnum(ascii[i]) ? ascii[i] : '.');
+
 			fprintf(log, "\n");
 			state = 0;
 		}
