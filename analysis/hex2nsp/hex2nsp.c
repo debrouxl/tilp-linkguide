@@ -34,6 +34,8 @@ typedef unsigned char	uint8_t;
 typedef unsigned short	uint16_t;
 typedef unsigned long	uint32_t;
 
+#define HEXDUMP_SIZE	12
+
 /* */
 
 typedef struct
@@ -52,9 +54,23 @@ typedef struct
 
 typedef struct
 {
-	uint16_t		type;
+	uint16_t		value;
 	const char*		name;
 } ServiceId;
+
+typedef struct
+{
+	uint16_t		value;
+	const char*		name;
+} Address;
+
+static const Address addrs[] = 
+{
+	{ 0x0000, "TI" },
+	{ 0x6400, "PC" },
+	{ 0x6401, "TI" },
+	{ 0 },
+};
 
 static const ServiceId sids[] = 
 {
@@ -68,7 +84,7 @@ static const ServiceId sids[] =
 	{ 0x4050, "Login" },
 	{ 0x4060, "File Management" },
 	{ 0x4080, "OS Installation" },
-	{ 0x40DE, "Service Deconnection" },
+	{ 0x40DE, "Service Disconnect" },
 	{ 0 },
 };
 
@@ -79,19 +95,29 @@ int is_a_sid(uint8_t id)
   int i;
   
   for(i=0; sids[i].name; i++)
-    if(id == sids[i].type)
+    if(id == sids[i].value)
       break;
   return i;
 }
 
-const char* name_of_sid(uint8_t id)
+const char* name_of_sid(uint16_t id)
 {
 	int i;
   
 	for(i=0; sids[i].name; i++)
-		if(id == sids[i].type)
+		if(id == sids[i].value)
 			return sids[i].name;
-	return "";
+	return "???";
+}
+
+const char* name_of_addr(uint16_t addr)
+{
+	int i;
+  
+	for(i=0; addrs[i].name; i++)
+		if(addr == addrs[i].value)
+			return addrs[i].name;
+	return "??";
 }
 
 const char* ep_way(int ep)
@@ -176,6 +202,7 @@ int dusb_write(int dir, uint8_t data)
 	static uint16_t dst_addr, dst_id;
 	static uint8_t data_size, ack, sq;
 	static int cnt;
+	static uint8_t ascii[HEXDUMP_SIZE+1];
 
   	if (log == NULL)
     		return -1;
@@ -238,8 +265,12 @@ int dusb_write(int dir, uint8_t data)
 		break;
 
 	case 16:		// header checksum
-		fprintf(log, "(%i bytes)\n", data_size);
+		fprintf(log, "(%i bytes) ", data_size);
 		cnt = 0;
+
+		fprintf(log, "\t\t\t%s (%s) ==> %s (%s)\n", 
+			name_of_addr(src_addr), name_of_sid(src_id), 
+			name_of_addr(dst_addr), name_of_sid(dst_id));
 
 		if(data_size == 0)
 			state = 0;
@@ -250,9 +281,15 @@ int dusb_write(int dir, uint8_t data)
 			fprintf(log, "\t\t");
 
 		fprintf(log, "%02X ", data);
+		ascii[cnt % HEXDUMP_SIZE] = data;
 
-		if(!(++cnt % 12))
+		if(!(++cnt % HEXDUMP_SIZE))
+		{
+			fprintf(log, " | ");
+			for(i = 0; i < HEXDUMP_SIZE; i++)
+				fprintf(log, "%c", isalnum(ascii[i]) ? ascii[i] : '.');
 			fprintf(log, "\n\t\t");
+		}
 		
 		if(--data_size == 0)
 		{
