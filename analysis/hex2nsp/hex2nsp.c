@@ -117,7 +117,7 @@ int add_sid(uint16_t* array, uint16_t id, int *count)
 	return i;
 }
 
-int add_addr(uint16_t* array, uint8_t addr, int *count)
+int add_addr(uint16_t* array, uint16_t addr, int *count)
 {
 	int i;
 	
@@ -184,60 +184,71 @@ int dusb_write(int dir, uint8_t data)
 
 	switch(state)	// Finite State Machine
 	{
-	case 1:
+	case 1:			// unused
 	case 2:
 		break;
 
-	case 3: 
+	case 3:			// source address
 		break;
 	case 4: 
-		src_addr = (array[3] << 8) | (array[2] << 0);
+		src_addr = (array[2] << 8) | (array[3] << 0);
 		fprintf(log, "%04x:", src_addr);
+		add_addr(addr_found, src_addr, &af);
 		break;
 
-	case 5: 
+	case 5:			// source service id
 		break;
 	case 6: 
-		src_id = (array[5] << 8) | (array[4] << 0);
+		src_id = (array[4] << 8) | (array[5] << 0);
 		fprintf(log, "%04x->", src_id);
+		add_sid(sid_found, src_id, &sif);
 		break;
 
-	case 7: 
+	case 7:			// destination address
 		break;
 	case 8: 
-		dst_addr = (array[7] << 8) | (array[6] << 0);
+		dst_addr = (array[6] << 8) | (array[7] << 0);
 		fprintf(log, "%04x:", dst_addr);
+		add_addr(addr_found, dst_addr, &af);
 		break;
 
-	case 9: 
+	case 9:			// destination service id
 		break;
 	case 10: 
-		dst_id = (array[9] << 8) | (array[8] << 0);
+		dst_id = (array[8] << 8) | (array[9] << 0);
 		fprintf(log, "%04x ", dst_id);
+		add_sid(sid_found, src_id, &sif);
 		break;
 		
-	case 11:	break;	// checksum
+	case 11: break;	// data checksum
 	case 12: break;
 		
-	case 13:
+	case 13:		// data size
 		data_size = array[12];
 		break;
 
-	case 14: 
+	case 14:		// acknowledgment
 		ack = array[13];
 		fprintf(log, "AK=%02x ", ack);
 		break;
 
-	case 15:
+	case 15:		// sequence number
 		sq = array[13];
 		fprintf(log, "SQ=%02x ", sq);
-
-		fprintf(log, "(%i bytes)\n", data_size);
-		cnt = 0;
 		break;
 
+	case 16:		// header checksum
+		fprintf(log, "(%i bytes)\n", data_size);
+		cnt = 0;
+
+		if(data_size == 0)
+			state = 0;
+		break;
 
 	default:
+		if(!cnt)
+			fprintf(log, "\t\t");
+
 		fprintf(log, "%02X ", data);
 
 		if(!(++cnt % 12))
