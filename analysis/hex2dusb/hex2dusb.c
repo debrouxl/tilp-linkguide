@@ -16,12 +16,13 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+
+#define HEXDUMP_SIZE	12
 
 /*
 	Format:
@@ -228,11 +229,11 @@ int dusb_write(int dir, uint8_t data)
 	static uint16_t vtl_type;
 	static int cnt;
 	static int first = 1;
+	static uint8_t ascii[HEXDUMP_SIZE+1];
 
   	if (log == NULL)
     		return -1;
 
-	//printf("<%i %i> ", i, state);
 	array[i++ % 16] = data;
 
 	switch(state)	// Finite State Machine
@@ -307,9 +308,15 @@ int dusb_write(int dir, uint8_t data)
 		break;
 	default: push:
 		fprintf(log, "%02X ", data);
+		ascii[cnt % HEXDUMP_SIZE] = data;
 
-		if(!(++cnt % 12))
+		if(!(++cnt % HEXDUMP_SIZE))
+		{
+			fprintf(log, " | ");
+			for(i = 0; i < HEXDUMP_SIZE; i++)
+				fprintf(log, "%c", isalnum(ascii[i]) ? ascii[i] : '.');
 			fprintf(log, "\n\t\t");
+		}
 		
 		if(--raw_size == 0)
 		{
