@@ -84,6 +84,14 @@ static const ServiceId sids[] =
 	{ 0x4060, "File Management" },
 	{ 0x4080, "OS Installation" },
 	{ 0x40DE, "Service Disconnect" },
+
+	{ 0x8003, "8003" },
+	{ 0x8004, "8004" },
+	{ 0x8005, "8005" },
+	{ 0x8006, "8006" },
+	{ 0x8007, "8007" },
+	{ 0x8009, "8009" },
+
 	{ 0 },
 };
 
@@ -259,7 +267,7 @@ int dusb_write(int dir, uint8_t data)
 		break;
 
 	case 15:		// sequence number
-		sq = array[13];
+		sq = array[14];
 		fprintf(log, "SQ=%02x ", sq);
 		break;
 
