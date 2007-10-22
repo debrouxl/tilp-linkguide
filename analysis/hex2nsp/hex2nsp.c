@@ -358,7 +358,7 @@ int dusb_decomp(const char *filename)
 		fgets(line, sizeof(line), hex);
 	}
 
-	fprintf(log, "TI packet decompiler for D-USB, version 1.0\n");
+	fprintf(log, "TI packet decompiler for NSpire, version 1.0\n");
 
 	while(hex_read(&data) != -1)
 	{
