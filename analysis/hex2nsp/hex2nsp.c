@@ -200,7 +200,7 @@ uint16_t sid_found[256] = { 0 };
 uint16_t addr_found[256] = { 0 };
 int sif=0, af=0;
 
-int dusb_write(int dir, uint8_t data)
+int nsp_write(int dir, uint8_t data)
 {
 	static int array[20];
   	static int i = 0;
@@ -323,7 +323,7 @@ int dusb_write(int dir, uint8_t data)
   	return 0;
 }
 
-int dusb_decomp(const char *filename)
+int nsp_decomp(const char *filename)
 {
 	char src_name[1024];
 	char dst_name[1024];
@@ -362,7 +362,7 @@ int dusb_decomp(const char *filename)
 
 	while(hex_read(&data) != -1)
 	{
-		dusb_write(0, data);
+		nsp_write(0, data);
 	}
 
 	fprintf(log, "() Service IDs found: ");
@@ -387,5 +387,5 @@ int main(int argc, char **argv)
 		exit(0);
     }
 
-	return dusb_decomp(argv[1]);
+	return nsp_decomp(argv[1]);
 }
