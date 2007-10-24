@@ -91,7 +91,7 @@ static const Opcode opcodes[] =
 
 /* */
 
-int is_a_packet(uint8_t id)
+static int is_a_packet(uint8_t id)
 {
   int i;
   
@@ -101,7 +101,7 @@ int is_a_packet(uint8_t id)
   return i;
 }
 
-const char* name_of_packet(uint8_t id)
+static const char* name_of_packet(uint8_t id)
 {
 	int i;
   
@@ -111,7 +111,7 @@ const char* name_of_packet(uint8_t id)
 	return "";
 }
 
-int is_a_packet_with_data_header(uint8_t id)
+static int is_a_packet_with_data_header(uint8_t id)
 {
 	int i;
   
@@ -123,7 +123,7 @@ int is_a_packet_with_data_header(uint8_t id)
   return 0;
 }
 
-int is_a_opcode(uint16_t id)
+static int is_a_opcode(uint16_t id)
 {
   int i;
 
@@ -134,7 +134,7 @@ int is_a_opcode(uint16_t id)
   return i;
 }
 
-const char* name_of_data(uint16_t id)
+static const char* name_of_data(uint16_t id)
 {
 	int i;
   
@@ -145,7 +145,7 @@ const char* name_of_data(uint16_t id)
 	return "unknown";
 }
 
-const char* ep_way(int ep)
+static const char* ep_way(int ep)
 {
 	if(ep == 0x01) return "TI>PC";
 	else if(ep == 0x02) return "PC>TI";
@@ -154,7 +154,7 @@ const char* ep_way(int ep)
 
 /* */
 
-int add_pkt_type(uint8_t* array, uint8_t type, int *count)
+static int add_pkt_type(uint8_t* array, uint8_t type, int *count)
 {
 	int i;
 	
@@ -168,7 +168,7 @@ int add_pkt_type(uint8_t* array, uint8_t type, int *count)
 	return i;
 }
 
-int add_data_code(uint16_t* array, uint16_t code, int *count)
+static int add_data_code(uint16_t* array, uint16_t code, int *count)
 {
 	int i;
 	
@@ -187,7 +187,7 @@ int add_data_code(uint16_t* array, uint16_t code, int *count)
 static FILE *hex = NULL;
 static FILE *log = NULL;
 
-int hex_read(unsigned char *data)
+static int hex_read(unsigned char *data)
 {
 	static char line[256];
 	static int idx = 0;
@@ -214,11 +214,11 @@ int hex_read(unsigned char *data)
 	return 0;
 }
 
-uint8_t pkt_type_found[256] = { 0 };
-uint16_t data_code_found[256] = { 0 };
-int ptf=0, dcf=0;
+static uint8_t pkt_type_found[256] = { 0 };
+static uint16_t data_code_found[256] = { 0 };
+static int ptf=0, dcf=0;
 
-int dusb_write(int dir, uint8_t data)
+static int dusb_write(int dir, uint8_t data)
 {
 	static int array[20];
   	static int i = 0;

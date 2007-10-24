@@ -97,7 +97,7 @@ static const ServiceId sids[] =
 
 /* */
 
-int is_a_sid(uint8_t id)
+static int is_a_sid(uint8_t id)
 {
   int i;
   
@@ -107,7 +107,7 @@ int is_a_sid(uint8_t id)
   return i;
 }
 
-const char* name_of_sid(uint16_t id)
+static const char* name_of_sid(uint16_t id)
 {
 	int i;
   
@@ -117,7 +117,7 @@ const char* name_of_sid(uint16_t id)
 	return "???";
 }
 
-const char* name_of_addr(uint16_t addr)
+static const char* name_of_addr(uint16_t addr)
 {
 	int i;
   
@@ -127,7 +127,7 @@ const char* name_of_addr(uint16_t addr)
 	return "??";
 }
 
-const char* ep_way(int ep)
+static const char* ep_way(int ep)
 {
 	if(ep == 0x01) return "TI>PC";
 	else if(ep == 0x02) return "PC>TI";
@@ -136,7 +136,7 @@ const char* ep_way(int ep)
 
 /* */
 
-int add_sid(uint16_t* array, uint16_t id, int *count)
+static int add_sid(uint16_t* array, uint16_t id, int *count)
 {
 	int i;
 	
@@ -150,7 +150,7 @@ int add_sid(uint16_t* array, uint16_t id, int *count)
 	return i;
 }
 
-int add_addr(uint16_t* array, uint16_t addr, int *count)
+static int add_addr(uint16_t* array, uint16_t addr, int *count)
 {
 	int i;
 	
@@ -169,7 +169,7 @@ int add_addr(uint16_t* array, uint16_t addr, int *count)
 static FILE *hex = NULL;
 static FILE *log = NULL;
 
-int hex_read(unsigned char *data)
+static int hex_read(unsigned char *data)
 {
 	static char line[256];
 	static int idx = 0;
@@ -196,11 +196,11 @@ int hex_read(unsigned char *data)
 	return 0;
 }
 
-uint16_t sid_found[256] = { 0 };
-uint16_t addr_found[256] = { 0 };
-int sif=0, af=0;
+static uint16_t sid_found[256] = { 0 };
+static uint16_t addr_found[256] = { 0 };
+static int sif=0, af=0;
 
-int nsp_write(int dir, uint8_t data)
+static int nsp_write(int dir, uint8_t data)
 {
 	static int array[20];
   	static int i = 0;
