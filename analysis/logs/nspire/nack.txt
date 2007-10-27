@@ -1,0 +1,7 @@
+ opening session from port #8002 to port #4003:
+ requesting RLE screenshot (cmd = 00):
+  6400:8003->6401:4021 AK=00 SQ=03 HC=00 DC=0000 (1 bytes)
+   00
+ receiving ack:
+  6401:00d3->6400:8003 AK=0a SQ=03 HC=e0 DC=2140 (2 bytes)
+   40 21
