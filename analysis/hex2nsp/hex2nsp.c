@@ -73,6 +73,7 @@ static const Address addrs[] =
 
 static const ServiceId sids[] = 
 {
+	{ 0x00D3, "Reception nAck" },
 	{ 0x00FE, "Reception Acknowledgment" },
 	{ 0x00FF, "Reception Ack" },
 	{ 0x4002, "Echo" },
